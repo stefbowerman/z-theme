@@ -1,2 +1,3 @@
-# puppet
-A bare-bones boilerplate Shopify theme for use in Zehner Group projects
+# Apollo
+
+> This is gonna be the shit that takes us to the moon, metaphorically. - Justin
