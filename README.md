@@ -33,3 +33,24 @@
 - `dev`: Working code copy. Changes made by developers are deployed here so integration and features can be tested. This environment is rapidly updated and contains the most recent version of the application.
 - `staging`: This is the release candidate, and normally a mirror of the production environment. The staging area contains the "next" version of the application and is used for final stress testing and client/manager approvals before going live.
 - `production` This is the currently released version of the application, accessible to the client/end users. This version preferably does not change except for during scheduled releases.
+
+### Directory Structure
+
+```
+└── src
+    ├── config
+    ├── layout
+    ├── sections
+    ├── snippets
+    ├── styles
+    │   ├── components
+    │   ├── elements
+    │   ├── global
+    │   ├── modules
+    │   ├── settings
+    │   ├── theme.scss
+    │   ├── tools
+    │   └── vendor
+    └── templates
+           └──  customers
+```
