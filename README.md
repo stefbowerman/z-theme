@@ -1,7 +1,5 @@
 # Apollo
 
-# Bucketfeet Shopify theme
-
 ## Getting Started
 
 - Install [Slate](https://shopify.github.io/slate/): `npm install -g @shopify/slate` (requires Node 6+)
