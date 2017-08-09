@@ -1,0 +1,63 @@
+
+// -----------------------------------------------------------------------------
+// Utilties
+// -----------------------------------------------------------------------------
+
+// -------------------------
+// Z-Index
+// -------------------------
+
+@for $z from 1 through 10 {
+  .z-index-#{$z} {
+    z-index: #{$z};
+  }
+}
+
+// --------------------------------------------------------
+// Hide
+// --------------------------------------------------------
+
+.hide,
+.hidden { display: none; }
+
+.hidden-xl {
+  @include media-query($widescreen) { display: none; }
+}
+.visible-xl {
+  @include media-query($large-down) { display: none; }
+  @include media-query($widescreen) { display: block; }
+}
+
+.hidden-lg {
+  @include media-query($large) { display: none; }
+}
+.visible-lg {
+  @include media-query($medium-down) { display: none; }
+  @include media-query($large) { display: block; }
+}
+
+.hidden-md {
+  @include media-query($medium) { display: none; }
+}
+.visible-md {
+  @include media-query($small) { display: none; }
+  @include media-query($medium) { display: block; }
+}
+
+.hidden-sm {
+  @include media-query($small) { display: none; }
+}
+
+.visible-sm {
+  @include media-query($small) { display: block; } // or `flex` or `unset`?
+  @include media-query($medium-up) { display: none; }
+}
+
+.hidden-xs {
+  @include media-query($x-small) { display: none; }
+}
+
+.visible-xs {
+  @include media-query($x-small) { display: block; }
+  @include media-query($small-up) { display: none; }
+}
