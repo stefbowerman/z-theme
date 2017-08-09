@@ -26,3 +26,9 @@
 /*================ MODULES ================*/
 @import url('modules/site-header.scss');
 @import url('modules/gift-card-template.scss');
+
+// Necessary bottom placement for specificity w/o `!important`
+@import url('global/utilities.scss');
+
+// DEV: Don't display Shopify's admin preview bar
+.shopify-preview-bar { display: none; }
