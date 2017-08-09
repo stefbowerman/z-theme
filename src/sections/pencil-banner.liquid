@@ -1,0 +1,36 @@
+{% if section.settings.toggle_banner %}
+  <div class="PencilBanner">
+    <div class="container">
+      {% if section.settings.banner_link == ''  %}
+        <span class="">{{ section.settings.banner_text }}</span>
+      {% else %}
+        <a href="{{ section.settings.banner_link }}" class="">{{ section.settings.banner_text }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Pencil Banner",
+    "settings": [
+      {
+        "id": "toggle_banner",
+        "type": "checkbox",
+        "label": "Show Pencil Ad",
+        "default": false
+      },
+      {
+        "id": "banner_text",
+        "type": "text",
+        "label": "Pencil Banner Text",
+        "default": "Default Banner Text"
+      },
+      {
+        "id": "banner_link",
+        "type": "url",
+        "label": "Should the banner link anywhere?"
+      }
+    ]
+  }
+{% endschema %}
