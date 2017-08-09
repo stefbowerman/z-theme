@@ -30,7 +30,7 @@ The Apollo repo is used for: 1) forking Apollo as a framework for theme you're b
   - **store:** the Shopify-specific URL for this store/environment (ie. my-store.myshopify.com)
   - **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes).
   - **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
-  - Run `slate -h` for help
+- Run `slate -h` for help
 
 #### [Slate Commands](https://shopify.github.io/slate/commands/)
 
@@ -39,27 +39,6 @@ slate start [-e][-m] # Runs build, deploy, then watcher
 slate watch [-e][-n] # Runs watcher, then deploy
 slate deploy [-e][-m] # Builds `dist` folder and replaces the theme set in config.yml
 slate build # Creates a production-ready `dist` bundle
-```
-
-### Directory Structure
-
-```
-└── src
-    ├── config
-    ├── layout
-    ├── sections
-    ├── snippets
-    ├── styles
-    │   ├── components
-    │   ├── elements
-    │   ├── global
-    │   ├── modules
-    │   ├── settings
-    │   ├── theme.scss
-    │   ├── tools
-    │   └── vendor
-    └── templates
-           └──  customers
 ```
 
 All developers who wish to contribute through code or issues, take a look at the
