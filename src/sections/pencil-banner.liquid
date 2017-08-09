@@ -1,14 +1,17 @@
-{% if section.settings.toggle_banner %}
-  <div class="PencilBanner">
-    <div class="container">
-      {% if section.settings.banner_link == ''  %}
-        <span class="">{{ section.settings.banner_text }}</span>
-      {% else %}
-        <a href="{{ section.settings.banner_link }}" class="">{{ section.settings.banner_text }}</a>
-      {% endif %}
+<div data-section-id="{{ section.id }}" data-section-type="pencil-banner">
+  {% if section.settings.toggle_banner %}
+    <div class="PencilBanner">
+      <div class="container">
+        {% if section.settings.banner_link == ''  %}
+          <span class="">{{ section.settings.banner_text }}</span>
+        {% else %}
+          <a href="{{ section.settings.banner_link }}" class="">{{ section.settings.banner_text }}</a>
+        {% endif %}
+        <a href="#" class="js-pencil-banner-close">&times;</a>
+      </div>
     </div>
-  </div>
-{% endif %}
+  {% endif %}
+</div>
 
 {% schema %}
   {
@@ -17,7 +20,7 @@
       {
         "id": "toggle_banner",
         "type": "checkbox",
-        "label": "Show Pencil Ad",
+        "label": "Show Pencil Banner",
         "default": false
       },
       {
