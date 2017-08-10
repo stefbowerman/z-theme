@@ -1,7 +1,9 @@
 {%- if section.settings.hero_image -%}
   {%- assign background_image = section.settings.hero_image | img_url: '1800x' -%}
+{%- comment %}
 {%- else -%}
   {%- assign background_image = 'hero-default.jpg' | asset_img_url: '1800x' -%}
+{% endcomment -%}
 {%- endif -%}
 
 {%- comment %}
