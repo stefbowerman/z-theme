@@ -4,6 +4,28 @@
 // -----------------------------------------------------------------------------
 
 // --------------------------------------------------------
+// Colors
+// --------------------------------------------------------
+
+// Text Colors
+.u-color-red { color: $color-red; }
+.u-color-grey { color: $color-grey; }
+.u-color-lightGrey { color: $color-lightGrey; }
+.u-color-white { color: $color-white; }
+.u-color-darkGrey { color: $color-darkGrey; }
+.u-color-black { color: $color-black; }
+
+
+// Background Colors
+.u-bg-red { background: $color-red; }
+.u-bg-white { background: $color-white; }
+.u-bg-lightGrey { background: $color-lightGrey; }
+.u-bg-grey { background: $color-grey; }
+.u-bg-darkGrey { background: $color-darkGrey; }
+.u-bg-gradient { background-image: linear-gradient(to bottom, #f4f4f4, $color-white), linear-gradient(#d8d8d8, #d8d8d8); }
+
+
+// --------------------------------------------------------
 // Layout-Related Utilties
 // --------------------------------------------------------
 
@@ -24,7 +46,6 @@
 .u-pos-rel { position: relative; }
 .u-pos-abs { position: absolute; }
 .u-pos-fix { position: fixed; }
-
 
 // --------------------------------------------------------
 // Z-Index
