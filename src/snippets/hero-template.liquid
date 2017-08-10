@@ -1,0 +1,36 @@
+{%- comment %}
+	this is the hero template
+{% endcomment -%}
+
+<section
+  class="
+    {% if hero_classnames != '' %}{{- hero_classnames -}}{{' '}}{% endif %}
+    {{- hero_height -}}{{' '}}
+    {% if hero_toggle_padding %} Hero--hasPadding{%- endif -%}
+  ">
+  <div class="Hero-background Hero-imageBackground" {%- if show_background_image and background_image -%}style="background-image: url('{{ background_image }}');"{%- endif -%}></div>
+
+  {% unless section.settings.background_overlay == 0 %}
+    <div class="Hero-background Hero-overlayBackground"></div>
+  {% endunless %}
+
+  <div class="container{%- if shrink_hero_container_width %} container--isShrunken{% endif %} flex-1 flex u-pos-rel u-full-width u-min-height">
+    <div class="flex-1 flex-align-self-center">
+      <h1 class="Hero-h1 h1 flex-1 u-ta-center u-lh-md u-pos-rel u-color-white z-index-1{% if hero_desc != blank or hero_has_cta %} u-mb__lg u-mb-lg__xl{% endif %}">
+        {{ hero_title }}
+      </h1>
+      {% if hero_desc %}
+        <h2 class="Hero-h3 h3 u-fs-sm u-pos-rel u-color-white{% if hero_has_cta %} u-mb__lg{% endif %} u-ta-center">
+          {{ hero_desc }}
+        </h2>
+      {% endif %}
+      {% if hero_has_cta %}
+        <div class="u-ta-center">
+          <a href="{{ button_url }}" class="Button Button--inverted" alt="{{ button_title }}" target="_blank">
+            {%- if button_title %}{{- button_title }}{% else %}See More{% endif -%}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

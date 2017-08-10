@@ -1,0 +1,37 @@
+
+// -----------------------------------------------------------------------------
+// Hero
+// -----------------------------------------------------------------------------
+
+// -------------------------
+// Hero Heights
+// -------------------------
+
+.Hero--sm {
+  min-height: 200px;
+  @include media-query($large-up) { min-height: 410px; }
+}
+
+.Hero--md {
+  min-height: 350px;
+  @include media-query($large-up) { min-height: 510px; }
+}
+
+.Hero--lg {
+  min-height: 400px;
+  @include media-query($large-up) { min-height: 717px; }
+}
+
+// -------------------------
+// Hero Image
+// -------------------------
+
+.Hero-imageBackground {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover;
+}
