@@ -2,7 +2,7 @@
 
 # Apollo
 
-Apollo is a boilerplate built on top of [Slate](https://shopify.github.io/slate/). Apollo follows Slate's theme scaffolding paradigm in which the initial scaffolding is [intentionally barebones](https://shopify.github.io/slate/theme/#intentionally-blank)
+Apollo is a boilerplate built on top of [Slate](https://shopify.github.io/slate/). Apollo follows Slate's theme scaffolding paradigm in which the initial scaffolding is [intentionally barebones](https://shopify.github.io/slate/theme/#intentionally-blank):
 
 > Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
 >
@@ -32,7 +32,7 @@ The Apollo repo is used for: 1) forking Apollo as a framework for theme you're b
   - **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
 - Run `slate -h` for help
 
-#### [Slate Commands](https://shopify.github.io/slate/commands/)
+### [Slate Commands](https://shopify.github.io/slate/commands/)
 
 ```bash
 slate start [-e][-m] # Runs build, deploy, then watcher
