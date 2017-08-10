@@ -4,15 +4,16 @@
   ============
   @description This snippet should get included in a hero `sections` on a template-by-template basis
 
-  @param hero_classnames {string} - Top-level hero classnames
-  @param hero_height {string} - Sets the height of the hero, expects `.Hero[--sm][--md][--lg]`
-  @param background_image {string} - This a var assigned via section.settings
-  @param shrink_hero_container_width {boolean} - Toggles the width of the container for the title & desc
-  @param hero_title {string} - Top-level heading for hero
-  @param hero_desc {string} - Sub-header copy below the title
-  @param hero_has_cta {boolean} - Toggles visibility of the CTA
-  @param button_title {string} - CTA button title
-  @param button_url - CTA button URL
+  @param background_image {string, required} - This a var assigned via section.settings
+  @param hero_title {string, required} - Top-level heading for hero
+  @param hero_has_cta {boolean, required} - Toggles visibility of the CTA
+  @param hero_height {string, required} - Sets the height of the hero, expects `.Hero[--sm][--md][--lg]`
+  @param hero_classnames {string, optional} - Top-level hero classnames
+  @param hero_desc {string, optional} - Sub-header copy below the title
+  @param button_title {string, optional} - CTA button title
+  @param button_url {string, optional} - CTA button URL
+  @param shrink_hero_container_width {boolean, optional} - Toggles container width for the title & desc
+  @param background_overlay {boolean, optional} - Toggles a light background overlay on the image
 
 {% endcomment -%}
 
