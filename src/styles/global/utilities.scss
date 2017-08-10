@@ -1,0 +1,86 @@
+
+// -----------------------------------------------------------------------------
+// Utilties
+// -----------------------------------------------------------------------------
+
+// --------------------------------------------------------
+// Layout-Related Utilties
+// --------------------------------------------------------
+
+.u-margin-normalize { margin: 0; }
+.u-margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.u-padding-normalize { padding: 0; }
+.u-lineHeight-normalize { line-height: 1; }
+.u-full-width,
+.img-full { width: 100%; }
+.u-full-height { height: 100%; }
+.u-min-height { min-height: 100%; }
+.u-block { display: block; }
+.u-inline-block { display: inline-block; }
+.u-pos-rel { position: relative; }
+.u-pos-abs { position: absolute; }
+.u-pos-fix { position: fixed; }
+
+
+// --------------------------------------------------------
+// Z-Index
+// --------------------------------------------------------
+
+@for $z from 1 through 10 {
+  .z-index-#{$z} {
+    z-index: #{$z};
+  }
+}
+
+// --------------------------------------------------------
+// Hide
+// --------------------------------------------------------
+
+.hide,
+.hidden { display: none; }
+
+.hidden-xl {
+  @include media-query($widescreen) { display: none; }
+}
+.visible-xl {
+  @include media-query($large-down) { display: none; }
+  @include media-query($widescreen) { display: block; }
+}
+
+.hidden-lg {
+  @include media-query($large) { display: none; }
+}
+.visible-lg {
+  @include media-query($medium-down) { display: none; }
+  @include media-query($large) { display: block; }
+}
+
+.hidden-md {
+  @include media-query($medium) { display: none; }
+}
+.visible-md {
+  @include media-query($small) { display: none; }
+  @include media-query($medium) { display: block; }
+}
+
+.hidden-sm {
+  @include media-query($small) { display: none; }
+}
+
+.visible-sm {
+  @include media-query($small) { display: block; } // or `flex` or `unset`?
+  @include media-query($medium-up) { display: none; }
+}
+
+.hidden-xs {
+  @include media-query($x-small) { display: none; }
+}
+
+.visible-xs {
+  @include media-query($x-small) { display: block; }
+  @include media-query($small-up) { display: none; }
+}
