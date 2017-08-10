@@ -2,7 +2,7 @@
 
 	Hero Snippet
   ============
-  @description This snippet should get included in a hero `sections` on a template-by-template basis
+  @description This snippet should get included in a hero `section` on a template-by-template basis
 
   @param background_image {string, required} - This a var assigned via section.settings
   @param hero_title {string, required} - Top-level heading for hero
@@ -19,12 +19,12 @@
 
 <section
   class="
+    {{-'Hero Hero--hasImageBackground Hero--hasOverlay flex-col flex-1 u-pos-rel'}}
     {% if hero_classnames != '' %}{{- hero_classnames -}}{{' '}}{% endif %}
-    {{- hero_height -}}{{' '}}
+    {{ hero_height -}}
   ">
   <div class="Hero-background Hero-imageBackground" {%- if background_image -%}style="background-image: url('{{ background_image }}');"{%- endif -%}></div>
 
-  {%- comment %} REVIEW: Is a background overlay toggle something we want to have as an option? {% endcomment -%}
   {% unless section.settings.background_overlay == 0 %}
     <div class="Hero-background Hero-overlayBackground"></div>
   {% endunless %}

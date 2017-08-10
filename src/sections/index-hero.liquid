@@ -1,27 +1,15 @@
 {%- if section.settings.hero_image -%}
   {%- assign background_image = section.settings.hero_image | img_url: '1800x' -%}
 {%- comment %}
+Uncomment this block once you've uploaded a fallback hero image to your `assets` directory
 {%- else -%}
   {%- assign background_image = 'hero-default.jpg' | asset_img_url: '1800x' -%}
 {% endcomment -%}
 {%- endif -%}
 
-{%- comment %}
-@param background_image {string, required} - This a var assigned via section.settings
-@param hero_title {string, required} - Top-level heading for hero
-@param hero_has_cta {boolean, required} - Toggles visibility of the CTA
-@param hero_height {string, required} - Sets the height of the hero, expects `.Hero[--sm][--md][--lg]`
-@param hero_classnames {string, optional} - Top-level hero classnames
-@param hero_desc {string, optional} - Sub-header copy below the title
-@param button_title {string, optional} - CTA button title
-@param button_url {string, optional} - CTA button URL
-@param shrink_hero_container_width {boolean, optional} - Toggles container width for the title & desc
-@param background_overlay {boolean, optional} - Toggles a light background overlay on the image
-{% endcomment -%}
-
+{%- comment %} See `hero-template.liquid` for a full list of params/args {% endcomment -%}
 {% include 'hero-template',
   hero_title: section.settings.hero_title,
-  hero_classnames: 'Hero Hero--hasImageBackground Hero--hasOverlay flex-col flex-1 u-pos-rel u-color-light-grey',
   hero_has_cta: false,
   hero_height: section.settings.hero_height,
   shrink_hero_container_width: true
