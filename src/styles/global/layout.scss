@@ -4,11 +4,18 @@ html {
   background-color: $color-body;
 }
 
+.container,
 .page-width {
   @include clearfix();
   max-width: $width-site;
   padding: 0 $gutter;
   margin: 0 auto;
+
+  @include media-query($small) { padding: 0 15px; }
+
+  @include media-query($large-up) {
+    max-width: ($widescreen - 60px);
+  }
 }
 
 .container--isShrunken {
