@@ -10,3 +10,7 @@ html {
   padding: 0 $gutter;
   margin: 0 auto;
 }
+
+.container--isShrunken {
+  @include media-query($medium-up) { max-width: 750px; }
+}

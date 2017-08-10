@@ -35,3 +35,25 @@
   background-position: center center;
   background-size: cover;
 }
+
+// ------------
+// Hero Image Overlay
+// ------------
+
+.Hero--hasOverlay .Hero-overlayBackground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $color-black;
+  opacity: .3;
+}
+
+// -------------------------
+// Hero Layout
+// -------------------------
+
+.Hero--hasImageBackground {
+  .container--heroTitle { align-items: flex-end; }
+}
