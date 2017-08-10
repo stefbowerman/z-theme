@@ -31,7 +31,7 @@
 
   <div class="container{%- if shrink_hero_container_width %} container--isShrunken{% endif %} flex-1 flex u-pos-rel u-full-width">
     <div class="flex-1 flex-align-self-center">
-      <h1 class="Hero-h1 h1 flex-1 u-ta-center u-pos-rel z-index-1{% if hero_desc != blank or hero_has_cta %} u-mb__lg u-mb-lg__xl{% endif %}">
+      <h1 class="Hero-h1 h1 flex-1 u-ta-center u-pos-rel u-color-white z-index-1{% if hero_desc != blank or hero_has_cta %} u-mb__lg {% endif %}">
         {{ hero_title }}
       </h1>
       {% if hero_desc %}
