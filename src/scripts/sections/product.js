@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * A file that contains scripts highly couple code to the Product template.
  *
-   * @namespace product
+ * @namespace product
  */
 
 theme.Product = (function() {
