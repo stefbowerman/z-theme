@@ -3,9 +3,32 @@
 // Utilties
 // -----------------------------------------------------------------------------
 
-// -------------------------
+// --------------------------------------------------------
+// Layout-Related Utilties
+// --------------------------------------------------------
+
+.u-margin-normalize { margin: 0; }
+.u-margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.u-padding-normalize { padding: 0; }
+.u-lineHeight-normalize { line-height: 1; }
+.u-full-width,
+.img-full { width: 100%; }
+.u-full-height { height: 100%; }
+.u-min-height { min-height: 100%; }
+.u-block { display: block; }
+.u-inline-block { display: inline-block; }
+.u-pos-rel { position: relative; }
+.u-pos-abs { position: absolute; }
+.u-pos-fix { position: fixed; }
+
+
+// --------------------------------------------------------
 // Z-Index
-// -------------------------
+// --------------------------------------------------------
 
 @for $z from 1 through 10 {
   .z-index-#{$z} {
