@@ -3,7 +3,8 @@
   "description": "A shopify boilerplate theme for Zehner Group",
   "version": "0.0.1",
   "devDependencies": {
-    "@shopify/slate-tools": "0.3.3"
+    "@shopify/slate-tools": "0.3.3",
+    "sass-lint": "^1.10.2"
   },
   "scripts": {
     "start": "npm i -g @shopify/slate && npm i",
