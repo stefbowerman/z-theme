@@ -3,57 +3,55 @@
 // Hero
 // -----------------------------------------------------------------------------
 
-// -------------------------
 // Hero Heights
-// -------------------------
+.Hero--sm {}
+.Hero--md {}
+.Hero--lg {}
 
-.Hero--sm {
-  min-height: 200px;
-  @include media-query($large-up) { min-height: 410px; }
-}
 
-.Hero--md {
-  min-height: 350px;
-  @include media-query($large-up) { min-height: 510px; }
-}
+// Hero Images
+.Hero-imageBackground {}
 
-.Hero--lg {
-  min-height: 400px;
-  @include media-query($large-up) { min-height: 717px; }
-}
-
-// -------------------------
-// Hero Image
-// -------------------------
-
-.Hero-imageBackground {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  background-position: center center;
-  background-size: cover;
-}
-
-// ------------
 // Hero Image Overlay
-// ------------
+.Hero--hasOverlay .Hero-overlayBackground {}
 
-.Hero--hasOverlay .Hero-overlayBackground {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #000;
-  opacity: .3;
+
+// --------------------------------------------------------
+// Hero Full Width
+// --------------------------------------------------------
+
+.Hero--fullWidth {}
+
+.HeroFull-container { @extend .container; }
+.HeroFull-container.is-shrunken { @extend .container--isShrunken; }
+
+.HeroFull-ctaWrapper {}
+
+// --------------------------------------------------------
+// Hero Split
+// --------------------------------------------------------
+
+.Hero--split {
+  .Hero-background {}
+  .Hero-cta {}
+  .HeroBackground--left {}
+  .HeroBackground--right {}
 }
 
-// -------------------------
-// Hero Layout
-// -------------------------
+.HeroSplit-container { @extend .container; }
 
-.Hero--hasImageBackground {
-  .container--heroTitle { align-items: flex-end; }
-}
+.HeroCta--left {}
+.HeroCta-buttonWrapper.buttonWrapper--left {}
+
+.HeroCta--right {}
+.HeroCta-buttonWrapper.buttonWrapper--right {}
+
+.HeroSplit-textAlignWrapper {}
+.HeroSplit-fullWidthHelper {}
+
+// -----------------------------------------------------------------------------
+// Hero Typography
+// -----------------------------------------------------------------------------
+
+.Hero-h1 {}
+.Hero-h3 {}

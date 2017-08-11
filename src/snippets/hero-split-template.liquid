@@ -20,25 +20,25 @@
 
 {% endcomment -%}
 
-<section class="Hero Hero--split Hero--hasOverlay flex-col u-pos-rel {% if hero_classnames != '' %}{{hero_classnames}}{% endif %}">
+<section class="Hero Hero--split Hero--hasOverlay {% if hero_classnames != '' %}{{hero_classnames}}{% endif %}">
   <div class="Hero-background HeroBackground--left" {% if background_image_left %}style="background-image: url('{{ background_image_left }}');"{% endif %}></div>
   <div class="Hero-background HeroBackground--right" {% if background_image_right %}style="background-image: url('{{ background_image_right }}');"{% endif %}></div>
   {% unless section.settings.background_overlay == 0 %}
     <div class="Hero-background Hero-overlayBackground"></div>
   {% endunless %}
-  <div class="container flex-1 flex-col u-pos-rel">
-    <div class="flex-1 flex-align-items-center flex-0">
-      <div class="flex-0">
-        <h1 class="Hero-h1 u-ta-center u-color-white {% if hero_has_cta %} u-mb__lg{% endif %}">{{split_hero_title}}</h1>
+  <div class="HeroSplit-container">
+    <div class="HeroSplit-textAlignWrapper">
+      <div class="HeroSplit-fullWidthHelper">
+        <h1 class="Hero-h1{% if hero_has_cta %} u-mb__lg{% endif %}">{{split_hero_title}}</h1>
         {% if hero_has_cta %}
-        <div class="Hero-cta flex flex-col-medium-down">
-          <div class="flex-1 flex">
-            <div class="flex1 flex-justify-left u-mb__sm">
+        <div class="Hero-cta">
+          <div class="HeroCta--left">
+            <div class="HeroCta-buttonWrapper buttonWrapper--left">
               <a href="{{button_left_url}}" class="Button">{{button_left_title}}</a>
             </div>
           </div>
-          <div class="flex-1 flex">
-            <div class="flex1 flex-justify-right">
+          <div class="HeroCta--right">
+            <div class="HeroCta-buttonWrapper buttonWrapper--right">
               <a href="{{button_right_url}}" class="Button">{{button_right_title}}</a>
             </div>
           </div>
