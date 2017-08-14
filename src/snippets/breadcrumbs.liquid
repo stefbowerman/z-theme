@@ -1,18 +1,18 @@
 {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
-  <nav class="Breadcrumbs flex u-mt__sm u-mb__sm" role="navigation" aria-label="breadcrumbs">
+  <nav class="Breadcrumbs l-Breadcrumbs" role="navigation" aria-label="breadcrumbs">
     <a href="/" title="Home">Home</a>
     {% if template contains 'page' %}
-      <span class="u-color-dusty-grey" aria-hidden="true">&rsaquo;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&rsaquo;</span>
       <span>{{ page.title }}</span>
     {% elsif template contains 'product' %}
       {% if collection.url %}
-        <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
         {{ collection.title | link_to: collection.url }}
       {% endif %}
-      <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
       <span>{{ product.title }}</span>
     {% elsif template contains 'collection' and collection.handle %}
-      <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
 
       {%- capture prev_link -%}
         {%- for link in linklists.nav_left.links -%}
@@ -48,7 +48,7 @@
       {% if prev_link != blank %}
         {% assign prev_link = prev_link | split: '|' %}
         {{ prev_link[0] | link_to: prev_link[1] }}
-        <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
       {% endif %}
 
       {% if current_tags %}
@@ -58,7 +58,7 @@
         {% else %}
           {{ collection.title | link_to: url }}
         {% endif %}
-        <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
 
 {% comment %}
   Another awful capture group
@@ -79,21 +79,21 @@
         {% endif %}
       {% endif %}
     {% elsif template == 'blog' %}
-      <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
       {% if current_tags %}
         {{ blog.title | link_to: blog.url }}
-        <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
         <span>{{ current_tags | join: " + " }}</span>
       {% else %}
       <span>{{ blog.title }}</span>
       {% endif %}
     {% elsif template == 'article' %}
-      <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
       {{ blog.title | link_to: blog.url }}
-      <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
       <span>{{ article.title }}</span>
     {% else %}
-     <span class="u-color-dusty-grey" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+     <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
      <span>{{ page_title }}</span>
     {% endif %}
   </nav>

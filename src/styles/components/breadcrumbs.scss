@@ -4,11 +4,17 @@
 // -----------------------------------------------------------------------------
 
 .Breadcrumbs {
-  a { }
-  a.is-active { }
+  a {}
+  a.is-active {}
 
   a:hover,
   a:active {}
+}
+
+.Breadcrumb-separator {}
+
+.l-Breadcrumbs {
+  @include display-flex;
 
   @include media-query($x-small) {
     a {
