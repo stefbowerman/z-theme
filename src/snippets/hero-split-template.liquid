@@ -20,29 +20,29 @@
 
 {% endcomment -%}
 
-<section class="Hero Hero--split Hero--hasOverlay {% if hero_classnames != '' %}{{hero_classnames}}{% endif %}">
-  <div class="Hero-background HeroBackground--left" {% if background_image_left %}style="background-image: url('{{ background_image_left }}');"{% endif %}></div>
-  <div class="Hero-background HeroBackground--right" {% if background_image_right %}style="background-image: url('{{ background_image_right }}');"{% endif %}></div>
+<section class="Hero Hero--split l-hero {% if hero_classnames != '' %}{{hero_classnames}}{% endif %}">
+  <div class="Hero-imageBackground l-imageBackground imageBackground--left" {% if background_image_left %}style="background-image: url('{{ background_image_left }}');"{% endif %}></div>
+  <div class="Hero-imageBackground l-imageBackground imageBackground--right" {% if background_image_right %}style="background-image: url('{{ background_image_right }}');"{% endif %}></div>
   {% unless section.settings.background_overlay == 0 %}
-    <div class="Hero-background Hero-overlayBackground"></div>
+    <div class="Hero-overlayBackground l-overlayBackground"></div>
   {% endunless %}
-  <div class="HeroSplit-container">
-    <div class="HeroSplit-textAlignWrapper">
-      <div class="HeroSplit-fullWidthHelper">
+  <div class="Hero-container l-container">
+    <div class="Hero-textWrapper l-textWrapper">
+      <div class="l-fullWidthHelper">
         <h1 class="Hero-h1{% if hero_has_cta %} u-mb__lg{% endif %}">{{split_hero_title}}</h1>
         {% if hero_has_cta %}
-        <div class="Hero-cta">
-          <div class="HeroCta--left">
-            <div class="HeroCta-buttonWrapper buttonWrapper--left">
-              <a href="{{button_left_url}}" class="Button">{{button_left_title}}</a>
+          <div class="Hero-cta l-cta">
+            <div class="HeroCta--left l-ctaLeft">
+              <div class="HeroCta-buttonWrapper l-buttonWrapper">
+                <a href="{{button_left_url}}" class="Button">{{button_left_title}}</a>
+              </div>
+            </div>
+            <div class="HeroCta--right l-ctaRight">
+              <div class="HeroCta-buttonWrapper l-buttonWrapper">
+                <a href="{{button_right_url}}" class="Button">{{button_right_title}}</a>
+              </div>
             </div>
           </div>
-          <div class="HeroCta--right">
-            <div class="HeroCta-buttonWrapper buttonWrapper--right">
-              <a href="{{button_right_url}}" class="Button">{{button_right_title}}</a>
-            </div>
-          </div>
-        </div>
         {% endif %}
       </div>
     </div>
