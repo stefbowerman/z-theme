@@ -1,104 +1,42 @@
 {% paginate collection.products by 12 %}
 
 <section class="Collection" data-section-id="{{ section.id }}" data-section-type="collections-template">
-  <header role="banner">
-    {%- if collection.image -%}
-      {%- assign background_image = collection.image | img_url: '2048x' -%}
-      {% assign hero_classnames = 'Hero--collection' %}
-    {%- else -%}
-      {% assign hero_classnames = 'Hero--fallback' %}
-    {%- endif -%}
+  {%- if collection.image -%}
+    {%- assign background_image = collection.image | img_url: '2048x' -%}
+    {% assign hero_classnames = 'Hero--collection' %}
+  {%- else -%}
+    {% assign hero_classnames = 'Hero--fallback' %}
+  {%- endif -%}
 
-    {% if collection.description != blank %}
-      {% assign hero_desc = collection.description %}
-    {% endif %}
+  {% if collection.description != blank %}
+    {% assign hero_desc = collection.description %}
+  {% endif %}
 
-    {% assign hero_title = collection.title %}
+  {% assign hero_title = collection.title %}
 
-    {% include 'hero-template',
-      hero_has_cta: false,
-      hero_height: 'Hero--sm',
-      shrink_hero_container_width: true
-    %}
+  {% include 'hero-template',
+    hero_has_cta: false,
+    hero_height: 'Hero--sm',
+    shrink_hero_container_width: true
+  %}
 
-    <header role="banner" class="Collection-filter">
+  <header role="banner" class="Collection-filter">
+    <div class="container">
+      {% include 'breadcrumbs' %}
+    </div>
+    <div class="Filter-container js-filter-main-container">
       <div class="container">
-        {% include 'breadcrumbs' %}
+        {% include 'filters' %}
       </div>
-      <div class="Filter-container js-filter-main-container">
-        <div class="container">
-          {% include 'filters' %}
-        </div>
-      </div>
-    </header>
-
-    <h1>{{ collection.title }}</h1>
-    {% if collection.description != blank %}
-      <div class="rte">
-        {{ collection.description }}
-      </div>
-    {% endif %}
-
-    {% if collection.all_tags.size > 0 %}
-      <ul>
-        {% for tag in collection.all_tags %}
-          {% if current_tags contains tag %}
-            <li class="active">
-              {{ tag | link_to_remove_tag: tag }}
-            </li>
-          {% else %}
-            <li>
-              {{ tag | link_to_tag: tag }}
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
+    </div>
   </header>
 
-  <div>
+  <div class="flex container section--padded Collection Collection-productGrid {% if product_remainder != 0 %}grid_uneven{% endif %}">
     {% for product in collection.products %}
-      <div>
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
-        </a>
-
-        <p>
-          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        </p>
-        <p>
-          {% if product.compare_at_price > product.price %}
-
-            {% if product.price_varies %}
-              {%- assign sale_price = product.price | money -%}
-              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-            {% else %}
-              {{ 'products.product.on_sale' | t }}
-              {{ product.price | money }}
-            {% endif %}
-
-          {% else %}
-
-            {% if product.price_varies %}
-              {%- assign price = product.price | money -%}
-              {{ 'products.product.from_text_html' | t: price: price }}
-            {% else %}
-              {{ product.price | money }}
-            {% endif %}
-
-          {% endif %}
-
-          {% if product.compare_at_price > product.price %}
-            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-            <s>{{ product.compare_at_price | money }}</s>
-          {% endif %}
-
-          {% unless product.available %}
-            {{ 'products.product.sold_out' | t }}
-          {% endunless %}
-        </p>
-      </div>
-
+      {% assign product_url = product.url | within: collection %}
+      {% include 'product-thumbnail',
+        classnames: 'Collection-product flex'
+      %}
     {% else %}
       {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
         {% for i in (1..8) %}
@@ -120,6 +58,7 @@
       {% endif %}
 
     {% endfor %}
+
   </div>
 
   {% if paginate.pages > 1 %}
@@ -128,3 +67,21 @@
 </section>
 
 {% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collections Hero",
+    "settings": [
+      {
+        "id": "hero_title",
+        "type": "text",
+        "label": "Hero Title"
+      },
+      {
+        "id": "background_image",
+        "type": "url",
+        "label": "Hero Background Image"
+      }
+    ]
+  }
+{% endschema %}
