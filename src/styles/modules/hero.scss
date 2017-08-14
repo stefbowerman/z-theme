@@ -4,28 +4,94 @@
 // -----------------------------------------------------------------------------
 
 // Hero Heights
-.Hero--sm {}
-.Hero--md {}
-.Hero--lg {}
+.Hero--sm {
+  height: 200px;
+}
+
+.Hero--md {
+  height: 350px;
+}
+
+.Hero--lg {
+  height: 400px;
+}
 
 
 // Hero Images
-.Hero-imageBackground {}
+.Hero-imageBackground {
+  background-position: center center;
+  background-size: cover;
+
+  &.l-imageBackground {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+  }
+}
 
 // Hero Image Overlay
-.Hero--hasOverlay .Hero-overlayBackground {}
+.Hero-overlayBackground {
 
+  &.l-overlayBackground {
+    background: rgba($color-black, .3); // required in this rule for z-index reasons
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+  }
+}
+
+// Hero Alignment
+.HeroFull-textWrapper {
+  &.l-textWrapper {
+    align-items: flex-end;
+  }
+}
 
 // --------------------------------------------------------
 // Hero Full Width
 // --------------------------------------------------------
 
-.Hero--fullWidth {}
+.Hero {
+  &.l-Hero {
+    @include display-flex;
+    @include flex-direction(column);
+    @include flex(1);
+    position: relative;
+  }
+}
 
-.HeroFull-container { @extend .container; }
-.HeroFull-container.is-shrunken { @extend .container--isShrunken; }
+.Hero-container {
+  &.l-container {
+    @extend .container;
+    @include display-flex;
+    @include flex-direction(column);
+    @include flex(1);
+    position: relative;
+    width: 100%;
+  }
+}
 
-.HeroFull-ctaWrapper {}
+.Hero-container.is-shrunken {
+  &.l-container {
+    @extend .container--isShrunken;
+  }
+}
+
+.Hero-textWrapper {
+  &.l-textWrapper {
+    @include display-flex;
+    @include flex(1);
+    align-items: center;
+  }
+}
+
+.Hero-ctaWrapper {
+  text-align: center;
+}
 
 // --------------------------------------------------------
 // Hero Split
@@ -53,5 +119,21 @@
 // Hero Typography
 // -----------------------------------------------------------------------------
 
-.Hero-h1 {}
-.Hero-h3 {}
+.Hero-h1 {
+  text-align: center;
+  color: $color-white;
+
+  &.l-h1 {
+    @include flex(1);
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.Hero-h3 {
+  text-align: center;
+  
+  &.l-h3 {
+    position: relative;
+  }
+}

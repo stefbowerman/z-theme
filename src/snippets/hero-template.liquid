@@ -19,28 +19,28 @@
 
 <section
   class="
-    {{-'Hero Hero--fullWidth Hero--hasOverlay'-}}
+    {{-'Hero l-Hero'-}}
     {% if hero_classnames != '' %}{{- hero_classnames -}}{{' '}}{% endif %}
     {{- hero_height -}}
   ">
-  <div class="Hero-background Hero-imageBackground" {%- if background_image -%}style="background-image: url('{{ background_image }}');"{%- endif -%}></div>
+  <div class="Hero-imageBackground l-imageBackground" {%- if background_image -%}style="background-image: url('{{ background_image }}');"{%- endif -%}></div>
 
   {% unless section.settings.background_overlay == 0 %}
-    <div class="Hero-background Hero-overlayBackground"></div>
+    <div class="Hero-overlayBackground l-overlayBackground"></div>
   {% endunless %}
 
-  <div class="HeroFull-container{%- if shrink_hero_container_width %} is-shrunken{% endif %}">
-    <div class="HeroFull-textWrapper">
-      <h1 class="Hero-h1">
-        {{ hero_title }}
+  <div class="Hero-container l-container{%- if shrink_hero_container_width %} is-shrunken{% endif %}">
+    <div class="Hero-textWrapper l-textWrapper">
+      <h1 class="Hero-h1 l-h1">
+        {{- hero_title -}}
       </h1>
       {% if hero_desc %}
-        <h2 class="Hero-h3">
-          {{ hero_desc }}
+        <h2 class="Hero-h3 l-h3">
+          {{- hero_desc -}}
         </h2>
       {% endif %}
       {% if hero_has_cta %}
-        <div class="HeroFull-ctaWrapper">
+        <div class="Hero-ctaWrapper">
           <a href="{{ button_url }}" class="Button" alt="{{ button_title }}" target="_blank">
             {%- if button_title %}{{- button_title }}{% else %}See More{% endif -%}
           </a>
