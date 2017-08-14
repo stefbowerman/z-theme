@@ -1,0 +1,30 @@
+
+// -----------------------------------------------------------------------------
+// Breadcrumbs
+// -----------------------------------------------------------------------------
+
+.Breadcrumbs {
+  a { }
+  a.is-active { }
+
+  a:hover,
+  a:active {}
+
+  @include media-query($x-small) {
+    a {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      min-width: 45px;
+      max-width: 120px;
+    }
+
+    span:last-of-type {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      min-width: 45px;
+      max-width: 160px;
+    }
+  }
+}
