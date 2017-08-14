@@ -33,7 +33,6 @@
 
 // Hero Image Overlay
 .Hero-overlayBackground {
-
   &.l-overlayBackground {
     background: rgba($color-black, .3); // required in this rule for z-index reasons
     position: absolute;
@@ -47,7 +46,7 @@
 // Hero Alignment
 .HeroFull-textWrapper {
   &.l-textWrapper {
-    align-items: flex-end;
+    @extend .flex-align-items-end;
   }
 }
 
@@ -145,10 +144,10 @@
 .Hero--split .Hero-cta {
   &.l-cta {
     @extend .flex-col-medium-down;
+    @extend .flex-align-items-center;
     position: relative;
-    align-items: center;
 
-    @include media-query($large-up) { align-items: flex-start; }
+    @include media-query($large-up) { @extend .flex-align-items-start; }
   }
 
   .l-ctaLeft,
