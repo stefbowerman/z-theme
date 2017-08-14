@@ -45,6 +45,12 @@
   }
 }
 
+/*================ Translate 3D Mixin ================*/
+
+@mixin translate3d($x, $y, $z) {
+  @include prefix(transform, translate3d($x, $y, $z), webkit moz ms o spec);
+}
+
 /*================ Media Query Mixin ================*/
 @mixin media-query($media-query) {
   $breakpoint-found: false;

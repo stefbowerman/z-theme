@@ -12,11 +12,12 @@
   background: $color-white;
   padding: $spacing-xs $spacing-0;
   border-bottom: 1px solid $color-grey;
+  @include translate3d(0, 0, 0);
+
   @include media-query($small){
     padding: $spacing-sm $spacing-0;
     border-bottom: 0px;
   }
-  @include translate3d(0, 0, 0);
 }
 
 .filter-btn{
