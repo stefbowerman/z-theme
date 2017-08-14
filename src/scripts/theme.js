@@ -32,6 +32,49 @@ $(document).ready(function() {
     slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
+  var filter_scene, mobile_scene;
+  var $filter_el = $('.js-filter-main-container');
+
+  var responsive =  {
+    _ww: function () {
+      var newW = $(window).width();
+      return newW;
+    },
+    _bp: {
+      small: 576
+    },
+    _bp_check: function () {
+      if (this._ww() > this._bp.small) {
+        return 'SMALL-UP'
+      } else {
+        return 'SMALL'
+      }
+    }
+  };
+
+  var filters_setup = {
+    windowBindings: function () {
+      var self = this;
+
+      $(window).on('resize', function(){
+        if (responsive._bp_check() === 'SMALL-UP') {
+          if ($filter_el.length > 0) {
+            if (filter_scene) {
+              filter_scene.destroy(true);  
+            }
+            self.filters();
+          }
+        } else if (responsive._bp_check() === 'SMALL') {
+          if ($filter_el.length > 0) {
+            if (filter_scene) {
+              filter_scene.destroy(true);
+            }
+          }
+        }
+      })
+    }
+  }
+
   // Wrap videos in div to force responsive layout.
   slate.rte.wrapTable();
   slate.rte.iframeReset();
