@@ -83,12 +83,15 @@ $font-size-base: {{ settings.type_base_size }};
   Grid Breakpoints and Class Names
     - Do not change the variable names
 ==============================================================================*/
-$grid-medium: 750px;
-$grid-large: 990px;
+$grid-small: 576px;
+$grid-medium: 768px;
+$grid-large: 992px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
 
+$x-small: 'x-small';
 $small: 'small';
+$small-up: 'small-up';
 $medium: 'medium';
 $medium-down: 'medium-down';
 $medium-up: 'medium-up';
@@ -97,10 +100,13 @@ $large-down: 'large-down';
 $large-up: 'large-up';
 $widescreen: 'widescreen';
 
+
 // The `$breakpoints` list is used to build our media queries.
 // You can use these in the media-query mixin.
 $breakpoints: (
+  $x-small '(max-width: #{$grid-small - 1})',
   $small '(max-width: #{$grid-medium - 1})',
+  $small-up '(min-width: #{$grid-small})',
   $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
   $medium-down '(max-width: #{$grid-large - 1})',
   $medium-up '(min-width: #{$grid-medium})',
