@@ -1,5 +1,26 @@
 {% paginate collection.products by 12 %}
+
+<section class="Collection" data-section-id="{{ section.id }}" data-section-type="collections-template">
   <header role="banner">
+    {%- if collection.image -%}
+      {%- assign background_image = collection.image | img_url: '2048x' -%}
+      {% assign hero_classnames = 'Hero--collection' %}
+    {%- else -%}
+      {% assign hero_classnames = 'Hero--fallback' %}
+    {%- endif -%}
+
+    {% if collection.description != blank %}
+      {% assign hero_desc = collection.description %}
+    {% endif %}
+
+    {% assign hero_title = collection.title %}
+
+    {% include 'hero-template',
+      hero_has_cta: false,
+      hero_height: 'Hero--sm',
+      shrink_hero_container_width: true
+    %}
+
     <h1>{{ collection.title }}</h1>
     {% if collection.description != blank %}
       <div class="rte">
@@ -93,4 +114,6 @@
   {% if paginate.pages > 1 %}
     {% include 'pagination' %}
   {% endif %}
+</section>
+
 {% endpaginate %}
