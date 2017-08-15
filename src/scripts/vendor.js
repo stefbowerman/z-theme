@@ -8,6 +8,11 @@
  */
 // =require vendor/jquery-2.2.3.min.js
 
+/*!
+ * instafeed.min.js
+ */
+// =require vendor/instafeed.min.js
+
 // Attempts to preserve comments that likely contain licensing information,
 // even if the comment does not have directives such as `@license` or `/*!`.
 //
