@@ -4,9 +4,9 @@
 // =require vendor/modernizr.min.js
 
 /*!
- * jquery-2.2.3.min.js
+ * jquery.min.js
  */
-// =require vendor/jquery-2.2.3.min.js
+// =require /../../node_modules/jquery/dist/jquery.min.js
 
 // Attempts to preserve comments that likely contain licensing information,
 // even if the comment does not have directives such as `@license` or `/*!`.
@@ -18,3 +18,23 @@
 // 2. A regular expression matches the string of the comment.
 //    For example: `MIT`, `@license`, or `Copyright`.
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
+
+/*!
+* popper.js
+*/
+// =require /../../node_modules/popper.js/dist/umd/popper.js
+
+/*!
+ * util.js
+ */
+// =require /../../node_modules/bootstrap/js/dist/util.js
+
+/*!
+ * tooltip.js
+ */
+// =require /../../node_modules/bootstrap/js/dist/tooltip.js
+
+/*!
+ * popover.js
+ */
+// =require /../../node_modules/bootstrap/js/dist/popover.js

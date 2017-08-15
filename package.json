@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.1",
     "sass-lint": "^1.10.2"
   },
   "scripts": {
