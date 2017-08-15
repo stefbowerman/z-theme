@@ -6,24 +6,16 @@
 .Hero { position: relative; }
 
 // Hero Heights
-.Hero--sm {
-  height: 200px;
-}
-
-.Hero--md {
-  height: 350px;
-}
-
-.Hero--lg {
-  height: 400px;
-}
+.Hero--sm {}
+.Hero--md {}
+.Hero--lg {}
 
 // Hero Images
 .Hero-imageBackground {
-  background-position: center center;
-  background-size: cover;
 
   &.l-imageBackground {
+    background-position: center center; // required in this layout rule for z-index reasons
+    background-size: cover; // required in this layout rule for z-index reasons
     position: absolute;
     left: 0;
     bottom: 0;
@@ -35,7 +27,7 @@
 // Hero Image Overlay
 .Hero-overlayBackground {
   &.l-overlayBackground {
-    background: rgba($color-black, .3); // required in this rule for z-index reasons
+    background: rgba($color-black, .3); // required in this layout rule for z-index reasons
     position: absolute;
     left: 0;
     bottom: 0;
@@ -103,9 +95,6 @@
     @include display-flex;
     @include flex-direction(column);
     position: relative;
-    height: 510px;
-
-    @include media-query($large-up) { height: 717px; }
   }
 }
 
@@ -217,6 +206,6 @@
 
 .Hero--fallback {
   background-color: #fafafa;
-  background-image: url('');
+
   .Hero-imageBackground { display: none; }
 }
