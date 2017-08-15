@@ -14,6 +14,7 @@ window.theme = window.theme || {};
 /*================ Sections ================*/
 // =require sections/product.js
 // =require sections/pencilBanner.js
+// =require sections/subscriptionPopup.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -23,6 +24,7 @@ $(document).ready(function() {
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
   sections.register('pencil-banner', theme.PencilBanner);
+  sections.register('subscription-popup', theme.SubscriptionPopup);
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
