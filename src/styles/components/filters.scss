@@ -4,28 +4,44 @@
 // -----------------------------------------------------------------------------
 
 .Collection-filter {
-  position: relative;
-  z-index: 1;
+
+
+  &.l-filter {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .Filter-container {
-  background: $color-white;
-  padding: $spacing-xs $spacing-0;
-  border-bottom: 1px solid $color-grey;
-  @include translate3d(0, 0, 0);
 
-  @include media-query($small){
-    padding: $spacing-sm $spacing-0;
-    border-bottom: 0px;
+
+  &.l-container {
+    @extend .container;
+    @include translate3d(0, 0, 0);
   }
 }
 
-.filter-btn{
-  @include media-query($medium-down) {
-    flex: 1;
-    text-align: center;
+.Filters {
+
+
+  &.l-Filters {
+    @include display-flex;
+    @extend .flex-justify-between;
+    @extend .flex-align-items-center;
   }
 }
+
+// Alignment/Spacing
+.Filter-label {
+
+
+  &.l-label {
+    @include display-flex;
+    @include flex(1);
+    @extend .flex-align-self-center;
+  }
+}
+
 
 // --------------------------------------------------------
 // Filter Modal (on Mobile)

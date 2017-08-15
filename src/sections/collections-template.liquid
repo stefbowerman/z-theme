@@ -20,14 +20,12 @@
     shrink_hero_container_width: true
   %}
 
-  <header role="banner" class="Collection-filter">
+  <header role="banner" class="Collection-filter l-filter">
     <div class="container">
       {% include 'breadcrumbs' %}
     </div>
-    <div class="Filter-container js-filter-main-container">
-      <div class="container">
-        {% include 'filters' %}
-      </div>
+    <div class="Filter-container l-container js-filter-main-container">
+      {% include 'filters' %}
     </div>
   </header>
 
