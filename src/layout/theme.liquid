@@ -74,5 +74,8 @@
 
   {% section 'footer' %}
 
+  {%- if template contains 'collection' -%}
+    {% include 'filter-modal-container' %}
+  {%- endif -%}
 </body>
 </html>
