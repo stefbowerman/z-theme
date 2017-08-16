@@ -15,16 +15,14 @@
   {% assign hero_title = collection.title %}
 
   {% include 'hero-template',
-    hero_has_cta: false,
-    hero_height: 'Hero--sm',
-    shrink_hero_container_width: true
+    hero_height: 'Hero--sm'
   %}
 
-  <header role="banner" class="Collection-filter l-filter">
+  <header role="banner" class="Collection-filter">
     <div class="container">
       {% include 'breadcrumbs' %}
     </div>
-    <div class="Filter-container l-container js-filter-main-container">
+    <div class="Filter-container js-filter-main-container">
       {% include 'filters' %}
     </div>
   </header>
