@@ -9,7 +9,7 @@
 theme.PencilBanner = (function($) {
 
   var selectors = {
-    close: '.js-PencilBanner-close'
+    close: '[data-pencil-banner-close]'
   };
 
   /**
