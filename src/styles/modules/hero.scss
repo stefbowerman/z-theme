@@ -3,7 +3,11 @@
 // Hero
 // -----------------------------------------------------------------------------
 
-.Hero { position: relative; }
+.Hero {
+
+  @include flex-fill(vertical);
+  @extend .u-pos-rel;
+}
 
 // Hero Heights
 .Hero--sm {}
@@ -13,77 +17,43 @@
 // Hero Images
 .Hero-imageBackground {
 
-  &.l-imageBackground {
-    background-position: center center; // required in this layout rule for z-index reasons
-    background-size: cover; // required in this layout rule for z-index reasons
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    top: 0;
-    right: 0;
-  }
+  @include stretch-within;
+  @include background-image-stretch();
 }
 
 // Hero Image Overlay
 .Hero-overlayBackground {
-  &.l-overlayBackground {
-    background: rgba($color-black, .3); // required in this layout rule for z-index reasons
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    top: 0;
-    right: 0;
-  }
+
+  @include stretch-within;
 }
 
 // Hero Alignment
 .HeroFull-textWrapper {
-  &.l-textWrapper {
-    @extend .flex-align-items-end;
-  }
+
+  @extend .flex-align-items-end;
 }
 
 // --------------------------------------------------------
 // Hero Full Width
 // --------------------------------------------------------
 
-.Hero {
-  &.l-Hero {
-    @include display-flex;
-    @include flex-direction(column);
-    @include flex(1);
-    position: relative;
-  }
-}
-
 .Hero-container {
-  &.l-container {
-    @extend .container;
-    @include display-flex;
-    @include flex-direction(column);
-    @include flex(1);
-    position: relative;
-    width: 100%;
-  }
-}
 
-.Hero-container.is-shrunken {
-  &.l-container {
-    @extend .container--isShrunken;
-  }
+  @include flex-fill(vertical);
+  @extend .container;
+  @extend .u-pos-rel;
+  @extend .u-full-width;
+  &.is-shrunken { @extend .container--isShrunken; }
 }
 
 .Hero-textWrapper {
-  &.l-textWrapper {
+
     @include display-flex;
     @include flex(1);
-    align-items: center;
-  }
+    @extend .flex-align-items-center;
 }
 
-.Hero-ctaWrapper {
-  text-align: center;
-}
+.Hero-ctaWrapper {}
 
 // --------------------------------------------------------
 // Hero Split
@@ -182,22 +152,15 @@
 // -----------------------------------------------------------------------------
 
 .Hero-h1 {
-  text-align: center;
-  color: $color-white;
 
-  &.l-h1 {
-    @include flex(1);
-    position: relative;
-    z-index: 1;
-  }
+  @include flex(1);
+  @extend .u-pos-rel;
+  @extend .z-index-1;
 }
 
 .Hero-h3 {
-  text-align: center;
 
-  &.l-h3 {
-    position: relative;
-  }
+  @extend .u-pos-rel;
 }
 
 // --------------------------------------------------------
@@ -205,7 +168,6 @@
 // --------------------------------------------------------
 
 .Hero--fallback {
-  background-color: #fafafa;
 
   .Hero-imageBackground { display: none; }
 }

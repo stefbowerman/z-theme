@@ -290,7 +290,7 @@
 
 // ------------
 // Flex Responsive Reflow
-// ------------
+// --------------------------------------------------------
 
 .flex-col-xsmall-down { // min-width: 586px
   @include display-flex;
@@ -324,3 +324,21 @@
 
 .flex-col-reverse { @include flex-direction(column-reverse); }
 .flex-row-reverse { @include flex-direction(row-reverse); }
+
+
+/*================ Flex Fill Vertical ================*/
+
+// required in flexbox.scss so it can inherit the mixins
+@mixin flex-fill($orientation) {
+  @include display-flex;
+  @if $orientation == vertical {
+    @include flex-direction(column);
+  } @else if $orientation == horizontal {
+    @include flex-direction(row);
+  } @else if $orientation == row {
+    @include flex-direction(row);
+  } @else if $orientation == column {
+    @include flex-direction(column);
+  }
+  @include flex(1);
+}
