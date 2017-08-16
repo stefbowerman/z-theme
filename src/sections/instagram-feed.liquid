@@ -1,0 +1,21 @@
+<div data-section-id="{{ section.id }}" data-section-type="instagram-feed" data-access-token="{{ section.settings.access_token }}">
+  {% if section.settings.access_token != blank %}
+    <div data-instagram-feed-target></div>
+  {% else %}
+    <p style="color: red">A valid Instagram access token is required for this section</p>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Instagram Feed",
+    "settings": [
+      {
+        "id": "access_token",
+        "label": "Access Token",
+        "type": "text",
+        "info": "See: instagram.com/developer/authentication"
+      }
+    ]
+  }
+{% endschema %}
