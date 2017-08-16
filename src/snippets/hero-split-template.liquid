@@ -24,7 +24,7 @@
   <div class="imageBackground--left" {% if background_image_left %}style="background-image: url('{{ background_image_left }}');"{% endif %}></div>
   <div class="imageBackground--right" {% if background_image_right %}style="background-image: url('{{ background_image_right }}');"{% endif %}></div>
   {% unless section.settings.background_overlay == 0 %}
-    <div class="Hero-overlayBackground l-overlayBackground"></div>
+    <div class="Hero-overlayBackground"></div>
   {% endunless %}
   <div class="Hero-container">
     <div class="Hero-textWrapper">
