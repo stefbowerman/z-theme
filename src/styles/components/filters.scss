@@ -23,94 +23,69 @@
 }
 
 .Filter-label {
-  
+
   @include display-flex;
   @include flex(1);
   @extend .flex-align-self-center;
 }
 
 
-// --------------------------------------------------------
-// Filter Modal (on Mobile)
-// --------------------------------------------------------
 
+/*============================================================================
+  Filter Modal (on Mobile)
+==============================================================================*/
+
+/*================ Filter Modal Scaffolding ================*/
+
+.Filter-modalContainer {
+
+  background: #f9f9f9;
+  @extend .Modal-container;
+  @include media-query($large-up) { display: none; }
+
+  .Select {}
+  .Filter-itemWrap {}
+  .Filter-modalContent {}
+  .Filter-modalContent .Filter-item {}
+}
+
+.Filter-modalClose {
+
+  @extend .Modal-closeIcon;
+  @extend .flex-pseudo-vertical-center;
+  @include flex-direction(column);
+}
+
+.Filter-modalHeader {
+
+  @extend .u-pos-rel;
+}
+
+.Filter-mobileWrapper {}
+.Filter-itemWrap {}
+.Filter-item {}
+
+/*================ Filter Element Visibilty Toggles ================*/
+
+// Mobile clear filters buttons
 @include media-query($medium-down) {
-  .Filter-container.is-expanded {
+  .Filter-mobileClear {}
 
-    &.l-container {
-      position: fixed;
-      top: 60px;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      @include display-flex;
-      @include flex(1);
-      z-index: 1;
-
-      > .container {
-        @include display-flex;
-        @include flex(1);
-
-        > .flex {
-          @include flex-direction(column);
-          @include flex(1);
-
-          .flex-align-self-center { align-self: auto; }
-        }
-      }
-    }
-  }
-
-  .Filter-mobileClear {
-    position: absolute;
-    right: 60px;
-    top: 0;
-    height: 100%;
-  }
-
-  #clear-filter-btn, #zero-indicator{
-    font-size: $fontSize-xs;
-    height:auto;
+  #clear-filter-btn,
+  #zero-indicator {
     display: none;
-    position: relative;
-    float: right;
-    top: 7px;
-    text-decoration: none;
-    &.active{
-      display: block;
-    }
-  }
-  #zero-indicator{
-    // color:$color-dustyGrey;
+    @extend .u-pos-rel;
+
+    &.active { display: block; }
   }
 }
 
-.Select {
-  border: 1px $color-grey solid;
-  padding: 8px 5px 7px 14px;
+// Toggles visiblity of sort by popover
+.Popover--sortBy.Select-container { display: none; }
+.Popover--sortBy.Select-container.is-active { display: block; }
 
-  &:hover{
-
-  }
-  @include media-query($medium-down){
-    padding: 8px 14px 7px 14px;
-  }
-}
-
-.Select-container {
-  display: none;
-
-  &.is-active { display: block; }
-}
-
+// Filter Popover Visibilty Toggles
 .FilterPopover {
-  left: 0%;
-  top: 40px;
-
-  @include media-query($medium-down){
-    left:0;
-  }
 
   .Content { display: block; }
   .Error { display: none; }
@@ -121,133 +96,15 @@
   }
 }
 
-.SelectOption {
-  &.is-active { font-weight: bold; }
-}
-
-.Filter-itemWrap {
-  border-bottom: 1px solid $color-grey;
-  border-left: 1px solid $color-grey;
-}
-
-.Filter-item {
-  @include flex(1,1,50%);
-  padding: 10px;
-  border: 1px solid $color-grey;
-  border-bottom: 0;
-  text-align: center;
-  font-size: $fontSize-xs;
-
-  &:first-child { border-left: 0; }
-  &:not(:first-child) { border-left: 0; }
-}
-
 .Select--filter.filter--mobile {
-  @include media-query($large-up) {
-    display: none;
-  }
+  @include media-query($large-up) { display: none; }
 }
 
-.Select--filter .Select-inner {
-  position: relative;
 
-  &:after {
-    content: '';
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid $color-grey;
-    transition: all $transitionSpeed-normal;
-    @include media-query($medium-down){
-      right: 0px;
-    }
-  }
-  &:hover{
-    &:after{
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid $color-black;
-    }
-  }
-}
-
-.Select--filter .Select-inner.is-active:after {
-  content: '';
-  transform: rotate(180deg);
-  transition: transform $transitionSpeed-normal;
-}
-
-// -----------------------------------------------------------------------------
-// Mobile Filter
-// -----------------------------------------------------------------------------
-
-.Filter-modalContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #f9f9f9;
-  z-index: 100;
-
-  .Select {
-    border: 0;
-    border-bottom: 1px solid $color-grey;
-    padding: 15px;
-    background: $color-white;
-  }
-
-  .Filter-itemWrap {
-    border: 1px solid $color-grey;
-    border-bottom: 2px solid $color-grey;
-  }
-}
-
-.Filter-modalClose {
-  position: absolute;
-  top: 0;
-  right: 15px;
-  height: 100%;
-}
-
-.Filter-mobileWrapper {
-  span.h3{
-    font-weight: $font-weight-medium;
-  }
-  @include media-query($medium-down) {
-    padding: 15px;
-    border-bottom: 1px solid $color-grey;
-  }
-}
-
-.Filter-modalContainer .Filter-modalContent {
-  @include media-query($medium-down) {
-    .u-mr__reflow { margin-bottom: 0; margin-right:0;}
-  }
-
-  .Filter-itemWrap { border: 0; }
-
-  .Filter-item {
-    border-top: 0;
-    border-bottom: 1px solid $color-grey;
-    padding: 15px;
-  }
-
-  .Filter-item:nth-child(odd) {
-    border-right: 1px solid $color-grey;
-  }
-}
-
-// -------------------------
-// Popover Style Overrides
-// -------------------------
+/*================ Filter Popover styles ================*/
 
 .Filter-modalContainer .Popover {
-  position: relative;
+  @extend .u-pos-rel;
   display: none;
 
   .Popover-content {
