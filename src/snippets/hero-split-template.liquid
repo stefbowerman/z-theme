@@ -1,0 +1,50 @@
+{%- comment %}
+
+	Split Hero Snippet
+  ============
+  @description This snippet should get included in a hero `section` on a template-by-template basis
+
+  @param background_image_left {string, required} - var for the left image (assigned via section.settings)
+  @param background_image_right {string, required} - var for the right image (assigned via section.settings)
+  @param split_hero_title {string, required} - Top-level heading for hero
+  @param hero_has_cta {boolean, required} - Toggles visibility of the CTA
+  @param hero_height {string, required} - Sets the height of the hero, expects `.Hero[--sm][--md][--lg]`
+  @param hero_classnames {string, optional} - Top-level hero classnames
+  @param hero_desc {string, optional} - Sub-header copy below the title
+  @param button_left_title {string, optional} - Left CTA button title
+  @param button_right_title {string, optional} - Left CTA button title
+  @param button_left_url {string, optional} - Left CTA button URL
+  @param button_right_url {string, optional} - Right CTA button URL
+  @param shrink_hero_container_width {boolean, optional} - Toggles container width for the title & desc
+  @param background_overlay {boolean, optional} - Toggles a light background overlay on the image
+
+{% endcomment -%}
+
+<section class="Hero Hero--split {% if hero_classnames != '' %}{{hero_classnames -}}{% endif %}">
+  <div class="imageBackground--left" {% if background_image_left %}style="background-image: url('{{ background_image_left }}');"{% endif %}></div>
+  <div class="imageBackground--right" {% if background_image_right %}style="background-image: url('{{ background_image_right }}');"{% endif %}></div>
+  {% unless section.settings.background_overlay == 0 %}
+    <div class="Hero-overlayBackground"></div>
+  {% endunless %}
+  <div class="Hero-container">
+    <div class="Hero-textWrapper">
+      <div class="Hero-fullWidthHelper">
+        <h1 class="Hero-h1{% if hero_has_cta %} has-cta{% endif %}">{{split_hero_title}}</h1>
+        {% if hero_has_cta %}
+          <div class="Hero-cta">
+            <div class="HeroCta--left">
+              <div class="HeroCta-buttonWrapper">
+                <a href="{{button_left_url}}" class="Button">{{button_left_title}}</a>
+              </div>
+            </div>
+            <div class="HeroCta--right">
+              <div class="HeroCta-buttonWrapper">
+                <a href="{{button_right_url}}" class="Button">{{button_right_title}}</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+  <nav class="Breadcrumbs l-Breadcrumbs" role="navigation" aria-label="breadcrumbs">
+    <a href="/" title="Home">Home</a>
+    {% if template contains 'page' %}
+      <span class="Breadcrumb-separator" aria-hidden="true">&rsaquo;</span>
+      <span>{{ page.title }}</span>
+    {% elsif template contains 'product' %}
+      {% if collection.url %}
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        {{ collection.title | link_to: collection.url }}
+      {% endif %}
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span>{{ product.title }}</span>
+    {% elsif template contains 'collection' and collection.handle %}
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+
+      {%- capture prev_link -%}
+        {%- for link in linklists.nav_left.links -%}
+          {%- assign child_list_handle = link.title | handleize -%}
+          {%- if collection.handle != child_list_handle -%}
+            {%- assign child_list_handle_left_col = link.title | handleize | append: '-quick-links' -%}
+            {%- assign child_list_handle_right_col = link.title | handleize | append: '-styles' -%}
+            {%- if menus[child_list_handle].links != blank -%}
+              {%- for childlink in menus[child_list_handle].links -%}
+                {%- if childlink.url == collection.url -%}
+                  {{- link.title -}}|{{- link.url -}}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if menus[child_list_handle_right_col].links != blank -%}
+              {%- for childlink in menus[child_list_handle_right_col].links -%}
+                {%- if childlink.url == collection.url -%}
+                  {{- link.title -}}|{{- link.url -}}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if menus[child_list_handle_left_col].links != blank -%}
+              {%- for childlink in menus[child_list_handle_left_col].links -%}
+                {%- if childlink.url == collection.url -%}
+                  {{- link.title -}}|{{- link.url -}}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {% if prev_link != blank %}
+        {% assign prev_link = prev_link | split: '|' %}
+        {{ prev_link[0] | link_to: prev_link[1] }}
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      {% endif %}
+
+      {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {% if prev_link %}
+          {{ collection.title | remove: prev_link[0] | rtrip | link_to: url }}
+        {% else %}
+          {{ collection.title | link_to: url }}
+        {% endif %}
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+
+{% comment %}
+  Another awful capture group
+
+  Removes the suffix for filter tags, and join them in an array that can be joined in a nice way to be displayed in a breadcrumb.
+{% endcomment %}
+
+{% assign filter_types = 'style,color,size,gallery,artist' | split: ',' %}
+{% capture tags %}
+{% for tag in current_tags %}{% for type in filter_types %}{% assign tag_type = tag | split: '-' %}{% assign tag_type_prefix = type | append: '-' %}{% if tag_type[0] == type %}{{ type | capitalize }}: {{ tag | remove: tag_type_prefix | replace: '-', ' ' | capitalize }}{% endif %}{% endfor %}{% if forloop.last == false %}@{% endif %}{% endfor %}{% endcapture %}
+
+        <span>{{ tags | split: '@' | join: " + " }}</span>
+      {% else %}
+        {% if prev_link %}
+        <span>{{ collection.title | remove: prev_link[0] | rtrip }}</span>
+        {% else %}
+        <span>{{ collection.title }}</span>
+        {% endif %}
+      {% endif %}
+    {% elsif template == 'blog' %}
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      {% if current_tags %}
+        {{ blog.title | link_to: blog.url }}
+        <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+        <span>{{ current_tags | join: " + " }}</span>
+      {% else %}
+      <span>{{ blog.title }}</span>
+      {% endif %}
+    {% elsif template == 'article' %}
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      {{ blog.title | link_to: blog.url }}
+      <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+      <span>{{ article.title }}</span>
+    {% else %}
+     <span class="Breadcrumb-separator" aria-hidden="true">&nbsp;&bull;&nbsp;</span>
+     <span>{{ page_title }}</span>
+    {% endif %}
+  </nav>
+{% endunless %}

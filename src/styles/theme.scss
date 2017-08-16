@@ -12,20 +12,25 @@
 @import url('global/helper-classes.scss');
 @import url('global/grid.scss');
 @import url('global/layout.scss');
+@import url('global/flexbox.scss');
 
 /*================ ELEMENTS ================*/
 @import url('elements/icons.scss');
 @import url('elements/links-buttons.scss');
 @import url('elements/blank-states.scss');
+@import url('elements/popover.scss');
 
 /*================ COMPONENTS ================*/
 @import url('components/forms.scss');
 @import url('components/rte.scss');
 @import url('components/responsive-tables.scss');
+@import url('components/breadcrumbs.scss');
+@import url('components/filters.scss');
 
 /*================ MODULES ================*/
 @import url('modules/site-header.scss');
 @import url('modules/gift-card-template.scss');
+@import url('modules/hero.scss');
 @import url('modules/pencil-banner.scss');
 
 // Necessary bottom placement for specificity w/o `!important`
