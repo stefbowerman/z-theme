@@ -70,6 +70,7 @@ textarea {
 
 .Select-inner {
   position: relative;
+  display: block;
 
   &:after {
     content: '';

@@ -25,11 +25,6 @@
   word-wrap: normal;
   white-space: normal;
   width: 100%;
-  padding: $spacing-lg;
-  border-radius: 0;
-  font-size: $fontSize-sm;
-  line-height: $lineHeight-md;
-  color: $color-darkGrey;
   background-color: $color-white;
   box-shadow: 0 0 1px 1px rgba(0,0,0,0.25);
 
@@ -89,22 +84,5 @@
       transform: rotate(-45deg);
       box-shadow: -1px -1px 0 0 rgba(0,0,0,0.21)
     }
-  }
-}
-
-// --------------------------------------------------------
-// Custom Popover Styles
-// --------------------------------------------------------
-
-.Popover--sortBy {
-  top: 40px;
-  left: auto;
-  right:0px;
-  min-width: 200px;
-
-  .Popover-content:after { margin-left: 73px; }
-
-  .Filter-item {
-    @include flex(1,1,100%);
   }
 }

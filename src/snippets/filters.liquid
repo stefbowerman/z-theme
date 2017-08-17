@@ -18,7 +18,7 @@
 {% assign filters_count = 3 %}
 
 <div class="Filters">
-  <div class="Filter-label l-label js-mobile-after">
+  <div class="Filter-label js-mobile-after">
     <label class="js-mobile-hidden">Filter By</label>
     <div class="Select Select--filter filter--mobile">
       <a href="#" class="js-mobile-filter-toggle">Filter By</a>
@@ -45,15 +45,15 @@
     {% if filter_content != blank %}
       {% capture popover_content %}
         <div class="Content">
-          <div class="flex flex-wrap Filter-itemWrap">
+          <div class="Filter-itemWrap">
             {{ filter_content }}
           </div>
         </div>
         <div class="Error">Error: Up to 3 Filters Max</div>
       {%- endcapture -%}
       {% assign filters_count = filters_count | minus: 1 %}
-      <div class="flex-1 flex-align-self-center js-filter-container u-pos-rel u-mr__reflow">
-        <div class="Select Select--filter Filter-mobileWrapper"><a class="Select-inner js-filter-action {% if selected_by_option != blank %}js-filter-action-remove{% endif %} u-block" href="#" data-option="{{ option | capitalize }}">{% if selected_by_option != blank %}{{ selected_by_option }}{% else %}{{ option | capitalize }}{% endif %}</a></div>
+      <div class="Filter-cell js-filter-container">
+        <div class="Select Select--filter Filter-mobileWrapper"><a class="Select-inner js-filter-action {% if selected_by_option != blank %}js-filter-action-remove{% endif %}" href="#" data-option="{{ option | capitalize }}">{% if selected_by_option != blank %}{{ selected_by_option }}{% else %}{{ option | capitalize }}{% endif %}</a></div>
         {% include 'popover' with popover_classnames: 'FilterPopover js-filter', popover_content: popover_content %}
       </div>
     {% endif %}
@@ -61,9 +61,9 @@
 
   {% if filters_set %}
     {% assign applied_filters = current_tags | size %}
-    <div class="flex-1 flex hidden-xs hidden-sm">
+    <div class="Filter-clear">
       {% if applied_filters > 0 %}
-        <button class="link flex-align-self-center js-filter-clear">Clear All</button>
+        <button class="js-filter-clear">Clear All</button>
       {% endif %}
     </div>
   {% else %}
@@ -71,8 +71,8 @@
       <p class="u-margin-normalize u-color-dustyGrey">No filters</p>
     </div>
   {% endif %}
-  <div class="hidden-xs hidden-sm flex-1 flex-align-self-center flex-justify-right">
-    <h3 class="u-mr__reflow">Sort By</h3>
+  <div class="Filter-label label--sortBy">
+    <label>Sort By</label>
   </div>
   <div class="flex-1 flex-align-self-center js-sort-container u-pos-rel">
     {% assign sort_options = 'created-descending|Newest,price-ascending|Price: $ - $$,price-descending|Price: $$ - $,best-selling|Best Selling' | split: ',' %}
@@ -99,8 +99,8 @@
       </div>
     {% endcapture %}
 
-    <div class="Select Select--filter">
-      <a class="Select-inner js-sort-action u-block" href="#">{{ selected_sort_label }}</a>
+    <div class="Select Select--sortBy">
+      <a class="Select-inner js-sort-action" href="#">{{ selected_sort_label }}</a>
     </div>
     {% include 'popover' with popover_classnames: 'Popover--sortBy Select-container js-sort-option-container', popover_content: sort_popover_content %}
   </div>

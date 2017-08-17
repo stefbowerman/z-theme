@@ -38,15 +38,11 @@
 /*================ Filter Modal Scaffolding ================*/
 
 .Filter-modalContainer {
-
   background: #f9f9f9;
+
   @extend .Modal-container;
   @include media-query($large-up) { display: none; }
 
-  .Select {}
-  .Filter-itemWrap {}
-  .Filter-modalContent {}
-  .Filter-modalContent .Filter-item {}
 }
 
 .Filter-modalClose {
@@ -61,9 +57,30 @@
   @extend .u-pos-rel;
 }
 
+.Filter-modalContent {}
 .Filter-mobileWrapper {}
-.Filter-itemWrap {}
 .Filter-item {}
+
+.Filter-itemWrap {
+
+  @include display-flex;
+  @extend .flex-wrap;
+}
+
+.Filter-cell {
+
+  @include flex(1);
+  @extend .u-pos-rel;
+  @extend .flex-align-self-center;
+}
+
+.Filter-clear {
+
+  @include flex-fill(horizontal);
+  @include media-query($small) { display: none; }
+}
+
+
 
 /*================ Filter Element Visibilty Toggles ================*/
 
@@ -79,10 +96,6 @@
     &.active { display: block; }
   }
 }
-
-// Toggles visiblity of sort by popover
-.Popover--sortBy.Select-container { display: none; }
-.Popover--sortBy.Select-container.is-active { display: block; }
 
 // Filter Popover Visibilty Toggles
 .FilterPopover {
@@ -100,6 +113,25 @@
   @include media-query($large-up) { display: none; }
 }
 
+/*================ Sort By styles ================*/
+
+.label--sortBy {
+
+  @include flex(1);
+  @extend .flex-align-self-center;
+  @extend .flex-justify-right;
+
+  @include media-query($small) { display: none; }
+}
+
+// Toggles visiblity of sort by popover
+.Popover--sortBy.Select-container { display: none; }
+.Popover--sortBy.Select-container.is-active { display: block; }
+
+.Popover--sortBy {
+  .Popover-content:after {}
+  .Filter-item {}
+}
 
 /*================ Filter Popover styles ================*/
 
