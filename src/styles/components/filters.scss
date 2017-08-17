@@ -29,7 +29,11 @@
   @extend .flex-align-self-center;
 }
 
+.label-noFilter {
 
+  @include flex(1);
+  @include media-query($x-small) { display: none; }
+}
 
 /*============================================================================
   Filter Modal (on Mobile)
@@ -80,8 +84,6 @@
   @include media-query($small) { display: none; }
 }
 
-
-
 /*================ Filter Element Visibilty Toggles ================*/
 
 // Mobile clear filters buttons
@@ -116,21 +118,7 @@
 /*================ Sort By styles ================*/
 
 .label--sortBy {
-
-  @include flex(1);
-  @extend .flex-align-self-center;
-  @extend .flex-justify-right;
-
   @include media-query($small) { display: none; }
-}
-
-// Toggles visiblity of sort by popover
-.Popover--sortBy.Select-container { display: none; }
-.Popover--sortBy.Select-container.is-active { display: block; }
-
-.Popover--sortBy {
-  .Popover-content:after {}
-  .Filter-item {}
 }
 
 /*================ Filter Popover styles ================*/
