@@ -10,6 +10,7 @@ window.theme = window.theme || {};
 // =require slate/currency.js
 // =require slate/images.js
 // =require slate/variants.js
+// =require slate/ajaxCart.js
 
 /*================ Sections ================*/
 // =require sections/product.js
@@ -28,6 +29,8 @@ $(document).ready(function() {
   sections.register('pencil-banner', theme.PencilBanner);
   sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
+
+  slate.AjaxCart.init({});
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
