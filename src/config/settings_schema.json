@@ -157,5 +157,15 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Mailing List",
+    "settings": [
+      {
+        "type": "text",
+        "id": "newsletter_form_action",
+        "label": "Newsletter Form Action URL"
+      }
+    ]
   }
 ]
