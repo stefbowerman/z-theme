@@ -4,24 +4,24 @@
 slate.filtersAndSort = (function () {
   var selectors = {
     // Filters
-    filterMainContainer: '.js-filter-main-container',
-    filterAction: '.js-filter-action',
-    filterContainer: '.js-filter-container',
-    filterPopover: '.js-filter',
-    filterSelect: '.js-filter-select',
-    filterClear: '.js-filter-clear',
+    filterMainContainer: '[data-selector="filter-main-container]',
+    filterAction: '[data-action="filter"]',
+    filterContainer: '[data-selector="filter-container"]',
+    filterPopover: '[data-selector="filter-popover"]',
+    filterSelect: '[data-selector="filter-select"]',
+    filterClear: '[data-action="filter-clear"]',
     // Mobile Filters
-    mobileHidden: '.js-mobile-hidden',
-    mobileFiltersToggle: '.js-mobile-filter-toggle',
-    mobileModalContainer: '.js-mobile-filter-modal',
-    mobileFilterContainer: '.js-mobile-filter-container',
-    mobileFilterClose: '.js-modal-filter-close',
-    mobileInsertAfter: '.js-mobile-after',
+    mobileHidden: '[data-selector="hide-label-mobile]',
+    mobileFiltersToggle: '[data-action="mobile-filter-toggle"]',
+    mobileModalContainer: '[data-selector="mobile-filter-modal"]',
+    mobileFilterContainer: '[data-selector="mobile-filter-container"]',
+    mobileFilterClose: '[data-action="close-filter-modal"]',
+    mobileInsertAfter: '[data-selector="append-filter-mobile"]',
     // Sort
-    sortAction: '.js-sort-action',
-    sortContainer: '.js-sort-container',
-    sortOptionContainer: '.js-sort-option-container',
-    sortSelect: '.js-sort-select'
+    sortAction: '[data-action="sort"]',
+    sortContainer: '[data-selector="sort-container"]',
+    sortOptionContainer: '[data-selector="sort-option-container"]',
+    sortSelect: '[data-selector="sort-select"]'
   };
 
   var collectionData = window.theme.collectionData;
@@ -29,7 +29,7 @@ slate.filtersAndSort = (function () {
   if (!collectionData) return;
 
   var sortDefault = collectionData.sortDefault;
-  var appliedSort = collectionData.sortApplied;
+  var sortApplied = collectionData.sortApplied;
 
   var activeClass = 'is-active';
   var hiddenClass = 'hidden';
@@ -131,8 +131,8 @@ slate.filtersAndSort = (function () {
       var collectionUrl = getCollectionUrlWithFilters();
       var queryParams = getQueryParams();
 
-      if (collectionData.appliedSort) {
-        queryParams.sort_by = collectionData.appliedSort;
+      if (collectionData.sortApplied) {
+        queryParams.sort_by = collectionData.sortApplied;
       }
 
       window.location.href = collectionUrl + '?' + $.param(queryParams);
@@ -141,22 +141,22 @@ slate.filtersAndSort = (function () {
       var collectionUrl = collectionData.url;
       var queryParams = getQueryParams();
 
-      if (collectionData.appliedSort) {
-        queryParams.sort_by = collectionData.appliedSort;
+      if (collectionData.sortApplied) {
+        queryParams.sort_by = collectionData.sortApplied;
       }
 
       window.location.href = collectionUrl + '?' + $.param(queryParams);
     },
     checkMobileFiltersStatus: function () {
-      var activeFilters = $('.Filter-modalContent').find('.js-filter-select.is-active');
+      var activeFilters = $('[data-selector="mobile-filter-container"]').find('.Select--filter .Select-inner.is-active');
 
       if (activeFilters.length > 0) {
-        $('#clear-filter-btn').addClass('active');
-        $('#zero-indicator').removeClass('active');
-        $('.Select.Select--filter.filter--mobile.u-mr__md').find('.js-mobile-filter-toggle').text('Filter By (' + activeFilters.length + ')')
+        $('[data-selector="clear-filter-button"]').addClass('active');
+        $('[data-selector="filter-none"]').removeClass('active');
+        $('[data-selector="filter-select-mobile"]').find('[data-action="mobile-filter-toggle"]').text('Filter By (' + activeFilters.length + ')')
       } else {
-        $('#clear-filter-btn').removeClass('active');
-        $('#zero-indicator').addClass('active');
+        $('[data-selector="clear-filter-button"]').removeClass('active');
+        $('[data-selector="filter-none"]').addClass('active');
       }
     },
     checkSize: function () {
@@ -197,7 +197,7 @@ slate.filtersAndSort = (function () {
       // Sort Filters
       $(selectors.filterPopover).each(function () {
         var container = $(this).find('.Content .flex');
-        var toSort =  container.find('.js-Filter-item');
+        var toSort =  container.find('[data-selector="filter-item"]');
 
         toSort.sort(function (a, b) {
           var contentA = $(a).find(selectors.filterSelect).text().trim();

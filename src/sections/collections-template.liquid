@@ -19,12 +19,8 @@
   %}
 
   <header role="banner" class="Collection-filter">
-    <div class="container">
-      {% include 'breadcrumbs' %}
-    </div>
-    <div class="Filter-container js-filter-main-container">
-      {% include 'filters' %}
-    </div>
+    {% include 'breadcrumbs' %}
+    {% include 'filters' %}
   </header>
 
   <div class="flex container section--padded Collection Collection-productGrid {% if product_remainder != 0 %}grid_uneven{% endif %}">

@@ -5,15 +5,13 @@
 
 .Collection-filter {
 
-  @extend .u-pos-rel;
-  @extend .z-index-1;
-}
-
-.Filter-container {
-
 }
 
 .Filters {
+
+}
+
+.Filter-item {
 
 }
 
@@ -21,17 +19,24 @@
 
 }
 
-.label-noFilter {
+.Filter-select {
 
 }
+
+.Filter-itemWrap {
+
+}
+
+.Filter-cell {
+
+}
+
 
 /*============================================================================
   Filter Modal (on Mobile)
 ==============================================================================*/
 
-/*================ Filter Modal Scaffolding ================*/
-
-.Filter-modalContainer {
+.Filter-modal {
   background: #f9f9f9;
   position: fixed;
   top: 0;
@@ -45,47 +50,14 @@
 
 .Filter-modalClose {
 
+}
+
+.Filter-modalContent {
 
 }
 
-.Filter-modalHeader {
-
-  @extend .u-pos-rel;
-}
-
-.Filter-modalContent {}
-.Filter-mobileWrapper {}
-.Filter-item {}
-
-.Filter-itemWrap {
-
-
-}
-
-.Filter-cell {
-
-
-}
-
-.Filter-clear {
-
-  @include media-query($small) { display: none; }
-}
 
 /*================ Filter Element Visibilty Toggles ================*/
-
-// Mobile clear filters buttons
-@include media-query($medium-down) {
-  .Filter-mobileClear {}
-
-  #clear-filter-btn,
-  #zero-indicator {
-    display: none;
-    @extend .u-pos-rel;
-
-    &.active { display: block; }
-  }
-}
 
 // Filter Popover Visibilty Toggles
 .FilterPopover {
@@ -96,38 +68,5 @@
   &.is-filter-disabled {
     .Content { display: none; }
     .Error { display: block; }
-  }
-}
-
-.Select--filter.filter--mobile {
-  @include media-query($large-up) { display: none; }
-}
-
-/*================ Sort By styles ================*/
-
-.label--sortBy {
-  @include media-query($small) { display: none; }
-}
-
-/*================ Filter Popover styles ================*/
-
-.Filter-modalContainer .Popover {
-  @extend .u-pos-rel;
-  display: none;
-
-  .Popover-content {
-    visibility: collapse;
-    height: 0;
-
-    &:after { display: none; }
-  }
-}
-
-.Filter-modalContainer .Popover.is-active {
-  display: block;
-
-  .Popover-content {
-    visibility: visible;
-    height: auto;
   }
 }

@@ -35,7 +35,7 @@ $(document).ready(function() {
   });
 
   var filter_scene, mobile_scene;
-  var $filter_el = $('.js-filter-main-container');
+  var $filter_el = $('[data-selector="filter-main-container]');
 
   var responsive =  {
     _ww: function () {
@@ -62,7 +62,7 @@ $(document).ready(function() {
         if (responsive._bp_check() === 'SMALL-UP') {
           if ($filter_el.length > 0) {
             if (filter_scene) {
-              filter_scene.destroy(true);  
+              filter_scene.destroy(true);
             }
             self.filters();
           }
