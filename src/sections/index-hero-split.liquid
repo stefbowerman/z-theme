@@ -1,0 +1,93 @@
+{%- if section.settings.background_image_left -%}
+  {%- assign background_image_left = section.settings.background_image_left | img_url: '720x' -%}
+{%- comment %}
+Uncomment this block once you've uploaded a fallback left hero image to your `assets` directory
+  {%- else -%}
+    {%- assign background_image_left = 'homepage-split-hero-women-default.jpg' | asset_img_url: '720x' -%}
+{% endcomment -%}
+{%- endif -%}
+
+{% if section.settings.background_image_right %}
+  {%- assign background_image_right = section.settings.background_image_right | img_url: '720x' -%}
+{%- comment %}
+Uncomment this block once you've uploaded a fallback right hero image to your `assets` directory
+  {%- else -%}
+    {%- assign background_image_right = 'homepage-split-hero-men-default.jpg' | asset_img_url: '720x' -%}
+{% endcomment -%}
+{% endif %}
+
+
+{%- comment %} See `hero-split-template.liquid` for a full list of params/args {% endcomment -%}
+{% include 'hero-split-template',
+  split_hero_title: section.settings.split_hero_title,
+  hero_has_cta: section.settings.hero_has_cta,
+  button_left_title: section.settings.button_left_title,
+  button_right_title: section.settings.button_right_title,
+  button_left_url: section.settings.button_left_url,
+  button_right_url: section.settings.button_right_url
+%}
+
+{% schema %}
+  {
+    "name": "Split Hero",
+    "class": "HeroSplit--index",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Settings"
+      },
+      {
+        "id": "split_hero_title",
+        "type": "text",
+        "label": "Hero Title",
+        "default": "Hero Split Title"
+      },
+      {
+        "id": "hero_has_cta",
+        "type": "checkbox",
+        "label": "Does the hero have CTAs?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Hero Left Column"
+      },
+      {
+        "id": "background_image_left",
+        "type": "image_picker",
+        "label": "Left background image"
+      },
+      {
+        "id": "button_left_title",
+        "type": "text",
+        "label": "Left button title",
+        "default": "Learn More"
+      },
+      {
+        "id": "button_left_url",
+        "type": "url",
+        "label": "Left button link"
+      },
+      {
+        "type": "header",
+        "content": "Hero Right Column"
+      },
+      {
+        "id": "background_image_right",
+        "type": "image_picker",
+        "label": "Right background image"
+      },
+      {
+        "id": "button_right_title",
+        "type": "text",
+        "label": "Right button title",
+        "default": "Shop Now"
+      },
+      {
+        "id": "button_right_url",
+        "type": "url",
+        "label": "Right button link"
+      }
+    ]
+  }
+{% endschema %}

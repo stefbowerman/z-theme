@@ -1,0 +1,150 @@
+
+// -----------------------------------------------------------------------------
+// Hero
+// -----------------------------------------------------------------------------
+
+.Hero {
+
+  @include flex-fill(vertical);
+  @extend .u-pos-rel;
+}
+
+// Hero Heights
+.Hero--sm {}
+.Hero--md {}
+.Hero--lg {}
+
+// Hero Images
+.Hero-imageBackground {
+
+  @include stretch-within;
+  @include background-image-stretch();
+}
+
+// Hero Image Overlay
+.Hero-overlayBackground {
+
+  @include stretch-within;
+}
+
+// Hero Alignment
+.HeroFull-textWrapper {
+
+  @extend .flex-align-items-end;
+}
+
+// --------------------------------------------------------
+// Hero Full Width
+// --------------------------------------------------------
+
+.Hero-container {
+
+  @include flex-fill(vertical);
+  @extend .container;
+  @extend .u-pos-rel;
+  @extend .u-full-width;
+  &.is-shrunken { @extend .container--isShrunken; }
+}
+
+.Hero-textWrapper {
+
+  @include display-flex;
+  @include flex(1);
+  @extend .flex-align-items-center;
+}
+
+.Hero-ctaWrapper {}
+
+// --------------------------------------------------------
+// Hero Split
+// --------------------------------------------------------
+
+.Hero--split {
+
+  @include display-flex;
+  @include flex-direction(column);
+  @extend .u-pos-rel;
+}
+
+.Hero--split .imageBackground--left {
+
+  @include stretch-within();
+  @include background-image-stretch();
+
+  @include media-query($medium-up) {
+    @include stretch-within();
+    right: calc(50%);
+  }
+}
+
+.Hero--split .imageBackground--right {
+
+  @include media-query($medium-up) {
+    @include stretch-within();
+    @include background-image-stretch();
+    left: calc(50%);
+  }
+}
+
+// CTA
+.Hero--split .Hero-cta {
+  
+  @extend .flex-col-medium-down;
+  @extend .flex-align-items-center;
+  @extend .u-pos-rel;
+
+  @include media-query($large-up) { @extend .flex-align-items-start; }
+
+  .HeroCta--left,
+  .HeroCta--right {
+    @include display-flex;
+    @include flex(1);
+
+    .HeroCta-buttonWrapper {
+      @include flex(1);
+      @extend .flex-justify-left;
+    }
+  }
+
+  .HeroCta--right .HeroCta-buttonWrapper { @extend .flex-justify-right; }
+}
+
+.Hero--split .Hero-container {
+
+  @extend .container;
+  @extend .u-pos-rel;
+  @include flex-fill(vertical);
+}
+
+.Hero--split .Hero-textWrapper {
+
+  @include flex(1);
+  @extend .flex-align-items-center;
+}
+
+.Hero-fullWidthHelper { @include flex(1); }
+
+// -----------------------------------------------------------------------------
+// Hero Typography
+// -----------------------------------------------------------------------------
+
+.Hero-h1 {
+
+  @include flex(1);
+  @extend .u-pos-rel;
+  @extend .z-index-1;
+}
+
+.Hero-h3 {
+
+  @extend .u-pos-rel;
+}
+
+// --------------------------------------------------------
+// Fallback
+// --------------------------------------------------------
+
+.Hero--fallback {
+
+  .Hero-imageBackground { display: none; }
+}

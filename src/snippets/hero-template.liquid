@@ -1,0 +1,51 @@
+{%- comment %}
+
+	Hero Snippet
+  ============
+  @description This snippet should get included in a hero `section` on a template-by-template basis
+
+  @param background_image {string, required} - This a var assigned via section.settings
+  @param hero_title {string, required} - Top-level heading for hero
+  @param hero_has_cta {boolean, required} - Toggles visibility of the CTA
+  @param hero_height {string, required} - Sets the height of the hero, expects `.Hero[--sm][--md][--lg]`
+  @param hero_classnames {string, optional} - Top-level hero classnames
+  @param hero_desc {string, optional} - Sub-header copy below the title
+  @param button_title {string, optional} - CTA button title
+  @param button_url {string, optional} - CTA button URL
+  @param shrink_hero_container_width {boolean, optional} - Toggles container width for the title & desc
+  @param background_overlay {boolean, optional} - Toggles a light background overlay on the image
+
+{% endcomment -%}
+
+<section
+  class="
+    {{-'Hero '-}}
+    {% if hero_classnames != '' %}{{- hero_classnames -}}{{' '}}{% endif %}
+    {{- hero_height -}}
+  ">
+  <div class="Hero-imageBackground" {%- if background_image -%}style="background-image: url('{{ background_image }}');"{%- endif -%}></div>
+
+  {% unless section.settings.background_overlay == 0 %}
+    <div class="Hero-overlayBackground"></div>
+  {% endunless %}
+
+  <div class="Hero-container{%- if shrink_hero_container_width %} is-shrunken{% endif %}">
+    <div class="Hero-textWrapper">
+      <h1 class="Hero-h1">
+        {{- hero_title -}}
+      </h1>
+      {% if hero_desc %}
+        <h2 class="Hero-h3">
+          {{- hero_desc -}}
+        </h2>
+      {% endif %}
+      {% if hero_has_cta %}
+        <div class="Hero-ctaWrapper">
+          <a href="{{ button_url }}" class="Button" alt="{{ button_title }}" target="_blank">
+            {%- if button_title %}{{- button_title }}{% else %}See More{% endif -%}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

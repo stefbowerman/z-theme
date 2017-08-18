@@ -178,18 +178,6 @@
   @include flex-direction(column-reverse);
 }
 
-.flex-alignStart {
-  @include display-flex;
-  align-items: flex-start;
-}
-
-.flex-align-items-center {
-  @include display-flex;
-  align-items: center;
-  // max-width: 100%; // IE10-11 fix for overflow
-}
-
-
 // -------------------------
 // Align Self
 // -------------------------
@@ -202,9 +190,22 @@
 // Align Items
 // -------------------------
 
+.flex-align-items-start {
+  align-items: flex-start;
+  @include display-flex;
+}
+
+.flex-align-items-center {
+  @include display-flex;
+  align-items: center;
+}
+
 .flex-align-right,
-.flex-align-items-end { align-items: flex-end; }
-.flex-align-items-start { align-items: flex-start; }
+.flex-align-items-end {
+  @include display-flex;
+  align-items: flex-end;
+}
+
 
 // -------------------------
 // Justify Content
@@ -237,59 +238,8 @@
 .flex-wrap { flex-wrap: wrap; }
 
 // --------------------------------------------------------
-// DEPRECATING: DON'T USE `flex-[breakpoint]-reflow`, see 'Updated Naming Conventions' for usage
-// --------------------------------------------------------
-
-.flex-mobile-reflow,
-.flex-landscape-reflow,
-.flex-tablet-reflow,
-.flex-desktop-reflow {
-  @include display-flex;
-  @include flex-direction(column);
-}
-.flex-mobile-reflow--reverse,
-.flex-landscape-reflow--reverse,
-.flex-tablet-reflow--reverse
-.flex-desktop-reflow--reverse {
-  @include display-flex;
-  @include flex-direction(column-reverse);
-}
-
-@media (min-width: 320px) {
-  .flex-mobile-reflow--reverse,
-  .flex-mobile-reflow {
-    @include flex-direction(row);
-  }
-}
-
-@include media-query($small-up) {
-  .flex-landscape-reflow,
-  .flex-landscape-reflow--reverse {
-    @include flex-direction(row);
-  }
-}
-
-@include media-query($medium-up) { // min-width: 768px
-  .flex-tablet-reflow--reverse,
-  .flex-tablet-reflow {
-    @include flex-direction(row);
-  }
-}
-
-@include media-query($large-up) { // min-width: 992px
-  .flex-desktop-reflow,
-  .flex-desktop-reflow--reverse {
-    @include flex-direction(row);
-  }
-}
-
-// --------------------------------------------------------
-// Updated Naming Conventions
-// --------------------------------------------------------
-
-// ------------
 // Flex Responsive Reflow
-// ------------
+// --------------------------------------------------------
 
 .flex-col-xsmall-down { // min-width: 586px
   @include display-flex;
@@ -323,3 +273,21 @@
 
 .flex-col-reverse { @include flex-direction(column-reverse); }
 .flex-row-reverse { @include flex-direction(row-reverse); }
+
+
+/*================ Flex Fill Vertical ================*/
+
+// required in flexbox.scss so it can inherit the mixins
+@mixin flex-fill($orientation) {
+  @include display-flex;
+  @if $orientation == vertical {
+    @include flex-direction(column);
+  } @else if $orientation == horizontal {
+    @include flex-direction(row);
+  } @else if $orientation == row {
+    @include flex-direction(row);
+  } @else if $orientation == column {
+    @include flex-direction(column);
+  }
+  @include flex(1);
+}

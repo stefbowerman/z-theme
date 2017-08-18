@@ -74,8 +74,12 @@
 
   {% section 'footer' %}
 
+  {%- if template contains 'collection' -%}
+    {% include 'filter-modal-container' %}
+  {%- endif -%}
+
   <div data-ajax-cart-container></div>
   {% include 'ajax-cart-template' %}
-
+  
 </body>
 </html>
