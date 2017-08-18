@@ -11,28 +11,18 @@
 
 .Filter-container {
 
-  @extend .container;
-  @include translate3d(0, 0, 0);
 }
 
 .Filters {
 
-  @include display-flex;
-  @extend .flex-justify-between;
-  @extend .flex-align-items-center;
 }
 
 .Filter-label {
 
-  @include display-flex;
-  @include flex(1);
-  @extend .flex-align-self-center;
 }
 
 .label-noFilter {
 
-  @include flex(1);
-  @include media-query($x-small) { display: none; }
 }
 
 /*============================================================================
@@ -43,17 +33,19 @@
 
 .Filter-modalContainer {
   background: #f9f9f9;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
 
-  @extend .Modal-container;
   @include media-query($large-up) { display: none; }
-
 }
 
 .Filter-modalClose {
 
-  @extend .Modal-closeIcon;
-  @extend .flex-pseudo-vertical-center;
-  @include flex-direction(column);
+
 }
 
 .Filter-modalHeader {
@@ -67,20 +59,16 @@
 
 .Filter-itemWrap {
 
-  @include display-flex;
-  @extend .flex-wrap;
+
 }
 
 .Filter-cell {
 
-  @include flex(1);
-  @extend .u-pos-rel;
-  @extend .flex-align-self-center;
+
 }
 
 .Filter-clear {
 
-  @include flex-fill(horizontal);
   @include media-query($small) { display: none; }
 }
 
@@ -141,8 +129,5 @@
   .Popover-content {
     visibility: visible;
     height: auto;
-    padding: 0;
-    border: 0;
-    box-shadow: none;
   }
 }
