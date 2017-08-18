@@ -13,6 +13,12 @@
  */
 // =require vendor/instafeed.min.js
 
+/*!
+ * handlebars v4.0.10
+ */
+// =require vendor/handlebars-v4.0.10.js
+
+
 // Attempts to preserve comments that likely contain licensing information,
 // even if the comment does not have directives such as `@license` or `/*!`.
 //
