@@ -29,23 +29,3 @@
 // 2. A regular expression matches the string of the comment.
 //    For example: `MIT`, `@license`, or `Copyright`.
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
-
-/*!
-* popper.js
-*/
-// =require /../../node_modules/popper.js/dist/umd/popper.js
-
-/*!
- * util.js
- */
-// =require /../../node_modules/bootstrap/js/dist/util.js
-
-/*!
- * tooltip.js
- */
-// =require /../../node_modules/bootstrap/js/dist/tooltip.js
-
-/*!
- * popover.js
- */
-// =require /../../node_modules/bootstrap/js/dist/popover.js

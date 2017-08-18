@@ -90,9 +90,4 @@ $(document).ready(function() {
   if (slate.cart.cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
-
-  // initialize bootstrap popovers
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
 });
