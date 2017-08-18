@@ -15,6 +15,7 @@ window.theme = window.theme || {};
 /*================ Sections ================*/
 // =require sections/product.js
 // =require sections/pencilBanner.js
+// =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
 
 /*================ Templates ================*/
@@ -26,6 +27,7 @@ $(document).ready(function() {
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
   sections.register('pencil-banner', theme.PencilBanner);
+  sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
 
   slate.AjaxCart.init({});
