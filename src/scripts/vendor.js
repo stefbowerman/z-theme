@@ -8,6 +8,7 @@
  */
 // =require /../../node_modules/jquery/dist/jquery.min.js
 
+
 /*!
  * instafeed.min.js
  */
@@ -31,6 +32,6 @@
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
 
 /*!
- * slick
- */
-// =require /../../node_modules/slick-carousel/slick.min.js
+* slick.min.js
+*/
+// =require /../../node_modules/slick-carousel/slick/slick.min.js

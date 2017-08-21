@@ -2,13 +2,7 @@
  * Carousel
  * ------------------------------------------------------------------------------
  *
- * This is a barebones implementation of Slick carousel.
- *
- * Usage:
- *
- * See the following list of stubbed / incomplete methods that need to be filled in
- *
- *   - AjaxCart.onOpenClick
+ * This is a barebones implementation of Slick carousel
  *
  */
 
@@ -67,11 +61,12 @@ slate.carousels = (function () {
   }
 
   function doCarousels () {
-    if (shouldMakeCarousel()) {
-      makeCarousel();
-    } else {
-      showDefaultContainer();
-    }
+    makeCarousel();
+    // if (shouldMakeCarousel()) {
+    //   makeCarousel();
+    // } else {
+    //   showDefaultContainer();
+    // }
   }
 
   $(window).on('resize', doCarousels);

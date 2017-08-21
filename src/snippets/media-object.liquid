@@ -1,42 +1,45 @@
-{% if url %}
-  {% assign url = url %}
-{% else %}
-  {% assign url = '#' %}
-{% endif %}
+{%- comment %}
 
-<div class="MediaObject flex{% if classnames != '' %} {{ classnames }}{% endif %} {% if modifier_classnames != '' %} {{ modifier_classnames }}{% endif %}" {% if has_shopify_attributes_tag %}{{ block.shopify_attributes }}{% endif %} {% if used_as_slide %}data-js-carousel-slide{% endif %}>
+  Media Object
+  ============
+
+  @description - a small, modular content block that provides: image, title, content, and copy areas
+  @usage - use for creating individual content blocks, or slides within a carousel
+
+  @param is_module_clickable {boolean} - whether the object gets wrapped in an <a> tag or not
+  @param has_shopify_attributes_tag {boolean} - links up block to Shopify's Javascript API
+  @param used_as_slide {boolean} - toggles treatment as a slide in a carousel
+  @param url {string} - (optional) makes module/button link somewhere
+  @param classnames {string} - (optional) top-level media object classnames
+
+  // use Liquid's `capture` to set these variables, they are expecting HTML blocks
+  @param img_area {string|html} - content for image area
+  @param title_area {string|html} - content for title area
+  @param html_area {string|html} - content for copy area
+  @param button_area {string|html} - content for button area (can't be used simultaneously with `is_module_clickable`)
+
+{% endcomment -%}
+
+<div class="MediaObject{%- if classnames != '' %} {{ classnames -}}{% endif %}" {% if has_shopify_attributes_tag %} {{ block.shopify_attributes }}{% endif %}{% if used_as_slide %} data-js-carousel-slide{% endif %}>
   {% if is_module_clickable %}
-    <a href="{{ url }}" class="u-block u-full-width">
+    <a href="{{ url }}" class="MediaObject-link">
   {% endif %}
-  <div class="MediaObject-wrapper flex{% if is_content_stacked %}-col{% endif %} {% if is_content_reversed %} flex-{% if is_content_stacked %}col{% else %}row{% endif %}-reverse{% endif %} flex-1 {% if wrapper_classnames != '' %} {{ wrapper_classnames }}{% endif %}">
-    {% if show_image %}
-      <div class="{% if img_wrapper_classnames %} {{ img_wrapper_classnames }}{% else %} flex0{% endif %}">
-        <img src="{{ img }}" class="MediaObject-img u-full-width{% if img_classnames != '' %} {{ img_classnames }}{% endif %}" {% if img_alt != '' %} alt="{{ img_alt }}"{% endif %}>
-      </div>
-      {% if img_spacer %}
-        {% if img_spacer_span != blank %}
-          <div class="flex-{{ img_spacer_span }}"></div>
-        {% else %}
-          <div class="flex-1"></div>
-        {% endif %}
-      {% endif %}
+  <div class="MediaObject-wrapper">
+    {% if img_area %}
+      {{ img_area }}
     {% endif %}
-    <div class="MediaObject-content flex-0 {% if content_classnames != '' %} {{ content_classnames }}{% endif %}">
-      {% if show_title %}
-        <h2 class="h2 {% if title_classnames != '' %} {{ title_classnames }}{% endif %}">{{ title }}</h2>
-      {% endif %}
-      {% if show_copy %}
-        <div class="MediaObject-copy {% if copy_classnames != '' %} {{ copy_classnames }}{% endif %}">
-          {{ html_area }}
-        </div>
-      {% endif %}
-      {% unless is_module_clickable %}
-        {% if show_button %}
-          <div class="{% if button_wrapper_classnames %} {{ button_wrapper_classnames }}{% else %} flex-0{% endif %}">
-            <a href="{{ url }}" class="Button{% if button_classnames != '' %} {{ button_classnames }}{% endif %}">{% if button_title != '' %}{{ button_title }}{% else %}{% endif %}</a>
-          </div>
-        {% endif %}
-      {% endunless %}
+    <div class="MediaObject-content">
+      {%- if title_area -%}
+        {{ title_area -}}
+      {%- endif -%}
+      {%- if html_area -%}
+        {{ html_area -}}
+      {%- endif -%}
+      {%- unless is_module_clickable -%}
+        {%- if button_area -%}
+          {{ button_area -}}
+        {%- endif -%}
+      {%- endunless -%}
     </div>
   </div>
   {% if is_module_clickable %}

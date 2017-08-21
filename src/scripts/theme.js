@@ -22,6 +22,7 @@ window.theme = window.theme || {};
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 // =require templates/filters.js
+// =require templates/carousels.js
 
 $(document).ready(function() {
   var sections = new slate.Sections();
@@ -67,7 +68,7 @@ $(document).ready(function() {
         if (responsive._bp_check() === 'SMALL-UP') {
           if ($filter_el.length > 0) {
             if (filter_scene) {
-              filter_scene.destroy(true);  
+              filter_scene.destroy(true);
             }
             self.filters();
           }
