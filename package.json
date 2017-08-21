@@ -5,7 +5,8 @@
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3",
     "jquery": "^3.2.1",
-    "sass-lint": "^1.10.2"
+    "sass-lint": "^1.10.2",
+    "slick-carousel": "^1.7.1"
   },
   "scripts": {
     "start": "npm i -g @shopify/slate && npm i",

@@ -1,0 +1,45 @@
+{% if url %}
+  {% assign url = url %}
+{% else %}
+  {% assign url = '#' %}
+{% endif %}
+
+<div class="MediaObject flex{% if classnames != '' %} {{ classnames }}{% endif %} {% if modifier_classnames != '' %} {{ modifier_classnames }}{% endif %}" {% if has_shopify_attributes_tag %}{{ block.shopify_attributes }}{% endif %} {% if used_as_slide %}data-js-carousel-slide{% endif %}>
+  {% if is_module_clickable %}
+    <a href="{{ url }}" class="u-block u-full-width">
+  {% endif %}
+  <div class="MediaObject-wrapper flex{% if is_content_stacked %}-col{% endif %} {% if is_content_reversed %} flex-{% if is_content_stacked %}col{% else %}row{% endif %}-reverse{% endif %} flex-1 {% if wrapper_classnames != '' %} {{ wrapper_classnames }}{% endif %}">
+    {% if show_image %}
+      <div class="{% if img_wrapper_classnames %} {{ img_wrapper_classnames }}{% else %} flex0{% endif %}">
+        <img src="{{ img }}" class="MediaObject-img u-full-width{% if img_classnames != '' %} {{ img_classnames }}{% endif %}" {% if img_alt != '' %} alt="{{ img_alt }}"{% endif %}>
+      </div>
+      {% if img_spacer %}
+        {% if img_spacer_span != blank %}
+          <div class="flex-{{ img_spacer_span }}"></div>
+        {% else %}
+          <div class="flex-1"></div>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    <div class="MediaObject-content flex-0 {% if content_classnames != '' %} {{ content_classnames }}{% endif %}">
+      {% if show_title %}
+        <h2 class="h2 {% if title_classnames != '' %} {{ title_classnames }}{% endif %}">{{ title }}</h2>
+      {% endif %}
+      {% if show_copy %}
+        <div class="MediaObject-copy {% if copy_classnames != '' %} {{ copy_classnames }}{% endif %}">
+          {{ html_area }}
+        </div>
+      {% endif %}
+      {% unless is_module_clickable %}
+        {% if show_button %}
+          <div class="{% if button_wrapper_classnames %} {{ button_wrapper_classnames }}{% else %} flex-0{% endif %}">
+            <a href="{{ url }}" class="Button{% if button_classnames != '' %} {{ button_classnames }}{% endif %}">{% if button_title != '' %}{{ button_title }}{% else %}{% endif %}</a>
+          </div>
+        {% endif %}
+      {% endunless %}
+    </div>
+  </div>
+  {% if is_module_clickable %}
+    </a>
+  {% endif %}
+</div>
