@@ -50,7 +50,6 @@ theme.Product = (function($, slate) {
    * @param {function} options.onHoverZoomReady
    * @param {function} options.onHoverZoomIn
    * @param {function} options.onHoverZoomOut
-   * @return {self}
    */
   function ProductImageZoomController(options) {
     
@@ -123,7 +122,7 @@ theme.Product = (function($, slate) {
         });
       };
 
-      // Kill the zoom once you leave the square
+      // Kill the zoom once you mouseout of the image
       $zoomTarget.on('mouseleave' + this.namespace, _this.hoverZoomOut.bind(_this));
 
       if(loadTest.addEventListener) {
@@ -214,9 +213,9 @@ theme.Product = (function($, slate) {
      *        It all depends on how complex your image updating logic is.
      *
      * @param {string} src - Image displayed as the feature image
-     * @param {string} zoomSrc - Image used as the zoomed image
+     * @param {string} srcZoom - Image used as the zoomed image
      */
-    this.changeImage = function(src, zoom) {
+    this.changeImage = function(src, srcZoom) {
       this.destroyHoverZoom();
       $(selectors.productFeaturedImage).attr('src', src);
       $(selectors.productFeaturedImageLink).attr('href', srcZoom);
