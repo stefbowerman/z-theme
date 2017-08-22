@@ -43,3 +43,53 @@ slate build # Creates a production-ready `dist` bundle
 
 All developers who wish to contribute through code or issues, take a look at the
 [Code of Conduct](https://github.com/zehnergroup/master/CODE_OF_CONDUCT.md).
+
+---
+
+## Apollo Roadmap
+
+This is a high-level look at the what we hope to provide out of the box with Apollo. **If you are looking to use Apollo as the boilerplate for your theme**, please visit [our wiki](https://github.com/zehnergroup/apollo/wiki/So-you-want-to-use-Apollo-as-a-boilerplate%3F) for further instructions.
+
+### Global
+
+- [ ] Nav
+  - [ ] Mobile nav
+  - [ ] Search modal
+  - [x] Mini cart `0.0.1`
+- [ ] Footer
+  - [x] Footer email signup  `0.0.1`
+- [ ] Multiple Pages (carousel on mobile)
+  - [ ] Two up
+  - [ ] Three up
+  - [ ] Mosaic
+
+### Homepage
+
+- [x] Split Hero `0.0.1`
+- [x] Hero `0.0.1`
+- [ ] Two up (carousel on mobile)
+- [ ] Feature collections Three up (carousel on mobile)
+- [ ] Full width hero
+- [ ] Mosaic (carousel on mobile)
+- [ ] Three up (carousel on mobile)
+- [x] Instagram widget `0.0.1`
+
+### Collections
+
+- [ ] Hero
+- [ ] Filters + sort by (custom functionality)
+- [ ] Product thumbnail
+- [ ] Load more (custom functionality)
+
+### Product Page
+
+- [x] image zoom `0.0.1`
+- [x] thumbnail image switcher `0.0.1`
+- [ ] Tabs for variants (men/women/kids)
+- [ ] Accordion
+
+### Static Pages
+
+- [ ] Hero w/ description and/or CTA
+- [ ] blockquotes
+- [ ] media objects (used in 2/3-ups)
