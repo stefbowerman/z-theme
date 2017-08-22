@@ -1,4 +1,4 @@
-<section {% if section.settings.toggle_carousel %} data-js-carousel-container data-js-slides-per-page="{{- section.settings.slides_per_page -}}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}"{%- endif %}>
+<section class="carousel carousel--{{ section.settings.carousel_height }}" id="carousel-{{ section.id }}" {% if section.settings.toggle_carousel %} data-js-carousel-container data-js-slides-per-page="{{- section.settings.slides_per_page -}}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}"{%- endif %}>
 
 <div {%- if section.settings.toggle_carousel %} data-js-carousel-hide{%- endif -%}>
 
@@ -65,7 +65,7 @@
       },
       {
         "type": "select",
-        "id": "slideshow_height",
+        "id": "carousel_height",
         "label": "Section height",
         "default": "small",
         "options": [
