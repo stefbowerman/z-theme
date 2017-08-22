@@ -9,6 +9,12 @@
 // =require /../../node_modules/jquery/dist/jquery.min.js
 
 /*!
+ * Zoom 1.7.18
+ * http://www.jacklmoore.com/zoom
+ */
+// =require /../../node_modules/jquery-zoom/jquery.zoom.min.js
+
+/*!
  * instafeed.min.js
  */
 // =require vendor/instafeed.min.js
