@@ -1,0 +1,119 @@
+{% comment %}
+  Filters Snippet
+
+  It looks through all the tags looking for certain tags that will become filters.
+
+  The tags using for filtering are the ones that starts with:
+    - `color-`
+    - `size-`
+    - `gallery-`
+
+  Tags are case-sensitive, so we will not do any transformation to them for filtering and transform them only for presentational purpose (capitalize).
+
+  Also manages Sort By (that works in conjuntion with Filters at some points)
+{% endcomment %}
+
+{% assign filter_options = 'color,size,gallery' | split: "," %}
+{% assign filters_set = false %}
+{% assign filters_count = 3 %}
+
+<div class="Filters">
+  <div class="Filter-label l-label js-mobile-after">
+    <label class="js-mobile-hidden">Filter By</label>
+    <div class="Select Select--filter filter--mobile">
+      <a href="#" class="js-mobile-filter-toggle">Filter By</a>
+    </div>
+  </div>
+  {% for option in filter_options %}
+    {% assign selected_by_option = '' %}
+    {%- capture filter_content -%}
+      {%- for tag in collection.all_tags -%}
+        {%- assign tag_type = tag | split: '-' -%}
+        {%- assign type = option | append: '-' -%}
+
+        {% if tag_type[0] == option %}
+          {% assign display_tag = tag | remove: type | replace: '-', ' ' | capitalize %}
+          <div class="Filter-item js-Filter-item"><a class="SelectOption js-filter-select {% if current_tags contains tag %}is-active{% endif %}" href="#" data-value="{{ tag }}">{{ display_tag }}</a></div>
+          {% assign filters_set = true %}
+          {% if current_tags contains tag %}
+            {% assign selected_by_option = display_tag %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endcapture %}
+    {% assign filter_content = filter_content | strip %}
+    {% if filter_content != blank %}
+      {% capture popover_content %}
+        <div class="Content">
+          <div class="flex flex-wrap Filter-itemWrap">
+            {{ filter_content }}
+          </div>
+        </div>
+        <div class="Error">Error: Up to 3 Filters Max</div>
+      {%- endcapture -%}
+      {% assign filters_count = filters_count | minus: 1 %}
+      <div class="flex-1 flex-align-self-center js-filter-container u-pos-rel u-mr__reflow">
+        <div class="Select Select--filter Filter-mobileWrapper"><a class="Select-inner js-filter-action {% if selected_by_option != blank %}js-filter-action-remove{% endif %} u-block" href="#" data-option="{{ option | capitalize }}">{% if selected_by_option != blank %}{{ selected_by_option }}{% else %}{{ option | capitalize }}{% endif %}</a></div>
+        {% include 'popover' with popover_classnames: 'FilterPopover js-filter', popover_content: popover_content %}
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  {% if filters_set %}
+    {% assign applied_filters = current_tags | size %}
+    <div class="flex-1 flex hidden-xs hidden-sm">
+      {% if applied_filters > 0 %}
+        <button class="link flex-align-self-center js-filter-clear">Clear All</button>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="flex-1 hidden-xs">
+      <p class="u-margin-normalize u-color-dustyGrey">No filters</p>
+    </div>
+  {% endif %}
+  <div class="hidden-xs hidden-sm flex-1 flex-align-self-center flex-justify-right">
+    <h3 class="u-mr__reflow">Sort By</h3>
+  </div>
+  <div class="flex-1 flex-align-self-center js-sort-container u-pos-rel">
+    {% assign sort_options = 'created-descending|Newest,price-ascending|Price: $ - $$,price-descending|Price: $$ - $,best-selling|Best Selling' | split: ',' %}
+    {% assign selected_sort =  collection.sort_by | default: collection.default_sort_by %}
+    {% assign selected_sort_label = 'Sort By' %}
+
+    {% capture sort_combo %}
+      {% for option in sort_options %}
+        {% assign option_couple = option | split: '|' %}
+        <div class="Filter-item">
+          <a class="js-sort-select {% if selected_sort == option_couple[0] %}is-active{% endif %}" href="#" data-value="{{ option_couple[0] }}">{{ option_couple[1] }}</a>
+        </div>
+        {% if selected_sort == option_couple[0] %}
+          {% assign selected_sort_label = option_couple[1] %}
+        {% endif %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% capture sort_popover_content %}
+      <div class="Content">
+        <div class="flex flex-wrap Filter-itemWrap">
+          {{ sort_combo }}
+        </div>
+      </div>
+    {% endcapture %}
+
+    <div class="Select Select--filter">
+      <a class="Select-inner js-sort-action u-block" href="#">{{ selected_sort_label }}</a>
+    </div>
+    {% include 'popover' with popover_classnames: 'Popover--sortBy Select-container js-sort-option-container', popover_content: sort_popover_content %}
+  </div>
+</div>
+
+<script>
+(function () {
+  window.theme = window.theme || {};
+
+  window.theme.collectionData = {
+    url: {{ collection.url | json }},
+    sortDefault: {{ collection.default_sort_by | json }},
+    sortApplied: {{ collection.sort_by | json }}
+  };
+}());
+</script>

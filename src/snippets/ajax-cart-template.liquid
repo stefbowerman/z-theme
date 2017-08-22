@@ -1,0 +1,48 @@
+{% raw %}
+<script type="text/x-handlebars-template" data-ajax-cart-template>
+  <div class="AjaxCart">
+    <form action="/cart" method="post" novalidate>
+      <div class="AjaxCart-header">
+        <h3>Shopping Bag</h3>
+        <a href="#" data-ajax-cart-close>&times;</a>
+      </div>
+      <div class="AjaxCart-body">
+        {{#if items}}
+          <ul class="AjaxCart-list">
+            {{#each items}}
+            <li class="AjaxCart-item" data-id="{{ variant_id }}" data-qty="{{ quantity }}" data-ajax-item>
+              <img src="{{ image }}" class="AjaxCart-itemImage">
+              <div class="AjaxCart-itemInfo">
+                <a href="{{ url }}" class="AjaxCart-itemTitle" title="{{ title }}">{{ title }}</a>
+                <p class="AjaxCart-itemOptions">
+                  <span class="AjaxCart-itemQty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span>
+                  {{#if variant_title}}
+                    <span class="AjaxCart-itemSize">
+                    {{#if gift_card}}
+                      Amount:
+                    {{/if}}
+                    {{ variant_title }}
+                  {{/if}}
+                </p>
+                <p class="AjaxCart-itemPrice">{{ price }}</p>
+                <a href="#" class="AjaxCart-itemRemove" data-ajax-cart-item-remove>&times;</a>
+                <a href="#" data-ajax-cart-item-increment>Increment</a>
+                <a href="#" data-ajax-cart-item-decrement>Decrement</a>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p class="AjaxCart-emptyMessage">{{emptyMessage}}</p>
+        {{/if}}
+      </div>
+      {{#if items}}
+        <div class="AjaxCart-footer">
+          <p>Total: {{ total_price }}</p>
+          <button type="submit" name="checkout">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}</button>
+        </div>
+      {{/if}}
+    </form>
+  </div>
+</script>
+{% endraw %}

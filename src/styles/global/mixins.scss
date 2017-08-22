@@ -45,6 +45,12 @@
   }
 }
 
+/*================ Translate 3D Mixin ================*/
+
+@mixin translate3d($x, $y, $z) {
+  @include prefix(transform, translate3d($x, $y, $z), webkit moz ms o spec);
+}
+
 /*================ Media Query Mixin ================*/
 @mixin media-query($media-query) {
   $breakpoint-found: false;
@@ -116,4 +122,23 @@
   width: auto;
   height: auto;
   margin: 0;
+}
+
+/*================ Background Image Stretch ================*/
+
+
+@mixin background-image-stretch() {
+  background-position: center center;
+  background-size: cover;
+}
+
+/*================ Stretch Element w/i Parent ================*/
+
+// requires parent to have position: relative
+@mixin stretch-within() {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
 }

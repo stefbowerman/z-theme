@@ -4,9 +4,16 @@ html {
   background-color: $color-body;
 }
 
+.container,
 .page-width {
   @include clearfix();
   max-width: $width-site;
   padding: 0 $gutter;
   margin: 0 auto;
+
+  @include media-query($small) { padding: 0 15px; }
+}
+
+.container--isShrunken {
+  @include media-query($medium-up) { max-width: 750px; }
 }

@@ -65,6 +65,7 @@
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
+  {% section 'pencil-banner' %}
   {% section 'header' %}
 
   <main role="main" id="MainContent">
@@ -72,6 +73,14 @@
   </main>
 
   {% section 'footer' %}
+  {% section 'subscription-popup' %}
+
+  {%- if template contains 'collection' -%}
+    {% include 'filter-modal-container' %}
+  {%- endif -%}
+
+  <div data-ajax-cart-container></div>
+  {% include 'ajax-cart-template' %}
 
 </body>
 </html>

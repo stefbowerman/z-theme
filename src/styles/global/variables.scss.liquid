@@ -1,3 +1,53 @@
+
+/*================ Brand Variables ================*/
+
+$color-red: #ee383d;
+$color-green: #06A12F;
+$color-grey: #d9d9d6;
+$color-white: #fff;
+$color-lightGrey: #f9f9f9;
+$color-darkGrey: #404040;
+$color-black: #000;
+
+/* Font Sizes */
+$fontSize-xxs: 12px;
+$fontSize-xs: 13px;
+$fontSize-sm: 15px;
+$fontSize-md: 17px;
+$fontSize-lg: 20px;
+$fontSize-xl: 24px;
+$fontSize-xxl: 30px;
+
+/* Letter Spacing */
+$letterspacing-xs: 0.4px;
+$letterspacing-sm: 0.5px;
+$letterspacing-md: 0.7px;
+
+/* Line Height */
+$lineHeight-sm: 1.1;
+$lineHeight-md: 1.3;
+$lineHeight-lg: 1.5;
+$lineHeight-xl: 1.65;
+$lineHeight-xxl: 1.7;
+
+/* Spacing */
+$spacing-0: 0;
+$spacing-xxs: 5px;
+$spacing-xs: 10px;
+$spacing-sm: 15px;
+$spacing-md: 20px;
+$spacing-lg: 30px;
+$spacing-xl: 40px;
+$spacing-xxl: 50px;
+$spacing-jumbo: 80px;
+
+/* Transition Speeds */
+
+$transitionSpeed-none: 0s;
+$transitionSpeed-fastest: 0.12s;
+$transitionSpeed-fast: 0.15s;
+$transitionSpeed-normal: 0.3s;
+
 /*================ Color Variables ================*/
 $color-primary: {{ settings.color_primary }};
 
@@ -20,6 +70,7 @@ $color-success-bg: #000;
 
 /*================ Typography Variables ================*/
 $font-weight-normal: 400;
+$font-weight-medium: 500;
 $font-weight-bold: 700;
 
 $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -32,12 +83,15 @@ $font-size-base: {{ settings.type_base_size }};
   Grid Breakpoints and Class Names
     - Do not change the variable names
 ==============================================================================*/
-$grid-medium: 750px;
-$grid-large: 990px;
+$grid-small: 576px;
+$grid-medium: 768px;
+$grid-large: 992px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
 
+$x-small: 'x-small';
 $small: 'small';
+$small-up: 'small-up';
 $medium: 'medium';
 $medium-down: 'medium-down';
 $medium-up: 'medium-up';
@@ -46,10 +100,13 @@ $large-down: 'large-down';
 $large-up: 'large-up';
 $widescreen: 'widescreen';
 
+
 // The `$breakpoints` list is used to build our media queries.
 // You can use these in the media-query mixin.
 $breakpoints: (
+  $x-small '(max-width: #{$grid-small - 1})',
   $small '(max-width: #{$grid-medium - 1})',
+  $small-up '(min-width: #{$grid-small})',
   $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
   $medium-down '(max-width: #{$grid-large - 1})',
   $medium-up '(min-width: #{$grid-medium})',

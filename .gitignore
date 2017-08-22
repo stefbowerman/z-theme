@@ -1,4 +1,5 @@
 # Shopify-specific
+dist/
 config.yml
 
 # Logs
@@ -59,3 +60,5 @@ typings/
 
 # dotenv environment variables file
 .env
+
+*.DS_Store

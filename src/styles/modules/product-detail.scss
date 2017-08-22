@@ -1,0 +1,25 @@
+/**
+ * Product Detail Styles
+ * ---------------------------
+ */
+
+// Target for zoom
+.FeaturedImage-Wrapper {
+
+  display: inline-block;
+
+  &.is-zoomable {
+    cursor: zoom-in;
+    cursor: -webkit-zoom-in;
+  }
+
+  &.is-zoomed {
+    cursor: zoom-out;
+    cursor: -webkit-zoom-out;
+    border: 1px solid #CCC;
+  }
+}
+
+.FeaturedImage {
+
+}
