@@ -55,9 +55,9 @@ This is a high-level look at the what we hope to provide out of the box with Apo
 - [ ] Nav
   - [ ] Mobile nav
   - [ ] Search modal
-  - [x] Mini cart `0.0.1`
+  - [x] Mini cart `0.1.0`
 - [ ] Footer
-  - [x] Footer email signup  `0.0.1`
+  - [x] Footer email signup  `0.1.0`
 - [ ] Multiple Pages (carousel on mobile)
   - [ ] Two up
   - [ ] Three up
@@ -65,14 +65,14 @@ This is a high-level look at the what we hope to provide out of the box with Apo
 
 ### Homepage
 
-- [x] Split Hero `0.0.1`
-- [x] Hero `0.0.1`
+- [x] Split Hero `0.1.0`
+- [x] Hero `0.1.0`
 - [ ] Two up (carousel on mobile)
 - [ ] Feature collections Three up (carousel on mobile)
 - [ ] Full width hero
 - [ ] Mosaic (carousel on mobile)
 - [ ] Three up (carousel on mobile)
-- [x] Instagram widget `0.0.1`
+- [x] Instagram widget `0.1.0`
 
 ### Collections
 
@@ -83,8 +83,8 @@ This is a high-level look at the what we hope to provide out of the box with Apo
 
 ### Product Page
 
-- [x] image zoom `0.0.1`
-- [x] thumbnail image switcher `0.0.1`
+- [x] image zoom `0.1.0`
+- [x] thumbnail image switcher `0.1.0`
 - [ ] Tabs for variants (men/women/kids)
 - [ ] Accordion
 
