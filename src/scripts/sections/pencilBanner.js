@@ -21,7 +21,8 @@ theme.PencilBanner = (function($) {
   function PencilBanner(container) {
     this.$container = $(container);
 
-    this.namespace = '.pencilBanner';
+    this.name = 'pencilBanner',
+    this.namespace = '.'+this.name;
 
     this.events = {
       SHOW: 'show'   + this.namespace,
@@ -72,7 +73,7 @@ theme.PencilBanner = (function($) {
      * Call this to show the banner
      */
     show: function() {
-      console.log('show' + this.namespace);
+      console.log('['+this.name+'] - open');
       $(window).trigger( $.Event(this.events.SHOW) );
     },
 
@@ -81,7 +82,7 @@ theme.PencilBanner = (function($) {
      * Call this to close the banner
      */
     close: function() {
-      console.log('close' + this.namespace);
+      console.log('['+this.name+'] - close');
       $(window).trigger( $.Event(this.events.CLOSE) );
     },
 
@@ -94,19 +95,19 @@ theme.PencilBanner = (function($) {
      * Theme Editor section events below
      */
     onSelect: function() {
-      console.log('[PencilBanner] - section:select');
+      console.log('['+this.name+'] - section:select');
     },
 
     onShow: function() {
-      console.log('[PencilBanner] - section:show');
+      console.log('['+this.name+'] - section:show');
     },
 
     onLoad: function() {
-      console.log('[PencilBanner] - section::load');
+      console.log('['+this.name+'] - section::load');
     },
 
     onUnload: function() {
-      console.log('[PencilBanner] - section::unload');
+      console.log('['+this.name+'] - section::unload');
     }
   });
 

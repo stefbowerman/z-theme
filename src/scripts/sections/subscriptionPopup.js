@@ -31,7 +31,8 @@ theme.SubscriptionPopup = (function($) {
   function SubscriptionPopup(container) {
     this.$container = $(container);
 
-    this.namespace = '.subscriptionPopup';
+    this.name = 'subscriptionPopup';
+    this.namespace = '.'+this.name;
 
     this.settings = {
       delay          : 2000, // delay before showing the popup on pageload,
@@ -101,7 +102,7 @@ theme.SubscriptionPopup = (function($) {
        * STUB METHOD - You need to add implementation details
        */
       e.preventDefault();
-      console.log('[SubscriptionPopup] - onFormSubmit');
+      console.log('['+this.name+'] - onFormSubmit');
     },
 
     show: function() {
@@ -140,19 +141,19 @@ theme.SubscriptionPopup = (function($) {
      * Theme Editor section events below
      */
     onSelect: function() {
-      console.log('[SubscriptionPopup] - section:select');
+      console.log('['+this.name+'] - section:select');
     },
 
     onShow: function() {
-      console.log('[SubscriptionPopup] - section:show');
+      console.log('['+this.name+'] - section:show');
     },
 
     onLoad: function() {
-      console.log('[SubscriptionPopup] - section::load');
+      console.log('['+this.name+'] - section::load');
     },
 
     onUnload: function() {
-      console.log('[SubscriptionPopup] - section::unload');
+      console.log('['+this.name+'] - section::unload');
     }
   });
 

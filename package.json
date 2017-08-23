@@ -1,12 +1,13 @@
 {
   "name": "Apollo",
   "description": "A shopify boilerplate theme for Zehner Group",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3",
     "jquery": "^3.2.1",
-    "sass-lint": "^1.10.2",
-    "slick-carousel": "^1.7.1"
+    "jquery-zoom": "^1.7.20",
+    "slick-carousel": "^1.7.1",
+    "sass-lint": "^1.10.2"
   },
   "scripts": {
     "start": "npm i -g @shopify/slate && npm i",
