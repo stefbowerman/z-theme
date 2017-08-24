@@ -4,22 +4,37 @@
 
   {% for block in section.blocks %}
 
-    {% capture title_area %}
-      <h3>{{ block.settings.title | escape }}</h3>
-    {% endcapture %}
+    {% if block.settings.link != blank %}
+      {% capture url %}
+        {{- block.settings.link -}}
+      {% endcapture %}
+      {% assign is_module_clickable = true %}
+    {% endif %}
 
-    {% capture img_area %}
-      <img src="{{ block.settings.image | img_url: '2048x' }}">
-    {% endcapture %}
+    {% unless block.settings.title == blank %}
+      {% capture title_area %}
+        <h3>{{ block.settings.title | escape }}</h3>
+      {% endcapture %}
+    {% endunless %}
 
-    {% capture html_area %}
-      <h3>{{ block.settings.subheading | escape }}</h3>
-    {% endcapture %}
+    {% if block.settings.image %}
+      {% unless block.settings.image == blank %}
+        {% capture img_area %}
+          <div class="carousel-image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}'); background-position: {{ block.settings.alignment }};"{% endif %}>
+        {% endcapture %}
+      {% endunless %}
+    {% endif %}
+
+    {% unless block.settings.subheading == blank %}
+      {% capture html_area %}
+        <h3>{{ block.settings.subheading | escape }}</h3>
+      {% endcapture %}
+    {% endunless %}
 
     {% include 'media-object',
       has_shopify_attributes_tag: true,
-      used_as_slide: true
-      html_area: html_area
+      used_as_slide: true,
+      is_module_clickable: is_module_clickable
     %}
   {% endfor %}
 </div>
@@ -73,22 +88,6 @@
             "label": "Small",
             "value": "small"
           },
-          {
-            "label": "Medium",
-            "value": "medium"
-          },
-          {
-            "label": "Large",
-            "value": "large"
-          }
-        ]
-      },
-      {
-        "type": "select",
-        "id": "text_size",
-        "label": "Text size",
-        "default": "medium",
-        "options": [
           {
             "label": "Medium",
             "value": "medium"
