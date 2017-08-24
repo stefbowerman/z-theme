@@ -1,6 +1,6 @@
 {% paginate collection.products by 12 %}
 
-<section class="Collection" data-section-id="{{ section.id }}" data-section-type="collections-template">
+<section class="Collection" data-section-id="{{ section.id }}" data-section-type="collection">
   {%- if collection.image -%}
     {%- assign background_image = collection.image | img_url: '2048x' -%}
     {% assign hero_classnames = 'Hero--collection' %}
@@ -18,9 +18,14 @@
     hero_height: 'Hero--sm'
   %}
 
-  <header role="banner" class="Collection-filter">
+  <header role="banner">
     {% include 'breadcrumbs' %}
-    {% include 'filters' %}
+    {% if section.settings.enable_filters %}
+      {% include 'collection-filters' %}
+    {% endif %}
+    {% if section.settings.enable_sort %}
+      {% include 'collection-sort' %}
+    {% endif %}
   </header>
 
   <div>
@@ -92,14 +97,36 @@
   {% if paginate.pages > 1 %}
     {% include 'pagination' %}
   {% endif %}
+
+  {% comment %} This JSON is required for filtering and sorting {% endcomment %}
+  {% capture collection_url %}
+    {% if collection.handle == "all" %}
+      /collections/all
+    {% else %}
+      {{ collection.url }}
+    {% endif %}
+  {% endcapture %}
+
+  <script type="application/json" data-collection-json>
+    {
+      "url": {{ collection_url | strip | json }},
+      "sortDefault": {{ collection.default_sort_by | json }},
+      "sortApplied": {{ collection.sort_by | json }}
+    }
+  </script>
+
 </section>
 
 {% endpaginate %}
 
 {% schema %}
   {
-    "name": "Collections Hero",
+    "name": "Collection",
     "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
       {
         "id": "hero_title",
         "type": "text",
@@ -109,6 +136,23 @@
         "id": "background_image",
         "type": "url",
         "label": "Hero Background Image"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "id": "enable_filters",
+        "type": "checkbox",
+        "label": "Enable Filters",
+        "default": true,
+        "info": "Filtering is based on product tags."
+      },
+      {
+        "id": "enable_sort",
+        "type": "checkbox",
+        "label": "Enable Sort",
+        "default": true
       }
     ]
   }

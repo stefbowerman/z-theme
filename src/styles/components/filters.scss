@@ -1,72 +1,10 @@
-
 // -----------------------------------------------------------------------------
 // Filter Bar on PLP
 // -----------------------------------------------------------------------------
 
-.Collection-filter {
+.CollectionFilters {
 
-}
+  select {
 
-.Filters {
-
-}
-
-.Filter-item {
-
-}
-
-.Filter-label {
-
-}
-
-.Filter-select {
-
-}
-
-.Filter-itemWrap {
-
-}
-
-.Filter-cell {
-
-}
-
-
-/*============================================================================
-  Filter Modal (on Mobile)
-==============================================================================*/
-
-.Filter-modal {
-  background: #f9f9f9;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-
-  @include media-query($large-up) { display: none; }
-}
-
-.Filter-modalClose {
-
-}
-
-.Filter-modalContent {
-
-}
-
-
-/*================ Filter Element Visibilty Toggles ================*/
-
-// Filter Popover Visibilty Toggles
-.FilterPopover {
-
-  .Content { display: block; }
-  .Error { display: none; }
-
-  &.is-filter-disabled {
-    .Content { display: none; }
-    .Error { display: block; }
   }
 }

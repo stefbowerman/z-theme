@@ -32,7 +32,8 @@ theme.Product = (function() {
     var sectionId = this.$container.attr('data-section-id');
 
     this.settings = {};
-    this.namespace = '.product';
+    this.name = 'product';
+    this.namespace = '.'+this.name;
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
