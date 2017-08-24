@@ -24,7 +24,8 @@ theme.InstagramFeed = (function($, Instafeed) {
   function InstagramFeed(container) {
     this.$container = $(container);
 
-    this.namespace = '.instagramFeed';
+    this.name = 'instagramFeed';
+    this.namespace = '.'+this.name;
 
     this.settings = {
       accessToken: this.$container.attr('data-access-token'),
@@ -64,7 +65,7 @@ theme.InstagramFeed = (function($, Instafeed) {
         
         // Handle invalid response
         if(response.meta.hasOwnProperty('error_message')){
-          console.warn('[InstagramFeed] - ' + response.meta.error_message);
+          console.warn('['+this.name+'] - ' + response.meta.error_message);
           return;
         }
 
@@ -117,19 +118,19 @@ theme.InstagramFeed = (function($, Instafeed) {
      * Theme Editor section events below
      */
     onSelect: function() {
-      console.log('[InstagramFeed] - section:select');
+      console.log('['+this.name+'] - section:select');
     },
 
     onShow: function() {
-      console.log('[InstagramFeed] - section:show');
+      console.log('['+this.name+'] - section:show');
     },
 
     onLoad: function() {
-      console.log('[InstagramFeed] - section::load');
+      console.log('['+this.name+'] - section::load');
     },
 
     onUnload: function() {
-      console.log('[InstagramFeed] - section::unload');
+      console.log('['+this.name+'] - section::unload');
     }
   });
 

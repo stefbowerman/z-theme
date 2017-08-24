@@ -4,14 +4,26 @@
 // =require vendor/modernizr.min.js
 
 /*!
- * jquery-2.2.3.min.js
+ * jquery.min.js
  */
-// =require vendor/jquery-2.2.3.min.js
+// =require /../../node_modules/jquery/dist/jquery.min.js
+
+/*!
+ * Zoom 1.7.18
+ * http://www.jacklmoore.com/zoom
+ */
+// =require /../../node_modules/jquery-zoom/jquery.zoom.min.js
 
 /*!
  * instafeed.min.js
  */
 // =require vendor/instafeed.min.js
+
+/*!
+ * handlebars v4.0.10
+ */
+// =require vendor/handlebars-v4.0.10.js
+
 
 // Attempts to preserve comments that likely contain licensing information,
 // even if the comment does not have directives such as `@license` or `/*!`.

@@ -12,11 +12,13 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 // =require slate/collectionFilters.js
 // =require slate/collectionSort.js
+// =require slate/ajaxCart.js
 
 /*================ Sections ================*/
 // =require sections/product.js
 // =require sections/collection.js
 // =require sections/pencilBanner.js
+// =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
 
 /*================ Templates ================*/
@@ -28,7 +30,10 @@ $(document).ready(function() {
   sections.register('product', theme.Product);
   sections.register('collection', theme.Collection);
   sections.register('pencil-banner', theme.PencilBanner);
+  sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
+
+  slate.AjaxCart.init({});
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

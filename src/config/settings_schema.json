@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Slate",
-    "theme_version": "0.11.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://shopify.github.io/slate/",
-    "theme_support_url": "https://github.com/Shopify/slate"
+    "theme_name": "Apollo",
+    "theme_version": "0.1.0",
+    "theme_author": "Zehner Group",
+    "theme_documentation_url": "https://github.com/zehnergroup/apollo/wiki",
+    "theme_support_url": "https://github.com/zehnergroup/apollo"
   },
   {
     "name": "Typography",
@@ -155,6 +155,16 @@
         "id": "favicon",
         "label": "Favicon image",
         "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Mailing List",
+    "settings": [
+      {
+        "type": "text",
+        "id": "newsletter_form_action",
+        "label": "Newsletter Form Action URL"
       }
     ]
   }
