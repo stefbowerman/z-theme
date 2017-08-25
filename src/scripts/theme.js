@@ -11,6 +11,7 @@ window.theme = window.theme || {};
 // =require slate/images.js
 // =require slate/variants.js
 // =require slate/ajaxCart.js
+// =require slate/carousels.js
 
 /*================ Sections ================*/
 // =require sections/product.js
@@ -22,7 +23,7 @@ window.theme = window.theme || {};
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 // =require templates/filters.js
-// =require templates/carousels.js
+
 
 $(document).ready(function() {
   var sections = new slate.Sections();
@@ -31,7 +32,7 @@ $(document).ready(function() {
   sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
 
-  slate.AjaxCart.init({});
+  // slate.AjaxCart.init({});
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

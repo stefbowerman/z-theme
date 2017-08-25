@@ -19,7 +19,7 @@ slate.carousels = (function () {
 
   var DESKTOP_MIN = 992;
 
-  function shouldMakeCarousel () {
+  function shouldBuildCarousel () {
     var width = $(window).width();
 
     if (width < DESKTOP_MIN) {
@@ -29,7 +29,7 @@ slate.carousels = (function () {
     return false;
   }
 
-  function makeCarousel () {
+  function buildCarousel() {
     $(selectors.carouselContainer).each(function () {
       var actualCarousel = $(this).find(selectors.actualCarousel), slidesPerPage;
 
@@ -61,15 +61,13 @@ slate.carousels = (function () {
   }
 
   function doCarousels () {
-    makeCarousel();
-    // if (shouldMakeCarousel()) {
-    //   makeCarousel();
+    // buildCarousel();
+    // if (shouldBuildCarousel()) {
+    //   buildCarousel();
     // } else {
     //   showDefaultContainer();
     // }
   }
 
-  $(window).on('resize', doCarousels);
-
-  doCarousels();
+  buildCarousel();
 }());
