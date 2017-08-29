@@ -1,0 +1,80 @@
+{% comment %}
+  Filters Snippet
+
+  It looks through all the tags looking for certain tags that will become filters.
+
+  The tags using for filtering are the ones that starts with:
+    - `color-`
+    - `size-`
+    - `gallery-`
+
+  Tags are case-sensitive, so we will not do any transformation to them for filtering and transform them only for presentational purpose (capitalize).
+{% endcomment %}
+
+{% unless collection == empty %}
+
+  <div class="CollectionFilters" data-filters>
+
+    {% assign filter_types = 'color,size,gallery' | split: "," %}
+    {% assign filters_set = false %}
+    {% assign filters_count = 3 %}
+
+    {%- capture filters_html %}
+
+      {% for filter_type in filter_types %}
+        
+        {% assign filter_type_options_count = 0 %}
+        
+        {% comment %} Create the list of <option> tags {% endcomment %}
+        {%- capture filter_type_select_content -%}
+
+          {% comment %} Create an empty option to select all / clear the filters {% endcomment %}
+          <option value="">All</option>
+
+          {%- for tag in collection.all_tags -%}
+
+            {% comment %} turns 'color-blue' into 'color' {% endcomment %}
+            {%- assign tag_type = tag | split: '-' | first -%}
+            {% comment %} turns 'color' into 'color-' {% endcomment %}
+            {%- assign type = filter_type | append: '-' -%}
+            
+            {% if tag_type == filter_type %}
+              {% assign filter_type_options_count = filter_type_options_count | plus: 1 %}
+              {% comment %} Turns 'color-sky-blue' into 'Sky Blue' {% endcomment %}
+              {% assign display_tag = tag | remove: type | replace: '-', ' ' | capitalize %}
+              <option value="{{ tag }}" {% if current_tags contains tag %}selected{% endif %}>
+                {{ display_tag }}
+              </option>
+            {% endif %}
+
+          {% endfor %}
+        {% endcapture %}
+
+        {% comment %} Construct a select tag for it if we have more than 1 option to display {% endcomment %}
+        {% if filter_type_options_count > 1 %}
+          <label>{{ filter_type | capitalize }}</label>
+          <select data-filters-type="{{ filter_type }}" data-filters-type-select>
+            {{ filter_type_select_content }}
+          </select>
+        {% endif %}
+
+      {% endfor %}
+    {% endcapture %}
+
+    {% comment %} If we have any select tags, output them here {% endcomment %}
+    {% if filters_html != blank %}
+
+      <p>Filter</p>
+      {{ filters_html }}
+
+      {% if current_tags %}
+        <a href="#" data-filters-clear>
+          Clear all filters
+        </a>
+      {% endif %}
+    {% endif %}
+
+  </div>
+
+{% endunless %}
+
