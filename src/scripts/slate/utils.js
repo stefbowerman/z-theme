@@ -77,5 +77,32 @@ slate.utils = {
    */
   defaultTo: function(value, defaultValue) {
     return (value == null || value !== value) ? defaultValue : value
+  },
+
+  /**
+   * Constructs an object of key / value pairs out of the parameters of the query string
+   *
+   * @return {Object}
+   */
+  getQueryParams: function() {
+    var queryString = location.search && location.search.substr(1) || '';
+    var queryParams = {};
+
+    queryString
+      .split('&')
+      .filter(function (element) {
+        return element.length;
+      })
+      .forEach(function (paramValue) {
+        var splitted = paramValue.split('=');
+
+        if (splitted.length > 1) {
+          queryParams[splitted[0]] = splitted[1];
+        } else {
+          queryParams[splitted[0]] = true;
+        }
+      });
+
+    return queryParams;
   }
 };

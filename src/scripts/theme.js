@@ -10,11 +10,14 @@ window.theme = window.theme || {};
 // =require slate/currency.js
 // =require slate/images.js
 // =require slate/variants.js
+// =require slate/collectionFilters.js
+// =require slate/collectionSort.js
 // =require slate/ajaxCart.js
 // =require slate/slideshow.js
 
 /*================ Sections ================*/
 // =require sections/product.js
+// =require sections/collection.js
 // =require sections/pencilBanner.js
 // =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
@@ -23,12 +26,12 @@ window.theme = window.theme || {};
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
-// =require templates/filters.js
 
 
 $(document).ready(function() {
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
+  sections.register('collection', theme.Collection);
   sections.register('pencil-banner', theme.PencilBanner);
   sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
@@ -43,49 +46,6 @@ $(document).ready(function() {
     slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
-  var filter_scene, mobile_scene;
-  var $filter_el = $('.js-filter-main-container');
-
-  var responsive =  {
-    _ww: function () {
-      var newW = $(window).width();
-      return newW;
-    },
-    _bp: {
-      small: 576
-    },
-    _bp_check: function () {
-      if (this._ww() > this._bp.small) {
-        return 'SMALL-UP'
-      } else {
-        return 'SMALL'
-      }
-    }
-  };
-
-  var filters_setup = {
-    windowBindings: function () {
-      var self = this;
-
-      $(window).on('resize', function(){
-        if (responsive._bp_check() === 'SMALL-UP') {
-          if ($filter_el.length > 0) {
-            if (filter_scene) {
-              filter_scene.destroy(true);
-            }
-            self.filters();
-          }
-        } else if (responsive._bp_check() === 'SMALL') {
-          if ($filter_el.length > 0) {
-            if (filter_scene) {
-              filter_scene.destroy(true);
-            }
-          }
-        }
-      })
-    }
-  }
-
   // Wrap videos in div to force responsive layout.
   slate.rte.wrapTable();
   slate.rte.iframeReset();
@@ -94,4 +54,5 @@ $(document).ready(function() {
   if (slate.cart.cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
+
 });
