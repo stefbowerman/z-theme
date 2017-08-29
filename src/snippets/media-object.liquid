@@ -4,11 +4,11 @@
   ============
 
   @description - a small, modular content block that provides: image, title, content, and copy areas
-  @usage - use for creating individual content blocks, or slides within a carousel
+  @usage - use for creating individual content blocks, or slides within a slideshow
 
   @param is_module_clickable {boolean} - whether the object gets wrapped in an <a> tag or not
   @param has_shopify_attributes_tag {boolean} - links up block to Shopify's Javascript API
-  @param used_as_slide {boolean} - toggles treatment as a slide in a carousel
+  @param used_as_slide {boolean} - toggles treatment as a slide in a slideshow
   @param url {string} - (optional) makes module/button link somewhere
   @param classnames {string} - (optional) top-level media object classnames
 
@@ -20,7 +20,7 @@
 
 {% endcomment -%}
 
-<div class="MediaObject{%- if classnames != '' %} {{ classnames -}}{% endif %}" {% if has_shopify_attributes_tag %} {{ block.shopify_attributes }}{% endif %}{% if used_as_slide %} data-js-carousel-slide{% endif %}>
+<div class="MediaObject{%- if classnames != '' %} {{ classnames -}}{% endif %}" {% if has_shopify_attributes_tag %} {{ block.shopify_attributes }} data-block-id="{{ block.id }}"{% endif %}{% if used_as_slide %} data-slideshow-slide{% endif %}>
   {% if is_module_clickable %}
     <a href="{{ url }}" class="MediaObject-link">
   {% endif %}

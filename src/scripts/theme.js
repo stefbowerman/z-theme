@@ -11,13 +11,14 @@ window.theme = window.theme || {};
 // =require slate/images.js
 // =require slate/variants.js
 // =require slate/ajaxCart.js
-// =require slate/carousels.js
+// =require slate/slideshow.js
 
 /*================ Sections ================*/
 // =require sections/product.js
 // =require sections/pencilBanner.js
 // =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
+// =require sections/slideshow.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -31,6 +32,7 @@ $(document).ready(function() {
   sections.register('pencil-banner', theme.PencilBanner);
   sections.register('subscription-popup', theme.SubscriptionPopup);
   sections.register('instagram-feed', theme.InstagramFeed);
+  sections.register('slideshow', theme.Slideshow);
 
   // slate.AjaxCart.init({});
 
