@@ -14,7 +14,7 @@ In building Apollo we have added the following modules
 
 ### Ajax Cart
 
-Initialize the ajaxCart inside the main javacsript file
+Initialize the ajaxCart inside the main javascript file
 
 ```javascript
 slate.AjaxCart.init({options});

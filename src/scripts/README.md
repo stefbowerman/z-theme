@@ -23,8 +23,8 @@ The main file that imports all the theme js dependencies, wires theme up and ini
 When adding code to either of these objects please keep the following code conventions in mind.
 
 - All code should be camelcased except constructors which should be Pascal cased.
-- Utilies use plain objects
-- Declare your dependencies via injection by passing then into the function scope (see [below](#adding-section-js).
+- Utilities use plain objects
+- Declare your dependencies via injection by passing them into the function scope (see [below](#adding-section-js).
 - Selectors use `data-*` attributes and should be defined outside any constructors.
 - Document your code as neccessary, this includes following [JSDocs](http://usejsdoc.org/) guidelines to define function signatures if they accept arguments, return values, or both.
 - Prefix any private methods with an underscore.
@@ -45,7 +45,7 @@ When adding javascript to the theme, you should first determine what the purpose
 
 ## Adding Section JS
 
-When adding section javascript, take extra care to make sure that it is fully compatible with the theme editor API.  For reference, see the following slate documentation on [adding section javascript](https://shopify.github.io/slate/js-examples/#section-events).  The code structure requires that you attach a constructor to `window.theme` which can them be passed into the section management object.  You should declare any selectors needed by that section outside of the constructor, and attach all methods to the object's prototype.  The constructor and object key should both be Pascal cased.  The constructor *must* accept an `HTMLElement` as it's only argument.
+When adding section javascript, take extra care to make sure that it is fully compatible with the theme editor API.  For reference, see the following slate documentation on [adding section javascript](https://shopify.github.io/slate/js-examples/#section-events).  The code structure requires that you attach a constructor to `window.theme` which can then be passed into the section management object.  You should declare any selectors needed by that section outside of the constructor, and attach all methods to the object's prototype.  The constructor and object key should both be Pascal cased.  The constructor *must* accept an `HTMLElement` as it's only argument.
 
 A simple example would look like:
 
