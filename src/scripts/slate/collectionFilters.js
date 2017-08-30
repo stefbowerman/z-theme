@@ -85,24 +85,6 @@ slate.collectionFilters = (function(){
     _sortingFunctions: {
 
       /**
-       * Sorts things alphabetically
-       *
-       * @param (string) a
-       * @param (string) b
-       * @return (int)
-       */
-      alpha: function(a, b) {
-        var a = a.toString();
-        var b = b.toString();
-
-        if(a == b) {
-          return 0;
-        }
-
-        return a > b ? 1 : -1;
-      },
-
-      /**
        * Sorts sizes based on a predefined order
        *
        * @param (string) a
@@ -110,7 +92,7 @@ slate.collectionFilters = (function(){
        * @return (int)
        */
       size: function(a, b) {
-        console.warn('['+this.name+'] - _sortingFunctions.size - This method hasn\'t been implemented yet.');
+        console.warn('[collectionFilters] - _sortingFunctions.size - This method hasn\'t been implemented yet.');
         // Implement this so sizes show up how we expect them to? small, med, large..
       }
     },
