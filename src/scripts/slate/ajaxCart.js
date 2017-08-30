@@ -20,61 +20,6 @@
 (function($, Handlebars, slate){
 
   if ((typeof ShopifyAPI) === 'undefined') { ShopifyAPI = {}; }
-  if ((typeof Shopify)    === 'undefined') { Shopify = {}; }
-
-  /*============================================================================
-    Shopify Money Formatting
-  ==============================================================================*/
-  if (!Shopify.formatMoney) {
-    Shopify.formatMoney = function formatMoney (cents, format) {
-      var value = '',
-          placeholderRegex = /\{\{\s*(\w+)\s*\}\}/,
-          formatString = (format || this.money_format);
-
-      if (typeof cents == 'string') {
-        cents = cents.replace('.','');
-      }
-
-      function defaultOption(opt, def) {
-        return (typeof opt == 'undefined' ? def : opt);
-      }
-
-      function formatWithDelimiters(number, precision, thousands, decimal) {
-        precision = defaultOption(precision, 2);
-        thousands = defaultOption(thousands, ',');
-        decimal   = defaultOption(decimal, '.');
-
-        if (isNaN(number) || number == null) {
-          return 0;
-        }
-
-        number = (number/100.0).toFixed(precision);
-
-        var parts   = number.split('.'),
-            dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
-            cents   = parts[1] ? (decimal + parts[1]) : '';
-
-        return dollars + cents;
-      }
-
-      switch(formatString.match(placeholderRegex)[1]) {
-        case 'amount':
-          value = formatWithDelimiters(cents, 2);
-          break;
-        case 'amount_no_decimals':
-          value = formatWithDelimiters(cents, 0);
-          break;
-        case 'amount_with_comma_separator':
-          value = formatWithDelimiters(cents, 2, '.', ',');
-          break;
-        case 'amount_no_decimals_with_comma_separator':
-          value = formatWithDelimiters(cents, 0, '.', ',');
-          break;
-      }
-
-      return formatString.replace(placeholderRegex, value);
-    };
-  }
 
   /*============================================================================
     API Functions
@@ -277,11 +222,11 @@
       */
       buildCart: function(cart) {
         // Make adjustments to the cart object contents before we pass it off to the handlebars template
-        cart.total_price = Shopify.formatMoney(cart.total_price, theme.moneyFormat);
+        cart.total_price = slate.Currency.formatMoney(cart.total_price, theme.moneyFormat);
         cart.emptyMessage = this.settings.emptyMessage
         cart.items.map(function(item){
           item.image = slate.Image.getSizedImageUrl(item.image, '200x');
-          item.price = Shopify.formatMoney(item.price, theme.moneyFormat);
+          item.price = slate.Currency.formatMoney(item.price, theme.moneyFormat);
           return item;
         });
 
