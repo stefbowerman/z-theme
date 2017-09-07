@@ -2,6 +2,13 @@
 
 Apollo builds on the pre-existing javascript structure provided to us by Slate.  This structure allows us to easily add functionality in an organized way that focuses on re-usability of modules and share-ability of utilities.
 
+- [Structure](#structure)
+- [JS Conventions](#js-conventions)
+- [Adding JS](#adding-js)
+- [Adding Section JS](#adding-section-js)
+- [Removing Section JS](#removing-section-js)
+- [Adding Vendor Libraries](#adding-vendor-libraries)
+
 ## Structure
 
 The site javascript is built off of the main `theme.js` file which relies on two global objects - `window.slate` and `window.theme`.  Slate code is imported first followed by theme code which consumes it.  All files should attach plain objects, constructors or instances (whichever makes the most sense) to the appropriate global object.  All initialization should be done inside `theme.js` or handled through the `slate.section` instance (see [Adding Section JS](#adding-section-js)).
