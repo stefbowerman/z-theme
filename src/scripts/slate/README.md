@@ -6,11 +6,11 @@ In keeping with their code convention, any module scripts that are independent o
 
 ## Modules
 
-In building Apollo we have added the following modules
+In building Apollo, we have added the following modules
 
-- [`ajaxCart.js`](#ajax-cart)
-- [`collectionFilters.js`](#collection-filters)
-- [`collectionSort.js`](#collection-sort)
+- [Ajax Cart](#ajax-cart)
+- [Collection Filters](#collection-filters)
+- [Collection Sort](#collection-sort)
 
 ### Ajax Cart
 
