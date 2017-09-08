@@ -6,6 +6,7 @@
     "@shopify/slate-tools": "0.3.3",
     "jquery": "^3.2.1",
     "jquery-zoom": "^1.7.20",
+    "slick-carousel": "^1.7.1",
     "sass-lint": "^1.10.2"
   },
   "scripts": {

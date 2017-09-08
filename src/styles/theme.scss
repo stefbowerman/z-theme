@@ -21,6 +21,9 @@
 @import url('elements/popover.scss');
 @import url('elements/modals.scss');
 
+/*================ VENDOR ================*/
+@import url('vendor/slick.css');
+
 /*================ COMPONENTS ================*/
 @import url('components/forms.scss');
 @import url('components/rte.scss');
@@ -36,6 +39,7 @@
 @import url('modules/ajax-cart.scss');
 @import url('modules/subscription-popup.scss');
 @import url('modules/product-detail.scss');
+@import url('modules/slideshow.scss');
 
 // Necessary bottom placement for specificity w/o `!important`
 @import url('global/utilities.scss');
