@@ -8,6 +8,7 @@
  */
 // =require /../../node_modules/jquery/dist/jquery.min.js
 
+
 /*!
  * Zoom 1.7.18
  * http://www.jacklmoore.com/zoom
@@ -35,3 +36,8 @@
 // 2. A regular expression matches the string of the comment.
 //    For example: `MIT`, `@license`, or `Copyright`.
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
+
+/*!
+* slick.min.js
+*/
+// =require /../../node_modules/slick-carousel/slick/slick.min.js

@@ -1,0 +1,48 @@
+{%- comment %}
+
+  Media Object
+  ============
+
+  @description - a small, modular content block that provides: image, title, content, and copy areas
+  @usage - use for creating individual content blocks, or slides within a slideshow
+
+  @param is_module_clickable {boolean} - whether the object gets wrapped in an <a> tag or not
+  @param has_shopify_attributes_tag {boolean} - links up block to Shopify's Javascript API
+  @param used_as_slide {boolean} - toggles treatment as a slide in a slideshow
+  @param url {string} - (optional) makes module/button link somewhere
+  @param classnames {string} - (optional) top-level media object classnames
+
+  // use Liquid's `capture` to set these variables, they are expecting HTML blocks
+  @param img_area {string|html} - content for image area
+  @param title_area {string|html} - content for title area
+  @param html_area {string|html} - content for copy area
+  @param button_area {string|html} - content for button area (can't be used simultaneously with `is_module_clickable`)
+
+{% endcomment -%}
+
+<div class="MediaObject{%- if classnames != '' %} {{ classnames -}}{% endif %}" {% if has_shopify_attributes_tag %} {{ block.shopify_attributes }} data-block-id="{{ block.id }}"{% endif %}{% if used_as_slide %} data-slideshow-slide{% endif %}>
+  {% if is_module_clickable %}
+    <a href="{{ url }}" class="MediaObject-link">
+  {% endif %}
+  <div class="MediaObject-wrapper">
+    {% if img_area %}
+      {{ img_area }}
+    {% endif %}
+    <div class="MediaObject-content">
+      {%- if title_area -%}
+        {{ title_area -}}
+      {%- endif -%}
+      {%- if html_area -%}
+        {{ html_area -}}
+      {%- endif -%}
+      {%- unless is_module_clickable -%}
+        {%- if button_area -%}
+          {{ button_area -}}
+        {%- endif -%}
+      {%- endunless -%}
+    </div>
+  </div>
+  {% if is_module_clickable %}
+    </a>
+  {% endif %}
+</div>
