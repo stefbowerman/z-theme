@@ -1,12 +1,12 @@
-# Apollo JS - Slate
+# Apollo JavaScript - Slate
 
 Since Apollo is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
 
-In keeping with their code convention, any module scripts that are independent of specific templates or sections should be added to `window.slate` for consumption by external theme code.  In building Apollo, we have added and modified several properties of this namespace which are documented below.
+In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Apollo, we have added and modified several properties of this namespace which are documented below.
 
 ## Modules
 
-In building Apollo, we have added the following modules
+In building Apollo, we have added the following modules:
 
 - [Ajax Cart](#ajax-cart)
 - [Collection Filters](#collection-filters)
@@ -39,7 +39,7 @@ The contents of the filters are sorted alphabetically by default but if you need
 To use, create a new instance and pass in an HTMLElement containing elements required by the selectors and a plain object of data about the collection that is being filtered.
 
 ```javascript
-var sorting = new slate.collectionFilter( container, collectionData );
+var filtering = new slate.collectionFilter( container, collectionData );
 ```
 
 ### Collection Sort

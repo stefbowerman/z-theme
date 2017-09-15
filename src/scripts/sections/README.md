@@ -1,4 +1,4 @@
-# Apollo JS - Sections
+# Apollo JavaScript - Sections
 
 Sections are one of the most unique features of Shopify.  Slate has provided us with the *Section* object that acts as an initializer for section sode and an abstraction layer for theme editor events.  Out of the box, Slate uses a section to render the product detail page and includes the `scripts/sections/product.js` file to handle all the functionality specific to that section.  In addition to product, Apollo has created more sections to provide often needed functionality.
 
