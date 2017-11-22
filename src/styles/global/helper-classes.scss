@@ -1,4 +1,7 @@
-/*================ Helper Classes ================*/
+// -------------------------
+// Helper Classes
+// -------------------------
+
 .clearfix {
   @include clearfix();
 }
@@ -62,9 +65,9 @@
 ==============================================================================*/
 .skip-link:focus {
   @include visually-shown(absolute);
-  color: $color-body-text;
-  background-color: $color-body;
-  padding: $gutter / 2;
+  color: $text-color;
+  background-color: $body-bg;
+  padding: $grid-gutter-width / 2;
   z-index: $z-index-skip-to-content;
   transition: none;
 }

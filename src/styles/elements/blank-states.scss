@@ -1,6 +1,6 @@
-$color-blankstate: rgba($color-body-text, 0.35);
-$color-blankstate-border: rgba($color-body-text, 0.2);
-$color-blankstate-background: rgba($color-body-text, 0.1);
+$color-blankstate: rgba($text-color, 0.35);
+$color-blankstate-border: rgba($text-color, 0.2);
+$color-blankstate-background: rgba($text-color, 0.1);
 
 .placeholder-svg {
   display: block;
