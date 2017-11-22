@@ -1,137 +1,319 @@
-
-/*================ Brand Variables ================*/
-
-$color-red: #ee383d;
-$color-green: #06A12F;
-$color-grey: #d9d9d6;
-$color-white: #fff;
-$color-lightGrey: #f9f9f9;
-$color-darkGrey: #404040;
-$color-black: #000;
-
-/* Font Sizes */
-$fontSize-xxs: 12px;
-$fontSize-xs: 13px;
-$fontSize-sm: 15px;
-$fontSize-md: 17px;
-$fontSize-lg: 20px;
-$fontSize-xl: 24px;
-$fontSize-xxl: 30px;
-
-/* Letter Spacing */
-$letterspacing-xs: 0.4px;
-$letterspacing-sm: 0.5px;
-$letterspacing-md: 0.7px;
-
-/* Line Height */
-$lineHeight-sm: 1.1;
-$lineHeight-md: 1.3;
-$lineHeight-lg: 1.5;
-$lineHeight-xl: 1.65;
-$lineHeight-xxl: 1.7;
-
-/* Spacing */
-$spacing-0: 0;
-$spacing-xxs: 5px;
-$spacing-xs: 10px;
-$spacing-sm: 15px;
-$spacing-md: 20px;
-$spacing-lg: 30px;
-$spacing-xl: 40px;
-$spacing-xxl: 50px;
-$spacing-jumbo: 80px;
-
-/* Transition Speeds */
-
-$transitionSpeed-none: 0s;
-$transitionSpeed-fastest: 0.12s;
-$transitionSpeed-fast: 0.15s;
-$transitionSpeed-normal: 0.3s;
+//
+//  Variables
+// --------------------------------------------------
 
 /*================ Color Variables ================*/
-$color-primary: {{ settings.color_primary }};
 
-// Text colors
-$color-body-text: {{ settings.color_body_text }};
+/* NOTE: As you add more colors here, update utilities.scss with matching text / background color utility classes */
+$color-black: #000;
+$color-white: #FFF;
+$color-grey:  #CCC;
 
-// Backgrounds
-$color-body: #fff;
-
-// Border colors
-$color-border: #f6f6f6;
-
-// Helper colors for form error states
-$color-disabled: #000;
-$color-disabled-border: #000;
-$color-error: #000;
-$color-error-bg: #000;
-$color-success: #000;
-$color-success-bg: #000;
+$text-color:    $color-black;
+$body-bg:       $color-white;
 
 /*================ Typography Variables ================*/
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-bold: 700;
 
-$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-weight-header: $font-weight-bold;
+$font-family-sans-serif:    "Futura", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-monospace:     "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:          $font-family-sans-serif !default;
 
-$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-size-base: {{ settings.type_base_size }};
+$font-size-base:            1rem !default; // set to `16px`
+$font-size-large:           $font-size-base * 1.25;
+$font-size-small:           $font-size-base * 0.875;
+$font-size-xsmall:          $font-size-base * 0.75;
+$font-size-h1:              $font-size-base * 2.5;
+$font-size-h2:              $font-size-base * 2;
+$font-size-h3:              $font-size-base * 1.75;
+$font-size-h4:              $font-size-base * 1.5;
+$font-size-h5:              $font-size-base * 1.25;
+$font-size-h6:              $font-size-base;
 
-/*============================================================================
-  Grid Breakpoints and Class Names
-    - Do not change the variable names
-==============================================================================*/
-$grid-small: 576px;
-$grid-medium: 768px;
-$grid-large: 992px;
-$grid-widescreen: 1400px;
-$grid-gutter: 30px;
+$font-weight-normal:        400;
+$font-weight-medium:        500;
+$font-weight-bold:          700;
+$font-weight-base:          $font-weight-normal !default;
 
-$x-small: 'x-small';
-$small: 'small';
-$small-up: 'small-up';
-$medium: 'medium';
-$medium-down: 'medium-down';
-$medium-up: 'medium-up';
-$large: 'large';
-$large-down: 'large-down';
-$large-up: 'large-up';
-$widescreen: 'widescreen';
+$letter-spacing-base:       0.015em;
+$letter-spacing-h1:         0em;
+$letter-spacing-h2:         0em;
+$letter-spacing-h3:         0em;
+$letter-spacing-h4:         0em;
+$letter-spacing-h5:         0em;
+$letter-spacing-h6:         0em;
+
+$line-height-base:           1.5; //** Unit-less `line-height` for use in components like buttons.
+$line-height-computed:       $font-size-base * $line-height-base !default; //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-h1:             1.2;
+$line-height-h2:             1.2;
+$line-height-h3:             1.2;
+$line-height-h4:             1.2;
+$line-height-h5:             1.2;
+$line-height-h6:             1.2;
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:       inherit !default;
+$headings-font-weight:       $font-weight-bold !default;
+$headings-color:             $color-black !default;
+$headings-text-transform:    uppercase;
+$headings-margin-bottom:     1rem;
+
+$link-color:                 $color-black !default;
+$link-decoration:            none !default;
+$link-hover-color:           lighten($link-color, 16%) !default;
+$link-hover-decoration:      none !default;
+
+/*================ Spacing Variables ================*/
+$spacer:                    1rem;
+$headings-margin-bottom:    $spacer * 1.5;
+$paragraph-margin-bottom:   0.8rem; // Paragraphs (styles the p element)
+
+//== Components
+//
+//## Define common padding and border radius sizes and more.
+
+$padding-base-vertical:     0.375rem;
+$padding-base-horizontal:   0.75rem;
+
+$padding-large-vertical:    0.625rem;
+$padding-large-horizontal:  1rem;
+
+$padding-small-vertical:    0.3125rem;
+$padding-small-horizontal:  0.625rem;
+
+$padding-xs-vertical:       0.0625rem;
+$padding-xs-horizontal:     0.3125rem;
+
+$line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
+$line-height-small:         1.5;
+
+$border-radius-base:        4px;
+$border-radius-large:       6px;
+$border-radius-small:       3px;
+
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-cell-padding:            .75rem !default;
+$table-condensed-cell-padding:  .3rem !default;
+$table-font-size:               $font-size-base;
+
+$table-bg:                      transparent !default;
+$table-bg-accent:               #f9f9f9 !default; //** Background color used for `.table-striped`.
+$table-bg-hover:                #f5f5f5 !default; //** Background color used for `.table-hover`.
+$table-bg-active:               $table-bg-hover !default;
+
+//** Border color for table and cell borders.
+$table-border-color:            #ddd !default;
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-font-weight:                $font-weight-bold !default;
+
+$btn-default-color:              $color-black !default;
+$btn-default-bg:                 $color-white !default;
+$btn-default-border:             $color-black !default;
+$btn-default-hover-color:        $color-black !default;
+$btn-default-hover-bg:           darken($color-white, 9%) !default;
+$btn-default-hover-border:       $color-black !default;
+
+$btn-primary-color:              $color-white !default;
+$btn-primary-bg:                 $color-black !default;
+$btn-primary-border:             $color-black !default;
+$btn-primary-hover-color:        $color-black !default;
+$btn-primary-hover-bg:           $color-white !default;
+$btn-primary-hover-border:       $color-black !default;
+
+$btn-link-disabled-color:        $color-grey !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius-base:         0 !default;
+$btn-border-radius-large:        0 !default;
+$btn-border-radius-small:        0 !default;
+
+$btn-padding-base-vertical:     0.75rem !default;
+$btn-padding-base-horizontal:   3rem !default;
+
+/*================ Forms ================*/
+
+//** `<input>` background color
+$input-bg:                       #fff !default;
+//** `<input disabled>` background color
+$input-bg-disabled:              $color-white !default;
+
+//** Text color for `<input>`s
+$input-color:                    $color-grey !default;
+//** Text color for `<input>`s when focused
+$input-focus-color:              $color-black;
+//** `<input>` border color
+$input-border:                   $color-grey !default;
+
+//** Default `.form-control` border radius
+// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
+$input-border-radius:            0 !default;
+//** Large `.form-control` border radius
+$input-border-radius-large:      0 !default;
+//** Small `.form-control` border radius
+$input-border-radius-small:      0 !default;
+
+//** Border color for inputs on focus
+$input-border-focus:             $color-black !default;
+
+//** Placeholder text color
+$input-color-placeholder:        $color-grey !default;
+
+//** Default `.form-control` height
+$input-height-base:              2.8rem; // ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
+//** Large `.form-control` height
+$input-height-large:             (($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2) !default;
+//** Small `.form-control` height
+$input-height-small:             (($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2) !default;
+
+//** `.form-group` margin
+$form-group-margin-bottom:       15px !default;
+
+$legend-color:                   $color-grey !default;
+$legend-border-color:            #e5e5e5 !default;
+
+//** Background color for textual input addons
+$input-group-addon-bg:           $color-white !default;
+//** Border color for textual input addons
+$input-group-addon-border-color: $input-border !default;
+
+//** Disabled cursor for form controls and buttons.
+$cursor-disabled:                not-allowed !default;
+
+/*================ Media Query Breakpoints ================*/
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              576px; // 480px !default;
+// Small screen / tablet
+$screen-sm-min:              768px !default;
+// Medium screen / desktop
+$screen-md-min:              992px !default;
+// Large screen / wide desktop
+$screen-lg-min:              1200px !default;
+// Widescreen
+$screen-xl-min:              1480px !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+$screen-lg-max:              ($screen-xl-min - 1) !default;
+
+/*================ Bootstrap Grid ================*/
+
+$grid-columns:               12 !default;
+$grid-gutter-width:          30px !default; //** Padding between columns. Gets divided in half for the left and right.
+
+// Navbar collapse
+
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint:      $screen-sm-min !default;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max:  $screen-xs-max !default;
 
 
-// The `$breakpoints` list is used to build our media queries.
-// You can use these in the media-query mixin.
-$breakpoints: (
-  $x-small '(max-width: #{$grid-small - 1})',
-  $small '(max-width: #{$grid-medium - 1})',
-  $small-up '(min-width: #{$grid-small})',
-  $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
-  $medium-down '(max-width: #{$grid-large - 1})',
-  $medium-up '(min-width: #{$grid-medium})',
-  $large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
-  $large-down '(max-width: #{$grid-widescreen - 1})',
-  $large-up '(min-width: #{$grid-large})',
-  $widescreen '(min-width: #{$grid-widescreen})'
-);
+/*================ Bootstrap Container Sizes ================*/
 
-/*============================================================================
-  Generate breakpoint-specific column widths and push classes
-    - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
-    - Default is no push classes
-    - Will not work if `styles/global/grid.scss` is removed
-==============================================================================*/
-$breakpoint-has-widths: ($small, $medium-up);
-$breakpoint-has-push: ();
+//## Define the maximum width of `.container` for different screen sizes.
 
-/*================ Sizing Variables ================*/
-$width-site: 1180px;
-$gutter: 30px;
+// Small screen / tablet
+$container-tablet:             (720px + $grid-gutter-width) !default;
+//** For `$screen-sm-min` and up.
+$container-sm:                 $container-tablet !default;
+
+// Medium screen / desktop
+$container-desktop:            (940px + $grid-gutter-width) !default;
+//** For `$screen-md-min` and up.
+$container-md:                 $container-desktop !default;
+
+// Large screen
+$container-large:              (1140px + $grid-gutter-width) !default;
+//** For `$screen-lg-min` and up.
+$container-lg:                 $container-large !default;
+
+// X-Large screen / widescreen
+$container-xlarge:             $screen-xl-min - $grid-gutter-width; // (1140px + $grid-gutter-width) !default;
+//** For `$screen-xl-min` and up.
+$container-xl:                 $container-xlarge !default;
+
 
 /*================ Z-Index ================*/
-$z-index-dropdown: 2;
+$z-index-dropdown: 99;
+$z-index-header: 100;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/
 $svg-select-icon: #{'{{ "ico-select.svg" | asset_url }}'};
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+$state-danger-text:              #F00 !default;
+$state-danger-bg:                #F00 !default;
+$state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%) !default;
+
+//== Type
+//
+//##
+
+//** Horizontal offset for forms and lists.
+$component-offset-horizontal: 180px !default;
+//** Text muted color
+$text-muted:                  $color-grey !default;
+//** Abbreviations and acronyms border color
+$abbr-border-color:           $color-grey !default;
+//** Headings small color
+$headings-small-color:        $color-grey !default;
+//** Blockquote small color
+$blockquote-small-color:      $color-grey !default;
+//** Blockquote font size
+$blockquote-font-size:        ($font-size-base * 1.25) !default;
+//** Blockquote border color
+$blockquote-border-color:     $color-grey !default;
+//** Page header border color
+$page-header-border-color:    $color-grey !default;
+//** Width of horizontal description list titles
+$dl-horizontal-offset:        $component-offset-horizontal !default;
+//** Point at which .dl-horizontal becomes horizontal
+$dl-horizontal-breakpoint:    $grid-float-breakpoint !default;
+//** Horizontal line color.
+$hr-border-color:             $color-black !default;
+$hr-border-width:             2px;
+$hr-margin-y:                 2rem;
+
+//== Transitions
+//
+//## Keep all transition functions / durations as variables for consistency.
+
+$transition-duration-none:    0s;
+$transition-duration-fastest: 0.05s;
+$transition-duration-fast:    0.15s;
+$transition-duration-base:    0.3s;
+$transition-duration-slow:    0.6s;
+
+ /*
+  *  Names are a little confusing but - 
+  *  $transition-timing-function-in should be used on the `active` state that you're transitioning *to*
+  *  $transition-timing-function-out should be used on the `active` state that you're transitioning *from*
+  *
+  *  Usage - 
+  *  .element {
+  *     transition: all $transition-timing-function-out;
+  *     &:hover,
+  *     &:focus {
+  *      transition: all $transition-timing-function-in;
+  *     }
+  *   }
+  *
+  */
+
+$transition-timing-function-base:      ease-in-out;
+$transition-timing-function-in:        ease-out;
+$transition-timing-function-out:       ease-in;
+$transition-timing-function-in-out-ui: cubic-bezier(0.42, 0, 0.13, 1.04);

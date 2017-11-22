@@ -8,58 +8,6 @@
     "theme_support_url": "https://github.com/zehnergroup/apollo"
   },
   {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "select",
-        "id": "type_base_size",
-        "label": "Base size",
-        "default": "16px",
-        "options": [
-          {
-            "value": "14px",
-            "label": "14px"
-          },
-          {
-            "value": "15px",
-            "label": "15px"
-          },
-          {
-            "value": "16px",
-            "label": "16px"
-          },
-          {
-            "value": "17px",
-            "label": "17px"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Colors",
-    "settings": [
-      {
-        "type": "header",
-        "content": "General colors"
-      },
-      {
-        "type": "color",
-        "id": "color_primary",
-        "label": "Primary color",
-        "default": "#000",
-        "info": "Used for text links, and primary buttons"
-      },
-      {
-        "type": "color",
-        "id": "color_body_text",
-        "label": "Text color",
-        "default": "#000",
-        "info": "Color used for content and paragraph text"
-      }
-    ]
-  },
-  {
     "name": "Social media",
     "settings": [
       {

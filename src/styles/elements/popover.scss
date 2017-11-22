@@ -10,7 +10,7 @@
   min-width: 240px;
   z-index: 200;
   opacity: 0;
-  transition: opacity $transitionSpeed-normal;
+  transition: opacity 500ms;
 
   &.is-active {
     opacity: 1;
