@@ -2,12 +2,27 @@
 // Breadcrumbs
 // -----------------------------------------------------------------------------
 
-.Breadcrumbs {
-  a {}
-  a.is-active {}
+.breadcrumbs {
+  @include display-flex;
 
-  a:hover,
-  a:active {}
+  @media screen and (min-width: $screen-xs-min) {
+    display: block;
+  }
 }
 
-.Breadcrumb-separator {}
+.breadcrumbs__crumb {
+  display: inline-block;
+
+  &:not(:last-child) {
+    &:after {
+      display: inline-block;
+      content: $breadcrumb-separator;
+      padding: 0 5px;
+    }
+  }
+
+  &:last-child:not(:only-child) {
+
+  }
+}
+

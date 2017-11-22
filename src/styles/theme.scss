@@ -6,7 +6,7 @@
 
 /*================ VENDOR ================*/
 // Import these up here to allow overrides down below
-@import url('vendor/slick.css');
+@import url('vendor/slick.scss');
 
 /*================ GLOBAL ================*/
 @import url('global/variables.scss.liquid');
@@ -26,13 +26,11 @@
 @import url('elements/popover.scss');
 @import url('elements/modals.scss');
 
-/*================ VENDOR ================*/
-@import url('vendor/slick.scss');
-
 /*================ COMPONENTS ================*/
 @import url('components/forms.scss');
 @import url('components/rte.scss');
 @import url('components/breadcrumbs.scss');
+@import url('components/pagination.scss');
 @import url('components/filters.scss');
 @import url('components/tables.scss');
 
