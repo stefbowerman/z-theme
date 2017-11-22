@@ -17,11 +17,9 @@
                 <p class="AjaxCart-itemOptions">
                   <span class="AjaxCart-itemQty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span>
                   {{#if variant_title}}
-                    <span class="AjaxCart-itemSize">
-                    {{#if gift_card}}
-                      Amount:
-                    {{/if}}
-                    {{ variant_title }}
+                    <p class="AjaxCart-itemOptions">
+                      {{ variant_title }}
+                    </p>
                   {{/if}}
                 </p>
                 <p class="AjaxCart-itemPrice">{{ price }}</p>
@@ -33,7 +31,7 @@
             {{/each}}
           </ul>
         {{else}}
-          <p class="AjaxCart-emptyMessage">{{emptyMessage}}</p>
+          <p class="AjaxCart-emptyMessage">{% endraw %}{{ 'cart.general.empty' | t }}{% raw %}</p>
         {{/if}}
       </div>
       {{#if items}}

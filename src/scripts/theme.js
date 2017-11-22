@@ -14,6 +14,8 @@ window.theme = window.theme || {};
 // =require slate/collectionSort.js
 // =require slate/ajaxCart.js
 // =require slate/slideshow.js
+// =require slate/animations.js
+// =require slate/user.js
 
 /*================ Sections ================*/
 // =require sections/product.js
@@ -22,37 +24,50 @@ window.theme = window.theme || {};
 // =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
 // =require sections/slideshow.js
+// =require sections/header.js
+// =require sections/footer.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 
+(function($) {
 
-$(document).ready(function() {
-  var sections = new slate.Sections();
-  sections.register('product', theme.Product);
-  sections.register('collection', theme.Collection);
-  sections.register('pencil-banner', theme.PencilBanner);
-  sections.register('subscription-popup', theme.SubscriptionPopup);
-  sections.register('instagram-feed', theme.InstagramFeed);
-  sections.register('slideshow', theme.Slideshow);
+  var $window       = $(window);
+  var $document     = $(document);
+  var $body         = $(document.body);
 
-  // slate.AjaxCart.init({});
+  $(document).ready(function() {
+    var sections = new slate.Sections();
+    sections.register('product', theme.Product);
+    sections.register('collection', theme.Collection);
+    sections.register('pencil-banner', theme.PencilBanner);
+    sections.register('subscription-popup', theme.SubscriptionPopup);
+    sections.register('instagram-feed', theme.InstagramFeed);
+    sections.register('slideshow', theme.Slideshow);
+    sections.register('header', theme.Header);
+    sections.register('footer', theme.Footer);
 
-  // Common a11y fixes
-  slate.a11y.pageLinkFocus($(window.location.hash));
+    if (!$body.hasClass('template-cart')) {
+      // slate.AjaxCart.init();
+    }
 
-  $('.in-page-link').on('click', function(evt) {
-    slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+    // Common a11y fixes
+    slate.a11y.pageLinkFocus($(window.location.hash));
+
+    $('.in-page-link').on('click', function(evt) {
+      slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+    });
+
+    // Wrap videos in div to force responsive layout.
+    slate.rte.wrapTable();
+    slate.rte.iframeReset();
+
+    // Apply a specific class to the html element for browser support of cookies.
+    if (slate.cart.cookiesEnabled()) {
+      document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
+    }
+
   });
 
-  // Wrap videos in div to force responsive layout.
-  slate.rte.wrapTable();
-  slate.rte.iframeReset();
-
-  // Apply a specific class to the html element for browser support of cookies.
-  if (slate.cart.cookiesEnabled()) {
-    document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
-  }
-
-});
+}(jQuery));

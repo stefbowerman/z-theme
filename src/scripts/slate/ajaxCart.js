@@ -84,7 +84,8 @@
     Ajax Shopify Add To Cart
   ==============================================================================*/
   slate.AjaxCart = (function() {
-
+    
+    var $window = $(window);
     var $body = $('body');
 
     var selectors = {
@@ -93,6 +94,8 @@
       open: '[data-ajax-cart-open]',
       close: '[data-ajax-cart-close]',
       addForm: 'form[action^="/cart/add"]',
+      addToCart: '[data-add-to-cart]',
+      addToCartText: '[data-add-to-cart-text]',
       item: '[data-ajax-item][data-id][data-qty]',
       itemRemove: '[data-ajax-cart-item-remove]',
       itemQuantity: 'input[data-ajax-cart-item-quantity]',
@@ -108,11 +111,15 @@
     function AjaxCart() {
       this.name = 'ajaxCart'
       this.namespace = '.' + this.name;
+      this.events = {
+        RENDER:  'render'  + this.namespace,
+        DESTROY: 'destroy' + this.namespace,
+        SCROLL:  'scroll'  + this.namespace
+      };
 
       var initialized = false;
       var settings = {
-        disableAjaxCart: false,
-        emptyMessage: 'Your Cart is Empty'
+        disableAjaxCart: false
       };
 
 
@@ -146,6 +153,8 @@
         $body.on('click', selectors.itemIncrement, this.onItemIncrementClick.bind(this));
         $body.on('click', selectors.itemDecrement, this.onItemDecrementClick.bind(this));
         $body.on('change', selectors.itemQuantity, this.onItemQuantityInputChange.bind(this));
+        $window.on(this.events.RENDER, this.onCartRender.bind(this));
+        $window.on(this.events.DESTROY, this.onCartDestroy.bind(this));
 
         // Get the cart data when we initialize the instance
         ShopifyAPI.getCart().then(this.buildCart.bind(this));
@@ -167,9 +176,26 @@
         $body.on('submit', selectors.addForm, function(e) {
           e.preventDefault();
 
+          var $submitButton = $(e.target).find(selectors.addToCart);
+          var $submitButtonText = $submitButton.find(selectors.addToCartText);
+
+          // Update the submit button text and disable the button so the user knows the form is being submitted
+          $submitButton.prop('disabled', true);
+          $submitButtonText.html(theme.strings.adding);
+
           ShopifyAPI.addItemFromForm( $(e.target) )
-            .then( this.onItemAddSuccess.bind(this) )
-            .fail( this.onItemAddFail.bind(this) );
+            .then(function(data) {
+              // Reset button state
+              $submitButton.prop('disabled', false);
+              $submitButtonText.html(theme.strings.addToCart);
+              this.onItemAddSuccess.bind(this);
+            })
+            .fail(function(data) {
+              // Reset button state
+              $submitButton.prop('disabled', false);
+              $submitButtonText.html(theme.strings.addToCart);
+              this.onItemAddFail.bind(this) ;
+            });
         }.bind(this));
       },
 
@@ -185,11 +211,12 @@
 
       _getItemRowAttributes: function(el) {
         var $el = $(el);
-        var $line = $el.is(selectors.item) ? $el : $el.parents(selectors.item);
+        var $row = $el.is(selectors.item) ? $el : $el.parents(selectors.item);
 
         return {
-          id:  $line.data('id'),
-          qty: this._validateQty($line.data('qty'))
+          $row: $row,
+          id:  $row.data('id'),
+          qty: this._validateQty($row.data('qty'))
         };
       },
 
@@ -214,6 +241,22 @@
         console.warn('['+this.name+'] - ' + data.message);
       },
 
+      /**
+      * Callback for when the cart HTML is rendered to the page
+      * Allows us to add event handlers for events that don't bubble
+      */
+      onCartRender: function(e) {
+        console.log('['+this.name+'] - onCartRender');
+      },
+
+     /**
+      * Callback for when the cart HTML is removed from the page
+      * Allows us to do cleanup on any event handlers applied post-render
+      */
+      onCartDestroy: function(e) {
+        console.log('['+this.name+'] - onCartDestroy');
+      },
+
      /**
       * Builds the HTML for the ajax cart.
       *
@@ -223,7 +266,6 @@
       buildCart: function(cart) {
         // Make adjustments to the cart object contents before we pass it off to the handlebars template
         cart.total_price = slate.Currency.formatMoney(cart.total_price, theme.moneyFormat);
-        cart.emptyMessage = this.settings.emptyMessage
         cart.items.map(function(item){
           item.image = slate.Image.getSizedImageUrl(item.image, '200x');
           item.price = slate.Currency.formatMoney(item.price, theme.moneyFormat);
@@ -239,7 +281,9 @@
          *  The code below isn't the most elegent way to update the cart but it works...
          */
 
-         $(selectors.container).empty().append( this.template(cart) );
+        $window.trigger(this.events.DESTROY);
+        $(selectors.container).empty().append( this.template(cart) );
+        $window.trigger(this.events.RENDER);
       },
 
      /**
@@ -320,10 +364,39 @@
       },
 
      /**
+      * Opens / closes the cart depending on state
+      *
+      */
+      toggleVisibility: function() {
+        return this.stateIsOpen ? this.close() : this.open();
+      },
+
+     /**
+      * Check the open / closed state of the cart
+      *
+      * @return {bool}
+      */
+      isOpen: function() {
+        return this.stateIsOpen;
+      },
+
+     /**
+      * Returns true is the cart is closed.
+      *
+      * @return {bool}
+      */
+      isClosed: function() {
+        return !this.stateIsOpen;
+      },
+
+     /**
       * STUB METHOD - Code for opening the cart
       */
       open: function() {
+        if(this.stateIsOpen) return;
         console.log('['+this.name+'] - open');
+        this.stateIsOpen = true;
+
         $(selectors.container).show();
       },
 
@@ -331,7 +404,11 @@
       * STUB METHOD - Code for closing the cart
       */
       close: function() {
+        if(!this.stateIsOpen) return;
+
         console.log('['+this.name+'] - close');
+        this.stateIsOpen = false;
+
         $(selectors.container).hide();
       }
     });

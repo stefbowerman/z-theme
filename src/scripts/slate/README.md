@@ -6,11 +6,13 @@ In keeping with their code convention, any module scripts that are independent o
 
 ## Modules
 
-In building Apollo, we have added the following modules:
+In building Apollo, we have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
+- [User](#user)
+- [Utilities](#utilities)
 
 ### Ajax Cart
 
@@ -23,7 +25,6 @@ slate.AjaxCart.init({options});
 | Parameters         | Type          | Description   |
 | :----------------- | :------------ | :------------ |
 | `disableAjaxCart`  | boolean | Quick way to disable the ajax cart |
-| `emptyMessage`     | string  | Message that displays when the cart is empty |
 
 The ajaxCart comes with public methods that allow you to control it from other parts of the application.
 
@@ -50,7 +51,7 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 
 ```javascript
 var sorting = new slate.collectionSort( container, collectionData );
-```
+``` 
 
 ### Utilities
 
@@ -65,3 +66,11 @@ Use this to retrieve an object of key / value pairs out of the parameters of the
 
 slate.utils.getQueryParams(); // outputs - { mySearchTerm: "blue+jeans" }
 ```
+
+##### `slate.utils.isThemeEditor`
+
+Return *`true`* if the site is being viewed inside the shopify theme editor.
+
+##### `slate.utils.whichTransitionEnd`
+
+Get the correct name of the `transitionend` event for the browser being used.

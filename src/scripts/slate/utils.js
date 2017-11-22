@@ -104,5 +104,36 @@ slate.utils = {
       });
 
     return queryParams;
+  },
+
+  /**
+   * Check if we're running the theme inside the theme editor
+   *
+   * @return {bool}
+   */
+  isThemeEditor: function() {
+    return location.href.match(/myshopify.com/) !== null && location.href.match(/theme_id/) !== null;
+  },
+
+  /**
+   * Get the name of the correct 'transitionend' event for the browser we're in
+   *
+   * @return {string}
+   */
+  whichTransitionEnd: function() {
+    var t;
+    var el = document.createElement('fakeelement');
+    var transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    };
+
+    for(t in transitions){
+      if( el.style[t] !== undefined ){
+        return transitions[t];
+      }
+    }
   }
 };

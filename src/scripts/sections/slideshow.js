@@ -11,6 +11,10 @@ theme.Slideshow = (function($) {
     slideshowWrapper: '[data-slideshow-wrapper]',
   };
 
+  var classes = {
+
+  };
+  
   /**
    * Slideshow section constructor
    *

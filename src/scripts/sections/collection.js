@@ -13,6 +13,10 @@
     filters: '[data-filters]'
   };
 
+  var classes = {
+
+  };
+  
   function Collection(container) {
     this.$container = $(container);
     var sectionId = this.$container.attr('data-section-id');

@@ -60,6 +60,31 @@
                 </option>
               {% endfor %}
             </select>
+
+            {% comment %}
+              To enable alternative variant option value select UI, create your markup here with the following data attributes.
+
+              parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
+                child - 'data-variant-option-value="{{ value }}"'
+
+              These data attributes are used to attach click events and update the selected variant when one is clicked.
+              The child element should respond to some sort of 'active' class to reflect the selected value.
+
+              See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
+
+              For example, to show a list of sizes..
+
+              {% if option.name == "Size" %}
+                <div data-option-position="{{ option.position }}" data-variant-option-value-list>
+                  {% for value in option.values %}
+                    <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
+                      {{ value }}
+                    </span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endcomment %}
+
           </div>
         {% endfor %}
       {% endunless %}
