@@ -12,7 +12,6 @@
   @param hero_desc {string, optional} - Sub-header copy below the title
   @param button_title {string, optional} - CTA button title
   @param button_url {string, optional} - CTA button URL
-  @param shrink_hero_container_width {boolean, optional} - Toggles container width for the title & desc
   @param background_overlay {boolean, optional} - Toggles a light background overlay on the image
 
 {% endcomment -%}
@@ -29,7 +28,7 @@
     <div class="Hero-overlayBackground"></div>
   {% endunless %}
 
-  <div class="Hero-container{%- if shrink_hero_container_width %} is-shrunken{% endif %}">
+  <div class="Hero-container">
     <div class="Hero-textWrapper">
       <h1 class="Hero-h1">
         {{- hero_title -}}

@@ -4,11 +4,16 @@
     - Do not adjust the order of stylesheets in the `global` directory!
 ==============================================================================*/
 
+/*================ VENDOR ================*/
+// Import these up here to allow overrides down below
+@import url('vendor/slick.css');
+
 /*================ GLOBAL ================*/
-@import url('global/mixins.scss');
 @import url('global/variables.scss.liquid');
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
+@import url('global/mixins.scss');
+@import url('global/reboot.scss');
+@import url('global/fonts.scss.liquid');
+@import url('global/typography.scss');
 @import url('global/helper-classes.scss');
 @import url('global/grid.scss');
 @import url('global/layout.scss');
@@ -16,7 +21,7 @@
 
 /*================ ELEMENTS ================*/
 @import url('elements/icons.scss');
-@import url('elements/links-buttons.scss');
+@import url('elements/buttons.scss');
 @import url('elements/blank-states.scss');
 @import url('elements/popover.scss');
 @import url('elements/modals.scss');
@@ -27,9 +32,9 @@
 /*================ COMPONENTS ================*/
 @import url('components/forms.scss');
 @import url('components/rte.scss');
-@import url('components/responsive-tables.scss');
 @import url('components/breadcrumbs.scss');
 @import url('components/filters.scss');
+@import url('components/tables.scss');
 
 /*================ MODULES ================*/
 @import url('modules/site-header.scss');
@@ -40,6 +45,9 @@
 @import url('modules/subscription-popup.scss');
 @import url('modules/product-detail.scss');
 @import url('modules/slideshow.scss');
+
+/*================ TEMPLATES ================*/
+@import url('templates/page.styles.scss');
 
 // Necessary bottom placement for specificity w/o `!important`
 @import url('global/utilities.scss');

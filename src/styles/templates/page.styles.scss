@@ -1,0 +1,89 @@
+// -------------------------
+// Styleguide
+// -------------------------
+
+#styleguide-content {
+  max-width: 1100px;
+  margin-bottom: 80px;
+
+  code {
+    font-size: $font-size-small;
+    padding: 1px 5px;
+    background: darken($color-white, 3%);
+    border: 1px solid darken($color-white, 6%);
+    border-radius: 5px;
+    color: #ad084b;
+  }
+}
+
+.docs-title {
+  max-width: 450px;
+  margin: 80px 0 50px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+
+.docs-subtitle {
+  margin: 50px 0;
+}
+
+.docs-well {
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid darken($body-bg, 15%);
+  border-radius: 3px;
+  box-shadow: -4px 6px 10px -8px transparentize(darken($body-bg, 20%), 0.2);
+}
+
+.styleguide-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 18px 0 0;
+  }
+}
+
+/*
+ * Grid examples
+ *
+ * Highlight the grid columns within the docs so folks can see their padding,
+ * alignment, sizing, etc.
+ */
+
+.show-grid {
+  margin-bottom: 15px;
+}
+.show-grid [class^="col-"] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #eee;
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86,61,124,.2);
+}
+
+.styleguide-color {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.styleguide-color__swatch {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+
+  &.styleguide-color__swatch--black {
+    background-color: $color-black;
+  }
+  &.styleguide-color__swatch--grey {
+    background-color: $color-grey;
+  }
+  &.styleguide-color__swatch--white {
+    background-color: $color-white;
+    border-color: darken($color-white, 5%);
+  }
+}
