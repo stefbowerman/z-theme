@@ -15,6 +15,10 @@ theme.InstagramFeed = (function($, Instafeed) {
     target: '[data-instagram-feed-target]'
   };
 
+  var classes = {
+
+  };
+
   /**
    * Instagram Feed section constructor. Runs on page load as well as Theme Editor
    * `section:load` events.

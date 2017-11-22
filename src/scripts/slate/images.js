@@ -13,7 +13,6 @@ slate.Image = (function() {
    * @param {Array} images - A list of image urls
    * @param {String} size - A shopify image size attribute
    */
-
   function preload(images, size) {
     if (typeof images === 'string') {
       images = [images];

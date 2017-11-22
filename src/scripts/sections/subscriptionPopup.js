@@ -20,7 +20,9 @@ theme.SubscriptionPopup = (function($) {
     successMessage: '[data-subscription-popup-success]'
   };
 
-  var insideThemeEditor = location.href.match(/myshopify.com/) && location.href.match(/theme_id/);
+  var classes = {
+
+  };
 
   /**
    * Subscription Popup section constructor. Runs on page load as well as Theme Editor
@@ -116,7 +118,7 @@ theme.SubscriptionPopup = (function($) {
         return false
       }
       
-      if(insideThemeEditor) {
+      if(slate.utils.isThemeEditor()) {
         return false;
       }
 
@@ -132,7 +134,7 @@ theme.SubscriptionPopup = (function($) {
     },
 
     onHidden: function() {
-      if(!insideThemeEditor) {
+      if(!slate.utils.isThemeEditor()) {
         this.setCookie(this.cookies.seen);
       }
     },

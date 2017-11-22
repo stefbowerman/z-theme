@@ -133,12 +133,19 @@ A simple example would look like:
 // Pascal Case the name of your section constructor and attach it to the global `theme` variable.
 theme.AboutUs = (function() {
 
+  // Place all selectors at the top of this file
   var selectors = {
     aboutButton: '[data-about-button]'
   };
 
+  // Place all classes at the top of this file that get used in functions down below.
+  var classes = {
+    isActive: 'is-active'
+  };
+
   // Constructor Function - This should also be Pascal Cased.
-  function AboutUs(container) { // container is the wrapper element from the section liquid file.  It scopes all other DOM elements.
+  // @param {HTMLElement} container - Wrapper element from the section liquid file, it scopes all other DOM elements.
+  function AboutUs(container) {
     this.$container = $(container);
 
     this.name = 'aboutUs', // namespaces should be camelCased.
@@ -201,10 +208,18 @@ If you remove a section from your theme, be sure to remove the file and all the 
   sections.register('about-us-section', theme.AboutUs);
   ```
 
-## Adding Vendor Libraries Using NPM
+## Adding Vendor Libraries
 
-By default, Slate provides you with a way to add vendor scripts to your project by adding them to the vendor directory and then importing them in the `vendor.js` file.  Since this project already uses node for task running, we can use NPM to manage vendor dependencies and import them from the `node_modules` directory.  To do this, install your dependency, and then reference the javascript file like so.
+All javascript dependencies should be included in one of two vendor files.  While both files are included in the head of the site, `vendor.js` is included with a `defer` attribute whereas `vendor-head.js` is included without one.  If your dependency is required in the body of the page or *must* be loaded before parsing of the body tag begins then include it in `vendor-head.js`, otherwise include it in `vendor.js`.
+
+By default, Slate provides you with a way to add vendor scripts to your project by adding them to the vendor directory and then importing them in the appropriate vendor file.  Since this project already uses node for task running, we can use NPM to manage vendor dependencies and import them from the `node_modules` directory.  To do this, install your dependency, and then reference the javascript file like so.
 
 ```javascript
+// scripts/vendor.js
+
+// Dependency from the vendor directory
+// =require /vendor/dependency.js
+
+// Node Module dependency
 // =require /../../node_modules/dependency/dependency.js
-```
+``` 

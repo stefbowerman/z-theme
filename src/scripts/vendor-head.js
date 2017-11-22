@@ -10,27 +10,11 @@
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
 
 /*!
- * Zoom 1.7.18
- * http://www.jacklmoore.com/zoom
+ * modernizr.min.js
  */
-// =require /../../node_modules/jquery-zoom/jquery.zoom.min.js
+// =require vendor/modernizr.min.js
 
 /*!
- * instafeed.min.js
+ * jquery.min.js
  */
-// =require vendor/instafeed.min.js
-
-/*!
- * handlebars v4.0.10
- */
-// =require vendor/handlebars-v4.0.10.js
-
-/*!
-* slick.min.js
-*/
-// =require /../../node_modules/slick-carousel/slick/slick.min.js
-
-/*!
-* js-cookie
-*/
-// =require /../../node_modules/js-cookie/src/js.cookie.js
+// =require /../../node_modules/jquery/dist/jquery.min.js

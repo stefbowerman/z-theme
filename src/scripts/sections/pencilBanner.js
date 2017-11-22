@@ -12,6 +12,10 @@ theme.PencilBanner = (function($) {
     close: '[data-pencil-banner-close]'
   };
 
+  var classes = {
+
+  };
+
   /**
    * Pencil Banner section constructor. Runs on page load as well as Theme Editor
    * `section:load` events.
@@ -39,9 +43,8 @@ theme.PencilBanner = (function($) {
      * To use, call this at the end of the constructor method
      */
     initForThemeEditor: function() {
-      var insideThemeEditor = location.href.match(/myshopify.com/) && location.href.match(/theme_id/);
      
-      if(insideThemeEditor){
+      if(slate.utils.isThemeEditor()){
         // Hide the close button to make life simpler
         // $(selectors.close).hide();
       }
