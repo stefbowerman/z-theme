@@ -13,7 +13,7 @@
        url('{{ "*font-file-normal*.otf" | asset_url }}') format('opentype'),
        url('{{ "*font-file-normal*.woff" | asset_url }}') format('woff'),
        url('{{ "*font-file-normal*.ttf" | asset_url }}') format('truetype'),
-       url('{{ "*normal_font_file*.ttf" | asset_url }}#Futura-Book') format('svg');
+       url('{{ "*font-file-normal*.svg" | asset_url }}#*font-file-normal*') format('svg');
   font-weight: 400;
   font-style: normal;
 }
@@ -22,9 +22,10 @@
   font-family: 'Font Family';
   src: url('{{ "*font-file-bold*.eot" | asset_url }}?#iefix');
   src: url('{{ "*font-file-bold*.eot" | asset_url }}?#iefix') format('embedded-opentype'),
+       url('{{ "*font-file-bold*.otf" | asset_url }}') format('opentype'),
        url('{{ "*font-file-bold*.woff" | asset_url }}') format('woff'),
        url('{{ "*font-file-bold*.ttf" | asset_url }}') format('truetype'),
-       url('{{ "*font-file-bold*.ttf" | asset_url }}#Futura-Medium') format('svg');
+       url('{{ "*font-file-bold*.svg" | asset_url }}#*font-file-bold*') format('svg');
   font-weight: 700;
   font-style: normal;
 }
