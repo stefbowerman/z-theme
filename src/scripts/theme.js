@@ -13,6 +13,7 @@ window.theme = window.theme || {};
 // =require slate/collectionFilters.js
 // =require slate/collectionSort.js
 // =require slate/ajaxCart.js
+// =require slate/ajaxChimp.js
 // =require slate/slideshow.js
 // =require slate/animations.js
 // =require slate/user.js

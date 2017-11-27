@@ -9,6 +9,7 @@ In keeping with their code convention, any module scripts that are independent o
 In building Apollo, we have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
+- [Ajax Chimp](#ajax-chimp)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
 - [User](#user)
@@ -32,6 +33,24 @@ The ajaxCart comes with public methods that allow you to control it from other p
 | :----------------- | :------------ | :------------ |
 | `open`  | `slate.AjaxCart.open()`  | Shows the cart |
 | `close` | `slate.AjaxCart.close()` | Hides the cart |
+
+### Ajax Chimp
+
+Included is a stripped down version of the [AjaxChimp jQuery](https://github.com/scdoshi/jquery-ajaxchimp) plugin.  It handles form submission for Mailchimp form URLs and provides basic validation and error handling.
+
+To use, create a new instance and pass in the form element and a plain object of settings anywhere you need an AJAX enabled subscription form.  See `scripts/slate/ajaxChimp.js` for the full list of options.
+
+```javascript
+var $form = $('form');
+var ajaxForm = new slate.AjaxChimp($form, {
+  onInit: function() {
+    // ...
+  },
+  onSubmitDone: function() {
+    // ...
+  }
+});
+```
 
 ### Collection Filters
 
