@@ -139,6 +139,21 @@
     {{ product.description }}
   </div>
 
+  {% if section.settings.size_guide_page %}
+    {% assign has_size = false %}
+    {% for option in product.options %}  
+      {% assign downcased_option = option | downcase %}
+      {% if has_size == false and downcased_option == "size" %}
+        {% assign has_size = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_size %}
+      <h3>Size Guide</h3>
+      {{ pages[section.settings.size_guide_page].content }}
+    {% endif %}
+  {% endif %}
+
   {% if section.settings.show_share_buttons %}
     {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
   {% endif %}
@@ -152,7 +167,7 @@
 
 {% schema %}
   {
-    "name": "Product pages",
+    "name": "Product Page",
     "settings": [
       {
         "type": "checkbox",
@@ -165,6 +180,12 @@
         "id": "show_share_buttons",
         "label": "Show social sharing buttons",
         "default": true
+      },
+      {
+        "type": "page",
+        "id": "size_guide_page",
+        "label": "Size Guide Page",
+        "info": "Contents of this page will be displayed"
       }
     ]
   }
