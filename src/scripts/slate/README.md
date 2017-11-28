@@ -72,6 +72,10 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 var sorting = new slate.collectionSort( container, collectionData );
 ``` 
 
+### User
+
+Apollo includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
+
 ### Utilities
 
 Apollo has added the following methods to `window.slate.utils`.
