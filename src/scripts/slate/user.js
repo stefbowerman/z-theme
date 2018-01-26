@@ -2,6 +2,8 @@
  * User Scripts
  * -----------------------------------------------------------------------------
  * Mostly handles cookie setting / removal, logic around user sessions
+ *
+ * @namespace user
  */
 
 slate.user = (function(Cookies) {
@@ -30,8 +32,8 @@ slate.user = (function(Cookies) {
     * @param {Number} cookie.expiration - Time to expire in days, expires after session if left blank
     */
     setCookie: function(cookie) {
-      if(this.hasCookie(cookie)){
-        this.removeCookie(cookie);
+      if(this.hasCookie(cookie.name) && this.getCookieValue(cookie.name) != cookie.value){
+        this.removeCookie(cookie.name);
       }
 
       var opts = cookie.hasOwnProperty('expiration') ? { expires : cookie.expiration } : {};
@@ -41,38 +43,33 @@ slate.user = (function(Cookies) {
     },
 
    /**
-    * Checks for the presence of a browser cookie by name
+    * Checks for the presence of a browser cookie by name (doesn't check for value equality)
     *
-    * @param {Object} cookie
-    * @param {String} cookie.name
+    * @param {String} cookieName
     * @return {Boolean}
     */
-    hasCookie: function(cookie) {
-      return cookie.hasOwnProperty('name') && typeof Cookies.get( cookie.name ) !== "undefined";
+    hasCookie: function(cookieName) {
+      return typeof Cookies.get( cookieName ) !== "undefined";
     },
 
    /**
-    * Returns a browser cookie by name
+    * Returns value of browser cookie by name
     *
-    * @param {Object} cookie
-    * @param {String} cookie.name
+    * @param {String} cookieName
     * @return {String | Undefined}
     */
-    getCookie: function(cookie) {
-      return this.hasCookie( cookie ) ? Cookies.get( cookie.name ) : undefined;
+    getCookieValue: function(cookieName) {
+      return this.hasCookie( cookieName ) ? Cookies.get( cookieName ) : undefined;
     },
 
    /**
     * Removes a cookie by name
     *
-    * @param {Object} cookie
-    * @param {String} cookie.name
+    * @param {String} cookieName
     * @return {Self}
     */
-    removeCookie: function(cookie) {
-      if(cookie.hasOwnProperty('name')) {
-        Cookies.remove( cookie.name )
-      }
+    removeCookie: function(cookieName) {
+      Cookies.remove( cookieName )
       return this;
     }
   });

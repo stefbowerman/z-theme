@@ -8,6 +8,8 @@
 
 theme.PencilBanner = (function($) {
 
+  var $window = $(window);
+
   var selectors = {
     close: '[data-pencil-banner-close]'
   };
@@ -51,33 +53,12 @@ theme.PencilBanner = (function($) {
     },
 
     /**
-     * Generates a string of integers unique to the text contents of the banner
-     * Useful for setting a cookie associated with the banner that invalidates when the contents are changed
-     * Reference - https://stackoverflow.com/a/7616484
-     *
-     * @return {string}
-     */
-    generateHashCodeForText: function() {
-      var str = this.$container.text();
-      var hash = 0, i, chr;
-
-      if (str.length === 0) return hash;
-
-      for (i = 0; i < str.length; i++) {
-        chr   = str.charCodeAt(i);
-        hash  = ((hash << 5) - hash) + chr;
-        hash  = hash & hash; // Convert to 32bit integer
-      }
-      return Math.abs(hash).toString();
-    },
-
-    /**
      * STUB METHOD - You need to add implementation details
      * Call this to show the banner
      */
     show: function() {
       console.log('['+this.name+'] - open');
-      $(window).trigger( $.Event(this.events.SHOW) );
+      $window.trigger( $.Event(this.events.SHOW) );
     },
 
     /**
@@ -86,7 +67,7 @@ theme.PencilBanner = (function($) {
      */
     close: function() {
       console.log('['+this.name+'] - close');
-      $(window).trigger( $.Event(this.events.CLOSE) );
+      $window.trigger( $.Event(this.events.CLOSE) );
     },
 
     onCloseClick: function(e){
