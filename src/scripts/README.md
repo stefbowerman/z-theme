@@ -105,12 +105,12 @@ For the sake of the following example code, lets assume we're building a section
 
 ##### Section Template
 
-The template that you create for your section can have whatever you want inside of it.  The only thing that must be present for your section code to run properly is a wrapper element with a `data-section-type` attribute.  The value should match the name of the liquid file and be suffixed with `-section`.  Make note of it because you will need it to register your section in `theme.js` (see below).
+The template that you create for your section can have whatever you want inside of it.  The only thing that must be present for your section code to run properly is a wrapper element with a `data-section-type` attribute.  The value should match the name of the liquid file.  Make note of it because you will need it to register your section in `theme.js` (see below).
 
 ```liquid
 <!-- sections/about-us.liquid -->
 
-<div data-section-type="about-us-section">
+<div data-section-type="about-us">
   <!-- Section liquid code here -->
 </div>
 ```
@@ -189,7 +189,7 @@ theme.AboutUs = (function() {
 
 // Register your section after all the other calls to sections.register
 
-sections.register('about-us-section', theme.AboutUs);
+sections.register('about-us', theme.AboutUs);
 ```
 
 ## Removing A Section

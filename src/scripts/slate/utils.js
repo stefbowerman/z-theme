@@ -132,12 +132,12 @@ slate.utils = {
    * @param {String} key
    * @return {String}
    */
-  getUrlWithRemovedQueryStringParameter: function(parameterKeyToRemove) {
-    var sourceURL = window.location.href,
-        rtn = sourceURL.split("?")[0],
+  getUrlWithRemovedQueryStringParameter: function(parameterKeyToRemove, uri) {
+    var uri = uri != undefined ? uri : window.location.href,
+        rtn = uri.split("?")[0],
         param,
         params_arr = [],
-        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+        queryString = (uri.indexOf("?") !== -1) ? uri.split("?")[1] : "";
 
     if (queryString !== "") {
         params_arr = queryString.split("&");
