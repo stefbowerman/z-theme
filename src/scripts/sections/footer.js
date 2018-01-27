@@ -19,7 +19,6 @@ theme.Footer = (function($) {
 
   function Footer(container) {
 
-    _this = this;
     this.$container = $(container);
 
     this.name = 'footer';
