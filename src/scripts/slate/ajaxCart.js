@@ -105,6 +105,9 @@
       addForm: 'form[action^="/cart/add"]',
       addToCart: '[data-add-to-cart]',
       addToCartText: '[data-add-to-cart-text]',
+      header: '[data-ajax-cart-header]',
+      body: '[data-ajax-cart-body]',
+      footer: '[data-ajax-cart-footer]',
       item: '[data-ajax-item][data-id][data-qty]',
       itemRemove: '[data-ajax-cart-item-remove]',
       itemQuantity: 'input[data-ajax-cart-item-quantity]',
@@ -134,9 +137,11 @@
         disableAjaxCart: false
       };
 
+      this.$el = $(selectors.container);
+
 
      /**
-      * Call this from the main theme.js file to initialize the ajaxCart
+      * Initialize the cart
       *
       * @param {object} options - see `settings` variable above
       */
@@ -509,7 +514,7 @@
       }
     });
 
-    return new AjaxCart();
+    return AjaxCart;
   })();
 
 })(jQuery, Handlebars, slate);

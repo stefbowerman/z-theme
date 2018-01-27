@@ -28,6 +28,7 @@ window.theme = window.theme || {};
 // =require sections/slideshow.js
 // =require sections/header.js
 // =require sections/footer.js
+// =require sections/ajaxCart.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -49,10 +50,7 @@ window.theme = window.theme || {};
     sections.register('slideshow', theme.Slideshow);
     sections.register('header', theme.Header);
     sections.register('footer', theme.Footer);
-
-    if (!$body.hasClass('template-cart')) {
-      slate.AjaxCart.init();
-    }
+    sections.register('ajax-cart', theme.AjaxCart);    
 
     $('.in-page-link').on('click', function(evt) {
       slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
