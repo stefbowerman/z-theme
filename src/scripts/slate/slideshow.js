@@ -8,7 +8,7 @@
  * @namespace - slideshow
 */
 
-slate.Slideshow = (function() {
+slate.Slideshow = (function($, Modernizr) {
 
   var selectors = {
     slideshowWrapper: '[data-slideshow-wrapper]',
@@ -36,7 +36,8 @@ slate.Slideshow = (function() {
     this.$slideshow = this.$wrapper.find(selectors.slideshow);
 
     var settings = {
-      accessibility: true,
+      accessibility: false, // prevents page from jumping on focus
+      arrows: !Modernizr.touchevents,
       arrows: false,
       dots: true,
       fade: true,
@@ -173,4 +174,4 @@ slate.Slideshow = (function() {
   });
 
   return Slideshow;
-}());
+}(jQuery, Modernizr));

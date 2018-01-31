@@ -8,8 +8,11 @@
 
 slate.rte = {
 
-  wrapTable: function() {
-    $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
+  fixTables: function() {
+    $('.rte').find('table').each(function() {
+      $(this).addClass('table');
+      $(this).wrap('<div class="table-responsive"></div>');
+    });
   },
 
   iframeReset: function() {

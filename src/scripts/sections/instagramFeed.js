@@ -6,7 +6,7 @@
  *   - See instafeedjs.com for documentation
  *   - See scripts/vendor directory for source file
  *
- * @namespace - InstagramFeed
+ * @namespace - instagramFeed
  */
 
 theme.InstagramFeed = (function($, Instafeed) {

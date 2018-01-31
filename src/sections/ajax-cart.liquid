@@ -1,0 +1,96 @@
+<div data-section-id="{{ section.id }}" data-section-type="ajax-cart">
+  <div class="AjaxCart-container" data-ajax-cart-container></div>
+</div>
+
+{% raw %}
+<script type="text/x-handlebars-template" data-ajax-cart-template>
+  <div class="AjaxCart">
+    <form action="/cart" method="post" novalidate>
+      <div class="AjaxCart-header" data-ajax-cart-header>
+          <a href="#" class="AjaxCart-close" data-ajax-cart-close>{% endraw %}{% include 'icon-close' %}{% raw %}</a>
+        <h4 class="AjaxCart-header__title">Your Bag</h4>
+      </div>
+      <div class="AjaxCart-body" data-ajax-cart-body>
+        {{#if items}}
+          <ul class="AjaxCart-list">
+            {{#each items}}
+            <li class="AjaxCart-item" data-id="{{ variant_id }}" data-qty="{{ quantity }}" data-ajax-item>
+              <img src="{{ image }}" class="AjaxCart-itemImage">
+              <div class="AjaxCart-itemInfo">{{ title }}</a></h5>
+                <ul class="AjaxCart-itemOptions">
+                  {{#if variant_options}}
+                    {{#each variant_options}}
+                      <li>
+                        {{ name }}: {{ value }}
+                      </li>
+                    {{/each}}
+                  {{/if}}
+                  <li><span class="AjaxCart-itemQty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span></li>
+                  <li>Price: {{ price }}</li>
+                  <li>
+                    <a href="#" class="AjaxCart-itemRemove" data-ajax-cart-item-remove>
+                      {% endraw %}{% include 'icon-close' %}{% raw %} Remove
+                    </a>
+                    <a href="#" data-ajax-cart-item-increment>Increment</a>
+                    <a href="#" data-ajax-cart-item-decrement>Decrement</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <div class="AjaxCart__empty-message">
+            {% endraw %}
+            {% if section.settings.empty_text != blank %}
+              {{ section.settings.empty_text }}
+            {% else %}
+              {{ 'cart.general.empty' | t }}
+            {% endif %}
+            {% raw %}
+          </div>
+        {{/if}}
+      </div>
+      {{#if items}}
+        <div class="AjaxCart-footer" data-ajax-cart-footer>
+          <div class="AjaxCart-footer__row">
+            <p>Total {{ total_price }}</p>  
+          </div>
+          <div class="AjaxCart-footer__row">
+            <a href="/cart" class="btn btn-primary">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</a>
+            <!-- <button type="submit" name="checkout" class="btn btn-primary btn-block">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</button> -->
+          </div>
+          {% endraw %}
+          {% if section.settings.footer_text != blank %}
+            <div class="AjaxCart-footer__row">
+              {{ section.settings.footer_text }}
+            </div>
+          {% endif %}
+          {% raw %}
+        </div>
+      {{/if}}
+    </form>
+  </div>
+</script>
+{% endraw %}
+
+
+{% schema %}
+  {
+    "name": "Ajax Cart",
+    "settings": [
+      {
+        "id": "empty_text",
+        "type": "richtext",
+        "label": "Empty Text",
+        "default": "<p>Your bag is empty</p>"
+      },
+      {
+        "id": "footer_text",
+        "type": "richtext",
+        "label": "Footer Text",
+        "default": "<p>Promotional Message Here</p>"
+      }
+    ]
+  }
+{% endschema %}

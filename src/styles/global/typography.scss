@@ -140,15 +140,6 @@ small,
 
 @include bg-variant('.bg-danger', $state-danger-bg);
 
-
-/*================ Page Header ================*/
-
-.page-header {
-  padding-bottom: (($line-height-computed / 2) - 1);
-  margin: ($line-height-computed * 2) 0 $line-height-computed;
-  border-bottom: 1px solid $page-header-border-color;
-}
-
 /*================ Lists ================*/
 
 // Unordered and Ordered lists

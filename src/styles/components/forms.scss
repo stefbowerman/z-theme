@@ -189,6 +189,13 @@ select.form-control {
   cursor: pointer;
 }
 
+// Fix site zooming on small iOS devices
+// se use JS to add user-agent specific classes to the body tag
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: $screen-sm-max) { 
+  [class*="ios"] .form-control {
+    font-size: 16px;
+  }
+}
 
 // Search inputs in iOS
 //

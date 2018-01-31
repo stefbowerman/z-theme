@@ -84,8 +84,9 @@
     {% include 'filter-modal-container' %}
   {%- endif -%}
 
-  <div data-ajax-cart-container></div>
-  {% include 'ajax-cart-template' %}
+  {% unless template == 'cart' %}
+    {% section 'ajax-cart' %}
+  {% endunless %}
 
 </body>
 </html>

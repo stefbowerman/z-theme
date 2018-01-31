@@ -19,7 +19,6 @@ theme.Header = (function($) {
 
   function Header(container) {
 
-    _this = this;
     this.$container = $(container);
 
     this.name = 'header';

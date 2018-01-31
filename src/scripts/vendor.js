@@ -26,6 +26,11 @@
 // =require vendor/handlebars-v4.0.10.js
 
 /*!
+ * jQuery Throttle / Debounce
+ */
+// =require vendor/jquery.ba-throttle-debounce.min.js
+
+/*!
 * slick.min.js
 */
 // =require /../../node_modules/slick-carousel/slick/slick.min.js
