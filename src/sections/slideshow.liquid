@@ -1,31 +1,31 @@
 <div data-section-id="{{ section.id }}" data-section-type="slideshow">
   {% if section.blocks.size > 0 %}
-    <div class="Slideshow-Wrapper" data-slideshow-wrapper>
-      <div class="Slideshow" 
+    <div class="slideshow-wrapper" data-slideshow-wrapper>
+      <div class="slideshow" 
            id="Slideshow-{{ section.id }}" 
            data-autoplay="{{ section.settings.autoplay }}" 
            data-speed="{{ section.settings.autoplay_speed }}"
            data-slideshow>
         {% for block in section.blocks %}
-          <div class="Slideshow-Slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
+          <div class="slideshow__slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
             {% if block.settings.link != blank %}
-              <a href="{{ block.settings.link }}" class="Slideshow-Link">
+              <a href="{{ block.settings.link }}" class="slideshow__link">
             {% endif %}
           
-              <div class="Slideshow-Image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}'); background-position: {{ block.settings.alignment }};"{% endif %}>
+              <div class="slideshow__image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}'); background-position: {{ block.settings.alignment }};"{% endif %}>
                 {% if block.settings.image == blank %}
                   {% capture current %}{% cycle 1, 2 %}{% endcapture %}
                   {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
               </div>
-              <div class="Slideshow-TextWrap">
+              <div class="slideshow__text-content">
                 {% unless block.settings.title == blank %}
-                  <h2 class="Slideshow-Title">
+                  <h2 class="slideshow__title">
                     {{ block.settings.title }}
                   </h2>
                 {% endunless %}
                 {% unless block.settings.subheading == blank %}
-                  <span class="Slideshow-Subtitle">
+                  <span class="slideshow__subtitle">
                     {{ block.settings.subheading | escape }}
                   </span>
                 {% endunless %}
@@ -45,7 +45,7 @@
   {% endif %}
 
   {% if section.blocks.size == 0 %}
-    <p>{{ 'homepage.onboarding.no_content' | t }}</p>
+    {% include 'no-blocks' %}
   {% endif %}
 </div>
 

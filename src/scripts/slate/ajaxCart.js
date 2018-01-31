@@ -137,8 +137,8 @@
         disableAjaxCart: false
       };
 
-      this.$el = $(selectors.container);
-
+      this.$el         = $(selectors.container);
+      this.stateIsOpen = null;
 
      /**
       * Initialize the cart

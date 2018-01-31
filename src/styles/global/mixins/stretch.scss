@@ -1,11 +1,11 @@
-/*================ Background Image Stretch ================*/
+// -------------------------
+// Mixin - Stretch
+// -------------------------
 
 @mixin background-image-stretch() {
   background-position: center center;
   background-size: cover;
 }
-
-/*================ Stretch Element w/i Parent ================*/
 
 // requires parent to have position: relative
 @mixin stretch-within() {

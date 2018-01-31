@@ -39,6 +39,18 @@
         "default": true
       },
       {
+        "type": "checkbox",
+        "id": "share_tumblr",
+        "label": "Share on Tumblr",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_email",
+        "label": "Share via Email",
+        "default": true
+      },      
+      {
         "type": "header",
         "content": "Sharing links"
       },

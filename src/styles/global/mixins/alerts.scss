@@ -1,4 +1,6 @@
-/*================ Alert Mixin ================*/
+// -------------------------
+// Mixin - Alerts
+// -------------------------
 
 @mixin alert-variant($background, $border, $text-color) {
   background-color: $background;
