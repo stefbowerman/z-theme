@@ -514,9 +514,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
-  <h4 class="docs-subtitle">Note About Select Elements</h4>
-  <p>This theme is using the <a href="https://harvesthq.github.io/chosen/" target="_blank">Chosen</a> library to enhance native select tags.  By default, any <code>select.form-control</code> elements are targeted and initialized on page load.  If you want to avoid this, add the <code>no-chosen</code> class to your select tag and it will be left alone.</p>
-
   <h3 class="docs-title">Buttons</h3>
 
   <p>
@@ -546,10 +543,14 @@
   <h4 class="docs-subtitle">Social icons</h4>
   <ul class="styleguide-icons">
     <li>{% include 'icon-facebook' %}</li>
+    <li>{% include 'icon-facebook-alt' %}</li>
     <li>{% include 'icon-instagram' %}</li>
     <li>{% include 'icon-twitter' %}</li>
     <li>{% include 'icon-youtube' %}</li>
     <li>{% include 'icon-pinterest' %}</li>
+    <li>{% include 'icon-linkedin' %}</li>
+    <li>{% include 'icon-mail' %}</li>
+    <li>{% include 'icon-tumblr' %}</li>
   </ul>
 
   <h4 class="docs-subtitle">General icons</h4>
@@ -577,26 +578,6 @@
   </nav>
 
   <h4 class="docs-subtitle">Social Sharing</h4>
-
-  <div class="social-sharing">
-    <a class="social-sharing__link" href="#">
-      {% include 'icon-facebook' %}
-      <span aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
-      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
-    </a>
-
-    <a class="social-sharing__link" href="#">
-      {% include 'icon-twitter' %}
-      <span aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
-      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
-    </a>
-
-    <a class="social-sharing__link" href="#">
-      {% include 'icon-pinterest' %}
-      <span aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
-      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
-    </a>
-
-  </div>
+  {% include 'social-sharing' %}
 
 </div>

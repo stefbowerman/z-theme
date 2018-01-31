@@ -6,7 +6,7 @@
 
 {% unless collection == empty %}
 
-  <div class="CollectionSort" data-sort>
+  <div class="collection-sort" data-sort>
     
     {% assign sort_options = 'created-descending|Newest,price-ascending|Price: $ - $$,price-descending|Price: $$ - $,best-selling|Best Selling' | split: ',' %}
     {% assign sort_selected =  collection.sort_by | default: collection.default_sort_by %}

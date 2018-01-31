@@ -1,3 +1,7 @@
+// -------------------------
+// Mixin - Visibility
+// -------------------------
+
 @mixin visually-hidden() {
   // sass-lint:disable no-important
   position: absolute !important;

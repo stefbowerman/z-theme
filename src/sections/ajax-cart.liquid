@@ -1,23 +1,24 @@
 <div data-section-id="{{ section.id }}" data-section-type="ajax-cart">
-  <div class="AjaxCart-container" data-ajax-cart-container></div>
+  <div class="ajax-cart__container" data-ajax-cart-container></div>
 </div>
 
 {% raw %}
 <script type="text/x-handlebars-template" data-ajax-cart-template>
-  <div class="AjaxCart">
+  <div class="ajax-cart">
     <form action="/cart" method="post" novalidate>
-      <div class="AjaxCart-header" data-ajax-cart-header>
-          <a href="#" class="AjaxCart-close" data-ajax-cart-close>{% endraw %}{% include 'icon-close' %}{% raw %}</a>
-        <h4 class="AjaxCart-header__title">Your Bag</h4>
+      <div class="ajax-cart__header" data-ajax-cart-header>
+        <a href="#" class="ajax-cart__close" data-ajax-cart-close>{% endraw %}{% include 'icon-close' %}{% raw %}</a>
+        <h4>Your Bag</h4>
       </div>
-      <div class="AjaxCart-body" data-ajax-cart-body>
+      <div class="ajax-cart__body" data-ajax-cart-body>
         {{#if items}}
-          <ul class="AjaxCart-list">
+          <ul class="ajax-cart__list">
             {{#each items}}
-            <li class="AjaxCart-item" data-id="{{ variant_id }}" data-qty="{{ quantity }}" data-ajax-item>
-              <img src="{{ image }}" class="AjaxCart-itemImage">
-              <div class="AjaxCart-itemInfo">{{ title }}</a></h5>
-                <ul class="AjaxCart-itemOptions">
+            <li class="ajax-cart__item" data-id="{{ variant_id }}" data-qty="{{ quantity }}" data-ajax-item>
+              <img src="{{ image }}" class="ajax-cart__item-image">
+              <div class="ajax-cart__item-info">
+                <a href="{{ url }}" class="ajax-cart__item-title">{{ title }}</a></h5>
+                <ul class="ajax-cart__item-options">
                   {{#if variant_options}}
                     {{#each variant_options}}
                       <li>
@@ -25,10 +26,10 @@
                       </li>
                     {{/each}}
                   {{/if}}
-                  <li><span class="AjaxCart-itemQty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span></li>
+                  <li><span class="ajax-cart__item-qty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span></li>
                   <li>Price: {{ price }}</li>
                   <li>
-                    <a href="#" class="AjaxCart-itemRemove" data-ajax-cart-item-remove>
+                    <a href="#" class="ajax-cart__item-remove" data-ajax-cart-item-remove>
                       {% endraw %}{% include 'icon-close' %}{% raw %} Remove
                     </a>
                     <a href="#" data-ajax-cart-item-increment>Increment</a>
@@ -40,7 +41,7 @@
             {{/each}}
           </ul>
         {{else}}
-          <div class="AjaxCart__empty-message">
+          <div class="ajax-cart__empty-message">
             {% endraw %}
             {% if section.settings.empty_text != blank %}
               {{ section.settings.empty_text }}
@@ -52,17 +53,17 @@
         {{/if}}
       </div>
       {{#if items}}
-        <div class="AjaxCart-footer" data-ajax-cart-footer>
-          <div class="AjaxCart-footer__row">
+        <div class="ajax-cart__footer" data-ajax-cart-footer>
+          <div class="ajax-cart__footer-row">
             <p>Total {{ total_price }}</p>  
           </div>
-          <div class="AjaxCart-footer__row">
+          <div class="ajax-cart__footer-row">
             <a href="/cart" class="btn btn-primary">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</a>
-            <!-- <button type="submit" name="checkout" class="btn btn-primary btn-block">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</button> -->
+            <button type="submit" name="checkout" class="btn">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}</button>
           </div>
           {% endraw %}
           {% if section.settings.footer_text != blank %}
-            <div class="AjaxCart-footer__row">
+            <div class="ajax-cart__footer-row">
               {{ section.settings.footer_text }}
             </div>
           {% endif %}

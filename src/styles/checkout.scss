@@ -14,10 +14,8 @@
 @import url('global/layout.scss');
 @import url('global/flexbox.scss');
 
-/*================ ELEMENTS ================*/
-@import url('elements/buttons.scss');
-
 /*================ COMPONENTS ================*/
+@import url('components/buttons.scss');
 @import url('components/forms.scss');
 
 /*================ CHECKOUT ================*/

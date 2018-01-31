@@ -1,7 +1,6 @@
-/**
- * AJAX Cart Module Styles
- * ---------------------------
- */
+// -------------------------
+// AJAX Cart
+// -------------------------
 
 // START - Styles for testing
 [data-ajax-cart-container] {
@@ -15,59 +14,62 @@
 }
 // END - Styles for testing
 
-.AjaxCart {
+.ajax-cart {
 
 }
 
-.AjaxCart-header {
+.ajax-cart__header {
 
 }
 
-.AjaxCart-body {
+.ajax-cart__body {
 
 }
 
-.AjaxCart-footer {
+.ajax-cart__footer {
 
 }
 
-.AjaxCart-emptyMessage {
+.ajax-cart__empty-message {
 
 }
 
-.AjaxCart-list {
+.ajax-cart__list {
 
 }
 
-.AjaxCart-item {
+.ajax-cart__item {
 
 }
 
-.AjaxCart-itemImage {
+.ajax-cart__item-image {
 
 }
 
-.AjaxCart-itemInfo {
+.ajax-cart__item-info {
 
 }
 
-.AjaxCart-itemTitle {
+.ajax-cart__item-title {
 
 }
 
-.AjaxCart-itemOptions {
+.ajax-cart__item-options {
 
 }
 
-.AjaxCart-itemQty {
+.ajax-cart__item-qty {
 
 }
 
-
-.AjaxCart-itemPrice {
+.ajax-cart__item-remove {
 
 }
 
-.AjaxCart-itemRemove {
+.ajax-cart__footer {
 
+}
+
+.ajax-cart__footer-row {
+  
 }

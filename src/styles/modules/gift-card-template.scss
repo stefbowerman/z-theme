@@ -1,4 +1,7 @@
-/*================ Giftcard Template ================*/
+// -------------------------
+// Gift Card
+// -------------------------
+
 .giftcard-qr {
   img {
     display: block;
@@ -11,7 +14,6 @@
   margin: 0 auto;
 }
 
-/*================ Print Giftcard Styles ================*/
 @media print {
   @page {
     margin: 0.5cm;
