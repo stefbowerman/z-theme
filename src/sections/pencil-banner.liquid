@@ -1,9 +1,9 @@
 <div data-section-id="{{ section.id }}" data-section-type="pencil-banner">
-  {% if section.settings.toggle_banner %}
+  {% if section.settings.banner_enabled %}
     <div class="pencil-banner">
       <div class="container">
         {{ section.settings.banner_content }}
-        <a href="#" class="pencil-banner__close" data-pencil-banner-close>&times;</a>
+        {% comment %}<a href="#" class="pencil-banner__close" data-pencil-banner-close>&times;</a>{% endcomment %}
       </div>
     </div>
   {% endif %}
@@ -14,10 +14,10 @@
     "name": "Pencil Banner",
     "settings": [
       {
-        "id": "toggle_banner",
+        "id": "banner_enabled",
         "type": "checkbox",
         "label": "Show Pencil Banner",
-        "default": false
+        "default": true
       },
       {
         "id": "banner_content",
