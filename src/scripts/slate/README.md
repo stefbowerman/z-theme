@@ -1,12 +1,12 @@
-# Apollo JavaScript - Slate
+# Z-Theme JavaScript - Slate
 
-Since Apollo is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
+Since Z-Theme is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
 
-In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Apollo, we have added and modified several properties of this namespace which are documented below.
+In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Z-Theme, we have added and modified several properties of this namespace which are documented below.
 
 ## Modules
 
-In building Apollo, we have added (or added to) the following modules:
+In building Z-Theme, we have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
 - [Ajax Chimp](#ajax-chimp)
@@ -112,11 +112,11 @@ var slideshow = new slate.Slideshow( $slideshowWrapper, options);
 
 ### User
 
-Apollo includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
+Z-Theme includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
 
 ### Utilities
 
-Apollo has added the following methods to `window.slate.utils`.
+Z-Theme has added the following methods to `window.slate.utils`.
 
 ##### `slate.utils.getQueryParams`
 

@@ -1,6 +1,6 @@
 {
-  "name": "Apollo",
-  "description": "A shopify boilerplate theme for Zehner Group",
+  "name": "Z-Theme",
+  "description": "A shopify starter theme for Zehner Group",
   "version": "0.1.0",
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3"
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zehnergroup/apollo.git"
+    "url": "https://github.com/zehnergroup/z-theme.git"
   },
   "keywords": [],
   "author": "Justin Mather, Scott Harrington, Stefan Bowerman, Zehner Group",
   "bugs": {
-    "url": "https://github.com/zehnergroup/apollo/issues"
+    "url": "https://github.com/zehnergroup/z-theme/issues"
   },
-  "homepage": "https://github.com/zehnergroup/apollo"
+  "homepage": "https://github.com/zehnergroup/z-theme"
 }

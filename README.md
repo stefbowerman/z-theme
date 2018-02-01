@@ -1,8 +1,8 @@
 ![ZG](http://i.imgur.com/kTma7I0.jpg)
 
-# Apollo
+# Z-Theme
 
-Apollo is a boilerplate built on top of [Slate](https://shopify.github.io/slate/). Apollo follows Slate's theme scaffolding paradigm in which the initial scaffolding is [intentionally barebones](https://shopify.github.io/slate/theme/#intentionally-blank):
+Z-Theme is a boilerplate Shopify theme built on top of [Slate](https://shopify.github.io/slate/).
 
 > Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
 >
@@ -13,16 +13,10 @@ For full Slate API documentation, go check out their [API docs](https://shopify.
 
 ---
 
-## Contributing
-
-The Apollo repo is used for: 1) forking Apollo as a framework for theme you're building, _or_, 2) managing and developing the Apollo core framework.
-
-**Please review the [Apollo code guide](https://github.com/zehnergroup/apollo/wiki/Code-Guide), and adhere to those standards when developing.**
-
-### Getting Started
+## Getting Started
 
 - Install Slate: `npm install -g @shopify/slate`
-- Fork the [repo](https://github.com/zehnergroup/apollo/), then clone it
+- Fork the [repo](https://github.com/zehnergroup/z-theme/), then clone it
 - In the project directory, install dependences with `npm install`
 - Setup your shopify dev store
 - [Generate API credentials](https://help.shopify.com/api/getting-started/api-credentials#get-credentials-through-the-shopify-admin) for your local environment
@@ -44,52 +38,3 @@ slate build # Creates a production-ready `dist` bundle
 All developers who wish to contribute through code or issues, take a look at the
 [Code of Conduct](https://github.com/zehnergroup/master/CODE_OF_CONDUCT.md).
 
----
-
-## Apollo Roadmap
-
-This is a high-level look at the what we hope to provide out of the box with Apollo. **If you are looking to use Apollo as the boilerplate for your theme**, please visit [our wiki](https://github.com/zehnergroup/apollo/wiki/So-you-want-to-use-Apollo-as-a-boilerplate%3F) for further instructions.
-
-### Global
-
-- [ ] Nav
-  - [ ] Mobile nav
-  - [ ] Search modal
-  - [x] Mini cart `0.1.0`
-- [ ] Footer
-  - [x] Footer email signup  `0.1.0`
-- [ ] Multiple Pages (carousel on mobile)
-  - [ ] Two up
-  - [ ] Three up
-  - [ ] Mosaic
-
-### Homepage
-
-- [x] Split Hero `0.1.0`
-- [x] Hero `0.1.0`
-- [ ] Two up (carousel on mobile)
-- [ ] Feature collections Three up (carousel on mobile)
-- [ ] Full width hero
-- [ ] Mosaic (carousel on mobile)
-- [ ] Three up (carousel on mobile)
-- [x] Instagram widget `0.1.0`
-
-### Collections
-
-- [ ] Hero
-- [ ] Filters + sort by (custom functionality)
-- [ ] Product thumbnail
-- [ ] Load more (custom functionality)
-
-### Product Page
-
-- [x] image zoom `0.1.0`
-- [x] thumbnail image switcher `0.1.0`
-- [ ] Tabs for variants (men/women/kids)
-- [ ] Accordion
-
-### Static Pages
-
-- [ ] Hero w/ description and/or CTA
-- [ ] blockquotes
-- [ ] media objects (used in 2/3-ups)
