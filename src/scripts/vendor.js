@@ -39,3 +39,11 @@
 * js-cookie
 */
 // =require /../../node_modules/js-cookie/src/js.cookie.js
+
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under the MIT license
+ */
+ // =require vendor/bootstrap.transition.js
+ // =require vendor/bootstrap.modal.js

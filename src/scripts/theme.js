@@ -23,7 +23,7 @@ window.theme = window.theme || {};
 // =require sections/product.js
 // =require sections/collection.js
 // =require sections/pencilBanner.js
-// =require sections/subscriptionPopup.js
+// =require sections/subscriptionModal.js
 // =require sections/instagramFeed.js
 // =require sections/slideshow.js
 // =require sections/header.js
@@ -45,7 +45,7 @@ window.theme = window.theme || {};
     sections.register('product', theme.Product);
     sections.register('collection', theme.Collection);
     sections.register('pencil-banner', theme.PencilBanner);
-    sections.register('subscription-popup', theme.SubscriptionPopup);
+    sections.register('subscription-modal', theme.SubscriptionModal);
     sections.register('instagram-feed', theme.InstagramFeed);
     sections.register('slideshow', theme.Slideshow);
     sections.register('header', theme.Header);
