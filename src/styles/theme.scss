@@ -4,37 +4,54 @@
     - Do not adjust the order of stylesheets in the `global` directory!
 ==============================================================================*/
 
+/*================ VENDOR ================*/
+// Import these up here to allow overrides down below
+@import url('vendor/slick.scss');
+
 /*================ GLOBAL ================*/
-@import url('global/mixins.scss');
 @import url('global/variables.scss.liquid');
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
+@import url('global/mixins.scss');
+@import url('global/reboot.scss');
+@import url('global/fonts.scss.liquid');
+@import url('global/typography.scss');
 @import url('global/helper-classes.scss');
 @import url('global/grid.scss');
 @import url('global/layout.scss');
 @import url('global/flexbox.scss');
 
-/*================ ELEMENTS ================*/
-@import url('elements/icons.scss');
-@import url('elements/links-buttons.scss');
-@import url('elements/blank-states.scss');
-@import url('elements/popover.scss');
-
 /*================ COMPONENTS ================*/
+// Components are small elements that may be re-used in multiple modules
+@import url('components/icons.scss');
+@import url('components/buttons.scss');
+@import url('components/blank-states.scss');
+@import url('components/modals.scss');
+@import url('components/page.scss');
 @import url('components/forms.scss');
 @import url('components/rte.scss');
-@import url('components/responsive-tables.scss');
 @import url('components/breadcrumbs.scss');
+@import url('components/pagination.scss');
 @import url('components/filters.scss');
+@import url('components/tables.scss');
+@import url('components/social-sharing.scss');
 
 /*================ MODULES ================*/
-@import url('modules/site-header.scss');
+// Modules are larger pieces of functionality that consume components
+// It is common for there to only be one instance of each on a page
+@import url('modules/header.scss');
+@import url('modules/footer.scss');
 @import url('modules/gift-card-template.scss');
 @import url('modules/hero.scss');
 @import url('modules/pencil-banner.scss');
 @import url('modules/ajax-cart.scss');
 @import url('modules/subscription-popup.scss');
 @import url('modules/product-detail.scss');
+@import url('modules/slideshow.scss');
+
+/*================ TEMPLATES ================*/
+// Styles *specific* to a shopify template
+// Only use if there is no less specific / more logical place to put styles
+// Try to use the body template class as a CSS hook
+@import url('templates/page.styles.scss');
 
 // Necessary bottom placement for specificity w/o `!important`
 @import url('global/utilities.scss');

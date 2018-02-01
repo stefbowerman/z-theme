@@ -20,61 +20,6 @@
 (function($, Handlebars, slate){
 
   if ((typeof ShopifyAPI) === 'undefined') { ShopifyAPI = {}; }
-  if ((typeof Shopify)    === 'undefined') { Shopify = {}; }
-
-  /*============================================================================
-    Shopify Money Formatting
-  ==============================================================================*/
-  if (!Shopify.formatMoney) {
-    Shopify.formatMoney = function formatMoney (cents, format) {
-      var value = '',
-          placeholderRegex = /\{\{\s*(\w+)\s*\}\}/,
-          formatString = (format || this.money_format);
-
-      if (typeof cents == 'string') {
-        cents = cents.replace('.','');
-      }
-
-      function defaultOption(opt, def) {
-        return (typeof opt == 'undefined' ? def : opt);
-      }
-
-      function formatWithDelimiters(number, precision, thousands, decimal) {
-        precision = defaultOption(precision, 2);
-        thousands = defaultOption(thousands, ',');
-        decimal   = defaultOption(decimal, '.');
-
-        if (isNaN(number) || number == null) {
-          return 0;
-        }
-
-        number = (number/100.0).toFixed(precision);
-
-        var parts   = number.split('.'),
-            dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
-            cents   = parts[1] ? (decimal + parts[1]) : '';
-
-        return dollars + cents;
-      }
-
-      switch(formatString.match(placeholderRegex)[1]) {
-        case 'amount':
-          value = formatWithDelimiters(cents, 2);
-          break;
-        case 'amount_no_decimals':
-          value = formatWithDelimiters(cents, 0);
-          break;
-        case 'amount_with_comma_separator':
-          value = formatWithDelimiters(cents, 2, '.', ',');
-          break;
-        case 'amount_no_decimals_with_comma_separator':
-          value = formatWithDelimiters(cents, 0, '.', ',');
-          break;
-      }
-
-      return formatString.replace(placeholderRegex, value);
-    };
-  }
 
   /*============================================================================
     API Functions
@@ -119,6 +64,15 @@
   };
 
  /**
+  * Retrieve a JSON respresentation of the users cart
+  *
+  * @return {Promise} - JSON cart
+  */
+  ShopifyAPI.getProduct = function(handle) {
+    return $.getJSON('/products/' + handle + '.js');
+  };  
+
+ /**
   * Change the quantity of an item in the users cart
   *
   * @param {int} variantId - Variant to be adjust
@@ -139,7 +93,8 @@
     Ajax Shopify Add To Cart
   ==============================================================================*/
   slate.AjaxCart = (function() {
-
+    
+    var $window = $(window);
     var $body = $('body');
 
     var selectors = {
@@ -148,6 +103,11 @@
       open: '[data-ajax-cart-open]',
       close: '[data-ajax-cart-close]',
       addForm: 'form[action^="/cart/add"]',
+      addToCart: '[data-add-to-cart]',
+      addToCartText: '[data-add-to-cart-text]',
+      header: '[data-ajax-cart-header]',
+      body: '[data-ajax-cart-body]',
+      footer: '[data-ajax-cart-footer]',
       item: '[data-ajax-item][data-id][data-qty]',
       itemRemove: '[data-ajax-cart-item-remove]',
       itemQuantity: 'input[data-ajax-cart-item-quantity]',
@@ -163,16 +123,25 @@
     function AjaxCart() {
       this.name = 'ajaxCart'
       this.namespace = '.' + this.name;
+      this.events = {
+        RENDER:  'render'  + this.namespace,
+        DESTROY: 'destroy' + this.namespace,
+        SCROLL:  'scroll'  + this.namespace
+      };
+
+      // Cache products here as we fetch them via ajax so we can make less successive requests
+      this.productStore = {};      
 
       var initialized = false;
       var settings = {
-        disableAjaxCart: false,
-        emptyMessage: 'Your Cart is Empty'
+        disableAjaxCart: false
       };
 
+      this.$el         = $(selectors.container);
+      this.stateIsOpen = null;
 
      /**
-      * Call this from the main theme.js file to initialize the ajaxCart
+      * Initialize the cart
       *
       * @param {object} options - see `settings` variable above
       */
@@ -190,7 +159,7 @@
         this.template = Handlebars.compile($(selectors.template).html());
 
         // Add the AJAX part
-        if(!this.settings.disableAjaxCart && $(selectors.addForm).length) {
+        if(!this.settings.disableAjaxCart) {
           this._formOverride();
         }
 
@@ -201,9 +170,11 @@
         $body.on('click', selectors.itemIncrement, this.onItemIncrementClick.bind(this));
         $body.on('click', selectors.itemDecrement, this.onItemDecrementClick.bind(this));
         $body.on('change', selectors.itemQuantity, this.onItemQuantityInputChange.bind(this));
+        $window.on(this.events.RENDER, this.onCartRender.bind(this));
+        $window.on(this.events.DESTROY, this.onCartDestroy.bind(this));
 
         // Get the cart data when we initialize the instance
-        ShopifyAPI.getCart().then(this.buildCart.bind(this));
+        ShopifyAPI.getCart().then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
 
         initialized = true;
 
@@ -219,14 +190,83 @@
       * Call this function to AJAX-ify any add to cart forms on the page
       */
       _formOverride: function() {
+        var _this = this;
+
         $body.on('submit', selectors.addForm, function(e) {
           e.preventDefault();
 
+          var $submitButton = $(e.target).find(selectors.addToCart);
+          var $submitButtonText = $submitButton.find(selectors.addToCartText);
+
+          // Update the submit button text and disable the button so the user knows the form is being submitted
+          $submitButton.prop('disabled', true);
+          $submitButtonText.html(theme.strings.adding);
+
           ShopifyAPI.addItemFromForm( $(e.target) )
-            .then( this.onItemAddSuccess.bind(this) )
-            .fail( this.onItemAddFail.bind(this) );
+            .then(function(data) {
+              // Reset button state
+              $submitButton.prop('disabled', false);
+              $submitButtonText.html(theme.strings.addToCart);
+              _this.onItemAddSuccess.call(_this, data);
+            })
+            .fail(function(data) {
+              // Reset button state
+              $submitButton.prop('disabled', false);
+              $submitButtonText.html(theme.strings.addToCart);
+              _this.onItemAddFail.call(_this, data) ;
+            });
         }.bind(this));
       },
+
+     /**
+      * Gets data necessary to build the cart HTML.
+      * Not only do we need the JSON cart, we need the JSON for all products in the cart too.
+      * Check the productStore instance variable first, and then fetch JSON for each product that doesn't exist in the store
+      *
+      * @param {Object} cart - JSON representation of the cart.
+      * @return {$.Deferred} promise
+      */
+      _getCartTemplateData: function(cart){
+        
+        var _this = this;
+        var promise = $.Deferred();
+        var requests = [];
+        var templateData = {
+          cart: cart,
+          products: []
+        };
+
+        for (var i = cart.items.length - 1; i >= 0; i--) {
+          if(!_this.productStore.hasOwnProperty(cart.items[i].product_id)) {
+            requests.push(ShopifyAPI.getProduct(cart.items[i].handle));
+          }
+        };
+
+        $.when.apply($, requests).then(function(resp){
+
+          var products = arguments;
+
+          // If we make one request, we get returned an array of plain objects
+          // If we make more than one request, we get returned an array of arrays (of plain objects)
+          // We have an array of arrays
+          if($.isArray(arguments[0])){
+            products = $.map(arguments, function (arg) { return arg[0]; });
+          }
+
+          // Update our product store with any products that don't already exist in there
+          if(products && products.length) {
+            for (var i = products.length - 1; i >= 0; i--) {
+              var p = products[i];
+              _this.productStore[p.id] = p;
+            }            
+          }
+
+          templateData.products = _this.productStore;
+          promise.resolve(templateData);
+        });
+
+        return promise;
+      },      
 
      /**
       * Ensure we are working with a valid number
@@ -240,11 +280,12 @@
 
       _getItemRowAttributes: function(el) {
         var $el = $(el);
-        var $line = $el.is(selectors.item) ? $el : $el.parents(selectors.item);
+        var $row = $el.is(selectors.item) ? $el : $el.parents(selectors.item);
 
         return {
-          id:  $line.data('id'),
-          qty: this._validateQty($line.data('qty'))
+          $row: $row,
+          id:  $row.data('id'),
+          qty: this._validateQty($row.data('qty'))
         };
       },
 
@@ -254,8 +295,10 @@
       * @param {Object} cart - JSON representation of the cart.
       */
       onItemAddSuccess: function(cart){
-        this.buildCart(cart);
-        this.open();
+        this._getCartTemplateData(cart).then(function(data){
+          this.buildCart(data);
+          this.open();
+        }.bind(this));
       },
 
      /**
@@ -269,19 +312,54 @@
         console.warn('['+this.name+'] - ' + data.message);
       },
 
+      /**
+      * Callback for when the cart HTML is rendered to the page
+      * Allows us to add event handlers for events that don't bubble
+      */
+      onCartRender: function(e) {
+        console.log('['+this.name+'] - onCartRender');
+      },
+
+     /**
+      * Callback for when the cart HTML is removed from the page
+      * Allows us to do cleanup on any event handlers applied post-render
+      */
+      onCartDestroy: function(e) {
+        console.log('['+this.name+'] - onCartDestroy');
+      },
+
      /**
       * Builds the HTML for the ajax cart.
+      * Modifies the JSON cart for consumption by our handlebars template
       *
-      * @param {object} cart - JSON representation of the cart.  See https://help.shopify.com/themes/development/getting-started/using-ajax-api#get-cart
+      * @param {object} cartTemplateData
+      * @param {object} cartTemplateData.cart - JSON representation of the cart.  See https://help.shopify.com/themes/development/getting-started/using-ajax-api#get-cart
+      * @param {object} cartTemplateData.products - Plain object of product JSON values, keyed with the product ID.
       * @return ??
       */
-      buildCart: function(cart) {
+      buildCart: function(cartTemplateData) {
+
+        var cart     = cartTemplateData.cart;
+        var products = cartTemplateData.products;
+
         // Make adjustments to the cart object contents before we pass it off to the handlebars template
-        cart.total_price = Shopify.formatMoney(cart.total_price, theme.moneyFormat);
-        cart.emptyMessage = this.settings.emptyMessage
+        cart.total_price = slate.Currency.formatMoney(cart.total_price, theme.moneyFormat);
         cart.items.map(function(item){
-          item.image = slate.Image.getSizedImageUrl(item.image, '200x');
-          item.price = Shopify.formatMoney(item.price, theme.moneyFormat);
+          item.image    = slate.Image.getSizedImageUrl(item.image, '200x');
+          item.price    = slate.Currency.formatMoney(item.price, theme.moneyFormat);
+
+          // Adjust the item's variant options to add "name" and "value" properties
+          if(products.hasOwnProperty(item.product_id)) {
+            var product = products[item.product_id];
+            for (var i = item.variant_options.length - 1; i >= 0; i--) {
+              var value = item.variant_options[i];
+              item.variant_options[i] = {
+                name: product.options[i].name,
+                value: value
+              }
+            }
+          }
+
           return item;
         });
 
@@ -291,10 +369,23 @@
          *
          *  return this.template(cart)
          *
-         *  The code below isn't the most elegent way to update the cart but it works...
-         */
+         *  The code below isn't the most elegant way to update the cart but it works...
+         */        
 
-         $(selectors.container).empty().append( this.template(cart) );
+        $window.trigger(this.events.DESTROY);
+        $(selectors.container).empty().append( this.template(cart) );
+        $window.trigger(this.events.RENDER);
+
+        this.updateCartCount(cart);
+      },
+
+     /**
+      * STUB - If your theme displays the cart count, use this method to udpate it
+      *
+      * @param {Object} cart - JSON representation of the cart.
+      */
+      updateCartCount: function(cart) {
+
       },
 
      /**
@@ -304,10 +395,9 @@
       */
       onItemRemoveClick: function(e) {
         e.preventDefault();
-        console.log('['+this.name+'] - onItemRemoveClick');
 
-        var id = $(e.target).parents(selectors.item).attr('data-id');
-        ShopifyAPI.changeItemQuantity(id, 0).then(this.buildCart.bind(this));
+        var attrs = this._getItemRowAttributes(e.target);
+        ShopifyAPI.changeItemQuantity(attrs.id, 0).then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
       },
 
      /**
@@ -321,7 +411,7 @@
 
         var attrs = this._getItemRowAttributes(e.target);
         
-        ShopifyAPI.changeItemQuantity(attrs.id, attrs.qty + 1).then(this.buildCart.bind(this));
+        ShopifyAPI.changeItemQuantity(attrs.id, attrs.qty + 1).then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
       },
 
      /**
@@ -334,9 +424,9 @@
         console.log('['+this.name+'] - onItemDecrementClick');
 
         var attrs = this._getItemRowAttributes(e.target);
-        var newQty = (attrs.qty <= 1 ? 1 : attrs.qty - 1);
+        var newQty = (attrs.qty < 1 ? 0 : attrs.qty - 1);
 
-        ShopifyAPI.changeItemQuantity(attrs.id, newQty).then(this.buildCart.bind(this));
+        ShopifyAPI.changeItemQuantity(attrs.id, newQty).then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
       },
 
      /**
@@ -346,9 +436,9 @@
       */
       onItemQuantityInputChange: function(e) {
         var attrs = this._getItemRowAttributes(e.target);
-        var qty = this._validateQty( $input.val() );
+        var qty = this._validateQty( $(e.currentTarget).val() );
 
-        ShopifyAPI.changeItemQuantity(attrs.id, qty).then(this.buildCart.bind(this));
+        ShopifyAPI.changeItemQuantity(attrs.id, qty).then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
       },
 
      /**
@@ -375,10 +465,39 @@
       },
 
      /**
+      * Opens / closes the cart depending on state
+      *
+      */
+      toggleVisibility: function() {
+        return this.stateIsOpen ? this.close() : this.open();
+      },
+
+     /**
+      * Check the open / closed state of the cart
+      *
+      * @return {bool}
+      */
+      isOpen: function() {
+        return this.stateIsOpen;
+      },
+
+     /**
+      * Returns true is the cart is closed.
+      *
+      * @return {bool}
+      */
+      isClosed: function() {
+        return !this.stateIsOpen;
+      },
+
+     /**
       * STUB METHOD - Code for opening the cart
       */
       open: function() {
+        if(this.stateIsOpen) return;
         console.log('['+this.name+'] - open');
+        this.stateIsOpen = true;
+
         $(selectors.container).show();
       },
 
@@ -386,12 +505,16 @@
       * STUB METHOD - Code for closing the cart
       */
       close: function() {
+        if(!this.stateIsOpen) return;
+
         console.log('['+this.name+'] - close');
+        this.stateIsOpen = false;
+
         $(selectors.container).hide();
       }
     });
 
-    return new AjaxCart();
+    return AjaxCart;
   })();
 
 })(jQuery, Handlebars, slate);

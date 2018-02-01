@@ -1,13 +1,9 @@
 <div data-section-id="{{ section.id }}" data-section-type="pencil-banner">
   {% if section.settings.toggle_banner %}
-    <div class="PencilBanner">
+    <div class="pencil-banner">
       <div class="container">
-        {% if section.settings.banner_link  %}
-          <a href="{{ section.settings.banner_link }}" class=""{% if section.settings.banner_link_external %}target="_blank"{% endif %}>{{ section.settings.banner_text }}</a>
-        {% else %}
-          <span class="">{{ section.settings.banner_text }}</span>
-        {% endif %}
-        <a href="#" class="PencilBanner-close" data-pencil-banner-close>&times;</a>
+        {{ section.settings.banner_content }}
+        <a href="#" class="pencil-banner__close" data-pencil-banner-close>&times;</a>
       </div>
     </div>
   {% endif %}
@@ -24,21 +20,10 @@
         "default": false
       },
       {
-        "id": "banner_text",
-        "type": "text",
-        "label": "Pencil Banner Text",
-        "default": "Default Banner Text"
-      },
-      {
-        "id": "banner_link",
-        "type": "url",
-        "label": "Should the banner link anywhere?"
-      },
-      {
-        "id": "banner_link_external",
-        "type": "checkbox",
-        "label": "Open Link in New Window",
-        "default": false
+        "id": "banner_content",
+        "type": "richtext", 
+        "label": "Pencil Banner Content",
+        "default": "<p>Default Banner Text</p>"
       }
     ]
   }

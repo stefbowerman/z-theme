@@ -1,0 +1,176 @@
+# Apollo JavaScript - Slate
+
+Since Apollo is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
+
+In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Apollo, we have added and modified several properties of this namespace which are documented below.
+
+## Modules
+
+In building Apollo, we have added (or added to) the following modules:
+
+- [Ajax Cart](#ajax-cart)
+- [Ajax Chimp](#ajax-chimp)
+- [Animations](#animations)
+- [Breakpoints](#breakpoints)
+- [Collection Filters](#collection-filters)
+- [Collection Sort](#collection-sort)
+- [Slideshow](#slideshow)
+- [User](#user)
+- [Utilities](#utilities)
+
+### Ajax Cart
+
+Create an initialize the Ajax Cart inside the Ajax Cart Section
+
+```javascript
+this.ajaxCart = new slate.AjaxCart();
+this.ajaxCart.init({options});
+```
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `disableAjaxCart`  | boolean | Quick way to disable the ajax cart |
+
+The ajaxCart comes with public methods that allow you to control it from other parts of the application.
+
+| Command        | Usage          | Description   |
+| :----------------- | :------------ | :------------ |
+| `open`  | `slate.AjaxCart.open()`  | Shows the cart |
+| `close` | `slate.AjaxCart.close()` | Hides the cart |
+
+### Ajax Chimp
+
+Included is a stripped down version of the [AjaxChimp jQuery](https://github.com/scdoshi/jquery-ajaxchimp) plugin.  It handles form submission for Mailchimp form URLs and provides basic validation and error handling.
+
+To use, create a new instance and pass in the form element and a plain object of settings anywhere you need an AJAX enabled subscription form.  See `scripts/slate/ajaxChimp.js` for the full list of options.
+
+```javascript
+var $form = $('form');
+var ajaxForm = new slate.AjaxChimp($form, {
+  onInit: function() {
+    // ...
+  },
+  onSubmitDone: function() {
+    // ...
+  }
+});
+```
+
+### Animations
+
+Attaches a single method to `slate.animations` to make working with animations in javascript easier.  Adds easing functions to `$.easing` and stores a dictionary of timing durations that should match those defined as SCSS variables.  Useful for times when CSS transitions won't do the job but you still want to keep things consistent.
+
+##### `slate.animations.getTransitionTimingDuration`
+
+Returns the timing durations (in ms) for the specified key
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `key`  | string | Key mapping to a timing duration (base, fast, slow..) |
+
+### Breakpoints
+
+Attaches a single method to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.
+
+##### `slate.breakpoints.getBreakpointMinWidth`
+
+Returns the minimum pixel width for the specified key
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `key`  | string | Key mapping to a screen size (sm, md, ..) |
+
+
+### Collection Filters
+
+The contents of the filters are sorted alphabetically by default but if you need an alternative sorting (like size), add a function to the `slate.CollectionFilters.Prototype._sortingFunctions` object.  The key that you use to add your sort function _must_ match the `data-filters-type` property of the element containing the options to sort.
+
+To use, create a new instance and pass in an HTMLElement containing elements required by the selectors and a plain object of data about the collection that is being filtered.
+
+```javascript
+var filtering = new slate.collectionFilter( container, collectionData );
+```
+
+### Collection Sort
+
+Controls collection sorting, requires a containing element and a select tag with sorting options that get turned into a query string on the collection page.
+
+To use, create a new instance and pass in an HTMLElement containing elements required by the selectors and a plain object of data about the collection that is being sorted.
+
+```javascript
+var sorting = new slate.collectionSort( container, collectionData );
+``` 
+
+### Slideshow
+Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
+
+```javascript
+var $slideshowWrapper = $('[data-slideshow-wrapper]');
+var options = { arrows: true };
+var slideshow = new slate.Slideshow( $slideshowWrapper, options);
+```
+
+### User
+
+Apollo includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
+
+### Utilities
+
+Apollo has added the following methods to `window.slate.utils`.
+
+##### `slate.utils.getQueryParams`
+
+Use this to retrieve an object of key / value pairs out of the parameters of the query string.
+
+```javascript
+// example.com/?mySearchTerm=blue+jeans
+
+slate.utils.getQueryParams(); // outputs - { mySearchTerm: "blue+jeans" }
+```
+
+##### `slate.utils.getUrlWithUpdatedQueryStringParameter`
+
+Use this to update a parameter in a uri query string.
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `key`  | string | Parameter key |
+| `value`  | string | Parameter value |
+| `uri`  | string | URI to update (defaults to `window.location.href`) |
+
+```javascript
+// example.com/?mySearchTerm=blue+jeans
+
+slate.utils.getUrlWithUpdatedQueryStringParameter('mySearchTerm', 'red+shirt'); // outputs - example.com/?mySearchTerm=red+shirt
+```
+
+##### `slate.utils.getUrlWithRemovedQueryStringParameter`
+
+Use this to update a parameter in a uri query string.
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `parameterKeyToRemove`  | string | Parameter key |
+| `uri`  | string | URI to update (defaults to `window.location.href`) |
+
+```javascript
+// example.com/?mySearchTerm=blue+jeans&myFilter=color
+
+slate.utils.getUrlWithRemovedQueryStringParameter('mySearchTerm'); // outputs - example.com/?myFilter=color
+```
+
+##### `slate.utils.isThemeEditor`
+
+Return *`true`* if the site is being viewed inside the shopify theme editor.
+
+##### `slate.utils.whichTransitionEnd`
+
+Get the correct name of the `transitionend` event for the browser being used.
+
+##### `slate.utils.userAgentBodyClass`
+
+Call this to apply user agenct specific classes to the body tag to use as css / js hooks.
+
+##### `slate.utils.hashFromString`
+
+Call this to turn a string into a 32 bit integer.  Useful for hashing content into a some-what unique identifier to use for cookies.

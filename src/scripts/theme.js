@@ -10,84 +10,67 @@ window.theme = window.theme || {};
 // =require slate/currency.js
 // =require slate/images.js
 // =require slate/variants.js
+// =require slate/collectionFilters.js
+// =require slate/collectionSort.js
 // =require slate/ajaxCart.js
+// =require slate/ajaxChimp.js
+// =require slate/slideshow.js
+// =require slate/animations.js
+// =require slate/user.js
+// =require slate/breakpoints.js
 
 /*================ Sections ================*/
 // =require sections/product.js
+// =require sections/collection.js
 // =require sections/pencilBanner.js
 // =require sections/subscriptionPopup.js
 // =require sections/instagramFeed.js
+// =require sections/slideshow.js
+// =require sections/header.js
+// =require sections/footer.js
+// =require sections/ajaxCart.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
-// =require templates/filters.js
 
-$(document).ready(function() {
-  var sections = new slate.Sections();
-  sections.register('product', theme.Product);
-  sections.register('pencil-banner', theme.PencilBanner);
-  sections.register('subscription-popup', theme.SubscriptionPopup);
-  sections.register('instagram-feed', theme.InstagramFeed);
+(function($) {
 
-  slate.AjaxCart.init({});
+  var $window       = $(window);
+  var $document     = $(document);
+  var $body         = $(document.body);
 
-  // Common a11y fixes
-  slate.a11y.pageLinkFocus($(window.location.hash));
+  $(document).ready(function() {
+    var sections = new slate.Sections();
+    sections.register('product', theme.Product);
+    sections.register('collection', theme.Collection);
+    sections.register('pencil-banner', theme.PencilBanner);
+    sections.register('subscription-popup', theme.SubscriptionPopup);
+    sections.register('instagram-feed', theme.InstagramFeed);
+    sections.register('slideshow', theme.Slideshow);
+    sections.register('header', theme.Header);
+    sections.register('footer', theme.Footer);
+    sections.register('ajax-cart', theme.AjaxCart);    
 
-  $('.in-page-link').on('click', function(evt) {
-    slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+    $('.in-page-link').on('click', function(evt) {
+      slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+    });
+
+    // Common a11y fixes
+    slate.a11y.pageLinkFocus($(window.location.hash));    
+
+    // Wrap RTE videos and tables to force responsive layout.
+    slate.rte.fixTables();
+    slate.rte.iframeReset();
+
+    // Apply UA classes to the document
+    slate.utils.userAgentBodyClass();    
+
+    // Apply a specific class to the html element for browser support of cookies.
+    if (slate.cart.cookiesEnabled()) {
+      document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
+    }
+
   });
 
-  var filter_scene, mobile_scene;
-  var $filter_el = $('.js-filter-main-container');
-
-  var responsive =  {
-    _ww: function () {
-      var newW = $(window).width();
-      return newW;
-    },
-    _bp: {
-      small: 576
-    },
-    _bp_check: function () {
-      if (this._ww() > this._bp.small) {
-        return 'SMALL-UP'
-      } else {
-        return 'SMALL'
-      }
-    }
-  };
-
-  var filters_setup = {
-    windowBindings: function () {
-      var self = this;
-
-      $(window).on('resize', function(){
-        if (responsive._bp_check() === 'SMALL-UP') {
-          if ($filter_el.length > 0) {
-            if (filter_scene) {
-              filter_scene.destroy(true);  
-            }
-            self.filters();
-          }
-        } else if (responsive._bp_check() === 'SMALL') {
-          if ($filter_el.length > 0) {
-            if (filter_scene) {
-              filter_scene.destroy(true);
-            }
-          }
-        }
-      })
-    }
-  }
-
-  // Wrap videos in div to force responsive layout.
-  slate.rte.wrapTable();
-  slate.rte.iframeReset();
-
-  // Apply a specific class to the html element for browser support of cookies.
-  if (slate.cart.cookiesEnabled()) {
-    document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
-  }
-});
+}(jQuery));

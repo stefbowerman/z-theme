@@ -1,0 +1,130 @@
+{% paginate collection.products by 12 %}
+
+<section class="Collection" data-section-id="{{ section.id }}" data-section-type="collection">
+
+  <h1>{{ collection.title }}</h1>
+  {% if collection.description != blank %}
+    <p>{{ collection.description }}</p>
+  {% endif %}
+
+  <header role="banner">
+    {% include 'breadcrumbs' %}
+    {% if section.settings.enable_filters %}
+      {% include 'collection-filters' %}
+    {% endif %}
+    {% if section.settings.enable_sort %}
+      {% include 'collection-sort' %}
+    {% endif %}
+  </header>
+
+  <div>
+    {% for product in collection.products %}
+      <div>
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+
+        <p>
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </p>
+        <p>
+          {% if product.compare_at_price > product.price %}
+
+            {% if product.price_varies %}
+              {%- assign sale_price = product.price | money -%}
+              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {% else %}
+              {{ 'products.product.on_sale' | t }}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% else %}
+
+            {% if product.price_varies %}
+              {%- assign price = product.price | money -%}
+              {{ 'products.product.from_text_html' | t: price: price }}
+            {% else %}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% endif %}
+
+          {% if product.compare_at_price > product.price %}
+            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+            <s>{{ product.compare_at_price | money }}</s>
+          {% endif %}
+
+          {% unless product.available %}
+            {{ 'products.product.sold_out' | t }}
+          {% endunless %}
+        </p>
+      </div>
+
+    {% else %}
+      {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+        {% for i in (1..8) %}
+          <a href="#">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+          </a>
+
+          <p>
+            <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+          </p>
+
+          <p>
+            {{ 1999 | money }}
+          </p>
+        {% endfor %}
+      {% else %}
+        <p>{{ 'collections.general.no_matches' | t }}</p>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
+
+  {% comment %} This JSON is required for filtering and sorting {% endcomment %}
+  {% capture collection_url %}
+    {% if collection.handle == "all" %}
+      /collections/all
+    {% else %}
+      {{ collection.url }}
+    {% endif %}
+  {% endcapture %}
+
+  <script type="application/json" data-collection-json>
+    {
+      "url": {{ collection_url | strip | json }},
+      "sortDefault": {{ collection.default_sort_by | json }},
+      "sortApplied": {{ collection.sort_by | json }}
+    }
+  </script>
+
+</section>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "id": "enable_filters",
+        "type": "checkbox",
+        "label": "Enable Filters",
+        "default": true,
+        "info": "Filtering is based on product tags."
+      },
+      {
+        "id": "enable_sort",
+        "type": "checkbox",
+        "label": "Enable Sort",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

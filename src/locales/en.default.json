@@ -31,10 +31,14 @@
       "share_on_facebook": "Share",
       "share_on_twitter": "Tweet",
       "share_on_pinterest": "Pin it",
+      "share_on_tumblr": "Tumblr",      
+      "share_on_email": "Email",
       "alt_text": {
         "share_on_facebook": "Share on Facebook",
         "share_on_twitter": "Tweet on Twitter",
-        "share_on_pinterest": "Pin on Pinterest"
+        "share_on_pinterest": "Pin on Pinterest",
+        "share_on_tumblr": "Share on Tumblr",
+        "share_on_email": "Share via Email"
       }
     },
     "search": {
@@ -78,6 +82,7 @@
       "shipping_at_checkout": "Shipping & taxes calculated at checkout",
       "update": "Update Cart",
       "checkout": "Check Out",
+      "view": "View Cart",
       "empty": "Your cart is currently empty.",
       "cookies_required": "Enable cookies to use the shopping cart",
       "continue_browsing_html": "Continue browsing <a href=\"/collections/all\">here</a>.",
@@ -248,7 +253,8 @@
       "on_sale_from_html": "On Sale from {{ price }}",
       "from_text_html": "From {{ price }}",
       "quantity": "Quantity",
-      "add_to_cart": "Add to Cart"
+      "add_to_cart": "Add to Cart",
+      "adding": "Adding..."
     }
   },
   "gift_cards": {

@@ -1,4 +1,7 @@
-/*================ Rich Text Editor ================*/
+// -------------------------
+// Rich Text Editor
+// -------------------------
+
 .rte {
   img {
     height: auto;
@@ -10,7 +13,7 @@
 
   ul,
   ol {
-    margin: 0 0 ($gutter / 2) $gutter;
+    margin: 0 0 ($grid-gutter-width / 2) $grid-gutter-width;
   }
 
   // Match the styles from RTE nested lists

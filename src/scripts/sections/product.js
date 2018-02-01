@@ -29,9 +29,15 @@ theme.Product = (function($, slate) {
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
     productThumbs: '[data-product-single-thumbnail]',
-    singleOptionSelector: '[data-single-option-selector]'
+    singleOptionSelector: '[data-single-option-selector]',
+    variantOptionValueList: '[data-variant-option-value-list]',
+    variantOptionValue: '[data-variant-option-value]',
   };
 
+  var classes = {
+    hide: 'hide',
+    variantOptionValueActive: 'is-active',
+  };
 
   /**
    * Used to control the image zoom behavior on the product page.
@@ -257,6 +263,7 @@ theme.Product = (function($, slate) {
     this.initVariants();
 
     this.$container.on('click', selectors.productThumbs, this.onProductThumbClick.bind(this));
+    this.$container.on('click', selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
 
     if(this.settings.zoomEnabled) {
       this.productImageZoomController = new ProductImageZoomController();
@@ -279,9 +286,15 @@ theme.Product = (function($, slate) {
 
       this.variants = new slate.Variants(options);
 
-      this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
+      this.$container.on('variantChange' + this.namespace, this.onVariantChange.bind(this));
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
       this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
+    },
+
+    onVariantChange: function(e) {
+      var variant = e.variant;
+
+      this.updateAddToCartState(variant);
     },
 
     /**
@@ -290,15 +303,14 @@ theme.Product = (function($, slate) {
      * @param {boolean} enabled - Decides whether cart is enabled or disabled
      * @param {string} text - Updates the text notification content of the cart
      */
-    updateAddToCartState: function(evt) {
-      var variant = evt.variant;
+    updateAddToCartState: function(variant) {
 
       if (variant) {
-        $(selectors.priceWrapper, this.$container).removeClass('hide');
+        $(selectors.priceWrapper, this.$container).removeClass(classes.hide);
       } else {
         $(selectors.addToCart, this.$container).prop('disabled', true);
         $(selectors.addToCartText, this.$container).html(theme.strings.unavailable);
-        $(selectors.priceWrapper, this.$container).addClass('hide');
+        $(selectors.priceWrapper, this.$container).addClass(classes.hide);
         return;
       }
 
@@ -327,10 +339,10 @@ theme.Product = (function($, slate) {
 
       if (variant.compare_at_price > variant.price) {
         $comparePrice.html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
-        $compareEls.removeClass('hide');
+        $compareEls.removeClass(classes.hide);
       } else {
         $comparePrice.html('');
-        $compareEls.addClass('hide');
+        $compareEls.addClass(classes.hide);
       }
     },
 
@@ -377,6 +389,31 @@ theme.Product = (function($, slate) {
         console.log('src - ', src);
         console.log('zoomSrc - ', zoomSrc);
       console.groupEnd();
+    },
+
+    /**
+     * Handle variant option value click event.
+     * Update the associated select tag and update the UI for this value
+     *
+     * @param {event} evt
+     */
+    onVariantOptionValueClick: function(e) {
+      
+      var $option = $(e.currentTarget);
+
+      if ($option.hasClass(classes.variantOptionValueActive)) {
+        return;
+      }
+
+      var value     = $option.data('variant-option-value');
+      var position  = $option.parents(selectors.variantOptionValueList).data('option-position');
+      var $selector = $(selectors.singleOptionSelector).filter('[data-index="option'+position+'"]');
+
+      $selector.val(value);
+      $selector.trigger('change');
+
+      $option.siblings().removeClass( classes.variantOptionValueActive );
+      $option.addClass( classes.variantOptionValueActive );
     },
 
     /**

@@ -1,81 +1,52 @@
-
 // -----------------------------------------------------------------------------
 // Utilties
 // -----------------------------------------------------------------------------
 
-// --------------------------------------------------------
-// Colors
-// --------------------------------------------------------
+/*================ Typography ================*/
 
-// Text Colors
-.u-color-red { color: $color-red; }
-.u-color-grey { color: $color-grey; }
-.u-color-lightGrey { color: $color-lightGrey; }
-.u-color-white { color: $color-white; }
-.u-color-darkGrey { color: $color-darkGrey; }
-.u-color-black { color: $color-black; }
-
-
-// Background Colors
-.u-bg-red { background: $color-red; }
-.u-bg-white { background: $color-white; }
-.u-bg-lightGrey { background: $color-lightGrey; }
-.u-bg-grey { background: $color-grey; }
-.u-bg-darkGrey { background: $color-darkGrey; }
-.u-bg-gradient { background-image: linear-gradient(to bottom, #f4f4f4, $color-white), linear-gradient(#d8d8d8, #d8d8d8); }
-
-// --------------------------------------------------------
-// Typography
-// --------------------------------------------------------
-
+// Alignment
 .u-ta-center { text-align: center; }
 .u-ta-right { text-align: right; }
 .u-ta-left { text-align: left; }
-.u-tt-uppercase { text-transform: uppercase; }
-
-// Font Size
-.u-fs-xxxl {
-  font-size: 85px;
-  @include media-query($small) { font-size: $fontSize-xxl; }
-}
-.u-fs-xxl { font-size: $fontSize-xxl; }
-.u-fs-xl { font-size: $fontSize-xl; } // 24px
-.u-fs-lg { font-size: $fontSize-lg; } // 20px
-.u-fs-md { font-size: $fontSize-md; } // 18px
-.u-fs-sm { font-size: $fontSize-sm; }
-.u-fs-xs { font-size: $fontSize-xs; } // 15px
+.u-ta-justify { text-align: justify; }
 
 // Font Weight
 .u-fw-normal { font-weight: $font-weight-normal; }
 .u-fw-medium { font-weight: $font-weight-medium; }
 .u-fw-bold { font-weight: $font-weight-bold; }
 
-// Letterspacing
-.u-ls-md { letter-spacing: $letterspacing-md; }
-.u-ls-sm { letter-spacing: $letterspacing-sm; }
-.u-ls-xs { letter-spacing: $letterspacing-xs; }
+// Font Size
+.u-fs-base { font-size: $font-size-base; }
+.u-fs-large { font-size: $font-size-large; }
+.u-fs-small { font-size: $font-size-small; }
+.u-fs-xsmall { font-size: $font-size-xsmall; }
 
-// Line Height
-.u-lh-sm { line-height: $lineHeight-sm; }
-.u-lh-md { line-height: $lineHeight-md; }
-.u-lh-lg { line-height: $lineHeight-lg; }
-.u-lh-xl { line-height: $lineHeight-xl; }
-.u-lh-xxl,
-.u-lh-xxl p,
-p.u-lh-xxl { line-height: $lineHeight-xxl; }
+// Text Colors
+.u-color-black { color: $color-black; }
+.u-color-white { color: $color-white; }
+.u-color-grey { color: $color-grey; }
 
-.u-td-underline,
-.link {
-  text-decoration: underline;
-  &:hover { text-decoration: underline; }
+// Transformation
+.u-tt-lowercase { text-transform: lowercase; }
+.u-tt-uppercase { text-transform: uppercase; }
+.u-tt-capitalize { text-transform: capitalize; }
+.u-tt-none { text-transform: none; }
+
+// Decoration
+.u-td-underline {
+  &, &:hover, &:focus { text-decoration: underline; }
 }
 
 .u-td-strike { text-decoration: line-through; }
 .u-ws-nowrap { white-space: nowrap; }
 
-// --------------------------------------------------------
-// Layout-Related Utilties
-// --------------------------------------------------------
+/*================ Background Colors ================*/
+
+.u-bg-white { background-color: $color-white; }
+.u-bg-black { background-color: $color-black; }
+.u-bg-grey { background-color: $color-grey; }
+
+/*================ Layout ================*/
 
 .u-margin-normalize { margin: 0; }
 .u-margin-auto {
@@ -95,53 +66,7 @@ p.u-lh-xxl { line-height: $lineHeight-xxl; }
 .u-pos-abs { position: absolute; }
 .u-pos-fix { position: fixed; }
 
-/* --------------------------------------------------------
-  Vertical Spacing
-  ===================
-
-  xxs: 5px;
-  xs: 10px;
-  sm: 15px;
-  md: 20px;
-  lg: 30px;
-  xl: 40px;
-  xxl: 50px;
-  jumbo: 80px;
-
-// -------------------------------------------------------- */
-
-.u-mt__0 { margin-top: $spacing-0; }
-.u-mt__xxs { margin-top: $spacing-xxs; }
-.u-mt__xs { margin-top: $spacing-xs; }
-.u-mt__sm { margin-top: $spacing-sm; }
-.u-mt__md { margin-top: $spacing-md; }
-.u-mt__lg { margin-top: $spacing-lg; }
-.u-mt__xl { margin-top: $spacing-xl; }
-.u-mt__xxl { margin-top: $spacing-xxl; }
-.u-mt__jumbo { margin-top: $spacing-jumbo; }
-
-.u-mb__0 { margin-bottom: $spacing-0; }
-.u-mb__xxs { margin-bottom: $spacing-xxs; }
-.u-mb__xs { margin-bottom: $spacing-xs; }
-.u-mb__sm { margin-bottom: $spacing-sm; }
-.u-mb__md { margin-bottom: $spacing-md; }
-.u-mb__lg { margin-bottom: $spacing-lg; }
-.u-mb__xl { margin-bottom: $spacing-xl; }
-.u-mb__xxl { margin-bottom: $spacing-xxl; }
-.u-mb__jumbo { margin-bottom: $spacing-jumbo; }
-
-.u-ml__md { margin-left: $spacing-md; }
-.u-mr__md { margin-right: $spacing-md; }
-.u-mr__xs { margin-right: $spacing-xs; }
-
-.u-mr__reflow {
-  @include media-query($x-small) { margin-bottom: $spacing-sm; }
-  @include media-query($small-up) { margin-right: $spacing-md; }
-}
-
-// --------------------------------------------------------
-// Z-Index
-// --------------------------------------------------------
+/*================ Z-Index ================*/
 
 @for $z from 1 through 10 {
   .z-index-#{$z} {
@@ -149,51 +74,7 @@ p.u-lh-xxl { line-height: $lineHeight-xxl; }
   }
 }
 
-// --------------------------------------------------------
-// Hide
-// --------------------------------------------------------
+/*================ Hide ================*/
 
 .hide,
 .hidden { display: none; }
-
-.hidden-xl {
-  @include media-query($widescreen) { display: none; }
-}
-.visible-xl {
-  @include media-query($large-down) { display: none; }
-  @include media-query($widescreen) { display: block; }
-}
-
-.hidden-lg {
-  @include media-query($large) { display: none; }
-}
-.visible-lg {
-  @include media-query($medium-down) { display: none; }
-  @include media-query($large) { display: block; }
-}
-
-.hidden-md {
-  @include media-query($medium) { display: none; }
-}
-.visible-md {
-  @include media-query($small) { display: none; }
-  @include media-query($medium) { display: block; }
-}
-
-.hidden-sm {
-  @include media-query($small) { display: none; }
-}
-
-.visible-sm {
-  @include media-query($small) { display: block; } // or `flex` or `unset`?
-  @include media-query($medium-up) { display: none; }
-}
-
-.hidden-xs {
-  @include media-query($x-small) { display: none; }
-}
-
-.visible-xs {
-  @include media-query($x-small) { display: block; }
-  @include media-query($small-up) { display: none; }
-}

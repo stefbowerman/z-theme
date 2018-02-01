@@ -6,13 +6,17 @@
  *   - See instafeedjs.com for documentation
  *   - See scripts/vendor directory for source file
  *
- * @namespace - InstagramFeed
+ * @namespace - instagramFeed
  */
 
 theme.InstagramFeed = (function($, Instafeed) {
 
   var selectors = {
     target: '[data-instagram-feed-target]'
+  };
+
+  var classes = {
+
   };
 
   /**

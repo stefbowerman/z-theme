@@ -1,36 +1,28 @@
-
 // -----------------------------------------------------------------------------
 // Breadcrumbs
 // -----------------------------------------------------------------------------
 
-.Breadcrumbs {
-  a {}
-  a.is-active {}
-
-  a:hover,
-  a:active {}
-}
-
-.Breadcrumb-separator {}
-
-.l-Breadcrumbs {
+.breadcrumbs {
   @include display-flex;
 
-  @include media-query($x-small) {
-    a {
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      min-width: 45px;
-      max-width: 120px;
-    }
-
-    span:last-of-type {
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      min-width: 45px;
-      max-width: 160px;
-    }
+  @media screen and (min-width: $screen-xs-min) {
+    display: block;
   }
 }
+
+.breadcrumbs__crumb {
+  display: inline-block;
+
+  &:not(:last-child) {
+    &:after {
+      display: inline-block;
+      content: $breadcrumb-separator;
+      padding: 0 5px;
+    }
+  }
+
+  &:last-child:not(:only-child) {
+
+  }
+}
+

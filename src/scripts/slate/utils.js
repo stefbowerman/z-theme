@@ -77,5 +77,182 @@ slate.utils = {
    */
   defaultTo: function(value, defaultValue) {
     return (value == null || value !== value) ? defaultValue : value
+  },
+
+  /**
+   * Constructs an object of key / value pairs out of the parameters of the query string
+   *
+   * @return {Object}
+   */
+  getQueryParams: function() {
+    var queryString = location.search && location.search.substr(1) || '';
+    var queryParams = {};
+
+    queryString
+      .split('&')
+      .filter(function (element) {
+        return element.length;
+      })
+      .forEach(function (paramValue) {
+        var splitted = paramValue.split('=');
+
+        if (splitted.length > 1) {
+          queryParams[splitted[0]] = splitted[1];
+        } else {
+          queryParams[splitted[0]] = true;
+        }
+      });
+
+    return queryParams;
+  },
+
+  /**
+   * Constructs a version of the current URL with the passed in key value pair as part of the query string
+   *
+   * @param {String} key
+   * @param {String} value
+   * @param {String} uri - optional, defaults to window.location.href
+   * @return {String}
+   */
+  getUrlWithUpdatedQueryStringParameter: function(key, value, uri) {
+    var uri = uri != undefined ? uri : window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+      return uri.replace(re, '$1' + key + "=" + value + '$2');
+    }
+    else {
+      return uri + separator + key + "=" + value;
+    }
+  },
+
+  /**
+   * Constructs a version of the current URL with the passed in parameter key and associated value removed
+   *
+   * @param {String} key
+   * @return {String}
+   */
+  getUrlWithRemovedQueryStringParameter: function(parameterKeyToRemove, uri) {
+    var uri = uri != undefined ? uri : window.location.href,
+        rtn = uri.split("?")[0],
+        param,
+        params_arr = [],
+        queryString = (uri.indexOf("?") !== -1) ? uri.split("?")[1] : "";
+
+    if (queryString !== "") {
+        params_arr = queryString.split("&");
+        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+            param = params_arr[i].split("=")[0];
+            if (param === parameterKeyToRemove) {
+                params_arr.splice(i, 1);
+            }
+        }
+         if (params_arr.length > 0) { 
+          rtn = rtn + "?" + params_arr.join("&");
+        }
+    }
+
+    return rtn;
+  },  
+
+  /**
+   * Check if we're running the theme inside the theme editor
+   *
+   * @return {bool}
+   */
+  isThemeEditor: function() {
+    return location.href.match(/myshopify.com/) !== null && location.href.match(/theme_id/) !== null;
+  },
+
+  /**
+   * Get the name of the correct 'transitionend' event for the browser we're in
+   *
+   * @return {string}
+   */
+  whichTransitionEnd: function() {
+    var t;
+    var el = document.createElement('fakeelement');
+    var transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    };
+
+    for(t in transitions){
+      if( el.style[t] !== undefined ){
+        return transitions[t];
+      }
+    }
+  },
+
+  /**
+   * Adds user agent classes to the document to target specific browsers
+   *
+   */
+  userAgentBodyClass: function() {
+    var ua = navigator.userAgent,
+        d = document.documentElement,
+        classes = d.className;
+
+    // Detect iOS (needed to disable zoom on form elements)
+    // http://stackoverflow.com/questions/9038625/detect-if-device-is-ios/9039885#9039885
+    if ( /iPad|iPhone|iPod/.test(ua) && !window.MSStream ) {
+      classes += ' ua-ios';
+
+      // Add class for version of iOS
+      var matches = ua.match(/((\d+_?){2,3})\slike\sMac\sOS\sX/);
+      if ( matches ) {
+        classes += ' ua-ios-' + matches[1];// e.g. ua-ios-7_0_2
+      }
+
+      // Add class for Twitter app
+      if ( /Twitter/.test(ua) ) {
+        classes += ' ua-ios-twitter';
+      }
+
+      // Add class for Chrome browser
+      if ( /CriOS/.test(ua) ) {
+        classes += ' ua-ios-chrome';
+      }
+    }
+
+    // Detect Android (needed to disable print links on old devices)
+    // http://www.ainixon.me/how-to-detect-android-version-using-js/
+    if ( /Android/.test(ua) ) {
+      var matches = ua.match(/Android\s([0-9\.]*)/);
+      classes += matches ? ' ua-aos ua-aos-' + matches[1].replace(/\./g,'_') : ' ua-aos';
+    }
+
+    // Detect webOS (needed to disable optimizeLegibility)
+    if ( /webOS|hpwOS/.test(ua) ) {
+      classes += ' ua-webos';
+    }
+
+    // Detect Samsung Internet browser
+    if ( /SamsungBrowser/.test(ua) ) {
+      classes += ' ua-samsung';
+    }
+
+    d.className = classes;
+  },
+
+  /**
+   * Generates a 32 bit integer from a string
+   * Reference - https://stackoverflow.com/a/7616484
+   *
+   * @param {string}
+   * @return {int}
+   */
+  hashFromString: function(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
   }
+  
 };
