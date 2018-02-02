@@ -18,6 +18,7 @@
 .content-grid__item {
   @include flex(1);
   @include flex-basis(percentage(1/1));
+  margin-bottom: $grid-gutter-width;
   padding: 0 $grid-gutter-width/2;
   max-width: percentage(1/1);
 

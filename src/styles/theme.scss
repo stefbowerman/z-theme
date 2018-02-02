@@ -39,6 +39,7 @@
 @import url('components/content-grid.scss');
 @import url('components/product-card.scss');
 @import url('components/article-card.scss');
+@import url('components/docs.scss');
 
 /*================ MODULES ================*/
 // Modules are larger pieces of functionality that consume components
@@ -57,7 +58,6 @@
 // Styles *specific* to a shopify template
 // Only use if there is no less specific / more logical place to put styles
 // Try to use the body template class as a CSS hook
-@import url('templates/page.styles.scss');
 @import url('templates/cart.scss');
 
 // Necessary bottom placement for specificity w/o `!important`

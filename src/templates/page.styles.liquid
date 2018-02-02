@@ -9,634 +9,650 @@
       <div class="col-md-10 col-md-offset-1">
 
         <div class="page-header">
-          <h1 class="page-header__title">{{ page.title }}</h1>
+          <h1 class="page-header__title">Styleguide</h1>
+          <div class="page-header__subtitle">
+            This page is here to show off styles for standard page elements such as typography, form elements, and icons. These are hard coded in an alternate page template file, named <code>page.styles.liquid</code>.</p>
+          </div>
         </div>
 
-        <div id="styleguide-content">
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#docs-type">Type</a></li>
+          <li><a href="#docs-colors">Colors</a></li>
+          <li><a href="#docs-typography">Typography</a></li>
+          <li><a href="#docs-grid-system">Grid System</a></li>
+          <li><a href="#docs-content-grid">Content Grid</a></li>
+          <li><a href="#docs-tables">Tables</a></li>
+          <li><a href="#docs-buttons">Buttons</a></li>
+          <li><a href="#docs-forms">Forms</a></li>
+          <li><a href="#docs-page-elements">Page Elements</a></li>
+          <li><a href="#docs-misc-elements">Miscellaneous elements</a></li>
+          <li><a href="#docs-iconography">Iconography</a></li>
+          <li><a href="#docs-ui-elements">UI Elements</a></li>
+        </ul>        
 
-          <p>This page is here to show off styles for standard page elements such as typography, form elements, and icons. These are hard coded in an alternate page template file, named <code>page.styles.liquid</code>.</p>
 
-          <h3 class="docs-title">Type</h3>
-          <div class="u-fw-bold" style="font-size: 18px;">
-            <p>FUTURA BOLD</p>
-            <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-            <p>abcdefghijklmnopqrstuvwxyz</p>
-            <p>0123456789</p>
+        <h3 id="docs-type" class="docs-title">Type</h3>
+        <div class="u-fw-bold" style="font-size: 18px;">
+          <p>FUTURA BOLD</p>
+          <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p>abcdefghijklmnopqrstuvwxyz</p>
+          <p>0123456789</p>
+        </div>
+        <br />
+        <div style="font-size: 18px;">
+          <p>FUTURA</p>
+          <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p>abcdefghijklmnopqrstuvwxyz</p>
+          <p>0123456789</p>    
+        </div>
+
+        <h3 id="docs-colors" class="docs-title">Colors</h3>
+
+        <h4 class="docs-subtitle">Main Colors</h4>
+        <div class="docs-well">
+          <div class="styleguide-color">
+            <div class="styleguide-color__swatch styleguide-color__swatch--black"></div>
+            <p>Black<br />#000<br />$color-black</p>
           </div>
-          <br />
-          <div style="font-size: 18px;">
-            <p>FUTURA</p>
-            <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-            <p>abcdefghijklmnopqrstuvwxyz</p>
-            <p>0123456789</p>    
+          <div class="styleguide-color">
+            <div class="styleguide-color__swatch styleguide-color__swatch--grey"></div>
+            <p>Dark Grey<br />#CCC<br />$color-grey</p>
           </div>
-
-          <h3 class="docs-title">Colors</h3>
-
-          <h4 class="docs-subtitle">Main Colors</h4>
-          <div class="docs-well">
-            <div class="styleguide-color">
-              <div class="styleguide-color__swatch styleguide-color__swatch--black"></div>
-              <p>Black<br />#000<br />$color-black</p>
-            </div>
-            <div class="styleguide-color">
-              <div class="styleguide-color__swatch styleguide-color__swatch--grey"></div>
-              <p>Dark Grey<br />#CCC<br />$color-grey</p>
-            </div>
-            <div class="styleguide-color">
-              <div class="styleguide-color__swatch styleguide-color__swatch--white"></div>
-              <p>White<br />#FFF<br />$color-white</p>
-            </div>
+          <div class="styleguide-color">
+            <div class="styleguide-color__swatch styleguide-color__swatch--white"></div>
+            <p>White<br />#FFF<br />$color-white</p>
           </div>
+        </div>
 
 
-          <h3 class="docs-title">Typography</h3>
+        <h3 id="docs-typography" class="docs-title">Typography</h3>
 
-          <h4 class="docs-subtitle">Headings</h4>
-          <h1>H1 Futura Bold</h1>
-          <h2>H2 Futura Bold</h2>
-          <h3>H3 Futura Bold</h3>
-          <h4>H4 Futura Bold</h4>
-          <h5>H5 Futura Bold</h5>
-          <h6>H6 Futura Bold</h6>
+        <h4 class="docs-subtitle">Headings</h4>
+        <h1>H1 Futura Bold</h1>
+        <h2>H2 Futura Bold</h2>
+        <h3>H3 Futura Bold</h3>
+        <h4>H4 Futura Bold</h4>
+        <h5>H5 Futura Bold</h5>
+        <h6>H6 Futura Bold</h6>
 
-          <h4 class="docs-subtitle">Paragraphs</h4>
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eleifend, enim nec tempor facilisis, urna dui hendrerit odio, sed laoreet ex metus commodo enim. Praesent vehicula malesuada ornare. Nulla in velit sit amet ligula convallis placerat ut sit amet nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus lobortis justo eu condimentum gravida. Aenean a sapien laoreet, scelerisque libero sit amet, ultrices est. Maecenas eu odio suscipit, maximus ligula eu, scelerisque sapien.
-          </p>
-          <p>
-          Mauris justo purus, bibendum ut molestie vitae, hendrerit in ipsum. Fusce commodo justo in lorem mattis, ut sagittis erat auctor. Maecenas dignissim, felis eu tempor varius, lorem nulla luctus augue, non volutpat massa sem nec felis. Suspendisse accumsan aliquam ornare. Suspendisse commodo nec arcu id imperdiet. Praesent tincidunt condimentum est non fermentum. Donec id malesuada enim. Nullam finibus arcu nulla, vestibulum egestas leo aliquet vel. Phasellus sed maximus eros.
-          </p>
-          <p>
-          Pellentesque imperdiet velit eu fringilla sagittis. Duis enim nibh, mattis id justo sed, euismod posuere diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent egestas ultricies nunc a bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras volutpat tellus tincidunt blandit efficitur. Sed maximus leo ultricies massa auctor egestas. Pellentesque aliquet aliquam porta. Vestibulum convallis libero et metus ornare, sit amet posuere dolor semper.
-          </p>
+        <h4 class="docs-subtitle">Paragraphs</h4>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eleifend, enim nec tempor facilisis, urna dui hendrerit odio, sed laoreet ex metus commodo enim. Praesent vehicula malesuada ornare. Nulla in velit sit amet ligula convallis placerat ut sit amet nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus lobortis justo eu condimentum gravida. Aenean a sapien laoreet, scelerisque libero sit amet, ultrices est. Maecenas eu odio suscipit, maximus ligula eu, scelerisque sapien.
+        </p>
+        <p>
+        Mauris justo purus, bibendum ut molestie vitae, hendrerit in ipsum. Fusce commodo justo in lorem mattis, ut sagittis erat auctor. Maecenas dignissim, felis eu tempor varius, lorem nulla luctus augue, non volutpat massa sem nec felis. Suspendisse accumsan aliquam ornare. Suspendisse commodo nec arcu id imperdiet. Praesent tincidunt condimentum est non fermentum. Donec id malesuada enim. Nullam finibus arcu nulla, vestibulum egestas leo aliquet vel. Phasellus sed maximus eros.
+        </p>
+        <p>
+        Pellentesque imperdiet velit eu fringilla sagittis. Duis enim nibh, mattis id justo sed, euismod posuere diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent egestas ultricies nunc a bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras volutpat tellus tincidunt blandit efficitur. Sed maximus leo ultricies massa auctor egestas. Pellentesque aliquet aliquam porta. Vestibulum convallis libero et metus ornare, sit amet posuere dolor semper.
+        </p>
 
-          <h4 class="docs-subtitle">Type styles</h4>
-          <ul>
-            <li><strong>Strong</strong></li>
-            <li><em>Emphasis</em></li>
-            <li><a href="#">Inline link</a></li>
-            <li><span style="text-decoration: line-through;">Strike</span></li>
-            <li><sup>Sup</sup></li>
-          </ul>
+        <h4 class="docs-subtitle">Type styles</h4>
+        <ul>
+          <li><strong>Strong</strong></li>
+          <li><em>Emphasis</em></li>
+          <li><a href="#">Inline link</a></li>
+          <li><span style="text-decoration: line-through;">Strike</span></li>
+          <li><sup>Sup</sup></li>
+        </ul>
 
-          <h4 class="docs-subtitle">Text Utilities</h4>
-          <ul>
-            <li class="u-fw-normal">.u-fw-normal</li>
-            <li class="u-fw-bold">.u-fw-bold</li>
-            <li class="u-color-black">.u-color-black</li>
-            <li class="u-color-grey">.u-color-grey</li>
-            <li class="u-color-white">.u-color-white</li>
-            <li class="u-td-underline">.u-td-underline</li>
-            <li class="u-td-strike">.u-td-strike</li>
-          </ul>
+        <h4 class="docs-subtitle">Text Utilities</h4>
+        <ul>
+          <li class="u-fw-normal">.u-fw-normal</li>
+          <li class="u-fw-bold">.u-fw-bold</li>
+          <li class="u-color-black">.u-color-black</li>
+          <li class="u-color-grey">.u-color-grey</li>
+          <li class="u-color-white">.u-color-white</li>
+          <li class="u-td-underline">.u-td-underline</li>
+          <li class="u-td-strike">.u-td-strike</li>
+        </ul>
 
-          <h4 class="docs-subtitle">Background Color Utilities</h4>
-          <ul style="max-width:400px;">
-            <li class="u-bg-black u-color-white">.u-bg-black</li>
-            <li class="u-bg-grey">.u-bg-grey</li>
-            <li class="u-bg-white">.u-bg-white</li>
-          </ul>
+        <h4 class="docs-subtitle">Background Color Utilities</h4>
+        <ul style="max-width:400px;">
+          <li class="u-bg-black u-color-white">.u-bg-black</li>
+          <li class="u-bg-grey">.u-bg-grey</li>
+          <li class="u-bg-white">.u-bg-white</li>
+        </ul>
 
-          <h4 class="docs-subtitle">Blockquotes</h4>
-          <blockquote>
-            <p>Eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-            <cite>The author of the quote</cite>
-          </blockquote>
+        <h4 class="docs-subtitle">Blockquotes</h4>
+        <blockquote>
+          <p>Eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+          <cite>The author of the quote</cite>
+        </blockquote>
 
-          <h4 class="docs-subtitle">Lists</h4>
-          <div class="table-responsive">
-            <table>
-              <tbody>
-                <tr>
-                  <td width="40%">
-                    <h6><code>ul</code> (default)</h6>
-                  </td>
-                  <td>
-                    <ul>
-                      <li>One</li>
-                      <li>Two</li>
-                      <li>Three</li>
-                      <li>Four</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h6>Numeric bullet <code>ol</code> (default)</h6>
-                  </td>
-                  <td>
-                    <ol>
-                      <li>One</li>
-                      <li>Two</li>
-                      <li>Three</li>
-                      <li>Four</li>
-                    </ol>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h6>Child lists (to match the RTE styles)</h6>
-                  </td>
-                  <td>
-                    <ul>
-                      <li>One</li>
-                      <li>Two</li>
-                      <li>Three, with child list
-                        <ul>
-                          <li>First sub item</li>
-                          <li>Second sub item</li>
-                          <li>Third sub item, with child list
-                            <ul>
-                              <li>Third level item</li>
-                              <li>Another third level item</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>Four</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h4 class="docs-subtitle">RTE Typography</h4>
-          <p>Styles specific to text that comes out of the rich text editor.</p>
-          <br />
-          <div class="rte">
-            <ul>
-            <li>One</li>
-            <li>Two</li>
-            <li>Three, with child list
-              <ul>
-                <li>First sub item</li>
-                <li>Second sub item</li>
-                <li>Third sub item, with ordered child list
+        <h4 class="docs-subtitle">Lists</h4>
+        <div class="table-responsive">
+          <table>
+            <tbody>
+              <tr>
+                <td width="40%">
+                  <h6><code>ul</code> (default)</h6>
+                </td>
+                <td>
+                  <ul>
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three</li>
+                    <li>Four</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h6>Numeric bullet <code>ol</code> (default)</h6>
+                </td>
+                <td>
                   <ol>
-                    <li>Third level item</li>
-                    <li>Another third level item</li>
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three</li>
+                    <li>Four</li>
                   </ol>
-                </li>
-              </ul>
-            </li>
-            <li>Four</li>
-          </ul>
-          </div>
-
-          <h3 class="docs-title">Grid System</h3>
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Extra small devices <small>Phones (&lt;768px)</small></th>
-                  <th>Small devices <small>Tablets (≥768px)</small></th>
-                  <th>Medium devices <small>Desktops (≥992px)</small></th>
-                  <th>Large devices <small>Desktops (≥1200px)</small></th>
-                  <th>Extra Large devices <small>Desktops (≥1480px)</small></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="text-nowrap" scope="row">Grid behavior</th>
-                  <td>Horizontal at all times</td>
-                  <td colspan="4">Collapsed to start, horizontal above breakpoints</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Container width</th>
-                  <td>None (auto)</td>
-                  <td>750px</td>
-                  <td>970px</td>
-                  <td>1170px</td>
-                  <td>1440px</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Class prefix</th>
-                  <td><code>.col-xs-</code></td>
-                  <td><code>.col-sm-</code></td>
-                  <td><code>.col-md-</code></td>
-                  <td><code>.col-lg-</code></td>
-                  <td><code>.col-xl-</code></td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row"># of columns</th>
-                  <td colspan="5">12</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Gutter width</th>
-                  <td colspan="5">30px (15px on each side of a column)</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Nestable</th>
-                  <td colspan="5">Yes</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Offsets</th>
-                  <td colspan="5">Yes</td>
-                </tr>
-                <tr>
-                  <th class="text-nowrap" scope="row">Column ordering</th>
-                  <td colspan="5">Yes</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="row show-grid">
-            <div class="col-md-8">.col-md-8</div>
-            <div class="col-md-4">.col-md-4</div>
-          </div>
-          <div class="row show-grid">
-            <div class="col-md-4">.col-md-4</div>
-            <div class="col-md-4">.col-md-4</div>
-            <div class="col-md-4">.col-md-4</div>
-          </div>
-          <div class="row show-grid">
-            <div class="col-md-6">.col-md-6</div>
-            <div class="col-md-6">.col-md-6</div>
-          </div>
-
-          <h3 class="docs-title">Tables</h3>
-          <h4 class="docs-subtitle">Responsive Tables</h4>
-          <p>Wrap tables with a <code>.table-responsive</code> element to enable horizontal scrolling on small screens</p>
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Order</th>
-                  <th>Date</th>
-                  <th>Payment Status</th>
-                  <th>Fulfillment Status</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#1001</td>
-                  <td>December 22, 2015</td>
-                  <td>Authorized</td>
-                  <td>Unfulfilled</td>
-                  <td>$43.03</td>
-                </tr>
-                <tr>
-                  <td>#1002</td>
-                  <td>December 23, 2015</td>
-                  <td>Authorized</td>
-                  <td>Unfulfilled</td>
-                  <td>$44.03</td>
-                </tr>
-                <tr>
-                  <td>#1003</td>
-                  <td>December 24, 2015</td>
-                  <td>Authorized</td>
-                  <td>Unfulfilled</td>
-                  <td>$45.03</td>
-                </tr>
-                <tr>
-                  <td>#1004</td>
-                  <td>December 25, 2015</td>
-                  <td>Authorized</td>
-                  <td>Unfulfilled</td>
-                  <td>$46.03</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h4 class="docs-subtitle">Border-less Tables</h4>
-          <div class="table-responsive">
-            <table class="table table-borderless">
-              <thead>
-                <tr>
-                  <th>Sizes</th>
-                  <th>XXS</th>
-                  <th>XS</th>
-                  <th>S</th>
-                  <th>M</th>
-                  <th>L</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Bust</td>
-                  <td></td>
-                  <td>32"-34"</td>
-                  <td>34"-36"</td>
-                  <td>36"-38"</td>
-                  <td>38"-40"</td>
-                </tr>
-                <tr>
-                  <td>Under Bust</td>
-                  <td></td>
-                  <td>32"-34"</td>
-                  <td>34"-36"</td>
-                  <td>36"-38"</td>
-                  <td>38"-40"</td>
-                </tr>
-                <tr>
-                  <td>Waist</td>
-                  <td>23.5"-24.5"</td>
-                  <td>32"-34"</td>
-                  <td>34"-36"</td>
-                  <td>36"-38"</td>
-                  <td>38"-40"</td>
-                </tr>
-                <tr>
-                  <td>Hip</td>
-                  <td>33"-34"</td>
-                  <td>32"-34"</td>
-                  <td>34"-36"</td>
-                  <td>36"-38"</td>
-                  <td>38"-40"</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 class="docs-title">Buttons</h3>
-
-          <p>
-            <a href="#" class="btn">Default button</a>
-            <a href="#" class="btn" disabled>Default Button (Disabled)</a>
-          </p>
-
-          <p>
-            <a href="#" class="btn btn-primary">Primary button</a>
-            <a href="#" class="btn btn-primary" disabled>Primary button (Disabled)</a>
-          </p>
-
-          <p>
-            <a href="#" class="btn btn-block">Block Level Button</a>
-            <a href="#" class="btn btn-block btn-primary">Block Level Button</a>
-          </p>      
-
-          <h3 class="docs-title">Forms</h3>
-
-          <h4 class="docs-subtitle">Default Forms</h4>
-
-          <form>
-            <div class="form-group">
-              <label for="textHorizontal1">Label</label>
-              <input type="text" id="textHorizontal1" placeholder="Input 1" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="textHorizontal2">Label 2</label>
-              <input type="text" id="textHorizontal2" placeholder="Input 2" class="form-control">
-            </div>
-
-            <select id="selectHorizontal1" class="form-control">
-              <option value="0">-- Choose --</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-          </form>
-
-          <h4 class="docs-subtitle">Invisible labels</h4>
-
-          <p>Add a class of <code>label-hidden</code> to a label to visually hide it, while keeping it accessible to screen readers. Use the <code>placeholder</code> attribute as your visible label.</p>
-          <p><small><strong>Note:</strong> The <code>placeholder</code> attribute only works in IE10+, so invisible labels are disabled in IE9 and below.</small></p>
-
-          <form>
-            <div class="form-group">
-              <label for="testInvisibleLabel1" class="label-hidden">First Name</label>
-              <input type="text" id="testInvisibleLabel1" name="testInvisibleLabel1" placeholder="First Name" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="testInvisibleLabel2" class="label-hidden">Last Name</label>
-              <input type="text" id="testInvisibleLabel2" name="testInvisibleLabel2" placeholder="Last Name" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="testInvisibleLabel3" class="label-hidden">Email</label>
-              <input type="text" id="testInvisibleLabel3" name="testInvisibleLabel3" placeholder="Email" class="form-control">
-            </div>
-          </form>
-
-          <h4 class="docs-subtitle">Horizontal forms (customer, contact, etc)</h4>
-
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label for="text1" class="col-sm-2 control-label">Text Field</label>
-              <div class="col-sm-10">
-                <input type="text" id="text1" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="text2" class="col-sm-2 control-label">Placeholder</label>
-              <div class="col-sm-10">
-                <input type="text" id="text2" placeholder="Placeholder text" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="text3" class="col-sm-2 control-label">Disabled Field</label>
-              <div class="col-sm-10">
-                <input type="text" id="text3" disabled="disabled" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group has-error">
-              <label for="text5" class="col-sm-2 control-label">Text Field (Error)</label>
-              <div class="col-sm-10">
-                <input type="text" id="text5" class="form-control" value="Invalid Entry">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="select1" class="col-sm-2 control-label">Select Field</label>
-              <div class="col-sm-10">
-                <select id="select1" class="form-control">
-                  <option value="0">-- Choose --</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                  <option value="4">Option 4</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="text6" class="col-sm-2 control-label textarea-label">Text Area</label>
-              <div class="col-sm-10">
-                <textarea type="text" id="text6" class="form-control" value="Invalid Entry" rows="5"></textarea>
-              </div>
-            </div>
-          </form>
-
-          <h4 class="docs-subtitle">Inline Forms</h4>
-          <form class="form-inline">
-            <div class="form-group">
-              <label for="exampleInputName2">Name</label>
-              <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail2">Email</label>
-              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-            </div>
-            <button type="submit" class="btn btn-primary">Send invitation</button>
-          </form>
-
-          <h4 class="docs-subtitle">Other Form Elements</h4>
-          <form>
-
-            <div class="checkbox">
-              <label for="check1">
-                <input type="checkbox" id="check1">
-                <span class="checkbox-ui"></span>
-                Checkbox Field
-              </label>
-            </div>
-            <div class="checkbox">
-              <label for="check2">
-                <input type="checkbox" id="check2">
-                <span class="checkbox-ui"></span>
-                Checkbox Field
-              </label>
-            </div>
-            <div class="checkbox disabled">
-              <label for="check3">
-                <input type="checkbox" id="check3" disabled>
-                <span class="checkbox-ui"></span>
-                Disabled Checkbox Field
-              </label>
-            </div>
-
-            <div class="radio">
-              <label for="radio1">
-                <input type="radio" name="radio" id="radio1">
-                <span class="radio-ui"></span>
-                Option 1
-              </label>
-            </div>
-            <div class="radio">
-              <label for="radio2">
-                <input type="radio" name="radio" id="radio2">
-                <span class="radio-ui"></span>
-                Option 2
-              </label>
-            </div>
-            <div class="radio disabled">
-              <label for="radio3">
-                <input type="radio" name="radio" id="radio3" disabled>
-                <span class="radio-ui"></span>
-                Option 3
-              </label>
-            </div>
-
-            <div class="form-group">
-              <label for="textarea1" class="control-label">Textarea</label>
-              <textarea id="textarea1" placeholder="Placeholder text" class="form-control"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="file1">File Field</label>
-              <input id="file1" type="file">
-              <p class="help-block">Example block-level help text here.</p>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-
-          <h4 class="docs-subtitle">Note About Select Elements</h4>
-          <p>This theme is using the <a href="https://harvesthq.github.io/chosen/" target="_blank">Chosen</a> library to enhance native select tags.  By default, any <code>select.form-control</code> elements are targeted and initialized on page load.  If you want to avoid this, add the <code>data-no-chosen</code> attribute to your select tag and it will be left alone.</p>      
-
-          <h3 class="docs-title">Page Elements</h3>
-
-          <h4 class="docs-subtitle">Page Header</h4>
-
-          <p>Use this element at the top of pages to add consistent titles + subtitles.  You can also use this element without the subtitle if necessary.</p>
-
-          <div class="page-header">
-            <h1 class="page-header__title">I'm a page title</h1>
-            <p class="page-header__subtitle">I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read.</p>
-          </div>      
-
-          <h3 class="docs-title">Miscellaneous elements</h3>
-
-          <h4 class="docs-subtitle">Horizontal Rules</h4>
-          <p>Default <code>hr</code></p>
-          <hr>
-
-          <h4 class="docs-subtitle">Alerts</h4>
-          <div class="alert alert-success">I'm a success alert</div>
-          <div class="alert alert-danger">I'm a danger alert</div>      
-
-          <h3 class="docs-title">Iconography</h3>
-          <p>Read more about using, creating, and editing SVG icons in Slate's documentation.</p>
-
-          <h4 class="docs-subtitle">Social icons</h4>
-          <ul class="styleguide-icons">
-            <li>{% include 'icon-facebook' %}</li>
-            <li>{% include 'icon-facebook-alt' %}</li>
-            <li>{% include 'icon-instagram' %}</li>
-            <li>{% include 'icon-twitter' %}</li>
-            <li>{% include 'icon-youtube' %}</li>
-            <li>{% include 'icon-pinterest' %}</li>
-            <li>{% include 'icon-linkedin' %}</li>
-            <li>{% include 'icon-mail' %}</li>
-            <li>{% include 'icon-tumblr' %}</li>
-          </ul>
-
-          <h4 class="docs-subtitle">General icons</h4>
-          <ul class="styleguide-icons">
-            <li>{% include 'icon-arrow-down' %}</li>
-            <li>{% include 'icon-close' %}</li>
-            <li>{% include 'icon-hamburger' %}</li>
-            <li>{% include 'icon-minus' %}</li>
-            <li>{% include 'icon-plus' %}</li>
-            <li>{% include 'icon-rss' %}</li>
-          </ul>
-
-          <h3 class="docs-title">UI Elements</h3>
-
-          <h4 class="docs-subtitle">Breadcrumbs</h4>
-
-          <nav class="breadcrumbs">
-            <div class="breadcrumbs__crumb">
-              <a href="#">Step 1</a>
-            </div>
-            <div class="breadcrumbs__crumb">
-              <a href="#">Step 2</a>
-            </div>
-            <div class="breadcrumbs__crumb">Step 3</div>
-          </nav>
-
-          <h4 class="docs-subtitle">Social Sharing</h4>
-          {% include 'social-sharing' %}
-
-          <h3 class="docs-title">Modals</h3>
-          <p>Built using <a href="https://getbootstrap.com/docs/3.3/javascript/#modals" target="_blank">Bootstrap's Modal</a>, use these to create an overlay to focus the user's attention.</p>
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test-modal-1">
-            Launch Modal
-          </button>
-
-          <!-- Test Modal -->
-          <div class="modal fade" id="test-modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">{% include 'icon-close' %}</a>
-                  <h3 class="modal-title" id="myModalLabel">Modal title</h3>
-                </div>
-                <div class="modal-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h6>Child lists (to match the RTE styles)</h6>
+                </td>
+                <td>
+                  <ul>
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three, with child list
+                      <ul>
+                        <li>First sub item</li>
+                        <li>Second sub item</li>
+                        <li>Third sub item, with child list
+                          <ul>
+                            <li>Third level item</li>
+                            <li>Another third level item</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>Four</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <h4 class="docs-subtitle">RTE Typography</h4>
+        <p>Styles specific to text that comes out of the rich text editor.</p>
+        <br />
+        <div class="rte">
+          <ul>
+          <li>One</li>
+          <li>Two</li>
+          <li>Three, with child list
+            <ul>
+              <li>First sub item</li>
+              <li>Second sub item</li>
+              <li>Third sub item, with ordered child list
+                <ol>
+                  <li>Third level item</li>
+                  <li>Another third level item</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+          <li>Four</li>
+        </ul>
+        </div>
+
+        <h3 id="docs-grid-system" class="docs-title">Grid System</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Extra small devices <small>Phones (&lt;768px)</small></th>
+                <th>Small devices <small>Tablets (≥768px)</small></th>
+                <th>Medium devices <small>Desktops (≥992px)</small></th>
+                <th>Large devices <small>Desktops (≥1200px)</small></th>
+                <th>Extra Large devices <small>Desktops (≥1480px)</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="text-nowrap" scope="row">Grid behavior</th>
+                <td>Horizontal at all times</td>
+                <td colspan="4">Collapsed to start, horizontal above breakpoints</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Container width</th>
+                <td>None (auto)</td>
+                <td>750px</td>
+                <td>970px</td>
+                <td>1170px</td>
+                <td>1440px</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Class prefix</th>
+                <td><code>.col-xs-</code></td>
+                <td><code>.col-sm-</code></td>
+                <td><code>.col-md-</code></td>
+                <td><code>.col-lg-</code></td>
+                <td><code>.col-xl-</code></td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row"># of columns</th>
+                <td colspan="5">12</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Gutter width</th>
+                <td colspan="5">30px (15px on each side of a column)</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Nestable</th>
+                <td colspan="5">Yes</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Offsets</th>
+                <td colspan="5">Yes</td>
+              </tr>
+              <tr>
+                <th class="text-nowrap" scope="row">Column ordering</th>
+                <td colspan="5">Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row show-grid">
+          <div class="col-md-8">.col-md-8</div>
+          <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row show-grid">
+          <div class="col-md-4">.col-md-4</div>
+          <div class="col-md-4">.col-md-4</div>
+          <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row show-grid">
+          <div class="col-md-6">.col-md-6</div>
+          <div class="col-md-6">.col-md-6</div>
+        </div>
+
+        <h3 id="docs-content-grid" class="docs-title">Content Grid</h3>
+        <p>This is a more rigid grid for laying out content, typically products and articles.  It uses the same sizing and gutters as the normal grid.  There is one base version with several modifier classes that allow you some level of flexibility.  The default layout is 1 across on mobile devices, and 3-across on screens larger than <code>$screen-md-min</code>.</p>
+
+        <div class="content-grid show-grid">
+          {% for i in (1..6) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h4 class="docs-subtitle">Alternate Content Grid Layouts</h4>
+        <p>Modifier classes are available to create 2-across and 4-across layouts on screens larger than <code>$screen-md-min</code>.</p>
+
+        <p>2 Across</p>
+        <div class="content-grid content-grid--2-across show-grid">
+          {% for i in (1..4) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <p>4 Across</p>
+        <div class="content-grid content-grid--4-across show-grid">
+          {% for i in (1..8) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h3 id="docs-tables" class="docs-title">Tables</h3>
+        <h4 class="docs-subtitle">Responsive Tables</h4>
+        <p>Wrap tables with a <code>.table-responsive</code> element to enable horizontal scrolling on small screens</p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Payment Status</th>
+                <th>Fulfillment Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1001</td>
+                <td>December 22, 2015</td>
+                <td>Authorized</td>
+                <td>Unfulfilled</td>
+                <td>$43.03</td>
+              </tr>
+              <tr>
+                <td>#1002</td>
+                <td>December 23, 2015</td>
+                <td>Authorized</td>
+                <td>Unfulfilled</td>
+                <td>$44.03</td>
+              </tr>
+              <tr>
+                <td>#1003</td>
+                <td>December 24, 2015</td>
+                <td>Authorized</td>
+                <td>Unfulfilled</td>
+                <td>$45.03</td>
+              </tr>
+              <tr>
+                <td>#1004</td>
+                <td>December 25, 2015</td>
+                <td>Authorized</td>
+                <td>Unfulfilled</td>
+                <td>$46.03</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="docs-subtitle">Border-less Tables</h4>
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th>Sizes</th>
+                <th>XXS</th>
+                <th>XS</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bust</td>
+                <td></td>
+                <td>32"-34"</td>
+                <td>34"-36"</td>
+                <td>36"-38"</td>
+                <td>38"-40"</td>
+              </tr>
+              <tr>
+                <td>Under Bust</td>
+                <td></td>
+                <td>32"-34"</td>
+                <td>34"-36"</td>
+                <td>36"-38"</td>
+                <td>38"-40"</td>
+              </tr>
+              <tr>
+                <td>Waist</td>
+                <td>23.5"-24.5"</td>
+                <td>32"-34"</td>
+                <td>34"-36"</td>
+                <td>36"-38"</td>
+                <td>38"-40"</td>
+              </tr>
+              <tr>
+                <td>Hip</td>
+                <td>33"-34"</td>
+                <td>32"-34"</td>
+                <td>34"-36"</td>
+                <td>36"-38"</td>
+                <td>38"-40"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="docs-buttons" class="docs-title">Buttons</h3>
+
+        <p>
+          <a href="#" class="btn">Default button</a>
+          <a href="#" class="btn" disabled>Default Button (Disabled)</a>
+        </p>
+
+        <p>
+          <a href="#" class="btn btn-primary">Primary button</a>
+          <a href="#" class="btn btn-primary" disabled>Primary button (Disabled)</a>
+        </p>
+
+        <p>
+          <a href="#" class="btn btn-block">Block Level Button</a>
+          <a href="#" class="btn btn-block btn-primary">Block Level Button</a>
+        </p>      
+
+        <h3 id="docs-forms" class="docs-title">Forms</h3>
+
+        <h4 class="docs-subtitle">Default Forms</h4>
+
+        <form>
+          <div class="form-group">
+            <label for="textHorizontal1">Label</label>
+            <input type="text" id="textHorizontal1" placeholder="Input 1" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="textHorizontal2">Label 2</label>
+            <input type="text" id="textHorizontal2" placeholder="Input 2" class="form-control">
+          </div>
+
+          <select id="selectHorizontal1" class="form-control">
+            <option value="0">-- Choose --</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        </form>
+
+        <h4 class="docs-subtitle">Invisible labels</h4>
+
+        <p>Add a class of <code>label-hidden</code> to a label to visually hide it, while keeping it accessible to screen readers. Use the <code>placeholder</code> attribute as your visible label.</p>
+        <p><small><strong>Note:</strong> The <code>placeholder</code> attribute only works in IE10+, so invisible labels are disabled in IE9 and below.</small></p>
+
+        <form>
+          <div class="form-group">
+            <label for="testInvisibleLabel1" class="label-hidden">First Name</label>
+            <input type="text" id="testInvisibleLabel1" name="testInvisibleLabel1" placeholder="First Name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="testInvisibleLabel2" class="label-hidden">Last Name</label>
+            <input type="text" id="testInvisibleLabel2" name="testInvisibleLabel2" placeholder="Last Name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="testInvisibleLabel3" class="label-hidden">Email</label>
+            <input type="text" id="testInvisibleLabel3" name="testInvisibleLabel3" placeholder="Email" class="form-control">
+          </div>
+        </form>
+
+        <h4 class="docs-subtitle">Horizontal forms (customer, contact, etc)</h4>
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="text1" class="col-sm-2 control-label">Text Field</label>
+            <div class="col-sm-10">
+              <input type="text" id="text1" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="text2" class="col-sm-2 control-label">Placeholder</label>
+            <div class="col-sm-10">
+              <input type="text" id="text2" placeholder="Placeholder text" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="text3" class="col-sm-2 control-label">Disabled Field</label>
+            <div class="col-sm-10">
+              <input type="text" id="text3" disabled="disabled" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group has-error">
+            <label for="text5" class="col-sm-2 control-label">Text Field (Error)</label>
+            <div class="col-sm-10">
+              <input type="text" id="text5" class="form-control" value="Invalid Entry">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="select1" class="col-sm-2 control-label">Select Field</label>
+            <div class="col-sm-10">
+              <select id="select1" class="form-control">
+                <option value="0">-- Choose --</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="text6" class="col-sm-2 control-label textarea-label">Text Area</label>
+            <div class="col-sm-10">
+              <textarea type="text" id="text6" class="form-control" value="Invalid Entry" rows="5"></textarea>
+            </div>
+          </div>
+        </form>
+
+        <h4 class="docs-subtitle">Inline Forms</h4>
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="exampleInputName2">Name</label>
+            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+          </div>
+          <button type="submit" class="btn btn-primary">Send invitation</button>
+        </form>
+
+        <h4 class="docs-subtitle">Other Form Elements</h4>
+        <form>
+
+          <div class="checkbox">
+            <label for="check1">
+              <input type="checkbox" id="check1">
+              <span class="checkbox-ui"></span>
+              Checkbox Field
+            </label>
+          </div>
+          <div class="checkbox">
+            <label for="check2">
+              <input type="checkbox" id="check2">
+              <span class="checkbox-ui"></span>
+              Checkbox Field
+            </label>
+          </div>
+          <div class="checkbox disabled">
+            <label for="check3">
+              <input type="checkbox" id="check3" disabled>
+              <span class="checkbox-ui"></span>
+              Disabled Checkbox Field
+            </label>
+          </div>
+
+          <div class="radio">
+            <label for="radio1">
+              <input type="radio" name="radio" id="radio1">
+              <span class="radio-ui"></span>
+              Option 1
+            </label>
+          </div>
+          <div class="radio">
+            <label for="radio2">
+              <input type="radio" name="radio" id="radio2">
+              <span class="radio-ui"></span>
+              Option 2
+            </label>
+          </div>
+          <div class="radio disabled">
+            <label for="radio3">
+              <input type="radio" name="radio" id="radio3" disabled>
+              <span class="radio-ui"></span>
+              Option 3
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="textarea1" class="control-label">Textarea</label>
+            <textarea id="textarea1" placeholder="Placeholder text" class="form-control"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="file1">File Field</label>
+            <input id="file1" type="file">
+            <p class="help-block">Example block-level help text here.</p>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <h4 class="docs-subtitle">Note About Select Elements</h4>
+        <p>This theme is using the <a href="https://harvesthq.github.io/chosen/" target="_blank">Chosen</a> library to enhance native select tags.  By default, any <code>select.form-control</code> elements are targeted and initialized on page load.  If you want to avoid this, add the <code>data-no-chosen</code> attribute to your select tag and it will be left alone.</p>      
+
+        <h3 id="docs-page-elements" class="docs-title">Page Elements</h3>
+
+        <h4 class="docs-subtitle">Page Header</h4>
+
+        <p>Use this element at the top of pages to add consistent titles + subtitles.  You can also use this element without the subtitle if necessary.</p>
+
+        <div class="page-header">
+          <h1 class="page-header__title">I'm a page title</h1>
+          <p class="page-header__subtitle">I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read.</p>
+        </div>      
+
+        <h3 id="docs-misc-elements" class="docs-title">Miscellaneous elements</h3>
+
+        <h4 class="docs-subtitle">Horizontal Rules</h4>
+        <p>Default <code>hr</code></p>
+        <hr>
+
+        <h4 class="docs-subtitle">Alerts</h4>
+        <div class="alert alert-success">I'm a success alert</div>
+        <div class="alert alert-danger">I'm a danger alert</div>      
+
+        <h3 id="docs-iconography" class="docs-title">Iconography</h3>
+        <p>Read more about using, creating, and editing SVG icons in Slate's documentation.</p>
+
+        <h4 class="docs-subtitle">Social icons</h4>
+        <ul class="styleguide-icons">
+          <li>{% include 'icon-facebook' %}</li>
+          <li>{% include 'icon-facebook-alt' %}</li>
+          <li>{% include 'icon-instagram' %}</li>
+          <li>{% include 'icon-twitter' %}</li>
+          <li>{% include 'icon-youtube' %}</li>
+          <li>{% include 'icon-pinterest' %}</li>
+          <li>{% include 'icon-linkedin' %}</li>
+          <li>{% include 'icon-mail' %}</li>
+          <li>{% include 'icon-tumblr' %}</li>
+        </ul>
+
+        <h4 class="docs-subtitle">General icons</h4>
+        <ul class="styleguide-icons">
+          <li>{% include 'icon-arrow-down' %}</li>
+          <li>{% include 'icon-close' %}</li>
+          <li>{% include 'icon-hamburger' %}</li>
+          <li>{% include 'icon-minus' %}</li>
+          <li>{% include 'icon-plus' %}</li>
+          <li>{% include 'icon-rss' %}</li>
+        </ul>
+
+        <h3 id="docs-ui-elements" class="docs-title">UI Elements</h3>
+
+        <h4 class="docs-subtitle">Breadcrumbs</h4>
+
+        <nav class="breadcrumbs">
+          <div class="breadcrumbs__crumb">
+            <a href="#">Step 1</a>
+          </div>
+          <div class="breadcrumbs__crumb">
+            <a href="#">Step 2</a>
+          </div>
+          <div class="breadcrumbs__crumb">Step 3</div>
+        </nav>
+
+        <h4 class="docs-subtitle">Social Sharing</h4>
+        {% include 'social-sharing' %}
 
       </div>
     </div>
