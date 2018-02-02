@@ -29,6 +29,7 @@ window.theme = window.theme || {};
 // =require sections/header.js
 // =require sections/footer.js
 // =require sections/ajaxCart.js
+// =require sections/cart.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -50,7 +51,8 @@ window.theme = window.theme || {};
     sections.register('slideshow', theme.Slideshow);
     sections.register('header', theme.Header);
     sections.register('footer', theme.Footer);
-    sections.register('ajax-cart', theme.AjaxCart);    
+    sections.register('ajax-cart', theme.AjaxCart);
+    sections.register('cart', theme.Cart);  
 
     $('.in-page-link').on('click', function(evt) {
       slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
@@ -70,6 +72,9 @@ window.theme = window.theme || {};
     if (slate.cart.cookiesEnabled()) {
       document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
     }
+
+    // Chosen JS plugin for select boxes
+    slate.utils.chosenSelects();    
 
   });
 

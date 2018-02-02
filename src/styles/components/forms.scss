@@ -334,6 +334,91 @@ input[type="checkbox"] {
   }
 }
 
+// Hide browser checkboxes / radio buttons and replace them with ones made via generated content
+.checkbox input[type="checkbox"],
+.radio input[type="radio"] {
+  display: none;
+}
+
+.checkbox-ui,
+.radio-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: $font-size-base;
+  text-align: center;
+  color: $color-black;
+  overflow: hidden;
+}
+
+// Hide browser checkboxes and replace them with ones made via generated content
+.checkbox-ui {
+  height: 21px;
+  width: 21px;
+  top: 1px;
+  line-height: 17px;
+  border: 1px solid $color-black;
+
+  &:before {
+    content: "\0000D7";
+    display: inline-block;
+    opacity: 0;
+    transition: opacity $transition-duration-fast $transition-timing-function-in;
+  }
+
+  input[type="checkbox"][disabled] ~ & {
+    opacity: 0.4;
+  }
+
+  input[type="checkbox"]:checked ~ & {
+    border-color: $color-black;
+
+    &:before {
+      opacity: 1;
+      transition: opacity $transition-duration-fast $transition-timing-function-out;
+    }
+  }
+}
+
+// Hide browser radio buttons and replace them with ones made via generated content
+.radio-ui {
+  height: 17px;
+  width: 17px;
+  top: 3px;
+  border: 1px solid $color-black;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all $transition-duration-fast $transition-timing-function-out;
+
+  // And a small white dot that is always visible
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    transform: scale(0.35);
+    transition: background-color $transition-duration-fast $transition-timing-function-out;
+  }
+
+  input[type="radio"][disabled] ~ & {
+    opacity: 0.4;
+  }
+
+  input[type="radio"]:checked ~ & {
+    border-color: $color-black;
+    background-color: $color-black;
+    transition: all $transition-duration-fast $transition-timing-function-out;
+    &:before {
+      background-color: $color-white;
+      transition: background-color $transition-duration-fast $transition-timing-function-out;
+    }
+  }
+}
+
 
 // Static form control text
 //

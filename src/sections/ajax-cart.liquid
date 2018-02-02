@@ -1,5 +1,5 @@
 <div data-section-id="{{ section.id }}" data-section-type="ajax-cart">
-  <div class="ajax-cart__container" data-ajax-cart-container></div>
+  <div class="ajax-cart-container" data-ajax-cart-container></div>
 </div>
 
 {% raw %}
@@ -17,7 +17,10 @@
             <li class="ajax-cart__item" data-id="{{ variant_id }}" data-qty="{{ quantity }}" data-ajax-item>
               <img src="{{ image }}" class="ajax-cart__item-image">
               <div class="ajax-cart__item-info">
-                <a href="{{ url }}" class="ajax-cart__item-title">{{ title }}</a></h5>
+                <h5 class="ajax-cart__item-header">
+                  <span class="ajax-cart__item-price">{{ price }}</span>
+                  <a href="{{ url }}" class="ajax-cart__item-title">{{ title }}</a>
+                </h5>
                 <ul class="ajax-cart__item-options">
                   {{#if variant_options}}
                     {{#each variant_options}}
@@ -26,12 +29,11 @@
                       </li>
                     {{/each}}
                   {{/if}}
-                  <li><span class="ajax-cart__item-qty">Qty: <input type="number" value="{{ quantity }}" min="0" data-ajax-cart-item-quantity /></span></li>
-                  <li>Price: {{ price }}</li>
+                  <li><span class="ajax-cart__item-qty">Quantity: {{ quantity }}</span></li>
                   <li>
-                    <a href="#" class="ajax-cart__item-remove" data-ajax-cart-item-remove>
-                      {% endraw %}{% include 'icon-close' %}{% raw %} Remove
-                    </a>
+                    <a href="#" class="ajax-cart__item-remove" data-ajax-cart-item-remove>Remove</a>
+                  </li>
+                  <li>
                     <a href="#" data-ajax-cart-item-increment>Increment</a>
                     <a href="#" data-ajax-cart-item-decrement>Decrement</a>
                   </li>
@@ -55,15 +57,15 @@
       {{#if items}}
         <div class="ajax-cart__footer" data-ajax-cart-footer>
           <div class="ajax-cart__footer-row">
-            <p>Total {{ total_price }}</p>  
+            <p class="clearfix">Subtotal <span style="float: right">{{ total_price }}</span></p>  
           </div>
           <div class="ajax-cart__footer-row">
-            <a href="/cart" class="btn btn-primary">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</a>
-            <button type="submit" name="checkout" class="btn">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}</button>
+            <a href="/cart" class="btn btn-block btn-primary">{% endraw %}{{ 'cart.general.view' | t }}{% raw %}</a>
+            <button type="submit" name="checkout" class="btn btn-block">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}</button>
           </div>
           {% endraw %}
           {% if section.settings.footer_text != blank %}
-            <div class="ajax-cart__footer-row">
+            <div class="ajax-cart__footer-row u-ta-center">
               {{ section.settings.footer_text }}
             </div>
           {% endif %}
