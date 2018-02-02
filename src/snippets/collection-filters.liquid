@@ -4,9 +4,8 @@
   It looks through all the tags looking for certain tags that will become filters.
 
   The tags using for filtering are the ones that starts with:
-    - `color-`
-    - `size-`
-    - `gallery-`
+    - `color:`
+    - `size:`
 
   Tags are case-sensitive, so we will not do any transformation to them for filtering and transform them only for presentational purpose (capitalize).
 {% endcomment %}
@@ -15,7 +14,7 @@
 
   <div class="collection-filters" data-filters>
 
-    {% assign filter_types = 'color,size,gallery' | split: "," %}
+    {% assign filter_types = 'color,size' | split: "," %}
     {% assign filters_set = false %}
     {% assign filters_count = 3 %}
 
@@ -33,17 +32,15 @@
 
           {%- for tag in collection.all_tags -%}
 
-            {% comment %} turns 'color-blue' into 'color' {% endcomment %}
-            {%- assign tag_type = tag | split: '-' | first -%}
-            {% comment %} turns 'color' into 'color-' {% endcomment %}
-            {%- assign type = filter_type | append: '-' -%}
+            {% comment %} turns 'color:Dark Blue' into 'color' {% endcomment %}
+            {%- assign tag_type = tag | split: ':' | first -%}
+            {% comment %} turns 'color:Dark Blue' into 'Dark Blue' {% endcomment %}
+            {%- assign tag_display = tag | split: ':' | last -%}
             
             {% if tag_type == filter_type %}
               {% assign filter_type_options_count = filter_type_options_count | plus: 1 %}
-              {% comment %} Turns 'color-sky-blue' into 'Sky Blue' {% endcomment %}
-              {% assign display_tag = tag | remove: type | replace: '-', ' ' | capitalize %}
               <option value="{{ tag }}" {% if current_tags contains tag %}selected{% endif %}>
-                {{ display_tag }}
+                {{ tag_display }}
               </option>
             {% endif %}
 
@@ -53,7 +50,7 @@
         {% comment %} Construct a select tag for it if we have more than 1 option to display {% endcomment %}
         {% if filter_type_options_count > 1 %}
           <label>{{ filter_type | capitalize }}</label>
-          <select data-filters-type="{{ filter_type }}" data-filters-type-select>
+          <select class="form-control" data-filters-type="{{ filter_type }}" data-filters-type-select>
             {{ filter_type_select_content }}
           </select>
         {% endif %}

@@ -18,6 +18,7 @@ window.theme = window.theme || {};
 // =require slate/animations.js
 // =require slate/user.js
 // =require slate/breakpoints.js
+// =require slate/productCard.js
 
 /*================ Sections ================*/
 // =require sections/product.js

@@ -1,0 +1,45 @@
+{%- comment %}
+
+  Article Card
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'article-card',
+              article: { article }
+  %}
+
+{% endcomment -%}
+
+{% if article and article != blank %}
+  
+  {% comment %} Shopify doesn't have a way to access article.blog directly so we have to parse out the url {% endcomment %}
+  {% assign blog_handle = article.url | replace: 'blogs/', '' | replace: '/', ' ' | split: ' ' | first %}
+
+  <div class="article-card">
+    {% if article.image %}
+      <a href="{{ article.url }}">
+        <img src="{{ article | img_url: '600x450', crop: 'center' }}" class="article-card__image" />
+      </a>
+    {% endif %}
+    <div class="article-card__info">
+      {% if article.tags.size > 0 %}
+        <div class="article-card__info-tags">
+          {% for tag in article.tags %}
+            <a href="/blogs/{{ blog_handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+            {% unless forloop.last %}&middot;{% endunless %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <a href="{{ article.url }}">
+        <h3 class="article-card__info-title">{{ article.title }}</h3>
+      </a>
+      <div class="article-card__info-meta">
+        {% capture author_link %}<a href="{{ article.user.homepage }}">{{ article.author }}</a>{% endcapture %}
+        {% capture date %}{{ article.published_at | time_tag: format: 'month_day' }}{% endcapture %}
+        {{ 'blogs.article.author_on_date_html' | t: author: author_link, date: date }}
+      </div>
+    </div>
+  </div>
+
+{% endif %}
