@@ -1,0 +1,76 @@
+<div class="layout-content-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+        <div class="page-header">
+          <h1 class="page-header__title">Z-Theme Components</h1>
+          <div class="page-header__subtitle">
+            This page is here to document available components for use on the site. These are hard coded in an alternate page template file, named <code>page.components.liquid</code>.
+          </div>          
+        </div>
+
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#docs-product-card">Product Card</a></li>
+          <li><a href="#docs-article-card">Article Card</a></li>
+          <li><a href="#docs-modals">Modals</a></li>
+        </ul>
+
+        <h3 id="docs-product-card" class="docs-title">Product Card</h3>
+        <p>See <code>snippets/product-card.liquid</code>.</p>
+        {% assign all_collection = collections['all'] %}
+        {% if all_collection.products.size > 0 %}
+          {% assign test_product = all_collection.products[0] %}
+          <div style="max-width: 500px;">
+            {% include 'product-card', product: test_product %}
+          </div>
+        {% else %}
+          <em>The product card requires a Shopify product in order to work.  <a href="{{ shop.url }}/admin/products/new">Go here to make one</a></em>.
+        {% endif %}
+
+        <h3 id="docs-article-card" class="docs-title">Article Card</h3>
+        <p>See <code>snippets/article-card.liquid</code>.</p>
+        {% assign news_blog = blogs['news'] %}
+        {% if news_blog.articles_count > 0 %}
+          {% assign test_article = news_blog.articles[0] %}
+          <div style="max-width: 500px;">
+            {% include 'article-card', article: test_article %}
+          </div>
+        {% else %}
+          The article card requires a Shopify article in order to work.  <a href="{{ shop.url }}/admin/products/new">Go here to make one</a> and add it to the default "News" blog to see this component.
+        {% endif %}
+
+        <h3 id="docs-modals" class="docs-title">Modals</h3>
+        <p>Built using <a href="https://getbootstrap.com/docs/3.3/javascript/#modals" target="_blank">Bootstrap's Modal</a>, use these to create an overlay to focus the user's attention.</p>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test-modal-1">
+          Launch Modal
+        </button>
+
+        <div class="modal fade" id="test-modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">{% include 'icon-close' %}</a>
+                <h3 class="modal-title" id="myModalLabel">Modal title</h3>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
