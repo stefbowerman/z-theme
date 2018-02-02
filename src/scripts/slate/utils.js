@@ -253,6 +253,11 @@ slate.utils = {
       hash |= 0; // Convert to 32bit integer
     }
     return hash;
+  },
+
+  chosenSelects: function($container) {
+    var $selects = $container ? $('select.form-control', $container) : $('select.form-control');
+    $selects.not('[data-no-chosen]').chosen();
   }
   
 };

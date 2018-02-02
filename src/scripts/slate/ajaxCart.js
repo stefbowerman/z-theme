@@ -100,7 +100,7 @@
     var selectors = {
       container: '[data-ajax-cart-container]',
       template: 'script[data-ajax-cart-template]',
-      open: '[data-ajax-cart-open]',
+      trigger: '[data-ajax-cart-trigger]',
       close: '[data-ajax-cart-close]',
       addForm: 'form[action^="/cart/add"]',
       addToCart: '[data-add-to-cart]',
@@ -110,9 +110,12 @@
       footer: '[data-ajax-cart-footer]',
       item: '[data-ajax-item][data-id][data-qty]',
       itemRemove: '[data-ajax-cart-item-remove]',
-      itemQuantity: 'input[data-ajax-cart-item-quantity]',
       itemIncrement: '[data-ajax-cart-item-increment]',
       itemDecrement: '[data-ajax-cart-item-decrement]'
+    };
+
+    var classes = {
+      cartOpen: 'is-open',
     };
 
    /**
@@ -164,12 +167,11 @@
         }
 
         // Add event handlers here
-        $body.on('click', selectors.open, this.onOpenClick.bind(this));
+        $body.on('click', selectors.trigger, this.onTriggerClick.bind(this));
         $body.on('click', selectors.close, this.onCloseClick.bind(this));
         $body.on('click', selectors.itemRemove, this.onItemRemoveClick.bind(this));
         $body.on('click', selectors.itemIncrement, this.onItemIncrementClick.bind(this));
         $body.on('click', selectors.itemDecrement, this.onItemDecrementClick.bind(this));
-        $body.on('change', selectors.itemQuantity, this.onItemQuantityInputChange.bind(this));
         $window.on(this.events.RENDER, this.onCartRender.bind(this));
         $window.on(this.events.DESTROY, this.onCartDestroy.bind(this));
 
@@ -430,29 +432,17 @@
       },
 
      /**
-      * Callback for changing the quantity of an item in the cart
-      *
-      * @param {event} e - Input change event
-      */
-      onItemQuantityInputChange: function(e) {
-        var attrs = this._getItemRowAttributes(e.target);
-        var qty = this._validateQty( $(e.currentTarget).val() );
-
-        ShopifyAPI.changeItemQuantity(attrs.id, qty).then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this));
-      },
-
-     /**
-      * STUB METHOD - Click the 'ajaxCart - open' selector
+      * Click the 'ajaxCart - trigger' selector
       *
       * @param {event} e - Click event
       */
-      onOpenClick: function(e) {
+      onTriggerClick: function(e) {
         e.preventDefault();
-        console.log('['+this.name+'] - onOpenClick');
+        this.toggleVisibility();
       },
 
      /**
-      * STUB METHOD - Click the 'ajaxCart - close' selector
+      * Click the 'ajaxCart - close' selector
       *
       * @param {event} e - Click event
       */
@@ -498,7 +488,7 @@
         console.log('['+this.name+'] - open');
         this.stateIsOpen = true;
 
-        $(selectors.container).show();
+        this.$el.addClass(classes.cartOpen);
       },
 
      /**
@@ -510,7 +500,7 @@
         console.log('['+this.name+'] - close');
         this.stateIsOpen = false;
 
-        $(selectors.container).hide();
+        this.$el.removeClass(classes.cartOpen);
       }
     });
 

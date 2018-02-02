@@ -186,6 +186,24 @@ $input-group-addon-border-color: $input-border !default;
 //** Disabled cursor for form controls and buttons.
 $cursor-disabled:                not-allowed !default;
 
+//== Alerts
+$alert-padding-y:                10px;
+$alert-padding-x:                20px;
+$alert-margin-bottom:            $spacer;
+$alert-border-width:             1px;
+
+$alert-success-bg:               #e1f7e1;
+$alert-success-border:           #DAF0DA;
+$alert-success-text:             $text-color;
+
+$alert-danger-bg:                #f7e5e1;
+$alert-danger-border:            #f0ddda;
+$alert-danger-text:              $text-color;
+
+$alert-info-bg:                  #d9edf7;
+$alert-info-border:              darken(adjust-hue(#d9edf7, -10), 7%);
+$alert-info-text:                $text-color;
+
 /*================ Media Query Breakpoints ================*/
 //** Deprecated `$screen-xs-min` as of v3.2.0
 $screen-xs-min:              576px; // 480px !default;
@@ -245,6 +263,7 @@ $container-xl:                 $container-xlarge !default;
 /*================ Z-Index ================*/
 $z-index-dropdown: 99;
 $z-index-header: 100;
+$z-index-ajax-cart: 200;
 $z-index-modal-background:  1049 !default;
 $z-index-modal:  1050;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
@@ -356,6 +375,13 @@ $modal-sm:                    300px !default;
 $pencil-banner-padding-vertical:        8px;
 $pencil-banner-bg:                      $color-black;
 $pencil-banner-text-color:              $color-white;
+
+// #AJAX Cart
+$ajax-cart-width:                       400px;
+$ajax-cart-bg:                          $color-white;
+$ajax-cart-border-color:                darken($ajax-cart-bg, 5%);
+$ajax-cart-padding-vertical:            $grid-gutter-width;
+$ajax-cart-padding-horizontal:          $grid-gutter-width;
 
 // #Footer
 $footer-bp-min:                         $screen-md-min;

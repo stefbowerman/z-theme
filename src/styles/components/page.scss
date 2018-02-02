@@ -1,13 +1,43 @@
 // -------------------------
-// Page Header
+// Page
 // -------------------------
 
-/*
- * Add styles related to page layouts here
- */
-
 .page-header {
-  padding-bottom: (($line-height-computed / 2) - 1);
-  margin: ($line-height-computed * 2) 0 $line-height-computed;
-  border-bottom: 1px solid $page-header-border-color;
+  margin: $grid-gutter-width 0;
+  text-align: center;
+
+  &.page-header--left {
+    @media (min-width: $screen-sm-min) {
+      text-align: left;
+    }
+  }
+
+  &.page-header--right {
+    @media (min-width: $screen-sm-min) {
+      text-align: right;
+    }
+  }
+}
+
+.page-header__title {
+  margin: 0;
+}
+
+.page-header__subtitle {
+  max-width: 50em;
+  margin: 0 auto;
+
+  @media (min-width: $screen-sm-min) {
+    .page-header--left & {
+      margin-left: 0;
+    }
+    .page-header--right & {
+      margin-right: 0;
+    }
+  }
+
+
+  .page-header__title + & {
+    margin-top: 15px;
+  }
 }
