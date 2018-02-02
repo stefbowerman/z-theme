@@ -42,10 +42,13 @@
       }
     },
     "search": {
-      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
-      "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
+      "no_results_html": "Nothing was found for '{{ terms }}'",
+      "results_for_html": "Search results for '{{ terms }}'",
+      "results_for_singular_html": "Search result for '{{ terms }}'",
+      "results_count_singular": "1 result",
+      "results_count_plural": "{{ count }} results",
       "title": "Search for products on our site",
-      "placeholder": "Search our store",
+      "placeholder": "Search products &amp; content",
       "submit": "Search"
     }
   },
@@ -273,6 +276,7 @@
     }
   },
   "date_formats":{
-    "month_day_year": "%B %d, %Y"
+    "month_day_year": "%B %d, %Y",
+    "month_day": "%B %e"
   }
 }

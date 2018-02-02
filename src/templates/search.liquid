@@ -1,80 +1,56 @@
-{% paginate search.results by 10 %}
+{% paginate search.results by 16 %}
 
-  <h1>
-    {% if search.performed %}
-      {% if search.results_count == 0 %}
-        {{ 'general.search.no_results_html' | t: terms: search.terms }}
-      {% else %}
-        {{ 'general.search.results_for_html' | t: terms: search.terms }}
-      {% endif %}
-    {% else %}
-      {{ 'general.search.title' | t }}
-    {% endif %}
-  </h1>
+<div class="layout-content-wrapper">
+  <div class="container">
 
-  <form action="/search" method="get" role="search">
-    <label for="Search" class="label-hidden">
-      {{ 'general.search.placeholder' | t }}
-    </label>
-    <input type="search"
-           name="q"
-           id="Search"
-           value="{{ search.terms | escape }}"
-           placeholder="{{ 'general.search.placeholder' | t }}">
-    <button type="submit" class="btn">
-      {% include 'icon-search' %}
-      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-    </button>
-  </form>
-
-
-{% if search.performed %}
-    <ul>
-      {% for item in search.results %}
-        <li>
-          {% if item.featured_image %}
-            <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-              {{ item.featured_image.src | img_url: '240x240' | img_tag: item.featured_image.alt }}
-            </a>
-          {% endif %}
-
-          <h5>{{ item.title | link_to: item.url }}</h5>
-
-          {% if item.object_type == 'product' %}
-            <p>
-              {% if item.compare_at_price > item.price %}
-                {% if item.price_varies %}
-                  {% assign sale_price = item.price | money %}
-                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                {% else %}
-                  {{ 'products.product.on_sale' | t }}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                <s>{{ item.compare_at_price | money }}</s>
-              {% else %}
-                {% if item.price_varies %}
-                  {% assign price = item.price | money %}
-                  <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
-                {% else %}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-              {% endif %}
-              {% unless item.available %}
-              {{ 'products.product.sold_out' | t }}
-              {% endunless %}
-            </p>
+    <div class="page-header">
+      <h1 class="page-header__title">
+        {% if search.performed %}
+          {{ 'general.search.results_for_html' | t: terms: search.terms }}
+        {% else %}
+          {{ 'general.search.title' | t }}
+        {% endif %}
+      </h1>
+      {% if search.results_count > 0 %}
+        <div class="page-header__subtitle">
+          {% if search.results_count == 1 %}
+            {{ 'general.search.results_count_singular' | t }}
           {% else %}
-            <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+            {{ 'general.search.results_count_plural' | t: count: search.results_count }}
           {% endif %}
+        </div>
+      {% endif %}
+    </div>
 
-        </li>
-      {% endfor %}
-    </ul>
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <div class="container">
+          <div class="content-grid">
+            {% for item in search.results %}
+              <div class="content-grid__item">
+                {% if item.object_type == 'product' %}
+                  {% include 'product-card', product: item, quick_view: true %}
+                {% elsif item.object_type == 'article' %}
+                  {% include 'article-card', article: item %}  
+                {% else %}
+                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
 
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+
+      {% else %}    
+       <p class="p1 u-ta-center">No search results found</p>
+      {% endif %}
+
     {% endif %}
-  {% endif %}
+
+  </div>
+</div>
 
 {% endpaginate %}
