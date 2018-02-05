@@ -19,6 +19,7 @@ window.theme = window.theme || {};
 // =require slate/user.js
 // =require slate/breakpoints.js
 // =require slate/productCard.js
+// =require slate/productDetailForm.js
 
 /*================ Sections ================*/
 // =require sections/product.js
