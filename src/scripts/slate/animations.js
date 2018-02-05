@@ -11,10 +11,6 @@ slate.animations = (function($) {
   // To add more see the full library - https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
   $.extend( $.easing, {
     // t: current time, b: begInnIng value, c: change In value, d: duration
-    def: 'easeOutQuad',
-    swing: function (x, t, b, c, d) {
-      return jQuery.easing[jQuery.easing.def](x, t, b, c, d);
-    },
     easeInQuint: function (x, t, b, c, d) {
       return c*(t/=d)*t*t*t*t + b;
     },
