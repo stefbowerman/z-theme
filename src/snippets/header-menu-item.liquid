@@ -1,0 +1,50 @@
+{%- comment %}
+
+  Header Menu Item
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'header-menu-item',
+              block_id: { string } - required
+              attributes: { string } - optional
+              url: { url } - required
+              title: { string } - required
+              dropdown_menu_html: { string } optional
+              dropdown_cta_html: { string } optional
+  %}
+
+{% endcomment -%}
+
+{% assign dropdown_id = "dropdown-" | append: block_id %}
+
+{% assign has_dropdown = false %}
+{% if dropdown_menu_html != blank or dropdown_cta_html != blank %}
+  {% assign has_dropdown = true %}
+{% endif %}
+
+<li class="header-nav__menu-item" {{ attributes }}>
+  <a href="{{ url }}" {% if has_dropdown %}data-block="{{ block_id }}" data-dropdown-trigger="#{{ dropdown_id }}"{% endif %}>
+    {{ title }}          
+  </a>
+  {% if has_dropdown %}
+    <div id="{{ dropdown_id }}" class="header-dropdown">
+      <div class="header-container">
+        <div class="row">
+          {% if dropdown_menu_html != blank %}
+            <div class="col-md-4">
+              {{ dropdown_menu_html }}
+            </div>
+          {% endif %}
+          {% if dropdown_cta_html != blank %}
+            <div class="{% if dropdown_menu_html != blank %}col-md-8{% else %}col-md-12{% endif %}">
+              <div class="header-dropdown__ctas">
+                {{ dropdown_cta_html }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}        
+</li>

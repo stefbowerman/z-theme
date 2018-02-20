@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           {% if settings.newsletter_form_action == blank %}
-            <p style="color:red">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</p>
+            <div class="alert alert-danger small">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</div>
           {% endif %}          
           {% if section.settings.image %}
             <img src="{{ section.settings.image | img_url: '600x' }}" class="subscription-modal__image" />

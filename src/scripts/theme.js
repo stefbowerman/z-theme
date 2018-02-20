@@ -21,6 +21,9 @@ window.theme = window.theme || {};
 // =require slate/productCard.js
 // =require slate/productDetailForm.js
 
+// =require slate/models/dropdown.js
+// =require slate/models/dropdownManager.js
+
 /*================ Sections ================*/
 // =require sections/product.js
 // =require sections/collection.js
@@ -32,6 +35,7 @@ window.theme = window.theme || {};
 // =require sections/footer.js
 // =require sections/ajaxCart.js
 // =require sections/cart.js
+// =require sections/mobileMenu.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -54,7 +58,8 @@ window.theme = window.theme || {};
     sections.register('header', theme.Header);
     sections.register('footer', theme.Footer);
     sections.register('ajax-cart', theme.AjaxCart);
-    sections.register('cart', theme.Cart);  
+    sections.register('cart', theme.Cart);
+    sections.register('mobile-menu', theme.MobileMenu);
 
     $('.in-page-link').on('click', function(evt) {
       slate.a11y.pageLinkFocus($(evt.currentTarget.hash));

@@ -1,3 +1,5 @@
+{% assign MAX_FOOTER_MENUS = 2 %}
+
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
   <div class="container">
 
@@ -8,11 +10,32 @@
       </div>
     </div>
 
+    {% comment %} Footer Block - Menus {% endcomment %}
+    <div class="col-md-6">
+      <div class="footer-block">
+        {% for i in (1..MAX_FOOTER_MENUS) %}
+          {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
+          {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
+          {% assign linklist_handle = section.settings[menu_setting_handle] %}
+          {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
+            <div class="footer-menu">
+              <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
+              <ul class="footer-menu__list">
+                {% for link in linklists[linklist_handle].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
     {% comment %} Footer Block - Contact {% endcomment %}
     <div class="col-md-4">
       <div class="footer-block">
         {% if settings.newsletter_form_action == blank %}
-          <p style="color:red">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</p>
+          <div class="alert alert-danger small">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</div>
         {% endif %}
         {% if section.settings.subscribe_heading %}
           <h4>{{ section.settings.subscribe_heading }}</h4>
@@ -49,27 +72,6 @@
             {{ social_list_items }}
           </ul>
         {% endif %}
-      </div>
-    </div>
-
-    {% comment %} Footer Block - Menus {% endcomment %}
-    <div class="col-md-6">
-      <div class="footer-block">
-        {% for i in (1..3) %}
-          {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
-          {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
-          {% assign linklist_handle = section.settings[menu_setting_handle] %}
-          {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
-            <div class="footer-menu">
-              <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
-              <ul class="footer-menu__list">
-                {% for link in linklists[linklist_handle].links %}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        {% endfor %}
       </div>
     </div>
 
