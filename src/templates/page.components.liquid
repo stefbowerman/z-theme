@@ -14,6 +14,7 @@
         <ul>
           <li><a href="#docs-product-card">Product Card</a></li>
           <li><a href="#docs-article-card">Article Card</a></li>
+          <li><a href="#docs-Banners">Banners</a></li>
           <li><a href="#docs-modals">Modals</a></li>
         </ul>
 
@@ -40,6 +41,30 @@
         {% else %}
           The article card requires a Shopify article in order to work.  <a href="{{ shop.url }}/admin/products/new">Go here to make one</a> and add it to the default "News" blog to see this component.
         {% endif %}
+
+        <h3 id="docs-banners" class="docs-title">Banners</h3>
+        <p>Banners are one of the most flexible and re-usable components on the site.  They consist of a parent <code>.banner</code> element and any number of child <code>.banner__panel</code> elements. Each banner panel has options for content alignment, text alignment, ctas, color inversion, custom vertical padding and content width, and background images plus positioning at 3 different screen sizes.  Most options are optional and have fallbacks.  See <code>snippets/banner-panel.liquid</code> for the full list of options.</p>
+
+        <p>Banners should generally be used <em>outside</em> of <code>.container</code> elements in order to be full bleed.  They have their own child <code>.container</code> elements to ensure that content doesn't stretch beyond the max content width for the site.</p>
+
+        <p><strong>Note</strong>: Banner panel styling is set via a small style block contained within the snippet.  Because we use an ID inside this style block to target the specific panel, you <em>must</em> pass a unique ID string into the snippet.  For most use cases, some combination of section ID, block ID, and forloop index will do the trick.</p>
+
+        <div class="banner">
+          {% include 'banner-panel',
+                      id: "123abc",
+                      content_alignment: "center",
+                      title: "Banner Panel Title 1",
+                      content_alignment: "left",
+                      text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          %}
+          {% include 'banner-panel',
+                      id: "abc123",
+                      content_alignment: "center",
+                      title: "Banner Panel Title 2",
+                      content_alignment: "right",
+                      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          %}  
+        </div>
 
         <h3 id="docs-modals" class="docs-title">Modals</h3>
         <p>Built using <a href="https://getbootstrap.com/docs/3.3/javascript/#modals" target="_blank">Bootstrap's Modal</a>, use these to create an overlay to focus the user's attention.</p>

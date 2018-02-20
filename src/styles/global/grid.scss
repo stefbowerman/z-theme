@@ -39,6 +39,32 @@
   @include container-fixed;
 }
 
+// Fluid max container
+//
+// Utilizes the mixin meant for fixed width containers, but with width set to 100% and max width set to container width for different screen sizes
+// This is for elements that may or may not span the entire screen, but you need to ensure that they don't grow beyond the container width
+
+.container-fluid-max {
+  @include container-fixed;
+  width: 100%;
+
+  @media (min-width: $screen-sm-min) {
+    max-width: $container-sm;
+  }
+
+  @media (min-width: $screen-md-min) {
+    max-width: $container-md;
+  }
+
+  @media (min-width: $screen-lg-min) {
+    max-width: $container-lg;
+  }
+
+  @media (min-width: $screen-xl-min) {
+    max-width: $container-xl;
+  }
+}
+
 
 // Row
 //
