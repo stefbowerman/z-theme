@@ -29,24 +29,21 @@
 }
 
 .product-card__gallery-image--alt {
+  @include stretch-within;
   background: $body-bg;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   opacity: 0;
   @include transition(opacity $transition-timing-function-out $transition-duration-base);
 
-  .product-card:hover &,
-  .product-card:focus & {
+  // We add the class 'alt-loaded' to the product card so we know it's safe to display the alt image
+  .product-card.alt-loaded:hover &,
+  .product-card.alt-loaded:focus & {
     opacity: 1;
     @include transition(opacity $transition-timing-function-in $transition-duration-fast);    
   }
 }
 
 .product-card__info {
-
+  text-align: $product-card-text-align;
 }
 
 .product-card__info-title,
@@ -55,11 +52,16 @@
 }
 
 .product-card__info-title {
-
+  font-size: $product-card-title-size;
 }
 
 .product-card__info-price {
-
+  font-size: $product-card-price-size;
+  
+  // Grey out crossed out price
+  s {
+    color: $color-grey;
+  }
 }
 
 
