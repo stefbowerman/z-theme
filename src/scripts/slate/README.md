@@ -9,7 +9,8 @@ In keeping with their code convention, any module scripts that are independent o
 In building Z-Theme, we have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
-- [Ajax Chimp](#ajax-chimp)
+- [Ajax MailChimp Form](#ajax-mailchimp-form)
+- [Ajax Klaviyo Form](#ajax-klaviyo-form)
 - [Animations](#animations)
 - [Breakpoints](#breakpoints)
 - [Collection Filters](#collection-filters)
@@ -38,15 +39,15 @@ The ajaxCart comes with public methods that allow you to control it from other p
 | `open`  | `slate.AjaxCart.open()`  | Shows the cart |
 | `close` | `slate.AjaxCart.close()` | Hides the cart |
 
-### Ajax Chimp
+### Ajax MailChimp Form
 
 Included is a stripped down version of the [AjaxChimp jQuery](https://github.com/scdoshi/jquery-ajaxchimp) plugin.  It handles form submission for Mailchimp form URLs and provides basic validation and error handling.
 
-To use, create a new instance and pass in the form element and a plain object of settings anywhere you need an AJAX enabled subscription form.  See `scripts/slate/ajaxChimp.js` for the full list of options.
+To use, create a new instance and pass in the form element and a plain object of settings anywhere you need an AJAX enabled subscription form.  See `scripts/slate/ajaxMailChimpForm.js` for the full list of options.
 
 ```javascript
 var $form = $('form');
-var ajaxForm = new slate.AjaxChimp($form, {
+var ajaxForm = new slate.AjaxMailChimpForm($form, {
   onInit: function() {
     // ...
   },
@@ -54,6 +55,25 @@ var ajaxForm = new slate.AjaxChimp($form, {
     // ...
   }
 });
+```
+
+### Ajax Klaviyo Form
+
+Class that handles form submission for Klaviyo.
+
+To use, create a new instance and pass in the form element and a plain object of settings anywhere you need an AJAX enabled subscription form.  See `scripts/slate/ajaxKlaviyoForm.js` for the full list of options.
+
+```javascript
+var $form = $('form');
+var listId = $form.data('list-id');
+var source = $form.data('source');
+var options = {
+  listId: listId,
+  source: source,
+  onSubscribeSuccess: function() { .. },
+  onSubmitFail: function(){ .. }
+};
+var ajaxKlaviyoForm = new slate.AjaxKlaviyoForm($form, options);
 ```
 
 ### Animations
