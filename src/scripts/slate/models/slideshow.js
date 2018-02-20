@@ -1,14 +1,17 @@
 /**
- * Slideshows
+ * Slideshow
  * ------------------------------------------------------------------------------
  *
- * Dependencies
+ * Requires:
  *  - slick.min.js
+ *  - Modernizr
  *
- * @namespace - slideshow
+ * @namespace - models.Slideshow
 */
 
-slate.Slideshow = (function($, Modernizr) {
+slate.models = slate.models || {};
+
+slate.models.Slideshow = (function($, Modernizr) {
 
   var selectors = {
     slideshowWrapper: '[data-slideshow-wrapper]',
