@@ -11,6 +11,10 @@ slate.productCard = (function() {
     altLazyImg: '[data-product-card-alt-lazy]'
   };
 
+  var classes = {
+    altLoaded: 'alt-loaded' // added to the product card once the alt image is loaded to avoid a flash of white while loading
+  };
+
   var $productCard = $(selectors.el);
 
   if(!$productCard.length) {
@@ -28,16 +32,15 @@ slate.productCard = (function() {
             };
 
 
-  $(selectors.el).on(events.enter, onEnter);
+  $(selectors.el).one(events.enter, onEnter);
 
   function onEnter(e) {
     var $productCard = $(e.currentTarget);
     var $lazyImg = $productCard.find( selectors.altLazyImg );
 
     if($lazyImg.length) {
-      $lazyImg.css('opacity', 0);
       $lazyImg.on('load', function() {
-        $(this).css('opacity', '');
+        $productCard.addClass(classes.altLoaded);
       });
       $lazyImg.attr('src', $lazyImg.data('src'));
       $lazyImg.removeAttr('data-src');

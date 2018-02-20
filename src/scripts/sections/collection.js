@@ -10,7 +10,7 @@
 
   var selectors = {
     collectionJson: '[data-collection-json]',
-    filters: '[data-filters]'
+    mobileFiltersToggle: '[data-mobile-filters-toggle]'
   };
 
   var classes = {
@@ -34,10 +34,15 @@
 
     this.filters = new slate.collectionFilters( container, this.collectionData );
     this.sort    = new slate.collectionSort( container, this.collectionData );
+
+    $(selectors.mobileFiltersToggle, this.$container).on('click', this.onMobileFiltersToggleClick.bind(this));
   }
 
   Collection.prototype = $.extend({}, Collection.prototype, {
-
+    onMobileFiltersToggleClick: function(e) {
+      e.preventDefault();
+      console.log('['+this.name+'] - Implement method to toggle mobile filters');
+    }
   });
 
   return Collection;

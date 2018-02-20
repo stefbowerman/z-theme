@@ -1,64 +1,87 @@
-{% paginate collection.products by 12 %}
+{% paginate collection.products by 6 %}
 
-<section class="Collection" data-section-id="{{ section.id }}" data-section-type="collection">
-
-  <div class="container">
-    <div class="page-header">
-      <h1 class="page-header__title">{{ collection.title }}</h1>
-      {% if collection.description != blank %}
-        <div class="page-header__subtitle">
-          {{ collection.description }}
-        </div>
-      {% endif %}
-    </div>  
-
-    {% if collection.products.size > 0 %}
-      <header role="banner">
-        {% include 'breadcrumbs' %}
-        {% if section.settings.enable_filters %}
-          {% include 'collection-filters' %}
-        {% endif %}
-        {% if section.settings.enable_sort %}
-          {% include 'collection-sort' %}
-        {% endif %}
-      </header>
-
-      <div class="content-grid">
-        {% for product in collection.products %}
-          <div class="content-grid__item">
-            {% include 'product-card', product: product, quick_view: true %}
+<div class="layout-content-wrapper">
+  <section data-section-id="{{ section.id }}" data-section-type="collection">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-header__title">{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div class="page-header__subtitle">
+            {{ collection.description }}
           </div>
-        {% endfor %}
-      </div>
+        {% endif %}
+      </div>  
 
-    {% else %}
-      <p>{{ 'collections.general.no_matches' | t }}</p>
+      {% if collection.products.size > 0 %}
+        <div class="collection-filter-bar">
+          {% comment %}
+            Vertically align groupings.  Space them out horizontally, flush to the edges
+            Make sure you put the if statements *inside* the .collection-filter-bar__grouping elements to always output tags even if they are empty.
+            This will ensure that flex will always space them out appropriately
+          {% endcomment %}
+          <div class="flex-row flex-align-items-center flex-justify-between">
+            <div class="collection-filter-bar__grouping">
+              {% if section.settings.enable_filters %}
+                <div class="visible-xs visible-sm">
+                  <a href="#" data-mobile-filters-toggle>
+                    <span style="margin-right: 6px;">{% include 'icon-filters' %}</span>
+                    Filter By
+                  </a>
+                </div>
+                <div class="hidden-xs hidden-sm">
+                  {% include 'collection-filters' %}
+                </div>
+              {% endif %}
+            </div>
+            {% if section.settings.enable_sort %}
+              <div class="collection-filter-bar__grouping">
+                {% include 'collection-sort' %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
 
-    {% endif %}
+        <p class="hidden-xs hidden-sm">
+          <small>Showing {{ collection.products.size }} {{ collection.products.size | pluralize: 'Item', 'Items' }}</small>
+        </p>      
 
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
-    {% endif %}
-  </div>
+        <div class="content-grid">
+          {% for product in collection.products %}
+            <div class="content-grid__item">
+              {% include 'product-card', product: product, quick_view: true %}
+            </div>
+          {% endfor %}
+        </div>
 
-  {% comment %} This JSON is required for filtering and sorting {% endcomment %}
-  {% capture collection_url %}
-    {% if collection.handle == "all" %}
-      /collections/all
-    {% else %}
-      {{ collection.url }}
-    {% endif %}
-  {% endcapture %}
+      {% else %}
+        <p>{{ 'collections.general.no_matches' | t }}</p>
 
-  <script type="application/json" data-collection-json>
-    {
-      "url": {{ collection_url | strip | json }},
-      "sortDefault": {{ collection.default_sort_by | json }},
-      "sortApplied": {{ collection.sort_by | json }}
-    }
-  </script>
+      {% endif %}
 
-</section>
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+
+    {% comment %} This JSON is required for filtering and sorting {% endcomment %}
+    {% capture collection_url %}
+      {% if collection.handle == "all" %}
+        /collections/all
+      {% else %}
+        {{ collection.url }}
+      {% endif %}
+    {% endcapture %}
+
+    <script type="application/json" data-collection-json>
+      {
+        "url": {{ collection_url | strip | json }},
+        "sortDefault": {{ collection.default_sort_by | json }},
+        "sortApplied": {{ collection.sort_by | json }}
+      }
+    </script>
+
+  </section>
+</div>
 
 {% endpaginate %}
 
