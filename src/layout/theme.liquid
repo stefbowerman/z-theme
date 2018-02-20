@@ -1,3 +1,5 @@
+{% assign ztheme_fixed_header = true %}
+
 <!doctype html>
 <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
@@ -66,18 +68,34 @@
   {{ content_for_header }}
 </head>
 
-<body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}{% if template.suffix != blank %} template-{{ template.name | append: '-' | append: template.suffix | handle }}{% endif %}">
+{% capture body_class %}
+  template-{{ template.name | handle }}
+  {% if template.suffix != blank %} template-{{ template.name | append: '-' | append: template.suffix | handle }} {% endif %}
+  {% if ztheme_fixed_header == true %} site-fixed-header {% endif %}
+{% endcapture %}
+
+<body id="{{ page_title | handle }}" class="{{ body_class | strip | strip_newlines }}">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
   {% section 'pencil-banner' %}
-  {% section 'header' %}
 
-  <main role="main" id="MainContent">
-    {{ content_for_layout }}
-  </main>
+  {% section 'mobile-menu' %}
 
-  {% section 'footer' %}
+  <div class="layout-wrapper">
+
+    {% comment %} Select the appropriate 'header-*' section for the theme you are building and remove the files for the others {% endcomment %}
+    {% section 'header-logo-center' %}
+    {% comment %}{% section 'header-logo-left' %} {% endcomment %}
+
+    <main role="main" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+  </div>
+
   {% section 'subscription-modal' %}
 
   {% unless template == 'cart' %}

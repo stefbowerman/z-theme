@@ -8,44 +8,116 @@
 theme.Header = (function($) {
 
   var $window = $(window);
+  var $body   = $(document.body);
 
   var selectors = {
-
+    header: '[data-header]',
+    searchOpen: '[data-search-open]',
+    searchClose: '[data-search-close]',
+    dropdownTrigger: '[data-dropdown-trigger][data-block]',
   };
 
   var classes = {
-
+    headerFixed: 'is-fixed',
+    siteHasFixedHeader: 'site-fixed-header'
   };
 
   function Header(container) {
 
-    this.$container = $(container);
+    var _this = this;
 
+    this.$container = $(container);
+    this.$el = $(selectors.header, this.$container);
     this.name = 'header';
     this.namespace = '.'+this.name;
+    this.dropdownManager = new slate.models.DropdownManager();
+
+    this.events = {
+      SCROLL: 'scroll' + this.namespace
+    };    
+
+    // Register each dropdown trigger
+    $(selectors.dropdownTrigger, this.$container).each(function(i, trigger) {
+      _this.dropdownManager.register( $(trigger) );
+    });
+
+    this.$container.on('pointerenter mouseenter', this.onMouseEnter.bind(this));
+    this.$container.on('pointerleave mouseleave', this.onMouseLeave.bind(this));
+    this.$container.on('click',   selectors.searchOpen, this.onSearchOpenClick.bind(this));
+    this.$container.on('click',   selectors.searchClose, this.onSearchCloseClick.bind(this));
+
+    // We pass in the fixed behavior as a class on the body of the site
+    if($body.hasClass(classes.siteHasFixedHeader)) {
+      $window.on(this.events.SCROLL, $.throttle(20, requestAnimationFrame.bind(window, this.onScroll.bind(this)))); // throttle + rAF = smooth scrolling :)
+      this.onScroll(); // hit this one time on init to make sure everything is good 
+    }
 
   };
 
   Header.prototype = $.extend({}, Header.prototype, {
 
+    scrollCheck: function() {
+      var actualOffset = this.$container.offset()['top'] - this.$el.outerHeight();
+      
+      if( $window.scrollTop() < actualOffset ){
+        this.$el.removeClass( classes.headerFixed );
+      }
+      else {
+        this.$el.addClass( classes.headerFixed );
+      }
+    },    
+
+    onScroll: function() {
+      this.scrollCheck();
+    },    
+
+    onMouseEnter: function() {
+
+    },
+
+    onMouseLeave: function() {
+      this.dropdownManager.closeAllDropdowns();
+    },    
+
+    onSearchOpenClick: function(e) {
+      e.preventDefault();
+      this.openSearch();
+    },
+
+    onSearchCloseClick: function(e) {
+      e.preventDefault();
+      this.closeSearch();
+    },
+
+    openSearch: function() {
+      console.log('['+this.name+'] - openSearch');
+    },
+
+    closeSearch: function() {
+      console.log('['+this.name+'] - closeSearch');
+    },    
+
     /**
      * Theme Editor section events below
      */
-    onSelect: function() {
-      console.log('['+this.name+'] - section:select');
+
+    onBlockSelect: function(e) {
+      var dropdown = this.dropdownManager.getDropdownByBlockId( e.detail.blockId );
+
+      // Bypass dropdown manager since we're inside the theme editor
+      if(dropdown) {
+        dropdown.forceOpen();
+      }
     },
 
-    onShow: function() {
-      console.log('['+this.name+'] - section:show');
-    },
+    onBlockDeselect: function(e) {
+      var dropdown = this.dropdownManager.getDropdownByBlockId( e.detail.blockId );
 
-    onLoad: function() {
-      console.log('['+this.name+'] - section::load');
-    },
-
-    onUnload: function() {
-      console.log('['+this.name+'] - section::unload');
-    }
+      // Bypass dropdown manager since we're inside the theme editor
+      if(dropdown) {
+        dropdown.forceClose();
+      }
+    }    
   });
 
   return Header;

@@ -1,0 +1,55 @@
+// -------------------------
+// Mobile Menu
+// -------------------------
+
+[data-section-type="mobile-menu"] {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  top: 30px;
+  left: 30px;
+  max-width: 80%;
+  border: 1px solid #efefef;
+  display: none;
+
+  &.is-visible {
+    display: block;
+  }
+}
+
+.mobile-menu__primary,
+.mobile-menu__secondary {
+
+  ul {
+    @include list-unstyled;
+    text-align: center;
+  }
+}
+
+.mobile-menu__primary {
+
+}
+
+.mobile-menu__secondary {
+
+}
+
+.mobile-menu__social {
+  @include list-unstyled;
+  margin-bottom: 30px;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 6px;
+  }
+
+  a {
+    padding: 5px;
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+  }
+}

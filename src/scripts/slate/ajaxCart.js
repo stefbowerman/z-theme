@@ -111,11 +111,14 @@
       item: '[data-ajax-item][data-id][data-qty]',
       itemRemove: '[data-ajax-cart-item-remove]',
       itemIncrement: '[data-ajax-cart-item-increment]',
-      itemDecrement: '[data-ajax-cart-item-decrement]'
+      itemDecrement: '[data-ajax-cart-item-decrement]',
+      cartBadge: '[data-cart-badge]',
+      cartBadgeCount: '[data-cart-badge-count]'
     };
 
     var classes = {
       cartOpen: 'is-open',
+      cartBadgeHasItems: 'has-items'
     };
 
    /**
@@ -382,12 +385,22 @@
       },
 
      /**
-      * STUB - If your theme displays the cart count, use this method to udpate it
+      * Update the cart badge + count here
       *
       * @param {Object} cart - JSON representation of the cart.
       */
       updateCartCount: function(cart) {
+        var $badge = $(selectors.cartBadge);
+        var $count = $(selectors.cartBadgeCount);
 
+        $count.html(cart.item_count);
+
+        if(cart.item_count) {
+          $badge.addClass(classes.cartBadgeHasItems);
+        }
+        else {
+          $badge.removeClass(classes.cartBadgeHasItems);
+        }
       },
 
      /**

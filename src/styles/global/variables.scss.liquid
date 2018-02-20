@@ -341,6 +341,11 @@ $transition-timing-function-in:        ease-out;
 $transition-timing-function-out:       ease-in;
 $transition-timing-function-in-out-ui: cubic-bezier(0.42, 0, 0.13, 1.04);
 
+// Header + dropdowns
+$transition-duration-dropdown:            $transition-duration-base;
+$transition-timing-function-dropdown-in:  $transition-timing-function-in;
+$transition-timing-function-dropdown-out: $transition-timing-function-out;
+
 //== Modals
 //
 //##
@@ -375,6 +380,19 @@ $modal-sm:                    300px !default;
 $pencil-banner-padding-vertical:        8px;
 $pencil-banner-bg:                      $color-black;
 $pencil-banner-text-color:              $color-white;
+
+// #Header
+$header-bp-min:                         $screen-md-min; // Above this breakpoint, switch to the full desktop nav
+$header-height-small:                   65px;
+$header-height-base:                    75px;
+$header-bg:                             $color-white;
+$header-text-color:                     $text-color;
+
+$header-logo-width:                     120px;
+
+$header-dropdown-bg:                    $header-bg;
+$header-dropdown-box-shadow:            0px 8px 15px -10px transparentize($color-black, 0.85);
+$header-dropdown-menu-spacing:          25px; // Horizontal spacing between dropdown menus
 
 // #AJAX Cart
 $ajax-cart-width:                       400px;

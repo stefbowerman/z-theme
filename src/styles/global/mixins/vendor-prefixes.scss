@@ -159,6 +159,12 @@
        -o-transform: translate($x, $y);
           transform: translate($x, $y);
 }
+@mixin translateZ($z) {
+  -webkit-transform: translateZ($z);
+      -ms-transform: translateZ($z); // IE9 only
+       -o-transform: translateZ($z);
+          transform: translateZ($z);
+}
 @mixin translateX($x) {
   -webkit-transform: translateX($x);
       -ms-transform: translateX($x); // IE9 only

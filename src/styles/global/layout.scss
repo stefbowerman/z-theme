@@ -4,7 +4,7 @@
 
 /* If supported, use flexbox to stick the footer to the bottom of the page */
 .flexbox {
-  body {
+  .layout-wrapper {
     @include display-flex;
     @include flex-direction(column);
     min-height: 100vh;
@@ -12,6 +12,20 @@
   main#MainContent {
     @include flex;
   }
+}
+
+.layout-wrapper {
+
+  // If we have a fixed header, make enough room at the top of the page for it.
+  .site-fixed-header & {
+    position:relative;
+    padding-top: $header-height-small;
+
+    @media (min-width: $screen-md-min) {
+      padding-top: $header-height-base;
+    }
+  }
+
 }
 
 // Use this as the only direct child of main#MainContent on pages where you don't want the content flush to the header and footer

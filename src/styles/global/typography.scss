@@ -104,7 +104,7 @@ hr {
 /*================ Emphasis + Misc ================*/
 small,
 .small {
-  font-size: $font-size-small / $font-size-base;
+  font-size: $font-size-small;
 }
 
 // @include text-emphasis-variant('.text-primary', $brand-primary);
