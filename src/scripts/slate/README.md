@@ -103,12 +103,12 @@ Returns the minimum pixel width for the specified key
 
 ### Collection Filters
 
-The contents of the filters are sorted alphabetically by default but if you need an alternative sorting (like size), add a function to the `slate.CollectionFilters.Prototype._sortingFunctions` object.  The key that you use to add your sort function _must_ match the `data-filters-type` property of the element containing the options to sort.
+The contents of the filters are sorted alphabetically by default but if you need an alternative sorting (like size), add a function to the `slate.models.CollectionFilters.Prototype._sortingFunctions` object.  The key that you use to add your sort function _must_ match the `data-filters-type` property of the element containing the options to sort.
 
 To use, create a new instance and pass in an HTMLElement containing elements required by the selectors and a plain object of data about the collection that is being filtered.
 
 ```javascript
-var filtering = new slate.collectionFilter( container, collectionData );
+var filtering = new slate.models.CollectionFilters( container, collectionData );
 ```
 
 ### Collection Sort
@@ -118,7 +118,7 @@ Controls collection sorting, requires a containing element and a select tag with
 To use, create a new instance and pass in an HTMLElement containing elements required by the selectors and a plain object of data about the collection that is being sorted.
 
 ```javascript
-var sorting = new slate.collectionSort( container, collectionData );
+var sorting = new slate.models.CollectionSort( container, collectionData );
 ``` 
 
 ### Slideshow
@@ -127,7 +127,7 @@ Wrapper around slideshow library to make initialization and consistency much sim
 ```javascript
 var $slideshowWrapper = $('[data-slideshow-wrapper]');
 var options = { arrows: true };
-var slideshow = new slate.Slideshow( $slideshowWrapper, options);
+var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
 ```
 
 ### User
@@ -181,7 +181,7 @@ slate.utils.getUrlWithRemovedQueryStringParameter('mySearchTerm'); // outputs - 
 
 ##### `slate.utils.isThemeEditor`
 
-Return *`true`* if the site is being viewed inside the shopify theme editor.
+Returns *`true`* if the site is being viewed inside the shopify theme editor.
 
 ##### `slate.utils.whichTransitionEnd`
 

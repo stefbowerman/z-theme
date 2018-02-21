@@ -8,6 +8,8 @@
 
 slate.user = (function(Cookies) {
 
+  var cookiePrefix = '_ztheme_'
+
  /**
   * User constructor
   */
@@ -22,6 +24,29 @@ slate.user = (function(Cookies) {
   };
 
   User.prototype = $.extend({}, User.prototype, {
+
+   /**
+    * Library of cookies to use throughout the site.
+    * Use the `createCookie` method below to create your own copies of these.  Don't access these directly.
+    */
+    _cookies: {
+      siteVisite: {
+        name: cookiePrefix + 'site_visit',
+        value: true
+      }
+    },
+
+   /**
+    * Creates and returns a copy of one of the cookies available above
+    *
+    * @param {String} key
+    * @return {Object | undefined}
+    */
+    createCookie: function(key) {
+      if(this._cookies.hasOwnProperty(key)) {
+        return $.extend(true, {}, this._cookies[key]);
+      }
+    },    
     
    /**
     * Sets a browser cookie

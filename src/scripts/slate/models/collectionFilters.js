@@ -1,13 +1,16 @@
 /**
- * Collection Filters
+ * Model - Collection Filters
  * ------------------------------------------------------------------------------
  *
- * @namespace - collectionFilters
+ * @namespace - models.collectionFilters
  */
 
-slate.collectionFilters = (function(){
+slate.models = slate.models || {}; 
+
+slate.models.CollectionFilters = (function(){
 
   var $body = $(document.body);
+  
   var selectors = {
     filterSelect: '[data-filters-type][data-filters-type-select]',
     filtersClear: '[data-filters-clear]'

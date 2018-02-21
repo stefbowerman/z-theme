@@ -1,16 +1,17 @@
 /**
- * Collection Sort
+ * Model - Collection Sort
  * ------------------------------------------------------------------------------
  *
  * Dependencies
  *  - slate.utils
  *
- * @namespace - collectionSort
+ * @namespace - models.collectionSort
  */
 
-slate.collectionSort = (function(){
+ slate.models.CollectionSort = (function(){
 
   var $body = $(document.body);
+  
   var selectors = {
     sortSelect: '[data-sort-select]'
   };

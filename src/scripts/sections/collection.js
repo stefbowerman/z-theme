@@ -32,8 +32,8 @@
 
     this.collectionData = JSON.parse($(selectors.collectionJson, this.$container).html());
 
-    this.filters = new slate.collectionFilters( container, this.collectionData );
-    this.sort    = new slate.collectionSort( container, this.collectionData );
+    this.filters = new slate.models.CollectionFilters( container, this.collectionData );
+    this.sort    = new slate.models.CollectionSort( container, this.collectionData );
 
     $(selectors.mobileFiltersToggle, this.$container).on('click', this.onMobileFiltersToggleClick.bind(this));
   }

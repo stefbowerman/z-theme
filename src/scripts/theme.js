@@ -9,8 +9,6 @@ window.theme = window.theme || {};
 // =require slate/currency.js
 // =require slate/images.js
 // =require slate/variants.js
-// =require slate/collectionFilters.js
-// =require slate/collectionSort.js
 // =require slate/ajaxCart.js
 // =require slate/ajaxMailChimpForm.js
 // =require slate/ajaxKlaviyoForm.js
@@ -25,6 +23,8 @@ window.theme = window.theme || {};
 // =require slate/models/dropdownManager.js
 // =require slate/models/slideshow.js
 // =require slate/models/quickView.js
+// =require slate/models/collectionFilters.js
+// =require slate/models/collectionSort.js
 
 /*================ Sections ================*/
 // =require sections/product.js
