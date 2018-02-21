@@ -36,11 +36,10 @@
             {% endif %}
           </div>
         {% endfor %}
-
-        {% if section.settings.autoplay %}
-          <a href="#" data-slideshow-pause-toggle>Toggle autoplay</a>
-        {% endif %}
       </div>
+      {% if section.settings.autoplay %}
+        <a href="#" data-slideshow-pause-toggle>Toggle autoplay</a>
+      {% endif %}      
     </div>
   {% endif %}
 

@@ -3,7 +3,6 @@ window.theme = window.theme || {};
 
 /*================ Slate ================*/
 // =require slate/a11y.js
-// =require slate/cart.js
 // =require slate/utils.js
 // =require slate/rte.js
 // =require slate/sections.js
@@ -13,16 +12,19 @@ window.theme = window.theme || {};
 // =require slate/collectionFilters.js
 // =require slate/collectionSort.js
 // =require slate/ajaxCart.js
-// =require slate/ajaxChimp.js
-// =require slate/slideshow.js
+// =require slate/ajaxMailChimpForm.js
+// =require slate/ajaxKlaviyoForm.js
 // =require slate/animations.js
 // =require slate/user.js
 // =require slate/breakpoints.js
 // =require slate/productCard.js
 // =require slate/productDetailForm.js
+// =require slate/quickView.js
 
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
+// =require slate/models/slideshow.js
+// =require slate/models/quickView.js
 
 /*================ Sections ================*/
 // =require sections/product.js
@@ -76,7 +78,7 @@ window.theme = window.theme || {};
     slate.utils.userAgentBodyClass();    
 
     // Apply a specific class to the html element for browser support of cookies.
-    if (slate.cart.cookiesEnabled()) {
+    if (slate.utils.cookiesEnabled()) {
       document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
     }
 

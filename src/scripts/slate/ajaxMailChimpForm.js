@@ -1,18 +1,40 @@
 /**
- * AJAX Chimp
+ * AJAX MailChimp Library
  * -----------------------------------------------------------------------------
  * Heavily modified version of the original jQuery plugin - https://github.com/scdoshi/jquery-ajaxchimp
  * Handles AJAX form submission and provides hooks for lifecycle events.
  *
- * @namespace ajaxChimp
+ * Usage:
+ *
+ *   var $form = $('form');
+ *   var ajaxForm = new slate.AjaxMailChimpForm($form, {
+ *     onInit: function() {
+ *       // ...
+ *     }
+ *   });
+ *
+ * @namespace ajaxMailChimpForm
  */
 
 
-slate.AjaxChimp = (function($) {
+slate.AjaxMailChimpForm = (function($) {
 
-  function AjaxChimp(form, options) {
+ /**
+  * AJAX MailChimp Form Contructor
+  *
+  * @param {HTMLElement | jQuery} form - Form element
+  * @param {Object} options
+  * @param {Function} options.onInit
+  * @param {Function} options.onDestroy
+  * @param {Function} options.onBeforeSend - Prevent AJAX submission by returning false here
+  * @param {Function} options.onSubmitFail
+  * @param {Function} options.onSubscribeSuccess
+  * @param {Function} options.onSubscribeFail
+  * @return {self}
+  */
+  function AjaxMailChimpForm(form, options) {
 
-    this.name = 'ajaxChimp'
+    this.name = 'ajaxMailChimpForm'
     this.namespace = '.' + this.name;
     this.events = {
       SUBMIT: 'submit' + this.namespace
@@ -23,8 +45,9 @@ slate.AjaxChimp = (function($) {
       onInit: $.noop,
       onDestroy: $.noop,
       onBeforeSend: $.noop,
-      onSubmitDone: $.noop,
-      onSubmitFail: $.noop
+      onSubmitFail: $.noop,
+      onSubscribeSuccess: $.noop,
+      onSubscribeFail: $.noop
     };
 
     if (form.length === 0) {
@@ -36,6 +59,10 @@ slate.AjaxChimp = (function($) {
     this.$submit  = this.$form.find('[type="submit"]');
     this.settings = $.extend({}, defaults, options);
 
+    if(this.$input.attr('name') != "EMAIL") {
+      console.warn('['+this.name+'] - Email input *must* have attribute [name="EMAIL"]');
+    }
+
     this.$form.on(this.events.SUBMIT, this.onFormSubmit.bind(_this));
 
     this.settings.onInit();
@@ -43,7 +70,7 @@ slate.AjaxChimp = (function($) {
     return this;
   };
 
-  AjaxChimp.prototype = $.extend({}, AjaxChimp.prototype, {
+  AjaxMailChimpForm.prototype = $.extend({}, AjaxMailChimpForm.prototype, {
     regexes: {
       error: {
         1: /Please enter a value/,
@@ -110,7 +137,10 @@ slate.AjaxChimp = (function($) {
       this.settings.onDestroy();
     },
     onBeforeSend: function() {
-      this.settings.onBeforeSend();
+      if(this.settings.onBeforeSend() == false) {
+        return false;
+      }
+
       if (this.$input.val() && this.$input.val().length) {
         this.$submit.prop('disabled', true);
         return true;
@@ -120,11 +150,9 @@ slate.AjaxChimp = (function($) {
       return false;
     },
     onSubmitDone: function(response) {
-      var success = response.result === 'success';
       var rspMsg = this.getMessageForResponse(response);
-
       this.$submit.prop('disabled', false);
-      this.settings.onSubmitDone(success, rspMsg);
+      response.result === 'success' ? this.settings.onSubscribeSuccess(rspMsg) : this.settings.onSubscribeFail(rspMsg);
     },
     onSubmitFail: function() {
       this.settings.onSubmitFail();
@@ -158,5 +186,5 @@ slate.AjaxChimp = (function($) {
     }
   });
 
-  return AjaxChimp;
+  return AjaxMailChimpForm;
 })(jQuery)

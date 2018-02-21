@@ -35,7 +35,7 @@ theme.Slideshow = (function($) {
       // Put your settings here
     };
 
-    this.slideshow = new slate.Slideshow( $(selectors.slideshowWrapper, this.$container), settings);
+    this.slideshow = new slate.models.Slideshow( $(selectors.slideshowWrapper, this.$container), settings);
 
   }
 
