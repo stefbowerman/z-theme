@@ -8,12 +8,17 @@
   {% include 'product-card',
               product: { product } - required
               quick_view: { boolean } - optional, defaults to false
+              show_swatches: { boolean } - optional, defaults to true
   %}
 
 {% endcomment -%}
 
 {% if quick_view == blank %}
   {% assign quick_view = false %}
+{% endif %}
+
+{% if show_swatches == blank %}
+  {% assign show_swatches = true %}
 {% endif %}
 
 {% if product %}
@@ -48,6 +53,20 @@
       {% endif %}
 
       <div class="product-card__info">
+
+        {% if show_swatches %}
+        
+          {% capture swatches_html %}
+            {% include 'product-dots-color' %}
+          {% endcapture %}
+
+          {% if swatches_html != blank %}
+            <div class="product-card__info-swatches">
+              {{ swatches_html }}
+            </div>
+          {% endif %}
+
+        {% endif %}
 
         <h3 class="product-card__info-title">
           <a href="{{ product_url }}">{{ product.title }}</a>
