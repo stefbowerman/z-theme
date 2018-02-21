@@ -42,6 +42,7 @@ window.theme = window.theme || {};
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
+// =require templates/page-styles.js
 
 (function($) {
 
