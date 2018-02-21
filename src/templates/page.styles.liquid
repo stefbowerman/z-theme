@@ -636,6 +636,7 @@
           <li>{% include 'icon-minus' %}</li>
           <li>{% include 'icon-plus' %}</li>
           <li>{% include 'icon-rss' %}</li>
+          <li>{% include 'icon-arrow-right' %}</li>
         </ul>
 
         <h3 id="docs-ui-elements" class="docs-title">UI Elements</h3>
@@ -654,6 +655,28 @@
 
         <h4 class="docs-subtitle">Social Sharing</h4>
         {% include 'social-sharing' %}
+
+        <h4 class="docs-subtitle">Minimal Input</h4>
+        <p>Normal</p>
+        <div class="minimal-input-box">
+          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+          <button type="submit" class="minimal-input-box__submit">
+            {% include 'icon-search' %}
+            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+        </div>
+
+        <br /><br />
+        <p>Inverted</p>
+        <div class="docs-well docs-well--dark">
+          <div class="minimal-input-box minimal-input-box--inverted">
+            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </div>
+        </div>        
 
       </div>
     </div>
