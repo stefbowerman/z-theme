@@ -28,6 +28,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     productGallery: '[data-product-gallery]',
     productGallerySlideshow: '[data-product-gallery-slideshow]',
     productGallerySlideLink: '[data-product-gallery-slide-link]',
+    productGalleryThumbnail: '[data-product-gallery-thumbnail]',
+    productGalleryThumbnailSlide: '[data-product-gallery-thumbnail-slide]',    
     initialSlide: '[data-initial-slide]',
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
@@ -112,9 +114,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       this.variants = new slate.Variants(variantOptions);
 
-      // See slate.Variants for these events
+      // See slate.Variants
       this.$container.on('variantChange' + this.namespace, this.onVariantChange.bind(this));
-      this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
 
       this.initGalleries();
 
@@ -192,6 +193,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       $galleries.each(function() {
         var $slideshow  = $(this).find(selectors.productGallerySlideshow);
+        var $thumbnail = $(this).find(selectors.productGalleryThumbnail);
 
         // Look for element with the initialSlide selector.
         var initialSlide = $(this).find(selectors.initialSlide).length ? $(this).find(selectors.initialSlide).index() : 0;
@@ -207,18 +209,35 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           dots: false,
           swipe: Modernizr.touchevents,
           arrows: !Modernizr.touchevents,
+          asNavFor: '#' + $thumbnail.attr('id'),
           prevArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--left"><a class="arrow arrow--transparent arrow--left"><span class="arrow__icon"><~</span></a></div>',
           nextArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--right"><a class="arrow arrow--transparent"><span class="arrow__icon">~></span></a></div>',
           initialSlide: initialSlide,
           accessibility: false,
           draggable: true
         });
+
+        $thumbnail.on('click', selectors.productGalleryThumbnailSlide, function() {
+          $slideshow.slick('slickGoTo', $(this).data('slick-index'));
+        });
+
+        $thumbnail.slick({
+          speed: 600,
+          slidesToShow: $thumbnail.find(selectors.productGalleryThumbnailSlide).length == 4 ? 3 : 4, // Slick has trouble when slidesToShow = slide number
+          slidestoScroll: 1,
+          arrows: false,
+          asNavFor: '#' + $slideshow.attr('id'),
+          initialSlide: initialSlide,
+          accessibility: false,
+          draggable: false
+        });        
       });
 
       // Because slick can get weird on initialization, make sure we call `refresh` on any visible galleries
       $galleries.not('.hide').each(function() {
         var $variantGallery = $(this);
         $variantGallery.find(selectors.productGallerySlideshow).slick('getSlick').refresh();
+        $variantGallery.find(selectors.productGalleryThumbnail).slick('getSlick').refresh();
       });
     },
 
@@ -233,13 +252,14 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     onVariantChange: function(evt) {
       var variant = evt.variant;
 
+      this.updateProductPrices(variant);
       this.updateAddToCartState(variant);
       this.updateQuantityDropdown(variant);
       this.updateVariantOptionValues(variant);
       this.updateFullDetailsLink(variant);
       this.updateGalleries(variant);
 
-      this.$container.find(selectors.singleOptionSelector).trigger('chosen:updated');
+      $(selectors.singleOptionSelector, this.$container).trigger('chosen:updated');
     },
 
     /**
@@ -249,15 +269,16 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
      */
     updateAddToCartState: function(variant) {
 
-      var $addToCartBtn     = this.$container.find(selectors.addToCart);
-      var $addToCartBtnText = this.$container.find(selectors.addToCartText);
+      var $addToCartBtn     = $(selectors.addToCart, this.$container);
+      var $addToCartBtnText = $(selectors.addToCartText, this.$container);
+      var $priceWrapper     = $(selectors.priceWrapper, this.$container);
 
       if (variant) {
-        this.$container.find(selectors.priceWrapper).removeClass(classes.hide);
+        $priceWrapper.removeClass(classes.hide);
       } else {
         $addToCartBtn.prop('disabled', true);
         $addToCartBtnText.html(theme.strings.unavailable);
-        this.$container.find(selectors.priceWrapper).addClass(classes.hide);
+        $priceWrapper.addClass(classes.hide);
         return;
       }
 
@@ -277,7 +298,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
      */
     updateQuantityDropdown: function(variant) {
 
-      var $select = $(selectors.quantitySelect);
+      var $select = $(selectors.quantitySelect, this.$container);
 
       // Close the dropdown while we make changes to it
       $select.trigger('chosen:close');
@@ -315,22 +336,26 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     /**
      * Updates the DOM with specified prices
      *
-     * @param {string} productPrice - The current price of the product
-     * @param {string} comparePrice - The original price of the product
+     * @param {Object} variant - Shopify variant object
      */
-    updateProductPrices: function(evt) {
-      var variant = evt.variant;
-      var $comparePrice = $(selectors.comparePrice);
-      var $compareEls = $comparePrice.add(selectors.comparePriceText);
+    updateProductPrices: function(variant) {
+      var $productPrice = $(selectors.productPrice, this.$container);
+      var $comparePrice = $(selectors.comparePrice, this.$container);
+      var $compareEls   = $comparePrice.add( $(selectors.comparePriceText, this.$container) );
 
-      this.$container.find(selectors.productPrice).html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
+      if(variant) {
+        $productPrice.html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
 
-      if (variant.compare_at_price > variant.price) {
-        $comparePrice.html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
-        $compareEls.removeClass(classes.hide);
-      } else {
-        $comparePrice.html('');
-        $compareEls.addClass(classes.hide);
+        // look for recharge stuff
+        // if recharge form -> look for selected radio on current variant
+
+        if (variant.compare_at_price > variant.price) {
+          $comparePrice.html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
+          $compareEls.removeClass(classes.hide);
+        } else {
+          $comparePrice.html('');
+          $compareEls.addClass(classes.hide);
+        }
       }
     },
 
@@ -344,9 +369,9 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
         // Loop through all the options and update the option value
         for (var i = 3; i >= 1; i--) {
           var variantOptionValue = variant['option' + i];
-          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]');
+          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]', this.$container);
 
-          $variantOptionValueUI.addClass(classes.variantOptionValueActive);
+          $variantOptionValueUI.addClass( classes.variantOptionValueActive );
           $variantOptionValueUI.siblings().removeClass( classes.variantOptionValueActive );
         }
       }
@@ -390,16 +415,18 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
               $variantGallery.removeClass(classes.hide);
               // Slick needs to make a lot of measurements in order to work, calling `refresh` forces this to happen
               $variantGallery.find(selectors.productGallerySlideshow).slick('getSlick').refresh();
+              $variantGallery.find(selectors.productGalleryThumbnail).slick('getSlick').refresh();
             }
           }
         }
         else {
+          // $galleries is just a single gallery
           // Slide to featured image for selected variant
           if (variant.featured_image) {
-            var $imageSlide = $(selectors.productGallerySlideshow).find('[data-image="'+variant.featured_image.id+'"]').first();
+            var $imageSlide = $galleries.find('[data-image="'+variant.featured_image.id+'"]').first();
 
             if ($imageSlide.length) {
-              $imageSlide.parents(selectors.productGallerySlideshow).slick('slickGoTo', $imageSlide.data('slick-index'));
+              $galleries.find(selectors.productGallerySlideshow).slick('slickGoTo', $imageSlide.data('slick-index'));
             }
           }
         }
@@ -425,7 +452,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       var value     = $option.data('variant-option-value');
       var position  = $option.parents(selectors.variantOptionValueList).data('option-position');
-      var $selector = $(selectors.singleOptionSelector).filter('[data-index="option'+position+'"]');
+      var $selector = $(selectors.singleOptionSelector, this.$container).filter('[data-index="option'+position+'"]');
 
       $selector.val(value);
       $selector.trigger('change');

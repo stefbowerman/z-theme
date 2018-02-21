@@ -54,3 +54,9 @@
  */
  // =require vendor/bootstrap.transition.js
  // =require vendor/bootstrap.modal.js
+
+ 
+/*!
+ * ImagesLoaded
+ */
+ // =require /../../node_modules/imagesloaded/imagesloaded.pkgd.min.js
