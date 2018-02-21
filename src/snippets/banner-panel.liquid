@@ -1,0 +1,166 @@
+{%- comment %}
+
+  Banner Panel
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'banner-panel',
+              id: { string } - required
+              content_alignment: { string } - optional
+              vertical_padding: { number } - optional
+              vertical_padding_mobile: { number } - optional
+              content_max_width: { number } - optional
+              background_image: { image } - optional
+              background_image_vertical_alignment: { string } - optional - defaults to "center"
+              background_image_medium: { image } - optional
+              background_image_medium_vertical_alignment: { string } - optional - defaults to "center"
+              background_image_small: { image } - optional
+              background_image_small_vertical_alignment: { string } - optional - defaults to "center",
+              light_text: { boolean }
+              title: { string }
+              title_alignment: { string } - optional - defaults to "center"
+              text: { string }
+              text_alignment: { string } - optional - defaults to "center"
+              cta_1_url: { url }
+              cta_1_text { string }
+              cta_2_url: { url }
+              cta_2_text: { string }
+  %}
+
+{% endcomment -%}
+
+{% comment %} Set defaults {% endcomment %}
+{% if background_image_vertical_alignment == blank %}
+  {% assign background_image_vertical_alignment = 'center' %}
+{% endif %}
+
+{% if background_image_medium_vertical_alignment == blank %}
+  {% assign background_image_medium_vertical_alignment = 'center' %}
+{% endif %}
+
+{% if background_image_small_vertical_alignment == blank %}
+  {% assign background_image_small_vertical_alignment = 'center' %}
+{% endif %}
+
+{% if title_alignment == blank %}
+  {% assign title_alignment = 'center' %}
+{% endif %}
+
+{% if text_alignment == blank %}
+  {% assign text_alignment = 'center' %}
+{% endif %}
+
+{% comment %} Check for missing arguments {% endcomment %}
+{% assign has_title = false %}
+{% if title != blank %}
+  {% assign has_title = true %}
+{% endif %}
+
+{% assign has_text = false %}
+{% if text != blank %}
+  {% assign has_text = true %}
+{% endif %}
+
+{% assign has_cta_1 = false %}
+{% if cta_1_url != blank and cta_1_text != blank %}
+  {% assign has_cta_1 = true %}
+{% endif %}
+
+{% assign has_cta_2 = false %}
+{% if cta_2_url != blank and cta_2_text != blank %}
+  {% assign has_cta_2 = true %}
+{% endif %}
+
+{% comment %} Only show the banner panel if there is text or a cta or a background image {% endcomment %}
+{% if has_title or has_text or has_cta_1 or has_cta_2 or background_image %}
+
+  <div id="banner__panel-{{ id }}" class="banner__panel{% if light_text %} banner__panel--light{% endif %}">
+
+      <style type="text/css">
+      {% if vertical_padding != blank %}
+      #banner__panel-{{ id }} {
+        padding-top: {{ vertical_padding | append: 'px' }};
+        padding-bottom: {{ vertical_padding | append: 'px' }};
+      }
+      {% endif %}      
+      #banner__panel-{{ id }} .banner__title {
+        text-align: {{ title_alignment }};
+      }
+      #banner__panel-{{ id }} .banner__text {
+        text-align: {{ text_alignment }};
+      }
+      {% if content_max_width != blank %}
+      #banner__panel-{{ id }} .banner__content-container {
+        max-width: {{ content_max_width | append: 'px' }};
+      }
+      {% endif %}
+      #banner__panel-{{ id }} .banner__bg-image {
+        background-position: center {{ background_image_vertical_alignment }};
+      }
+      {% if background_image %}
+      #banner__panel-{{ id }} .banner__bg-image {
+        background-image: url({{ background_image | img_url: '1800x' }});
+      }
+      {% endif %}
+
+      @media (max-width: 991px) {
+        #banner__panel-{{ id }} .banner__bg-image {
+          background-position: center {{ background_image_medium_vertical_alignment }};
+          {% if background_image_medium %}
+            background-image: url({{ background_image_medium | img_url: '1400x' }});
+          {% elsif background_image %}
+            background-image: url({{ background_image | img_url: '1400x' }});
+          {% endif %}
+        }      
+      }
+
+      @media (max-width: 767px) {
+        {% if vertical_padding_mobile != blank %}
+        #banner__panel-{{ id }} {
+          padding-top: {{ vertical_padding_mobile | append: 'px' }};
+          padding-bottom: {{ vertical_padding_mobile | append: 'px' }};
+        }
+        {% endif %}
+        #banner__panel-{{ id }} .banner__bg-image {
+          background-position: center {{ background_image_small_vertical_alignment }};
+          {% if background_image_small %}
+            background-image: url({{ background_image_small | img_url: '800x' }});
+          {% elsif background_image %}
+            background-image: url({{ background_image | img_url: '800x' }});
+          {% endif %}
+        }
+      }
+    </style>
+
+    {% if background_image or background_image_medium or background_image_small %}
+      <div class="banner__bg-container">
+        <div class="banner__bg-image"></div>
+      </div>
+    {% endif %}
+
+    <div class="container-fluid-max">
+      <div class="banner__content-container banner__content-container--{{ content_alignment }}">
+        {% if has_title %}
+          <h3 class="banner__title">{{ title }}</h3>
+        {% endif %}
+        {% if has_text %}
+          <div class="banner__text">{{ text }}</div>
+        {% endif %}
+
+        {% capture cta_html %}
+          {% if has_cta_1 %}
+            <a href="{{ cta_1_url }}">{{ cta_1_text }}</a>
+          {% endif %}
+          {% if has_cta_2 %}
+            <a href="{{ cta_2_url }}">{{ cta_2_text }}</a>
+          {% endif %}
+        {% endcapture %}
+
+        {% if cta_html != blank %}
+          <div class="cta-group">{{ cta_html }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
