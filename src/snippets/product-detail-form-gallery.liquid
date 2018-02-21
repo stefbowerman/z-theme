@@ -10,10 +10,14 @@
     .product-galleries
       .product-gallery
         .product-gallery__slideshow-wrapper
-          ul.product-gallery__slideshow
+          ul.product-gallery__slideshow <- Needs an id in order for the asNavFor to work
             li.product-gallery__slideshow-slide
               a
                 img
+        .product-gallery__thumbnails-wrapper
+          ul.product-gallery__thumbnails <- Needs an id in order for the asNavFor to work
+            li.product-gallery__thumbnails-slide
+              img
   - The only difference between the two is that .product-gallery elements gets a `data-variant-gallery` attribute matching the color value associated with it
 
   Usage:
@@ -82,7 +86,7 @@
 
           <div class="product-gallery{% if option.selected_value != color %} hide{% endif %}" data-product-gallery data-variant-gallery="{{ color }}">
             <div class="product-gallery__slideshow-wrapper">
-              <ul class="product-gallery__slideshow" data-product-gallery-slideshow>
+              <ul id="slideshow-{{ product.id }}-{{ forloop.index }}" class="product-gallery__slideshow" data-product-gallery-slideshow>
                 {% for image in product.images %}
                   {% assign image_alt_downcase = image.alt | downcase %}
                   {% if image_alt_downcase contains color_downcase %}
@@ -101,6 +105,20 @@
                 {% endfor %}
               </ul>
             </div>
+            <div class="product-gallery__thumbnails-wrapper">
+              <ul id="slideshow-thumbs-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumbnails" data-product-gallery-thumbnail>
+                {% for image in product.images %}
+                  {% assign image_alt_downcase = image.alt | downcase %}
+                  {% if image_alt_downcase contains color_downcase %}
+                    {% unless image_alt_downcase contains alt_swatch_identifier %}
+                      <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnail-slide>
+                        <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
+                      </li>
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>            
           </div>
         {% endfor %}
       {% endif %}
@@ -111,7 +129,7 @@
     {% comment %} Make one gallery for all the images {% endcomment %}
     <div class="product-gallery" data-product-gallery>
       <div class="product-gallery__slideshow-wrapper">
-        <ul class="product-gallery__slideshow" data-product-gallery-slideshow>
+        <ul id="slideshow-{{ product.id }}" class="product-gallery__slideshow" data-product-gallery-slideshow>
           {% for image in product.images %}
             {% assign image_alt_downcase = image.alt | downcase %}
             {% unless image_alt_downcase contains alt_swatch_identifier %}
@@ -127,6 +145,18 @@
           {% endfor %}
         </ul>
       </div>
+      <div class="product-gallery__thumbnails-wrapper">
+        <ul id="slideshow-thumbs-{{ product.id }}" class="product-gallery__thumbnails list-unstyled" data-product-gallery-thumbnail>
+          {% for image in product.images %}
+            {% assign image_alt_downcase = image.alt | downcase %}
+            {% unless image_alt_downcase contains alt_swatch_identifier %}
+              <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnail-slide>
+                <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>      
     </div>
   {% endif %}
 

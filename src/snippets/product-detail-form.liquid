@@ -47,6 +47,21 @@
         <h1>{{ product.title }}</h1>
         <p>{{ product.vendor }}</p>
 
+        <div data-price-wrapper>
+          <span data-product-price>
+            {{ current_variant.price | money }}
+          </span>
+
+          {% if product.compare_at_price_max > product.price %}
+            <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+            <s data-compare-price>
+              {% if current_variant.compare_at_price > current_variant.price %}
+                {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+          {% endif %}
+        </div>        
+
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
           <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
@@ -55,16 +70,28 @@
           <form action="/cart/add" method="post" enctype="multipart/form-data">
             {% unless product.has_only_default_variant %}
               {% for option in product.options_with_values %}
-                <div class="selector-wrapper js">
+                
+                {% assign option_name_downcase = option.name | downcase %}
+
+                {% capture option_alt_ui %}
+                  {% if option_name_downcase == "color" %}
+                    {% include 'product-dots-color', product: product, selected_color: option.selected_value %}
+                  {% endif %}
+                {% endcapture %}
+
+                <div class="selector-wrapper form-group js">
+
                   <label for="SingleOptionSelector-{{ forloop.index0 }}">
                     {{ option.name }}
                   </label>
+
 
                   <select
                     id="SingleOptionSelector-{{ forloop.index0 }}"
                     class="form-control"
                     data-single-option-selector
-                    data-index="option{{ option.position }}">
+                    data-index="option{{ option.position }}"
+                    {% if option_alt_ui != blank %}style="display: none" data-no-chosen{% endif %}>
                     {% for value in option.values %}
                       <option
                         value="{{ value | escape }}"
@@ -74,33 +101,37 @@
                     {% endfor %}
                   </select>
 
-                  {% comment %}
-                    To enable alternative variant option value select UI, create your markup here with the following data attributes.
-
-                    parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
-                      child - 'data-variant-option-value="{{ value }}"'
-
-                    These data attributes are used to attach click events and update the selected variant when one is clicked.
-                    The child element should respond to some sort of 'active' class to reflect the selected value.
-
-                    See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
-
-                    For example, to show a list of sizes..
-
-                    {% if option.name == "Size" %}
-                      <div data-option-position="{{ option.position }}" data-variant-option-value-list>
-                        {% for value in option.values %}
-                          <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
-                            {{ value }}
-                          </span>
-                        {% endfor %}
-                      </div>
-                    {% endif %}
-
-                    Be sure to hide the corresponding select tag for that option
-                  {% endcomment %}
+                  {% comment %} Output alternative option UI here {% endcomment %}
+                  {{ option_alt_ui }}
 
                 </div>
+
+                {% comment %}
+                  To enable alternative variant option value select UI, create your markup here with the following data attributes.
+
+                  parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
+                    child - 'data-variant-option-value="{{ value }}"'
+
+                  These data attributes are used to attach click events and update the selected variant when one is clicked.
+                  The child element should respond to some sort of 'active' class to reflect the selected value.
+
+                  See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
+
+                  For example, to show a list of sizes..
+
+                  {% if option.name == "Size" %}
+                    <div data-option-position="{{ option.position }}" data-variant-option-value-list>
+                      {% for value in option.values %}
+                        <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
+                          {{ value }}
+                        </span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
+                  Be sure to hide the corresponding select tag for that option
+                {% endcomment %}
+
               {% endfor %}
             {% endunless %}
 
@@ -115,22 +146,15 @@
               {% endfor %}
             </select>
 
-            <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-            <input type="number" id="Quantity" name="quantity" value="1" min="1">
-
-            <div data-price-wrapper>
-              <span data-product-price>
-                {{ current_variant.price | money }}
-              </span>
-
-              {% if product.compare_at_price_max > product.price %}
-                <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-                <s data-compare-price>
-                  {% if current_variant.compare_at_price > current_variant.price %}
-                    {{ current_variant.compare_at_price | money }}
-                  {% endif %}
-                </s>
-              {% endif %}
+            <div class="selector-wrapper form-group" style="min-width: 0;">
+              <label for="Quantity">{{ 'products.product.quantity' | t }}:</label>
+              <div style="max-width: 80px;">
+                <select id="Quantity" name="quantity" class="form-control" {% if current_variant.available == false %}disabled="true"{% endif %} data-product-quantity-select>
+                  {% for i in (1..5) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                  {% endfor %}
+                </select>
+              </div>
             </div>
 
             <button

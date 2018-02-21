@@ -110,8 +110,6 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
         product: this.productSingleObject
       };
 
-      this.QUANTITY_SELECT_LIMIT = this.$container.find(selectors.quantitySelect).first().data('max') || 4;
-
       this.variants = new slate.Variants(variantOptions);
 
       // See slate.Variants
@@ -292,7 +290,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     },
 
     /**
-     * Updates the quantity select dropdown based on the available quantity and inventory management setting of the selected variant
+     * Updates the disabled property of the quantity select based on the availability of the selected variant
      *
      * @param {Object} variant - Shopify variant object
      */
@@ -303,30 +301,11 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
       // Close the dropdown while we make changes to it
       $select.trigger('chosen:close');
 
-      if(variant && variant.inventory_management && variant.inventory_policy == "deny") {
-        if(variant.inventory_quantity > 0) {
-          $select.prop('disabled', false);
-          
-          // Update the select box to max out at the limit if less than 5?
-          var limit = (variant.inventory_quantity > this.QUANTITY_SELECT_LIMIT ? this.QUANTITY_SELECT_LIMIT : variant.inventory_quantity);
-          
-          $select.empty();
-
-          for (var i = 1; i <= limit; i++) {
-            
-            var option = document.createElement('option');
-                option.value = i;
-                option.text  = i;
-
-            $select.append(option);
-          }
-        }
-        else {
-          $select.prop('disabled', true);
-        }
+      if(variant && variant.available) {
+        $select.prop('disabled', false);
       }
       else {
-        $select.prop('disabled', false);
+        $select.prop('disabled', true);
       }
 
       $select.trigger('chosen:updated');
@@ -421,8 +400,9 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
         }
         else {
           // $galleries is just a single gallery
-          // Slide to featured image for selected variant
-          if (variant.featured_image) {
+          // Slide to featured image for selected variant but only if we're not already on it.
+          // Have to check this way because slick clones slides so even if we're currently on it, there can be a cloned slide that also has the correct data-image attribute
+          if (variant.featured_image && $galleries.find('.slick-current').data('image') != variant.featured_image.id) {
             var $imageSlide = $galleries.find('[data-image="'+variant.featured_image.id+'"]').first();
 
             if ($imageSlide.length) {
