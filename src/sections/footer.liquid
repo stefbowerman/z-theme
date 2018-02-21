@@ -44,8 +44,15 @@
           <p>{{ section.settings.subscribe_text }}</p>
         {% endif %}        
         <form action="{{ settings.newsletter_form_action }}" method="post">
-          <input type="email" class="form-control" value="{% if customer %}{{ customer.email }}{% endif %}" required="required"/>
-          <input type="submit" name="submit" value="Submit" class="btn">
+          <div class="form-group">
+            <div class="minimal-input-box minimal-input-box--inverted">
+              <input type="email" class="minimal-input-box__input" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Subscribe to our newsletter" required="required"/>
+              <button type="submit" class="minimal-input-box__submit">
+                {% include 'icon-arrow-right' %}
+                <span class="icon-fallback-text">Submit</span>
+              </button>
+            </div>
+          </div>
         </form>
 
         {% comment %} Put the social stuff in a capture block because we use it twice in the footer {% endcomment %}
