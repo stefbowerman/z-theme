@@ -32,132 +32,136 @@
   {% assign is_quick_view = true %}
 {% endif %}
 
-<div class="container">
+<div data-product-detail-form>
 
-  {% include 'product-detail-form-gallery',
-              product: product,
-              current_variant: current_variant
-  %}  
+  <div class="container">
 
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.vendor }}</p>
+    {% include 'product-detail-form-gallery',
+                product: product,
+                current_variant: current_variant
+    %}  
 
-  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-    <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-    <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+    <h1>{{ product.title }}</h1>
+    <p>{{ product.vendor }}</p>
 
-    <form action="/cart/add" method="post" enctype="multipart/form-data">
-      {% unless product.has_only_default_variant %}
-        {% for option in product.options_with_values %}
-          <div class="selector-wrapper js">
-            <label for="SingleOptionSelector-{{ forloop.index0 }}">
-              {{ option.name }}
-            </label>
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+      <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+      <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
-            <select
-              id="SingleOptionSelector-{{ forloop.index0 }}"
-              class="form-control"
-              data-single-option-selector
-              data-index="option{{ option.position }}">
-              {% for value in option.values %}
-                <option
-                  value="{{ value | escape }}"
-                  {% if option.selected_value == value %}selected="selected"{% endif %}>
-                    {{ value }}
-                </option>
-              {% endfor %}
-            </select>
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="selector-wrapper js">
+              <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                {{ option.name }}
+              </label>
 
-            {% comment %}
-              To enable alternative variant option value select UI, create your markup here with the following data attributes.
-
-              parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
-                child - 'data-variant-option-value="{{ value }}"'
-
-              These data attributes are used to attach click events and update the selected variant when one is clicked.
-              The child element should respond to some sort of 'active' class to reflect the selected value.
-
-              See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
-
-              For example, to show a list of sizes..
-
-              {% if option.name == "Size" %}
-                <div data-option-position="{{ option.position }}" data-variant-option-value-list>
-                  {% for value in option.values %}
-                    <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
+              <select
+                id="SingleOptionSelector-{{ forloop.index0 }}"
+                class="form-control"
+                data-single-option-selector
+                data-index="option{{ option.position }}">
+                {% for value in option.values %}
+                  <option
+                    value="{{ value | escape }}"
+                    {% if option.selected_value == value %}selected="selected"{% endif %}>
                       {{ value }}
-                    </span>
-                  {% endfor %}
-                </div>
-              {% endif %}
+                  </option>
+                {% endfor %}
+              </select>
 
-              Be sure to hide the corresponding select tag for that option
-            {% endcomment %}
+              {% comment %}
+                To enable alternative variant option value select UI, create your markup here with the following data attributes.
 
-          </div>
-        {% endfor %}
-      {% endunless %}
+                parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
+                  child - 'data-variant-option-value="{{ value }}"'
 
-      <select name="id" class="no-js" data-product-select>
-        {% for variant in product.variants %}
-          <option
-            {% if variant == current_variant %}selected="selected"{% endif %}
-            {% unless variant.available %}disabled="disabled"{% endunless %}
-            value="{{ variant.id }}">
-              {{ variant.title }}
-          </option>
-        {% endfor %}
-      </select>
+                These data attributes are used to attach click events and update the selected variant when one is clicked.
+                The child element should respond to some sort of 'active' class to reflect the selected value.
 
-      <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+                See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
 
-      <div data-price-wrapper>
-        <span data-product-price>
-          {{ current_variant.price | money }}
-        </span>
+                For example, to show a list of sizes..
 
-        {% if product.compare_at_price_max > product.price %}
-          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-          <s data-compare-price>
-            {% if current_variant.compare_at_price > current_variant.price %}
-              {{ current_variant.compare_at_price | money }}
-            {% endif %}
-          </s>
-        {% endif %}
-      </div>
+                {% if option.name == "Size" %}
+                  <div data-option-position="{{ option.position }}" data-variant-option-value-list>
+                    {% for value in option.values %}
+                      <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
+                        {{ value }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
 
-      <button
-        type="submit"
-        name="add"
-        class="btn btn-primary"
-        data-add-to-cart
-        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-          <span data-add-to-cart-text>
-            {% if current_variant.available %}
-              {{ 'products.product.add_to_cart' | t }}
-            {% else %}
-              {{ 'products.product.sold_out' | t }}
-            {% endif %}
+                Be sure to hide the corresponding select tag for that option
+              {% endcomment %}
+
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <select name="id" class="no-js" data-product-select>
+          {% for variant in product.variants %}
+            <option
+              {% if variant == current_variant %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled="disabled"{% endunless %}
+              value="{{ variant.id }}">
+                {{ variant.title }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+        <input type="number" id="Quantity" name="quantity" value="1" min="1">
+
+        <div data-price-wrapper>
+          <span data-product-price>
+            {{ current_variant.price | money }}
           </span>
-      </button>
-    </form>
 
+          {% if product.compare_at_price_max > product.price %}
+            <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+            <s data-compare-price>
+              {% if current_variant.compare_at_price > current_variant.price %}
+                {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+          {% endif %}
+        </div>
+
+        <button
+          type="submit"
+          name="add"
+          class="btn btn-primary"
+          data-add-to-cart
+          {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+            <span data-add-to-cart-text>
+              {% if current_variant.available %}
+                {{ 'products.product.add_to_cart' | t }}
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+        </button>
+      </form>
+
+    </div>
+
+    <div class="rte">
+      {{ product.description }}
+    </div>
+
+    {% if is_quick_view %}
+      {% comment %} This link will get updated on variant change.  See productDetailForm.js {% endcomment %}
+      <a href="{{ current_variant.url }}" data-full-details-link>View Full Details</a>
+    {% endif %}
   </div>
 
-  <div class="rte">
-    {{ product.description }}
-  </div>
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
 
-  {% if is_quick_view %}
-    {% comment %} This link will get updated on variant change.  See productDetailForm.js {% endcomment %}
-    <a href="{{ current_variant.url }}" data-full-details-link>View Full Details</a>
-  {% endif %}
 </div>
-
-{% unless product == empty %}
-  <script type="application/json" data-product-json>
-    {{ product | json }}
-  </script>
-{% endunless %}

@@ -19,10 +19,12 @@ window.theme = window.theme || {};
 // =require slate/breakpoints.js
 // =require slate/productCard.js
 // =require slate/productDetailForm.js
+// =require slate/quickView.js
 
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
 // =require slate/models/slideshow.js
+// =require slate/models/quickView.js
 
 /*================ Sections ================*/
 // =require sections/product.js
