@@ -38,6 +38,7 @@ window.theme = window.theme || {};
 // =require sections/ajaxCart.js
 // =require sections/cart.js
 // =require sections/mobileMenu.js
+// =require sections/blog.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -63,6 +64,7 @@ window.theme = window.theme || {};
     sections.register('ajax-cart', theme.AjaxCart);
     sections.register('cart', theme.Cart);
     sections.register('mobile-menu', theme.MobileMenu);
+    sections.register('blog', theme.Blog);
 
     $('.in-page-link').on('click', function(evt) {
       slate.a11y.pageLinkFocus($(evt.currentTarget.hash));

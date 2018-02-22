@@ -157,7 +157,8 @@
       "delete_confirm": "Are you sure you wish to delete this address?"
     },
     "login": {
-      "title": "Login",
+      "title": "Login or Create an Account",
+      "subtitle": "Sign in for access to convenient features and quick checkout.",
       "email": "Email",
       "password": "Password",
       "forgot_password": "Forgot your password?",
@@ -212,6 +213,7 @@
     },
     "register": {
       "title": "Create Account",
+      "subtitle": "Register for quick checkout, order status, purchase history, wishlists, and more.",
       "first_name": "First Name",
       "last_name": "Last Name",
       "email": "Email",

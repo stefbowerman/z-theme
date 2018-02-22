@@ -134,11 +134,13 @@ A simple example would look like:
 theme.AboutUs = (function() {
 
   // Place all selectors at the top of this file
+  // These should almost always be data-attributes (to keep css classes strictly presentational) that describe the elements they select
   var selectors = {
     aboutButton: '[data-about-button]'
   };
 
-  // Place all classes at the top of this file that get used in functions down below.
+  // Place all css classes at the top of this file that get used in functions down below.
+  // These are typically used to represent the different element states
   var classes = {
     isActive: 'is-active'
   };
@@ -151,6 +153,7 @@ theme.AboutUs = (function() {
     this.name = 'aboutUs', // namespaces should be camelCased.
     this.namespace = '.'+this.name; // namespaces are useful if you need to fire events that are section specific
 
+    // Be sure to bind all event handlers
     $(selectors.aboutButton).on('click', this.onAboutButtonClick.bind(this));
   }
 

@@ -1,38 +1,54 @@
-<h1>{{ 'customer.account.title' | t }}</h1>
-
-<h2>{{ 'customer.orders.title' | t }}</h2>
-
 {% paginate customer.orders by 20 %}
-  {% if customer.orders.size != 0 %}
-    <table class="table">
-      <thead>
-        <tr>
-          <th>{{ 'customer.orders.order_number' | t }}</th>
-          <th>{{ 'customer.orders.date' | t }}</th>
-          <th>{{ 'customer.orders.payment_status' | t }}</th>
-          <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
-          <th>{{ 'customer.orders.total' | t }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in customer.orders %}
-          <tr>
-            <td>{{ order.name | link_to: order.customer_url }}</td>
-            <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
-            <td>{{ order.financial_status_label }}</td>
-            <td>{{ order.fulfillment_status_label }}</td>
-            <td>{{ order.total_price | money }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>{{ 'customer.orders.none' | t }}</p>
-  {% endif %}
 
-  {% if paginate.pages > 1 %}
-    {% include 'pagination' %}
-  {% endif %}
+  <div class="layout-content-wrapper">
+    <div class="container">
+      <div class="row">
+
+        <div class="page-header">
+          <h1 class="page-header__title">
+            {% if customer.first_name %}
+              {{ 'Welcome, ' | append: customer.first_name | append: '!' }}
+            {% else %}
+              {{ 'customer.account.title' | t }}
+            {% endif %}
+          </h1>
+        </div>        
+
+        <h2>{{ 'customer.orders.title' | t }}</h2>
+
+        {% if customer.orders.size != 0 %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ 'customer.orders.order_number' | t }}</th>
+                <th>{{ 'customer.orders.date' | t }}</th>
+                <th>{{ 'customer.orders.payment_status' | t }}</th>
+                <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th>{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <td>{{ order.name | link_to: order.customer_url }}</td>
+                  <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
+                  <td>{{ order.financial_status_label }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>{{ 'customer.orders.none' | t }}</p>
+        {% endif %}
+
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
 {% endpaginate %}
 
