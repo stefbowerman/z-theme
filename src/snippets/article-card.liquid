@@ -6,10 +6,20 @@
   Usage:
 
   {% include 'article-card',
-              article: { article }
+              article: { article },
+              show_author: { boolean } - defaults to true
+              show_tags: { boolean } - defaults to true
   %}
 
 {% endcomment -%}
+
+{% if show_author == blank %}
+  {% assign show_author = true %}
+{% endif %}
+
+{% if show_tags == blank %}
+  {% assign show_tags = true %}
+{% endif %}
 
 {% if article and article != blank %}
   
@@ -23,7 +33,7 @@
       </a>
     {% endif %}
     <div class="article-card__info">
-      {% if article.tags.size > 0 %}
+      {% if article.tags.size > 0 and show_tags %}
         <div class="article-card__info-tags">
           {% for tag in article.tags %}
             <a href="/blogs/{{ blog_handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
@@ -37,7 +47,11 @@
       <div class="article-card__info-meta">
         {% capture author_link %}<a href="{{ article.user.homepage }}">{{ article.author }}</a>{% endcapture %}
         {% capture date %}{{ article.published_at | time_tag: format: 'month_day' }}{% endcapture %}
-        {{ 'blogs.article.author_on_date_html' | t: author: author_link, date: date }}
+        {% if show_author %}
+          {{ 'blogs.article.author_on_date_html' | t: author: author_link, date: date }}
+        {% else %}
+          {{ date }}
+        {% endif %}
       </div>
     </div>
   </div>

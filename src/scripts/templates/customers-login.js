@@ -42,6 +42,7 @@ theme.customerLogin = (function() {
   function toggleRecoverPasswordForm() {
     $('#RecoverPasswordForm').toggleClass('hide');
     $('#CustomerLoginForm').toggleClass('hide');
+    $('#RecoverPassword').toggleClass('hide');
   }
 
   /**
