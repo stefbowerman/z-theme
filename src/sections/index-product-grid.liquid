@@ -1,0 +1,80 @@
+
+{% assign product_count = 0 %}
+{% capture content_grid_html %}
+  {% for block in section.blocks %}
+    {% if block.type == "product" %}
+      {% assign product_handle = block.settings.product %}
+      {% assign product = all_products[product_handle] %}
+      {% if product_handle != blank %}
+        <div class="content-grid__item" {{ block.shopify_attributes }}>
+          {% include 'product-card', product: product %}
+        </div>
+        {% assign product_count = product_count | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}   
+{% endcapture %}
+
+{% if content_grid_html != blank %}
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h3 class="u-ta-center">{{ section.settings.title }}</h3>
+    {% endif %}    
+    <div class="content-grid content-grid--centered content-grid--{{ product_count }}-across">
+      {{ content_grid_html }}
+    </div>
+    {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+      <div class="u-ta-center">
+        <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Product Grid",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      }   
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Product",
+        "name": "Product Grid",
+        "settings": {
+          "title": "Our Products"
+        },        
+        "blocks": []
+      }
+    ]    
+  }
+{% endschema %}
