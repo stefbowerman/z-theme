@@ -88,6 +88,14 @@ Returns the timing durations (in ms) for the specified key
 | :----------------- | :------------ | :------------ |
 | `key`  | string | Key mapping to a timing duration (base, fast, slow..) |
 
+##### `slate.animations.getTransitionTimingFunction`
+
+Returns the css timing function for the specified key
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `key`  | string | Key mapping to a timing function (base, in, out..) 
+
 ### Breakpoints
 
 Attaches a single method to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.

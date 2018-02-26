@@ -1,0 +1,43 @@
+{%- comment %}
+
+  Image with text
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'image-with-text',
+              layout: { string } - "left" or "right" - optional, defaults to "left"
+              image: { image }
+              image_small: { image }
+              title: { string } - optional
+              text: { string } - optional
+              cta_url: { url }
+              cta_text: { string }
+  %}
+
+{% endcomment -%}
+
+{% if layout != "left" or layout != "right" %}
+  {% assign layout = "left" %}
+{% endif %}
+
+<div class="image-with-text image-with-text--layout-{{ layout }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="{{ section.settings.background | img_url: '1600x' }}" />
+      </div>
+      <div class="col-md-4">
+        {% if title != blank %}
+          <h2 class="image-with-text__title">{{ title }}</h2>
+        {% endif %}
+        {% if text != blank %}
+          <div class="image-with-text__text">{{ text }}</div>
+        {% endif %}
+        {% if cta_url != blank and cta_text != blank %}
+          <a href="{{ cta_url }}" class="btn btn-primary">{{ cta_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

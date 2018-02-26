@@ -97,7 +97,9 @@ slate.quickView = (function() {
         // generate a new QV
         quickView = new slate.models.QuickView({
           $productCard: $productCard,
-          url: $trigger.attr('href')
+          url: $trigger.attr('href'),
+          transitionDuration: slate.animations.getTransitionTimingDuration('slow'),
+          transitionTimingFunction: slate.animations.getTransitionTimingFunction('inOutUI')
         });
 
         $productCard.one('loaded.quickView', function() {

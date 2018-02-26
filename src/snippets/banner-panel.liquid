@@ -150,10 +150,10 @@
 
         {% capture cta_html %}
           {% if has_cta_1 %}
-            <a href="{{ cta_1_url }}">{{ cta_1_text }}</a>
+            <a href="{{ cta_1_url }}" class="btn btn-primary">{{ cta_1_text }}</a>
           {% endif %}
           {% if has_cta_2 %}
-            <a href="{{ cta_2_url }}">{{ cta_2_text }}</a>
+            <a href="{{ cta_2_url }}" class="btn btn-primary">{{ cta_2_text }}</a>
           {% endif %}
         {% endcapture %}
 

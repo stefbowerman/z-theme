@@ -18,13 +18,13 @@
 {% if content_grid_html != blank %}
   <div class="container">
     {% if section.settings.title != blank %}
-      <h3 class="u-ta-center">{{ section.settings.title }}</h3>
+      <h3 class="content-header">{{ section.settings.title }}</h3>
     {% endif %}    
     <div class="content-grid content-grid--centered content-grid--{{ product_count }}-across">
       {{ content_grid_html }}
     </div>
     {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
-      <div class="u-ta-center">
+      <div class="content-footer">
         <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
       </div>
     {% endif %}
@@ -35,6 +35,7 @@
 {% schema %}
   {
     "name": "Product Grid",
+    "class": "index-section",
     "max_blocks": 4,
     "settings": [
       {
