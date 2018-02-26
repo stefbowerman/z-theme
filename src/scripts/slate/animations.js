@@ -25,9 +25,18 @@ slate.animations = (function($) {
 
   // Match those set in variables.scss
   var _transitionTimingDurations = {
-    base:     300
- // fast:     150,
- // slow:     600
+    base:     300,
+    fast:     150,
+    fastest:  50,
+    slow:     600,
+    none:     0
+  };
+
+  var _transitionTimingFunctions = {
+    base:      'ease-in-out',
+    in:        'ease-out',
+    out:       'ease-in',
+    inOutUI:   'cubic-bezier(0.42, 0, 0.13, 1.04)'
   };
 
  /**
@@ -45,8 +54,24 @@ slate.animations = (function($) {
     return _transitionTimingDurations[k];
   }
 
+ /**
+  * Get one of the timing functions stored in the variable defined above
+  * If the requested function doesn't exist, fallback to the base
+  *
+  * @param {string} key - string matching one of the key names
+  * @return {string} - valid css timing function
+  */
+  function getTransitionTimingFunction(key) {
+    var k = 'base';
+    if(_transitionTimingFunctions.hasOwnProperty(key)) {
+      k = key;
+    }
+    return _transitionTimingFunctions[k];
+  };  
+
   return {
-    getTransitionTimingDuration: getTransitionTimingDuration
+    getTransitionTimingDuration: getTransitionTimingDuration,
+    getTransitionTimingFunction: getTransitionTimingFunction
   };
 
 }(jQuery));

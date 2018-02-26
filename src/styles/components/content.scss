@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// Content Grid
+// Content Sections - Grid, Header, Footer
 // -----------------------------------------------------------------------------
 
 .content-grid {
@@ -42,4 +42,19 @@
       max-width: percentage(1/4);
     }
   }
+}
+
+.content-header,
+.content-footer {
+  text-align: center;
+  margin-top: $grid-gutter-width;
+  margin-bottom: $grid-gutter-width;  
+}
+
+.content-header {
+
+}
+
+.content-footer {
+
 }

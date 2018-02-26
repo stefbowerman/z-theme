@@ -1,0 +1,26 @@
+// -------------------------
+// Image with text
+// -------------------------
+
+.image-with-text {
+
+  @media (min-width: $screen-md-min) {
+    .row {
+      @include display-flex;
+      @include align-items(center);
+    }
+
+    &.image-with-text--layout-right .row {
+      @include flex-direction(row-reverse);
+    }
+  }
+
+}
+
+.image-with-text__title {
+
+}
+
+.image-with-text__text {
+
+}

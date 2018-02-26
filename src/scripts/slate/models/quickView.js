@@ -67,7 +67,7 @@
     this.$productCardContents   = this.$productCard.find(selectors.productCardContents);
     this.$productDetailForm     = null;
     this.$quickView             = null;
-    this.$quickViewContentsBody = null
+    this.$quickViewContentsBody = null;
     this.$close                 = null;
 
     this.stateIsOpen               = false;

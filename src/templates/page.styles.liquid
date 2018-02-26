@@ -26,6 +26,7 @@
           <li><a href="#docs-buttons">Buttons</a></li>
           <li><a href="#docs-forms">Forms</a></li>
           <li><a href="#docs-page-elements">Page Elements</a></li>
+          <li><a href="#docs-frames">Frames</a></li>
           <li><a href="#docs-misc-elements">Miscellaneous elements</a></li>
           <li><a href="#docs-iconography">Iconography</a></li>
           <li><a href="#docs-ui-elements">UI Elements</a></li>
@@ -599,7 +600,40 @@
         <div class="page-header">
           <h1 class="page-header__title">I'm a page title</h1>
           <p class="page-header__subtitle">I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read.</p>
-        </div>      
+        </div>
+
+        <h3 id="docs-frames" class="docs-title">Frames</h3>
+        <p>Use frames to create elements with defined aspect ratios.  All frames require the <code>.frame</code> base class and a modifier class to define their aspect ratio.  There is also a child element <code>.frame__inner</code> that is positioned absolutely and stretches the full dimensions of the frame.</p>
+        <div class="row">
+          {% assign ratios = '16x9 6x4 4x3 1x1 3x4 4x6 9x16' | split: " " %}
+          {% for ratio in ratios %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+              <div style="margin-bottom: 30px;">
+                <div class="frame frame--{{ ratio }}" style="background-color: white; border: 1px solid #d8d8d8">
+                  <div class="frame__inner flex-align-items-center flex-justify-center">
+                    {{ ratio }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <h4 class="docs-subtitle">Responsive Frames</h4>
+        <p>There are responsive modifier classes for all frame sizes and all breakpoints.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="frame frame--xs-16x9 frame--sm-6x4 frame--md-1x1 frame--lg-3x4 frame--xl-4x6" style="background-color: white; border: 1px solid #d8d8d8">
+                <div class="frame__inner flex-col flex-align-items-center flex-justify-center u-ta-center" style="padding: 10px;">
+                  <code>.frame</code><br />
+                  <code>.frame--xs-16x9</code><br />
+                  <code>.frame--sm-6x4</code><br />
+                  <code>.frame--md-1x1</code><br />
+                  <code>.frame--lg-3x4</code><br />
+                  <code>.frame--xl-4x6</code>
+                </div>
+            </div>
+          </div>
+        </div>        
 
         <h3 id="docs-misc-elements" class="docs-title">Miscellaneous elements</h3>
 
@@ -609,7 +643,7 @@
 
         <h4 class="docs-subtitle">Alerts</h4>
         <div class="alert alert-success">I'm a success alert</div>
-        <div class="alert alert-danger">I'm a danger alert</div>      
+        <div class="alert alert-danger">I'm a danger alert</div>     
 
         <h3 id="docs-iconography" class="docs-title">Iconography</h3>
         <p>Read more about using, creating, and editing SVG icons in Slate's documentation.</p>
