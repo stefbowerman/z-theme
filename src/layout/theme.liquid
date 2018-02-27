@@ -77,7 +77,10 @@
 <body id="{{ page_title | handle }}" class="{{ body_class | strip | strip_newlines }}">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
-
+  
+  {% comment %} Feel free to comment this out / remove this section if not needed.  There is no JS attached to it. {% endcomment %}
+  {% section 'swatches' %}
+  
   {% section 'pencil-banner' %}
 
   {% section 'mobile-menu' %}
