@@ -5,6 +5,7 @@
            id="Slideshow-{{ section.id }}" 
            data-autoplay="{{ section.settings.autoplay }}" 
            data-speed="{{ section.settings.autoplay_speed }}"
+           data-dots="{{ section.settings.dots }}"
            data-slideshow>
         {% for block in section.blocks %}
           <div class="slideshow__slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
@@ -41,10 +42,10 @@
         <a href="#" data-slideshow-pause-toggle>Toggle autoplay</a>
       {% endif %}      
     </div>
-  {% endif %}
+  {% else %}
 
-  {% if section.blocks.size == 0 %}
     {% include 'no-blocks' %}
+
   {% endif %}
 </div>
 
@@ -55,10 +56,16 @@
     "settings": [
       {
         "type": "checkbox",
-        "id": "autoplay",
-        "label": "Auto-rotate slides",
+        "id": "dots",
+        "label": "Dots enabled",
         "default": true
-      },
+      },    
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Auto-play",
+        "default": true
+      },   
       {
         "type": "select",
         "id": "autoplay_speed",

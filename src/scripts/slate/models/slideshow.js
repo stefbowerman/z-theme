@@ -42,7 +42,7 @@ slate.models.Slideshow = (function($, Modernizr) {
       accessibility: false, // prevents page from jumping on focus
       arrows: !Modernizr.touchevents,
       arrows: false,
-      dots: true,
+      dots: this.$slideshow.data('dots'),
       fade: true,
       draggable: true,
       touchThreshold: 20,
