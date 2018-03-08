@@ -38,7 +38,7 @@ slate.models.Slideshow = (function($, Modernizr) {
     this.$wrapper   = $el.is(selectors.slideshowWrapper) ? $el : $el.closest(selectors.slideShowWrapper);
     this.$slideshow = this.$wrapper.find(selectors.slideshow);
 
-    var settings = {
+    var defaults = {
       accessibility: false, // prevents page from jumping on focus
       arrows: !Modernizr.touchevents,
       arrows: false,
@@ -52,7 +52,7 @@ slate.models.Slideshow = (function($, Modernizr) {
       autoplaySpeed: this.$slideshow.data('speed') || 5000
     };
 
-    this.settings = $.extend({}, settings, options);
+    this.settings = $.extend({}, defaults, options);
 
     this.$wrapper.on('click', selectors.pauseToggle, this.onPauseToggleClick.bind(this));    
     this.$slideshow.on('init', this.slideshowA11y.bind(this));
