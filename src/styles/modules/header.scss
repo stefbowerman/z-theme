@@ -100,11 +100,11 @@
   padding-left: $grid-gutter-width/2;
   padding-right: $grid-gutter-width/2;
 
-  &:first-child {
+  &.header-nav--left {
     padding-left: 0;
   }
 
-  &:last-child {
+  &.header-nav--right {
     padding-right: 0;
   }
 

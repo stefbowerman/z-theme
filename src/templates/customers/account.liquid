@@ -1,4 +1,13 @@
-{% paginate customer.orders by 20 %}
+{% capture page_sidebar_html %}
+  {% include 'page-sidebar' %}
+{% endcapture %}
+
+{% assign has_sidebar = false %}
+{% if page_sidebar_html != blank %}
+  {% assign has_sidebar = true %}
+{% endif %}
+
+{% paginate customer.orders by 3 %}
 
   <div class="layout-content-wrapper">
     <div class="container">
@@ -12,48 +21,47 @@
               {{ 'customer.account.title' | t }}
             {% endif %}
           </h1>
-        </div>        
+        </div>
 
-        <h2>{{ 'customer.orders.title' | t }}</h2>
+        <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
 
-        {% if customer.orders.size != 0 %}
-          <table class="table">
-            <thead>
-              <tr>
-                <th>{{ 'customer.orders.order_number' | t }}</th>
-                <th>{{ 'customer.orders.date' | t }}</th>
-                <th>{{ 'customer.orders.payment_status' | t }}</th>
-                <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
-                <th>{{ 'customer.orders.total' | t }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for order in customer.orders %}
+          {% if customer.orders.size != 0 %}
+            <table class="table">
+              <thead>
                 <tr>
-                  <td>{{ order.name | link_to: order.customer_url }}</td>
-                  <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
-                  <td>{{ order.financial_status_label }}</td>
-                  <td>{{ order.fulfillment_status_label }}</td>
-                  <td>{{ order.total_price | money }}</td>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        {% else %}
-          <p>{{ 'customer.orders.none' | t }}</p>
-        {% endif %}
+              </thead>
+              <tbody>
+                {% for order in customer.orders %}
+                  <tr>
+                    <td>{{ order.name | link_to: order.customer_url }}</td>
+                    <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
+                    <td>{{ order.financial_status_label }}</td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {% endif %}
 
-        {% if paginate.pages > 1 %}
-          {% include 'pagination' %}
-        {% endif %}
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        </div>
+
+        {{ page_sidebar_html }}
+        
       </div>
     </div>
   </div>
 
 {% endpaginate %}
 
-<h2>{{ 'customer.account.details' | t }}</h2>
-
-{{ customer.default_address | format_address }}
-
-<a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>

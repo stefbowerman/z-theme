@@ -124,6 +124,7 @@
       "title": "My Account",
       "details": "Account Details",
       "view_addresses": "View Addresses",
+      "addresses": "Addresses",
       "return": "Return to Account Details"
     },
     "activate_account": {

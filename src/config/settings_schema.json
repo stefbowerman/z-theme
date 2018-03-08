@@ -144,6 +144,20 @@
     ]
   },
   {
+    "name": "Customer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Account Pages"
+      },
+      {
+        "type": "link_list",
+        "id": "customer_account_menu",
+        "label": "Customer Account Menu"
+      }
+    ]
+  }, 
+  {
     "name": "Mailing List",
     "settings": [
       {
