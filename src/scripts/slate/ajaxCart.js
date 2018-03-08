@@ -357,10 +357,17 @@
           if(products.hasOwnProperty(item.product_id)) {
             var product = products[item.product_id];
             for (var i = item.variant_options.length - 1; i >= 0; i--) {
+              var name  = product.options[i].name;
               var value = item.variant_options[i];
+
               item.variant_options[i] = {
-                name: product.options[i].name,
+                name: name,
                 value: value
+              }
+
+              // Don't show this info if it's the default variant that Shopify creates
+              if(value == "Default Title") {
+                delete item.variant_options[i];
               }
             }
           }

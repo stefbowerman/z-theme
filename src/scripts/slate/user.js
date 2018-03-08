@@ -30,8 +30,8 @@ slate.user = (function(Cookies) {
     * Use the `generateCookie` method below to create your own copies of these.  Don't access these directly.
     */
     _cookies: {
-      siteVisite: {
-        name: 'site_visit',
+      siteVisit: {
+        name: cookiePrefix + 'site_visit',
         value: true
       },
       subscriptionSlideupSeen: {
@@ -60,7 +60,13 @@ slate.user = (function(Cookies) {
         c = $.extend(true, {}, this._cookies[key]);
         c.name = cookiePrefix + c.name;
       }
+<<<<<<< HEAD
       return c;
+=======
+      else {
+        console.warn('['+this.name+'] - Cannot create cookie.  Key "' + key + '" not found.' );
+      }
+>>>>>>> development
     },    
     
    /**
