@@ -65,7 +65,7 @@
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 
-  {{ content_for_header }}
+  {{ content_for_header }} 
 </head>
 
 {% capture body_class %}
@@ -79,8 +79,8 @@
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
   
   {% comment %} Feel free to comment this out / remove this section if not needed.  There is no JS attached to it. {% endcomment %}
-  {% section 'swatches' %}
-  
+  {% section 'swatches' %} 
+    
   {% section 'pencil-banner' %}
 
   {% section 'mobile-menu' %}
