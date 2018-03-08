@@ -16,6 +16,7 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
 - [Slideshow](#slideshow)
+- [Slideup](#slideup)
 - [User](#user)
 - [Utilities](#utilities)
 
@@ -136,6 +137,23 @@ Wrapper around slideshow library to make initialization and consistency much sim
 var $slideshowWrapper = $('[data-slideshow-wrapper]');
 var options = { arrows: true };
 var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
+```
+
+### Slideup
+Full width element that is fixed to the bottom of the screen.  This class provides a simple way to open and close the slideup as well as lifecycle events.
+
+```javascript
+var $el = $('[data-slideup]');
+var options = { closeSelector: '.close-me' };
+var slideup = new slate.models.Slideup( $el, options);
+
+// Later...
+
+$el.on('hidden.slideup', function() {
+  console.log('Slideup hidden');
+});
+
+slideup.hide();
 ```
 
 ### User

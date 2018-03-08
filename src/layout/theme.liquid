@@ -99,7 +99,9 @@
 
   </div>
 
+  {% comment %} Select the appropriate 'subscription-*' section for the theme you are building and remove the files for the others {% endcomment %}
   {% section 'subscription-modal' %}
+  {% comment %}{% section 'subscription-slideup' %}{% endcomment %}
 
   {% unless template == 'cart' %}
     {% section 'ajax-cart' %}

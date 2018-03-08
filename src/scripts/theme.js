@@ -22,6 +22,7 @@ window.theme = window.theme || {};
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
 // =require slate/models/slideshow.js
+// =require slate/models/slideup.js
 // =require slate/models/quickView.js
 // =require slate/models/collectionFilters.js
 // =require slate/models/collectionSort.js
@@ -31,6 +32,7 @@ window.theme = window.theme || {};
 // =require sections/collection.js
 // =require sections/pencilBanner.js
 // =require sections/subscriptionModal.js
+// =require sections/subscriptionSlideup.js
 // =require sections/instagramFeed.js
 // =require sections/slideshow.js
 // =require sections/header.js
@@ -57,6 +59,7 @@ window.theme = window.theme || {};
     sections.register('collection', theme.Collection);
     sections.register('pencil-banner', theme.PencilBanner);
     sections.register('subscription-modal', theme.SubscriptionModal);
+    sections.register('subscription-slideup', theme.SubscriptionSlideup);
     sections.register('instagram-feed', theme.InstagramFeed);
     sections.register('slideshow', theme.Slideshow);
     sections.register('header', theme.Header);
