@@ -61,6 +61,7 @@
   @include list-unstyled;
   height: 3*$slideshow-dot-size;
   margin-top: -3*$slideshow-dot-size;
+  margin-bottom: 0;
 
   li {
     position: relative;
