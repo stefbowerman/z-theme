@@ -19,7 +19,7 @@
                   {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
               </div>
-              <div class="slideshow__text-content">
+              <div class="slideshow__text-content u-ta-center">
                 {% unless block.settings.title == blank %}
                   <h2 class="slideshow__title">
                     {{ block.settings.title }}
@@ -37,10 +37,7 @@
             {% endif %}
           </div>
         {% endfor %}
-      </div>
-      {% if section.settings.autoplay %}
-        <a href="#" data-slideshow-pause-toggle>Toggle autoplay</a>
-      {% endif %}      
+      </div>     
     </div>
   {% else %}
 

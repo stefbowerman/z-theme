@@ -16,8 +16,7 @@ slate.models.Slideshow = (function($, Modernizr) {
   var selectors = {
     slideshowWrapper: '[data-slideshow-wrapper]',
     slideshow: '[data-slideshow]',
-    slide: '[data-slideshow-slide]',
-    pauseToggle: '[data-slideshow-pause-toggle]'
+    slide: '[data-slideshow-slide]'
   };
 
   var KEYS = {
@@ -41,7 +40,7 @@ slate.models.Slideshow = (function($, Modernizr) {
     var defaults = {
       accessibility: false, // prevents page from jumping on focus
       arrows: !Modernizr.touchevents,
-      arrows: false,
+      arrows: true,
       dots: this.$slideshow.data('dots'),
       fade: true,
       draggable: true,
@@ -49,7 +48,9 @@ slate.models.Slideshow = (function($, Modernizr) {
       slidesToShow: this.$slideshow.data('slides-to-show') || 1,
       slidesToScroll: this.$slideshow.data('slides-to-scroll') || 1,
       autoplay: this.$slideshow.data('autoplay') || false,
-      autoplaySpeed: this.$slideshow.data('speed') || 5000
+      autoplaySpeed: this.$slideshow.data('speed') || 5000,
+      prevArrow: '<div class="slick-arrow slick-arrow--prev"><span class="arrow arrow--left"><span class="arrow__icon"></span></span></div>',
+      nextArrow: '<div class="slick-arrow slick-arrow--next"><span class="arrow arrow--right"><span class="arrow__icon"></span></span></div>'
     };
 
     this.settings = $.extend({}, defaults, options);

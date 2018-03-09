@@ -675,6 +675,37 @@
 
         <h3 id="docs-ui-elements" class="docs-title">UI Elements</h3>
 
+        <h4 class="docs-subtitle">Arrows</h4>
+        <p>Arrow elements are mostly used for slideshow controls.  The root element has the base <code>arrow</code> class applied to it and directional modifier classes are available.  By default, it has one child element that makes up the actual arrow icon.</p>
+        <a href="#" class="arrow arrow--up">
+          <span class="arrow__icon"></span>
+        </a>
+        <a href="#" class="arrow">
+          <span class="arrow__icon"></span>
+        </a>
+        <a href="#" class="arrow arrow--down">
+          <span class="arrow__icon"></span>
+        </a>
+        <a href="#" class="arrow arrow--left">
+          <span class="arrow__icon"></span>
+        </a>
+        <br /><br />
+
+        <p>This child element easily be swapped out for a png, svg, or other icon made of pseudo elements.</p>
+
+        <a href="#" class="arrow arrow--up">
+          {% include 'icon-arrow-right' %}
+        </a>
+        <a href="#" class="arrow">
+          {% include 'icon-arrow-right' %}
+        </a>
+        <a href="#" class="arrow arrow--down">
+          {% include 'icon-arrow-right' %}
+        </a>
+        <a href="#" class="arrow arrow--left">
+          {% include 'icon-arrow-right' %}
+        </a>
+
         <h4 class="docs-subtitle">Breadcrumbs</h4>
 
         <nav class="breadcrumbs">
