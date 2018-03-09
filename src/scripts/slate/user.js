@@ -60,13 +60,10 @@ slate.user = (function(Cookies) {
         c = $.extend(true, {}, this._cookies[key]);
         c.name = cookiePrefix + c.name;
       }
-<<<<<<< HEAD
-      return c;
-=======
       else {
         console.warn('['+this.name+'] - Cannot create cookie.  Key "' + key + '" not found.' );
       }
->>>>>>> development
+      return c;
     },    
     
    /**
