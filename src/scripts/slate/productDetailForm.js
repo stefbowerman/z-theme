@@ -34,7 +34,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
     singleOptionSelector: '[data-single-option-selector]',
-    variantOptionValueList: '[data-variant-option-value-list]',
+    variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
     variantOptionValue: '[data-variant-option-value]',
     quantitySelect: '[data-product-quantity-select]',
     fullDetailsLink: '[data-full-details-link]'
@@ -348,7 +348,10 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
         // Loop through all the options and update the option value
         for (var i = 3; i >= 1; i--) {
           var variantOptionValue = variant['option' + i];
-          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]', this.$container);
+          // Since we are finding the variantOptionValueUI based on the *actual* value, we need to scope to the correct list
+          // As some products can have the same values for different variant options (waist + inseam both use "32", "34", etc..)
+          var $variantOptionValueList = $(selectors.variantOptionValueList, this.$container).filter('[data-option-position="'+i+'"]');
+          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]', $variantOptionValueList);
 
           $variantOptionValueUI.addClass( classes.variantOptionValueActive );
           $variantOptionValueUI.siblings().removeClass( classes.variantOptionValueActive );
