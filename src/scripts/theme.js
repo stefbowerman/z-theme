@@ -76,9 +76,21 @@ window.theme = window.theme || {};
     // Common a11y fixes
     slate.a11y.pageLinkFocus($(window.location.hash));    
 
-    // Wrap RTE videos and tables to force responsive layout.
-    slate.rte.fixTables();
-    slate.rte.iframeReset();
+    // Target tables to make them scrollable
+    slate.rte.wrapTables({
+      $tables: $('.rte table'),
+      tableWrapperClass: 'table-responsive'
+    });
+
+    // Target iframes to make them responsive
+    var iframeSelectors =
+      '.rte iframe[src*="youtube.com/embed"],' +
+      '.rte iframe[src*="player.vimeo"]';
+
+    slate.rte.wrapIframe({
+      $iframes: $(iframeSelectors),
+      iframeWrapperClass: 'rte__video-wrapper'
+    });
 
     // Apply UA classes to the document
     slate.utils.userAgentBodyClass();    
