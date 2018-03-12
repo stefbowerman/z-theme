@@ -3,36 +3,36 @@
 // -------------------------
 
 // Slideshow Slide styling
-.slideshow-wrapper {
-
-}
-
 .slideshow {
+}
+
+.slideshow-slide {
 
 }
 
-.slideshow__slide {
+.slideshow-slide__inner {
 
 }
 
-.slideshow__link {
+.slideshow-slide__link {
 
 }
 
-.slideshow__image {
-  height: 40vh;
-  min-height: 500px;
-}
-
-.slideshow__text-content {
+.slideshow-slide__image {
 
 }
 
-.slideshow__title {
-
+.slideshow-slide__text-content {
+  margin: $spacer*2 0;
 }
 
-.slideshow__subtitle {
+.slideshow-slide__title {
+  @media (max-width: $screen-sm-max) {
+    font-size: $font-size-h4;
+  }
+}
+
+.slideshow-slide__subtitle {
   
 }
 
@@ -51,7 +51,19 @@
     &.slick-arrow--next {
       right: $grid-gutter-width/2;
     }
-  } 
+  }
+
+  &.has-equal-height-slides {
+    .slick-track {
+      @include display-flex;
+    }
+
+    &.slick-initialized .slick-slide {
+      @include display-flex;
+      @include flex-direction(column);
+      height: auto;
+    }
+  }
 }
 
 .slick-dots {
@@ -61,6 +73,7 @@
   @include list-unstyled;
   height: 3*$slideshow-dot-size;
   margin-top: -3*$slideshow-dot-size;
+  margin-bottom: 0;
 
   li {
     position: relative;

@@ -1,55 +1,45 @@
 <div data-section-id="{{ section.id }}" data-section-type="slideshow">
-  {% if section.blocks.size > 0 %}
-    <div class="slideshow-wrapper" data-slideshow-wrapper>
-      <div class="slideshow" 
-           id="Slideshow-{{ section.id }}" 
-           data-autoplay="{{ section.settings.autoplay }}" 
-           data-speed="{{ section.settings.autoplay_speed }}"
-           data-dots="{{ section.settings.dots }}"
-           data-slideshow>
-        {% for block in section.blocks %}
-          <div class="slideshow__slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
-            {% if block.settings.link != blank %}
-              <a href="{{ block.settings.link }}" class="slideshow__link">
-            {% endif %}
-          
-              <div class="slideshow__image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}'); background-position: {{ block.settings.alignment }};"{% endif %}>
-                {% if block.settings.image == blank %}
-                  {% capture current %}{% cycle 1, 2 %}{% endcapture %}
-                  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-                {% endif %}
-              </div>
-              <div class="slideshow__text-content u-ta-center">
-                {% unless block.settings.title == blank %}
-                  <h2 class="slideshow__title">
-                    {{ block.settings.title }}
-                  </h2>
-                {% endunless %}
-                {% unless block.settings.subheading == blank %}
-                  <span class="slideshow__subtitle">
-                    {{ block.settings.subheading | escape }}
-                  </span>
-                {% endunless %}
-              </div>
+  <div class="container">
+    {% if section.blocks.size > 0 %}
+      <div class="slideshow-wrapper" data-slideshow-wrapper>
+        <div class="slideshow" 
+             id="slideshow-{{ section.id }}" 
+             data-autoplay="{{ section.settings.autoplay }}" 
+             data-speed="{{ section.settings.autoplay_speed }}"
+             data-dots="{{ section.settings.dots }}"
+             data-fade="{{ section.settings.fade }}"
+             data-slideshow>
+          {% for block in section.blocks %}
+              {% capture attributes %}{{ block.shopify_attributes }} data-block-id="{{ block.id }}"{% endcapture %}
+              {% include 'slideshow-slide',
+                         id: block.id,
+                         attributes: attributes,
+                         link: block.settings.link,
+                         title: block.settings.title,
+                         subtitle: block.settings.subtitle,
+                         text_position: section.settings.text_position,
+                         background_image: block.settings.background_image,
+                         background_image_vertical_alignment: block.settings.background_image_vertical_alignment,
+                         background_image_aspect_ratio: section.settings.background_image_aspect_ratio,
+                         background_image_small: block.settings.background_image_small,
+                         background_image_small_vertical_alignment: block.settings.background_image_small_vertical_alignment,
+                         background_image_small_aspect_ratio: section.settings.background_image_small_aspect_ratio
+              %}
+          {% endfor %}
+        </div>     
+      </div>
+    {% else %}
 
-            {% if block.settings.link != blank %}
-              </a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>     
-    </div>
-  {% else %}
+      {% include 'no-blocks' %}
 
-    {% include 'no-blocks' %}
-
-  {% endif %}
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}
   {
-    "name": "Slideshow",
-    "max_blocks": 4,
+    "name": "Image Slideshow",
+    "max_blocks": 8,
     "settings": [
       {
         "type": "checkbox",
@@ -60,9 +50,19 @@
       {
         "type": "checkbox",
         "id": "autoplay",
-        "label": "Auto-play",
+        "label": "Auto-rotate slides",
         "default": true
-      },   
+      },
+      {
+        "type": "select",
+        "id": "fade",
+        "label": "Animation",
+        "options": [
+          { "value": "true", "label": "Fade" },
+          { "value": "false", "label": "Slide" }
+        ],
+        "default": "true"
+      },      
       {
         "type": "select",
         "id": "autoplay_speed",
@@ -76,6 +76,37 @@
           { "value": "10000", "label": "10 seconds" }
         ],
         "default": "7000"
+      },
+      {
+        "type": "radio",
+        "id": "background_image_aspect_ratio",
+        "label": "Aspect Ratio",
+        "options": [
+          { "value": "4x3", "label": "4x3" },
+          { "value": "6x4", "label": "6x4" },
+          { "value": "16x9", "label": "16x9" }
+        ],
+        "default": "4x3"
+      },
+      {
+        "type": "radio",
+        "id": "background_image_small_aspect_ratio",
+        "label": "Aspect Ratio - Mobile",
+        "options": [
+          { "value": "3x4", "label": "3x4" },
+          { "value": "1x1", "label": "1x1" },
+          { "value": "4x3", "label": "4x3" }
+        ],
+        "default": "3x4"
+      },
+      {
+        "type": "select",
+        "id": "text_position",
+        "label": "Text Position",
+        "options": [
+          { "value": "top", "label": "Top" },
+          { "value": "bottom", "label": "Bottom" }
+        ]
       }
     ],
     "blocks": [
@@ -84,52 +115,67 @@
         "name": "Image slide",
         "settings": [
           {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Image"
-          },
-          {
-            "type": "select",
-            "id": "alignment",
-            "label": "Image alignment",
-            "default": "top",
-            "options": [
-              {
-                "value": "top",
-                "label": "Top"
-              },
-              {
-                "value": "center",
-                "label": "Middle"
-              },
-              {
-                "value": "bottom",
-                "label": "Bottom"
-              }
-            ]
-          },
-          {
             "type": "text",
             "id": "title",
-            "label": "Heading",
+            "label": "Title",
             "default": "Image slide"
           },
           {
             "type": "text",
-            "id": "subheading",
-            "label": "Subheading",
-            "default": "Tell your brand's story through video and images"
+            "id": "subtitle",
+            "label": "Subtitle"
           },
           {
             "type": "url",
             "id": "link",
             "label": "Slide link"
+          },
+          {
+            "type": "header",
+            "content": "Image - Desktop",
+            "info": "Desktop image will be used for all screens.  If a small screen image is set, that will be used for small screens"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "background_image_vertical_alignment",
+            "label": "Image alignment",
+            "default": "top",
+            "options": [
+              { "value": "top", "label": "Top" },
+              { "value": "center", "label": "Middle" },
+              { "value": "bottom", "label": "Bottom" }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Image - Mobile"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image_small",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "background_image_small_vertical_alignment",
+            "label": "Image alignment",
+            "default": "top",
+            "options": [
+              { "value": "top", "label": "Top" },
+              { "value": "center", "label": "Middle" },
+              { "value": "bottom", "label": "Bottom" }
+            ]
           }
         ]
       }
     ],
     "presets": [{
-      "name": "Slideshow",
+      "name": "Image Slideshow",
       "category": "Image",
       "settings": {
         "autoplay": true,
