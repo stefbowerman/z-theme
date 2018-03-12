@@ -208,8 +208,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           swipe: Modernizr.touchevents,
           arrows: !Modernizr.touchevents,
           asNavFor: '#' + $thumbnail.attr('id'),
-          prevArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--left"><a class="arrow arrow--transparent arrow--left"><span class="arrow__icon"><~</span></a></div>',
-          nextArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--right"><a class="arrow arrow--transparent"><span class="arrow__icon">~></span></a></div>',
+          prevArrow: '<div class="slick-arrow slick-arrow--prev"><span class="arrow arrow--left"><span class="arrow__icon"></span></span></div>',
+          nextArrow: '<div class="slick-arrow slick-arrow--next"><span class="arrow arrow--right"><span class="arrow__icon"></span></span></div>',
           initialSlide: initialSlide,
           accessibility: false,
           draggable: true

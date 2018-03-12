@@ -11,6 +11,15 @@
   @media (min-width: $screen-md-min) {
     @include flex-direction(row);
   }
+
+  // For banners inside sliders, make sure they are all equal height
+  .slick-slide & {
+    height: 100%;
+
+    .banner__panel {
+      min-height: 100%;
+    }
+  }
 }
 
 .banner__panel {
