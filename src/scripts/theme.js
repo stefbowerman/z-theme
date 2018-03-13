@@ -21,6 +21,7 @@ window.theme = window.theme || {};
 
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
+// =require slate/models/drawer.js
 // =require slate/models/slideshow.js
 // =require slate/models/slideup.js
 // =require slate/models/quickView.js

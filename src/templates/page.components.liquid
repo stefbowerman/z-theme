@@ -18,6 +18,8 @@
           <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
           <li><a href="#docs-modals">Modals</a></li>
+          <li><a href="#docs-slideup">Slideup</a></li>
+          <li><a href="#docs-drawer">Drawer</a></li>
         </ul>
 
         <h3 id="docs-product-card" class="docs-title">Product Card</h3>
@@ -87,7 +89,7 @@
         <h3 id="docs-promo" class="docs-title">Promo</h3>
         <p>Promos consist of an image and text laid out vertically on mobile and horizontally on desktop.  Listed below are the available options that affect layout / styling.</p>
         <div class="table-responsive">
-          <table class="table tabled-condensed">
+          <table class="table">
             <thead>
               <tr>
                 <th>Option</th>
@@ -169,6 +171,61 @@
             </div>
           </div>
         </div>
+
+        <h3 id="docs-slideup" class="docs-title">Slideup</h3>
+        <h3 id="docs-drawer" class="docs-title">Drawer</h3>
+
+        <p>Drawers are elements that are fixed to the side of the screen and are hidden by default.  Opening them will transition the element on screen and apply a backdrop to focus user attention and act as a clickable area that dismisses the drawer.</p>
+
+        <p>
+          <button data-toggle="drawer" data-target="#my-drawer" data-backdrop="true" class="btn btn-primary">Trigger drawer</button>
+          <button data-toggle="drawer" data-target="#my-drawer" data-backdrop="false" class="btn btn-primary">Trigger drawer without backdrop</button>
+        </p>
+
+        <div id="my-drawer" class="drawer">
+          <div class="drawer__inner">
+            <div class="drawer__header">
+              <h4>Drawer Header</h4>
+              <a href="#" class="drawer__close" data-drawer-close>
+                {% include 'icon-close' %}
+              </a>
+            </div>
+            <div class="drawer__body">
+              Drawer content here
+            </div>            
+          </div>
+        </div>
+
+        <p>The API closely follows the one for Bootstrap's modals.  You can create the drawer programatically by calling the <code>Drawer</code> constructor and passing in options or by using <code>data-*</code> attributes to specify the element, trigger and options.  The example above uses the data API.</p>        
+
+        <h4 class="docs-subtitle">Options</h4>
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>closeSelector</code></td>
+                <td>String</td>
+                <td>[data-drawer-close]</td>
+                <td>Selector for the close button contained within the drawer element</td>
+              </tr>
+              <tr>
+                <td><code>backdrop</code></td>
+                <td>Boolean</td>
+                <td>true</td>
+                <td>Turns on / off a clickable backdrop.</td>
+              </tr>            
+            </tbody>
+          </table>
+        </div>        
 
       </div>
     </div>
