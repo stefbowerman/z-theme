@@ -8,15 +8,9 @@
 
 theme.MobileMenu = (function($) {
 
-  var $window = $(window);
-  var $body = $(document.body);
-
   var selectors = {
-    toggle: '[data-mobile-menu-toggle]'
-  };
-
-  var classes = {
-    isVisible: 'is-visible'
+    toggle: '[data-mobile-menu-toggle]',
+    menu: '[data-mobile-menu]'
   };
 
   function MobileMenu(container) {
@@ -25,43 +19,31 @@ theme.MobileMenu = (function($) {
     this.name = 'mobileMenu';
     this.namespace = '.'+this.name;
 
-    $(selectors.toggle).on('click', this.onToggleClick.bind(this));
+    this.$el     = $(selectors.menu, this.$container);
+    this.$toggle = $(selectors.toggle); // Don't scope to this.$container
+
+    this.drawer  = new slate.models.Drawer(this.$el);
+
+    this.$toggle.on('click', this.onToggleClick.bind(this));
+
   }
 
   MobileMenu.prototype = $.extend({}, MobileMenu.prototype, {
 
     onToggleClick: function(e) {
       e.preventDefault();
-      console.log('['+this.name+'] - toggleMenu');
-      this.$container.toggleClass(classes.isVisible);
+      this.drawer.toggle();
     },
-
 
     /**
      * Theme Editor section events below
      */
     onSelect: function() {
-      console.log('['+this.name+'] - section:select');
-      console.log('['+this.name+'] - open');
-      this.$container.addClass(classes.isVisible);
+      this.drawer.show();
     },
 
     onDeselect: function() {
-      console.log('['+this.name+'] - section:deselect');
-      console.log('['+this.name+'] - close');
-      this.$container.removeClass(classes.isVisible);
-    },
-
-    onShow: function() {
-      console.log('['+this.name+'] - section:show');
-    },
-
-    onLoad: function() {
-      console.log('['+this.name+'] - section::load');
-    },
-
-    onUnload: function() {
-      console.log('['+this.name+'] - section::unload');
+      this.drawer.hide();
     }
   });
 

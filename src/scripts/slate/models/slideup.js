@@ -1,5 +1,5 @@
 /**
- * Slidesup
+ * Slideup
  * ------------------------------------------------------------------------------
  *
  * Requires:
@@ -13,14 +13,15 @@ slate.models = slate.models || {};
 slate.models.Slideup = (function($, Modernizr) {
 
   var classes = {
-    slideupVisible: 'is-visible'
+    slideup: 'slide-up',
+    visible: 'is-visible'
   };
 
  /**
   * Slideup constructor
   *
   * @param {HTMLElement | $} el - The slideup element
-  * @param {Object} options - Options passed into the slider initialize function
+  * @param {Object} options
   */
   function Slideup(el, options) {
 
@@ -28,6 +29,11 @@ slate.models.Slideup = (function($, Modernizr) {
     this.namespace = '.'+this.name;
 
     this.$el = $(el);
+
+    if (!this.$el || this.$el == undefined) {
+      console.warn('['+this.name+'] - Element with class `'+classes.slideup+'` required to initialize.');
+      return;
+    }    
 
     var defaults = {
       closeSelector: '[data-slideup-close]'
@@ -70,7 +76,7 @@ slate.models.Slideup = (function($, Modernizr) {
       var e = $.Event(this.events.HIDE);
       this.$el.trigger(e);
 
-      this.$el.removeClass(classes.slideupVisible);
+      this.$el.removeClass(classes.visible);
 
       if(this.supportsCssTransitions) {
         this.$el.one(slate.utils.whichTransitionEnd(), this.onHidden.bind(this));
@@ -84,7 +90,7 @@ slate.models.Slideup = (function($, Modernizr) {
       var e = $.Event(this.events.SHOW);
       this.$el.trigger(e);
 
-      this.$el.addClass(classes.slideupVisible);
+      this.$el.addClass(classes.visible);
 
       if(this.supportsCssTransitions) {
         this.$el.one(slate.utils.whichTransitionEnd(), this.onShown.bind(this));

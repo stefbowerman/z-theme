@@ -15,6 +15,7 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Breakpoints](#breakpoints)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
+- [Drawer](#drawer)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
 - [User](#user)
@@ -130,6 +131,31 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 var sorting = new slate.models.CollectionSort( container, collectionData );
 ``` 
 
+### Drawer
+Element that hides off screen and animates in.  This class provides a simple way to open and close the drawer as well as lifecycle events.
+
+```javascript
+var $el = $('[data-drawer]');
+var drawer = new slate.models.Drawer( $el );
+
+// Later...
+
+$el.on('shown.drawer', function() {
+  console.log('Drawer is now visible');
+});
+
+drawer.hide();
+```
+
+Note:  This class also includes a data attribute based API to use drawers without writing javascript.  See the components page for reference.
+
+| Event Type         | Description   |
+| :----------------- | :------------ |
+| `hide.drawer`      | This event is fired immediately when the hide instance method has been called. |
+| `hidden.drawer`    | This event is fired when the drawer has finished being hidden from the user (will wait for CSS transitions to complete). |
+| `show.drawer`      | This event fires immediately when the show instance method is called. |
+| `shown.drawer`     | This event is fired when the drawer has been made visible to the user (will wait for CSS transitions to complete). |
+
 ### Slideshow
 Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
 
@@ -155,6 +181,13 @@ $el.on('hidden.slideup', function() {
 
 slideup.hide();
 ```
+
+| Event Type         | Description   |
+| :----------------- | :------------ |
+| `hide.slideup`      | This event is fired immediately when the hide instance method has been called. |
+| `hidden.slideup`    | This event is fired when the slideup has finished being hidden from the user (will wait for CSS transitions to complete). |
+| `show.slideup`      | This event fires immediately when the show instance method is called. |
+| `shown.slideup`     | This event is fired when the slideup has been made visible to the user (will wait for CSS transitions to complete). |
 
 ### User
 
