@@ -2,27 +2,28 @@
 // Mobile Menu
 // -------------------------
 
-.mobile-menu__primary,
-.mobile-menu__secondary {
+.mobile-menu-block {
 
-  ul {
-    @include list-unstyled;
-    text-align: center;
+  & + & {
+    margin-top: 30px;
   }
 }
 
-.mobile-menu__primary {
-
-}
-
-.mobile-menu__secondary {
-
-}
-
-.mobile-menu__social {
+.mobile-menu-list {
   @include list-unstyled;
-  margin-bottom: 30px;
-  text-align: center;
+  margin-bottom: 0;
+  text-align: center;  
+}
+
+.mobile-menu-block--primary {
+
+}
+
+.mobile-menu-block--secondary {
+
+}
+
+.mobile-menu-block--social {
 
   li {
     display: inline-block;

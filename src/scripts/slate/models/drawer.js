@@ -84,6 +84,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
         // debug this...
         setTimeout(function() {
+          $body.addClass(classes.bodyDrawerOpen);          
           _this.$backdrop.addClass(classes.backdropVisible);
         }, 10);
       }
@@ -105,6 +106,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
         setTimeout(function() {
           _this.$backdrop.removeClass(classes.backdropVisible);
+          $body.removeClass(classes.bodyDrawerOpen);
         }, 10);
       }
       else {

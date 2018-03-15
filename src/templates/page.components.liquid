@@ -18,8 +18,8 @@
           <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
           <li><a href="#docs-modals">Modals</a></li>
-          <li><a href="#docs-slideup">Slideup</a></li>
           <li><a href="#docs-drawer">Drawer</a></li>
+          <li><a href="#docs-slideup">Slideup</a></li>
         </ul>
 
         <h3 id="docs-product-card" class="docs-title">Product Card</h3>
@@ -27,24 +27,110 @@
         {% assign all_collection = collections['all'] %}
         {% if all_collection.products.size > 0 %}
           {% assign test_product = all_collection.products[0] %}
-          <div style="max-width: 500px;">
+          <div class="docs-well docs-well--constrained">
             {% include 'product-card', product: test_product %}
           </div>
         {% else %}
           <em>The product card requires a Shopify product in order to work.  <a href="{{ shop.url }}/admin/products/new">Go here to make one</a></em>.
         {% endif %}
 
+        <h4 class="docs-subtitle">Snippet API</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Values</th>                
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>product</code></td>
+                <td>Product</td>
+                <td>None</td>
+                <td>Shopify product object.  Required.</td>
+              </tr>
+              <tr>
+                <td><code>quick_view</code></td>
+                <td>Boolean</td>
+                <td>false</td>
+                <td>Controls if the product card has a quickview trigger</td>
+              </tr>
+              <tr>
+                <td><code>show_swatches</code></td>
+                <td>Boolean</td>
+                <td>True</td>
+                <td>Controls if the product card displays swatches</td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>         
+
         <h3 id="docs-article-card" class="docs-title">Article Card</h3>
         <p>See <code>snippets/article-card.liquid</code>.</p>
         {% assign news_blog = blogs['news'] %}
         {% if news_blog.articles_count > 0 %}
           {% assign test_article = news_blog.articles[0] %}
-          <div style="max-width: 500px;">
+          <div class="docs-well docs-well--constrained">
             {% include 'article-card', article: test_article %}
           </div>
         {% else %}
           The article card requires a Shopify article in order to work.  <a href="{{ shop.url }}/admin/products/new">Go here to make one</a> and add it to the default "News" blog to see this component.
         {% endif %}
+
+        <h4 class="docs-subtitle">Snippet API</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Values</th>                
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>article</code></td>
+                <td>Article</td>
+                <td>None</td>
+                <td>Shopify article object.  Required.</td>
+              </tr>
+              <tr>
+                <td><code>show_author</code></td>
+                <td>Boolean</td>
+                <td>true</td>
+                <td>Controls visibility of article author</td>
+              </tr>
+              <tr>
+                <td><code>show_date</code></td>
+                <td>Boolean</td>
+                <td>true</td>
+                <td>Controls visibility of article date</td>
+              </tr>
+              <tr>
+                <td><code>show_tags</code></td>
+                <td>Boolean</td>
+                <td>true</td>
+                <td>Controls visibility of article tags</td>
+              </tr>
+              <tr>
+                <td><code>show_excerpt</code></td>
+                <td>Boolean</td>
+                <td>false</td>
+                <td>Controls visibility of article excerpt</td>
+              </tr>
+              <tr>
+                <td><code>img_size</code></td>
+                <td>String</td>
+                <td>600x450</td>
+                <td>Specifies crop of the displayed article image.  See <a href="https://help.shopify.com/themes/liquid/filters/url-filters#size-parameters">URL Filter Size Parameters</a> for more info.</td>
+              </tr>  
+            </tbody>
+          </table>
+        </div>       
 
         <h3 id="docs-banners" class="docs-title">Banners</h3>
         <p>Banners are one of the most flexible and re-usable components on the site.  They consist of a parent <code>.banner</code> element and any number of child <code>.banner__panel</code> elements. The parent <code>.banner</code> element accepts <code>.banner--tall</code> and <code>.banner--short</code> modifier classes to create different sized banners.  Note that these modifier classes affect the vertical padding of the child banner panels.</p>
@@ -88,45 +174,46 @@
 
         <h3 id="docs-promo" class="docs-title">Promo</h3>
         <p>Promos consist of an image and text laid out vertically on mobile and horizontally on desktop.  Listed below are the available options that affect layout / styling.</p>
+        <h4 class="docs-subtitle">Snippet API</h4>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
                 <th>Option</th>
-                <th>Default</th>
                 <th>Values</th>
+                <th>Default</th>
                 <th>Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><code>layout</code></td>
-                <td>Left</td>
                 <td>Left / Right</td>
+                <td>Left</td>
                 <td>Positions image on the left / right side.</td>
               </tr>
               <tr>
                 <td><code>type</code></td>
-                <td>None</td>
                 <td>1 / 2 / 3 / 4 / 5</td>
+                <td>None</td>
                 <td>Different types determine how the two columns of the promo share space.  See <code>promo.scss</code> for the list of widths.</td>
               </tr>
               <tr>
                 <td><code>content_max_width</code></td>
-                <td>None</td>
                 <td>Integer</td>
+                <td>None</td>
                 <td>Sets the maximum width of the text content on desktop sized screens</td>
               </tr>
               <tr>
                 <td><code>frame_ratio</code></td>
-                <td>None</td>
                 <td>String</td>
+                <td>None</td>
                 <td>If set, images will be applied as a background image to a frame element with this aspect ratio.  See <code>frames.scss</code></td>
               </tr>
               <tr>
                 <td><code>frame_ratio_small</code></td>
-                <td>None</td>
                 <td>String</td>
+                <td>None</td>
                 <td>If set, images will be applied as a background image to a frame element with this aspect ratio on mobile sized screens.  See <code>frames.scss</code></td>
               </tr>            
             </tbody>
@@ -144,7 +231,7 @@
         %}
 
         <h3 id="docs-modals" class="docs-title">Modals</h3>
-        <p>Built using <a href="https://getbootstrap.com/docs/3.3/javascript/#modals" target="_blank">Bootstrap's Modal</a>, use these to create an overlay to focus the user's attention.</p>
+        <p>Built using Bootstrap's Modal, use these to create an overlay to focus the user's attention.  <a href="https://getbootstrap.com/docs/3.3/javascript/#modals" target="_blank">Click here to see the docs for more info</a></p>
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test-modal-1">
           Launch Modal
@@ -172,10 +259,11 @@
           </div>
         </div>
 
-        <h3 id="docs-slideup" class="docs-title">Slideup</h3>
         <h3 id="docs-drawer" class="docs-title">Drawer</h3>
 
         <p>Drawers are elements that are fixed to the side of the screen and are hidden by default.  Opening them will transition the element on screen and apply a backdrop to focus user attention and act as a clickable area that dismisses the drawer.</p>
+
+        <p>You can use the drawer with or without a backdrop.  If the backdrop is used, scrolling will be killed on the body when the drawer is opened.</p>
 
         <p>
           <button data-toggle="drawer" data-target="#my-drawer" data-backdrop="true" class="btn btn-primary">Trigger drawer</button>
@@ -185,14 +273,24 @@
         <div id="my-drawer" class="drawer">
           <div class="drawer__inner">
             <div class="drawer__header">
-              <h4>Drawer Header</h4>
               <a href="#" class="drawer__close" data-drawer-close>
                 {% include 'icon-close' %}
-              </a>
+              </a>        
+              <h5 class="drawer__header-title">Drawer Header</h5>
             </div>
             <div class="drawer__body">
-              Drawer content here
-            </div>            
+              <div class="drawer__body-contents">
+                <p>Drawer content goes here.</p>
+              </div>
+            </div>
+            <div class="drawer__body drawer__body--flush">
+              <div class="drawer__body-contents" style="background: #fff6d0; padding-top: 30px; padding-bottom:30px;">
+                <p>I'm content that is using the flush drawer body modifier class.</p>
+              </div>
+            </div> 
+            <div class="drawer__footer">
+              Throw some content in the footer of this drawer.
+            </div>           
           </div>
         </div>
 
@@ -226,6 +324,8 @@
             </tbody>
           </table>
         </div>        
+
+        <h3 id="docs-slideup" class="docs-title">Slideup</h3>
 
       </div>
     </div>
