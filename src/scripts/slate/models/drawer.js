@@ -12,8 +12,12 @@ slate.models = slate.models || {};
 
 slate.models.Drawer = (function($, Modernizr) {
 
-  var $document = $(document)
+  var $document = $(document);
   var $body     = $(document.body);
+
+  var selectors = {
+    close: '[data-drawer-close]'
+  };
 
   var classes = {
     drawer: 'drawer',
@@ -31,15 +35,14 @@ slate.models.Drawer = (function($, Modernizr) {
   */
   function Drawer(el, options) {
 
-    console.log(options);
-
     this.name = 'drawer';
     this.namespace = '.'+this.name;
 
     this.$el = $(el);
-    this.$backdrop          = null;
-    this.stateIsOpen        = null;
-    this.transitionEndEvent = slate.utils.whichTransitionEnd();    
+    this.$backdrop              = null;
+    this.stateIsOpen            = false;
+    this.transitionEndEvent     = slate.utils.whichTransitionEnd();
+    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
 
     if(this.$el == undefined || !this.$el.hasClass(classes.drawer)) {
       console.warn('['+this.name+'] - Element with class `'+classes.drawer+'` required to initialize.');
@@ -47,14 +50,11 @@ slate.models.Drawer = (function($, Modernizr) {
     }     
 
     var defaults = {
-      closeSelector: '[data-drawer-close]',
+      closeSelector: selectors.close,
       backdrop: true
     };
 
     this.settings = $.extend({}, defaults, options);
-
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
-    this.stateIsOpen = false;
 
     this.events = {
       HIDE:   'hide'   + this.namespace,
@@ -197,9 +197,11 @@ slate.models.Drawer = (function($, Modernizr) {
 
     if(!data) {
       $this.data('drawer', (data = new Drawer($target, options)));
+      data.show();
     }
-
-    data.show();
+    else {
+      data.toggle();
+    }
 
   });  
 
