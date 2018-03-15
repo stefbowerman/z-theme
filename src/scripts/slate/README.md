@@ -165,6 +165,17 @@ var options = { arrows: true };
 var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
 ```
 
+To set options on the slideshow, you can either pass an object into the constructor or use data attributes on the slideshow element.  Data attribute options with take precedent over those passed into the constructor.  The list of available data-attributes is listed below.
+
+| Attribute         | Type          | Default          | Description   |
+| :---------------- | :------------ | :--------------- | :------------ |
+| `data-fade` | boolean | true | If true, the slideshow will fade slides in and out instead of sliding them |
+| `data-slides-to-show` | integer | 1 | How many slides are visible at a time |
+| `data-slides-to-scroll` | integer | 1 | How many slides to scroll at a time |
+| `data-autoplay` | boolean | false | Should the slideshow play automatically |
+| `data-autoplay-speed` | integer | 5000 | Slideshow speed in ms |
+
+
 ### Slideup
 Full width element that is fixed to the bottom of the screen.  This class provides a simple way to open and close the slideup as well as lifecycle events.
 

@@ -12,8 +12,14 @@ slate.models = slate.models || {};
 
 slate.models.Slideup = (function($, Modernizr) {
 
+  var $document = $(document);
+
+  var selectors = {
+    close: '[data-slideup-close]',
+  }
+
   var classes = {
-    slideup: 'slide-up',
+    slideup: 'slideup',
     visible: 'is-visible'
   };
 
@@ -29,19 +35,21 @@ slate.models.Slideup = (function($, Modernizr) {
     this.namespace = '.'+this.name;
 
     this.$el = $(el);
+    this.stateIsOpen            = false;
+    this.transitionEndEvent     = slate.utils.whichTransitionEnd();    
+    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
 
-    if (!this.$el || this.$el == undefined) {
+
+    if (this.$el == undefined || !this.$el.hasClass(classes.slideup)) {
       console.warn('['+this.name+'] - Element with class `'+classes.slideup+'` required to initialize.');
       return;
     }    
 
     var defaults = {
-      closeSelector: '[data-slideup-close]'
+      closeSelector: selectors.close
     };
 
     this.settings = $.extend({}, defaults, options);
-
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
 
     this.events = {
       HIDE:   'hide'   + this.namespace,
@@ -60,6 +68,7 @@ slate.models.Slideup = (function($, Modernizr) {
      * Called after the closing animation has run
      */    
     onHidden: function() {
+      this.stateIsOpen = false;
       var e = $.Event(this.events.HIDDEN);
       this.$el.trigger(e);
     },
@@ -76,35 +85,67 @@ slate.models.Slideup = (function($, Modernizr) {
       var e = $.Event(this.events.HIDE);
       this.$el.trigger(e);
 
-      this.$el.removeClass(classes.visible);
+      if(this.stateIsOpen) {  
+        this.$el.removeClass(classes.visible);
 
-      if(this.supportsCssTransitions) {
-        this.$el.one(slate.utils.whichTransitionEnd(), this.onHidden.bind(this));
-      }
-      else {
-        this.onHidden();
-      }      
+        if(this.supportsCssTransitions) {
+          this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
+        }
+        else {
+          this.onHidden();
+        }
+      }   
     },
 
     show: function() {
       var e = $.Event(this.events.SHOW);
       this.$el.trigger(e);
 
-      this.$el.addClass(classes.visible);
+      if(!this.stateIsOpen) {
+        this.stateIsOpen = true;
 
-      if(this.supportsCssTransitions) {
-        this.$el.one(slate.utils.whichTransitionEnd(), this.onShown.bind(this));
-      }
-      else {
-        this.onShown();
+        this.$el.addClass(classes.visible);
+
+        if(this.supportsCssTransitions) {
+          this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
+        }
+        else {
+          this.onShown();
+        }
       }
     },
+
+    toggle: function() {
+      return this.stateIsOpen ? this.hide() : this.show();
+    },    
 
     onCloseClick: function(e) {
       e.preventDefault();
       this.hide();
     }
   });
+
+  // SLIDEUP DATA-API
+  // ===============
+
+  $document.on('click.slideup', '[data-toggle="slideup"]', function (e) {
+
+    var $this   = $(this)
+    var $target = $($this.attr('data-target'));
+    var options = $.extend($target.data(), $this.data());
+    var data    = $this.data('slideup');
+
+    if ($this.is('a')) e.preventDefault();
+
+    if(!data) {
+      $this.data('slideup', (data = new Slideup($target, options)));
+      data.show();
+    }
+    else {
+      data.toggle();
+    }
+
+  });   
 
   return Slideup;
 }(jQuery, Modernizr));
