@@ -13,9 +13,11 @@ body.drawer-open {
   right: 0;
   width: 100%;
   max-width: $drawer-max-width;
+  max-height: 100%;
   background: $drawer-bg;
   border: 1px solid $drawer-border-color;
   pointer-events: none;
+  overflow: scroll;
   @include translateX(100%);
   @include transition(all $transition-duration-base $transition-timing-function-base);
 
@@ -40,13 +42,42 @@ body.drawer-open {
 .drawer__header {
   position: relative;
   margin-bottom: 20px;
+  padding: 30px 0 $headings-margin-bottom;
+  border-bottom: 2px solid $drawer-border-color;
 
   .drawer__close {
     position: absolute;
+    top: 0;
     right: 0;
-    top: 50%;
-    @include translateY(-60%);
   }
+}
+
+.drawer__header-title {
+  margin: 0;
+  padding: 0;
+  font-size: $drawer-header-font-size;
+}
+
+.drawer__body {
+
+  &.drawer__body--flush {
+    margin-left: -#{$drawer-padding-horizontal};
+    margin-right: -#{$drawer-padding-horizontal};
+  }
+}
+
+.drawer__body-contents {
+
+  .drawer__body--flush & {
+    padding-left: $drawer-padding-horizontal;
+    padding-right: $drawer-padding-horizontal;
+  }
+}
+
+.drawer__footer {
+  margin-top: 20px;
+  padding: $headings-margin-bottom 0 0;  
+  border-top: 2px solid $drawer-border-color;
 }
 
 .drawer-backdrop {
