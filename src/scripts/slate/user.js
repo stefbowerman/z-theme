@@ -27,13 +27,25 @@ slate.user = (function(Cookies) {
 
    /**
     * Library of cookies to use throughout the site.
-    * Use the `createCookie` method below to create your own copies of these.  Don't access these directly.
+    * Use the `generateCookie` method below to create your own copies of these.  Don't access these directly.
     */
     _cookies: {
-      siteVisite: {
+      siteVisit: {
         name: cookiePrefix + 'site_visit',
         value: true
-      }
+      },
+      subscriptionSlideupSeen: {
+        name: 'subscriptionSlideup_seen',
+        value: true
+      },
+      subscriptionModalSeen: {
+        name: 'subscriptionModal_seen',
+        value: true
+      },
+      emailCollected: {
+        name: 'emailCollected',
+        value: true
+      }      
     },
 
    /**
@@ -42,10 +54,16 @@ slate.user = (function(Cookies) {
     * @param {String} key
     * @return {Object | undefined}
     */
-    createCookie: function(key) {
+    generateCookie: function(key) {
+      var c;
       if(this._cookies.hasOwnProperty(key)) {
-        return $.extend(true, {}, this._cookies[key]);
+        c = $.extend(true, {}, this._cookies[key]);
+        c.name = cookiePrefix + c.name;
       }
+      else {
+        console.warn('['+this.name+'] - Cannot create cookie.  Key "' + key + '" not found.' );
+      }
+      return c;
     },    
     
    /**

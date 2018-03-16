@@ -194,8 +194,12 @@
       "price": "Price",
       "quantity": "Quantity",
       "total": "Total",
-      "fulfilled_at": "Fulfilled {{ date }}",
-      "subtotal": "Subtotal"
+      "subtotal": "Subtotal",
+      "fulfilled_at": "Date fulfilled",
+      "track_shipment": "Track shipment",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Carrier",
+      "tracking_number": "Tracking number"
     },
     "recover_password": {
       "title": "Reset your password",
@@ -275,7 +279,8 @@
       "shop_link": "Start shopping",
       "print": "Print",
       "remaining_html": "{{ balance }} left",
-      "add_to_apple_wallet": "Add to Apple Wallet"
+      "add_to_apple_wallet": "Add to Apple Wallet",
+      "initial_value": "Gift card value: {{ value }}"
     }
   },
   "date_formats":{

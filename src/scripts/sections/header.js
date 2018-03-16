@@ -48,7 +48,7 @@ theme.Header = (function($) {
 
     // We pass in the fixed behavior as a class on the body of the site
     if($body.hasClass(classes.siteHasFixedHeader)) {
-      $window.on(this.events.SCROLL, $.throttle(20, requestAnimationFrame.bind(window, this.onScroll.bind(this)))); // throttle + rAF = smooth scrolling :)
+      $window.on(this.events.SCROLL, $.throttle(20, this.onScroll.bind(this)));
       this.onScroll(); // hit this one time on init to make sure everything is good 
     }
 
@@ -57,14 +57,20 @@ theme.Header = (function($) {
   Header.prototype = $.extend({}, Header.prototype, {
 
     scrollCheck: function() {
+      // Do measurements outside of rAF.
+      var scrollTop = $window.scrollTop();
       var actualOffset = this.$container.offset()['top'] - this.$el.outerHeight();
-      
-      if( $window.scrollTop() < actualOffset ){
-        this.$el.removeClass( classes.headerFixed );
-      }
-      else {
-        this.$el.addClass( classes.headerFixed );
-      }
+
+      // Do DOM updates inside.
+      requestAnimationFrame(function() {
+        if( scrollTop < actualOffset ){
+          this.$el.removeClass( classes.headerFixed );
+        }
+        else {
+          this.$el.addClass( classes.headerFixed );
+        }
+      }.bind(this));
+
     },    
 
     onScroll: function() {

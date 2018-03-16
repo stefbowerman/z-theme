@@ -41,31 +41,31 @@ theme.SubscriptionModal = (function($, slate) {
 
     this.settings = {
       enabled        : this.$container.data('enabled'),
-      delay          : !isNaN(parseInt( this.$container.data('delay'))) ? (parseInt( this.$container.data('delay'))*1000) : 3000, // delay before showing the modal on pageload,
-      seenExpiration : !isNaN(parseInt( this.$container.data('seen-expiration'))) ? parseInt( this.$container.data('seen-expiration')) : 30 // days before showing the modal again
+      delay          : !isNaN(parseInt( this.$container.data('delay') )) ? (parseInt( this.$container.data('delay') )*1000) : 3000, // delay before showing the modal on pageload,
+      seenExpiration : !isNaN(parseInt( this.$container.data('seen-expiration') )) ? parseInt( this.$container.data('seen-expiration') ) : 30 // days before showing the modal again
     };
 
     // if seenExpiration is set to 0, set it to 1 year (very far into the future)
     if(this.settings.seenExpiration == 0) {
       this.settings.seenExpiration = 365;
-    }    
+    }
+
+    // DOM elements we'll need
+    this.$modal          = $(selectors.modal, this.$container);
+    this.$form           = $(selectors.form, this.$container);
+    this.$successMessage = $(selectors.successMessage, this.$container);
 
     /**
      * These are the cookies that we'll use to keep track of how much the user has seen / interacted with the popup
      */
     this.cookies = {}
 
-    this.cookies.seen = {};
-    this.cookies.seen.name = '_subscriptionModal_seen';
-    this.cookies.seen.value = slate.utils.hashFromString($(selectors.modal).text()).toString(); // Set the cookie value based on the content
+    this.cookies.seen = slate.user.generateCookie('subscriptionModalSeen');
+    this.cookies.seen.value = slate.utils.hashFromString(this.$modal.text()).toString(); // Set the cookie value based on the content
     this.cookies.seen.expiration = this.settings.seenExpiration;
 
-    this.cookies.emailCollected = {};
-    this.cookies.emailCollected.name = '_subscriptionModal_emailCollected';
-    this.cookies.emailCollected.value = true;
+    this.cookies.emailCollected = slate.user.generateCookie('emailCollected');
     this.cookies.emailCollected.expiration = this.settings.seenExpiration;
-
-    this.$modal = $(selectors.modal, this.$container);
 
     /**
      * Attach event handlers
@@ -94,8 +94,8 @@ theme.SubscriptionModal = (function($, slate) {
     },
 
     onFormSuccess: function() {
-      $(selectors.form, this.$modal).hide();
-      $(selectors.successMessage, this.$modal).show();
+      this.$form.hide();
+      this.$successMessage.show();
       // setTimeout => this.hide() ?
     },
 
