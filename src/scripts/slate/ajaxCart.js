@@ -157,7 +157,7 @@
         this.settings = $.extend(settings, options);
 
         if(!$(selectors.template).length){
-          console.warn('['+this.name+'] - Handlebars template required to initialize AjaxCart');
+          console.warn('['+this.name+'] - Handlebars template required to initialize');
           return;
         }
 
