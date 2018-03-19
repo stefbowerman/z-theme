@@ -17,6 +17,7 @@
               background_image_medium_vertical_alignment: { string } - optional - defaults to "center"
               background_image_small: { image } - optional
               background_image_small_vertical_alignment: { string } - optional - defaults to "center",
+              overlay: { string } - optional - accepted values are "light" and "dark"
               light_text: { boolean }
               title: { string }
               title_alignment: { string } - optional - defaults to "center"
@@ -137,6 +138,10 @@
       <div class="banner__bg-container">
         <div class="banner__bg-image"></div>
       </div>
+    {% endif %}
+
+    {% if overlay == "light" or overlay == "dark" %}
+      <div class="banner__overlay banner__overlay--{{ overlay }}"></div>
     {% endif %}
 
     <div class="container-fluid-max">
