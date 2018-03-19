@@ -18,6 +18,7 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Drawer](#drawer)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
+- [Slideup Alert](#slideup-alert)
 - [User](#user)
 - [Utilities](#utilities)
 
@@ -199,6 +200,16 @@ slideup.hide();
 | `hidden.slideup`    | This event is fired when the slideup has finished being hidden from the user (will wait for CSS transitions to complete). |
 | `show.slideup`      | This event fires immediately when the show instance method is called. |
 | `shown.slideup`     | This event is fired when the slideup has been made visible to the user (will wait for CSS transitions to complete). |
+
+### Slideup Alert
+One time use instance of Slideup.  Displays on creation and uses a javascript timeout to hide and remove it from the DOM.
+
+```javascript
+new slate.models.SlideupAlert({
+  title: 'Slideup title',
+  text: 'Alert message here'
+});
+```
 
 ### User
 

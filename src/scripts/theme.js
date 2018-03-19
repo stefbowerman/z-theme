@@ -24,6 +24,7 @@ window.theme = window.theme || {};
 // =require slate/models/drawer.js
 // =require slate/models/slideshow.js
 // =require slate/models/slideup.js
+// =require slate/models/slideupAlert.js
 // =require slate/models/quickView.js
 // =require slate/models/collectionFilters.js
 // =require slate/models/collectionSort.js
@@ -47,6 +48,7 @@ window.theme = window.theme || {};
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 // =require templates/page-styles.js
+// =require templates/page-components.js
 
 (function($) {
 

@@ -14,7 +14,7 @@
     dot: '.dot'
   }
 
-  if( !$body.is('#styleguide') ){
+  if( !$body.is('.template-page-styles') ){
     return;
   }
 
