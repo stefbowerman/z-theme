@@ -34,7 +34,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
     singleOptionSelector: '[data-single-option-selector]',
-    variantOptionValueList: '[data-variant-option-value-list]',
+    variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
     variantOptionValue: '[data-variant-option-value]',
     quantitySelect: '[data-product-quantity-select]',
     fullDetailsLink: '[data-full-details-link]'
@@ -208,8 +208,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           swipe: Modernizr.touchevents,
           arrows: !Modernizr.touchevents,
           asNavFor: '#' + $thumbnail.attr('id'),
-          prevArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--left"><a class="arrow arrow--transparent arrow--left"><span class="arrow__icon"><~</span></a></div>',
-          nextArrow: '<div class="product-gallery__arrow-wrapper product-gallery__arrow-wrapper--right"><a class="arrow arrow--transparent"><span class="arrow__icon">~></span></a></div>',
+          prevArrow: '<div class="slick-arrow slick-arrow--prev"><span class="arrow arrow--left"><span class="arrow__icon"></span></span></div>',
+          nextArrow: '<div class="slick-arrow slick-arrow--next"><span class="arrow arrow--right"><span class="arrow__icon"></span></span></div>',
           initialSlide: initialSlide,
           accessibility: false,
           draggable: true
@@ -348,7 +348,10 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
         // Loop through all the options and update the option value
         for (var i = 3; i >= 1; i--) {
           var variantOptionValue = variant['option' + i];
-          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]', this.$container);
+          // Since we are finding the variantOptionValueUI based on the *actual* value, we need to scope to the correct list
+          // As some products can have the same values for different variant options (waist + inseam both use "32", "34", etc..)
+          var $variantOptionValueList = $(selectors.variantOptionValueList, this.$container).filter('[data-option-position="'+i+'"]');
+          var $variantOptionValueUI = $('[data-variant-option-value="'+variantOptionValue+'"]', $variantOptionValueList);
 
           $variantOptionValueUI.addClass( classes.variantOptionValueActive );
           $variantOptionValueUI.siblings().removeClass( classes.variantOptionValueActive );

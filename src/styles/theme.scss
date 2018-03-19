@@ -39,6 +39,7 @@
 @import url('components/content.scss');
 @import url('components/product-card.scss');
 @import url('components/article-card.scss');
+@import url('components/content-card.scss');
 @import url('components/quick-view.scss');
 @import url('components/docs.scss');
 @import url('components/banner.scss');
@@ -47,6 +48,9 @@
 @import url('components/promo.scss');
 @import url('components/frames.scss');
 @import url('components/spacer.scss');
+@import url('components/slideup.scss');
+@import url('components/arrows.scss');
+@import url('components/drawer.scss');
 
 /*================ MODULES ================*/
 // Modules are larger pieces of functionality that consume components
@@ -56,7 +60,6 @@
 @import url('modules/gift-card-template.scss');
 @import url('modules/pencil-banner.scss');
 @import url('modules/ajax-cart.scss');
-@import url('modules/subscription-popup.scss');
 @import url('modules/product-detail.scss');
 @import url('modules/slideshow.scss');
 @import url('modules/mobile-menu.scss');

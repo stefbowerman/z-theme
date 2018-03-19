@@ -11,6 +11,15 @@
   @media (min-width: $screen-md-min) {
     @include flex-direction(row);
   }
+
+  // For banners inside sliders, make sure they are all equal height
+  .slick-slide & {
+    height: 100%;
+
+    .banner__panel {
+      min-height: 100%;
+    }
+  }
 }
 
 .banner__panel {
@@ -36,31 +45,39 @@
   }
 
   // Modifier classes to make tall + short banners
-  .banner--short > & {
-    padding-top:    $banner-panel-padding-vertical * .5;
-    padding-bottom: $banner-panel-padding-vertical * .5;
+  .banner--small > & {
+    padding-top:    $banner-panel-padding-vertical-small;
+    padding-bottom: $banner-panel-padding-vertical-small;
   }
 
-  .banner--tall > & {
-    padding-top:    $banner-panel-padding-vertical * 2;
-    padding-bottom: $banner-panel-padding-vertical * 2;
+  .banner--large > & {
+    padding-top:    $banner-panel-padding-vertical-large;
+    padding-bottom: $banner-panel-padding-vertical-large;
   }
 }
 
 .banner__bg-container,
 .banner__bg-image {
-  position:absolute;
+  @include stretch-within;
   z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .banner__bg-image {
   background: {
     size: cover;
     position: center;
+  }
+}
+
+.banner__overlay {
+  @include stretch-within;
+
+  &.banner__overlay--light {
+    background-color: $banner-panel-overlay-light-color;
+  }
+
+  &.banner__overlay--dark {
+    background-color: $banner-panel-overlay-dark-color;
   }
 }
 

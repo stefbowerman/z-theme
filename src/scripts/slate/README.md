@@ -15,7 +15,10 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Breakpoints](#breakpoints)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
+- [Drawer](#drawer)
 - [Slideshow](#slideshow)
+- [Slideup](#slideup)
+- [Slideup Alert](#slideup-alert)
 - [User](#user)
 - [Utilities](#utilities)
 
@@ -129,6 +132,31 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 var sorting = new slate.models.CollectionSort( container, collectionData );
 ``` 
 
+### Drawer
+Element that hides off screen and animates in.  This class provides a simple way to open and close the drawer as well as lifecycle events.
+
+```javascript
+var $el = $('[data-drawer]');
+var drawer = new slate.models.Drawer( $el );
+
+// Later...
+
+$el.on('shown.drawer', function() {
+  console.log('Drawer is now visible');
+});
+
+drawer.hide();
+```
+
+Note:  This class also includes a data attribute based API to use drawers without writing javascript.  See the components page for reference.
+
+| Event Type         | Description   |
+| :----------------- | :------------ |
+| `hide.drawer`      | This event is fired immediately when the hide instance method has been called. |
+| `hidden.drawer`    | This event is fired when the drawer has finished being hidden from the user (will wait for CSS transitions to complete). |
+| `show.drawer`      | This event fires immediately when the show instance method is called. |
+| `shown.drawer`     | This event is fired when the drawer has been made visible to the user (will wait for CSS transitions to complete). |
+
 ### Slideshow
 Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
 
@@ -136,6 +164,51 @@ Wrapper around slideshow library to make initialization and consistency much sim
 var $slideshowWrapper = $('[data-slideshow-wrapper]');
 var options = { arrows: true };
 var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
+```
+
+To set options on the slideshow, you can either pass an object into the constructor or use data attributes on the slideshow element.  Data attribute options with take precedent over those passed into the constructor.  The list of available data-attributes is listed below.
+
+| Attribute         | Type          | Default          | Description   |
+| :---------------- | :------------ | :--------------- | :------------ |
+| `data-fade` | boolean | true | If true, the slideshow will fade slides in and out instead of sliding them |
+| `data-slides-to-show` | integer | 1 | How many slides are visible at a time |
+| `data-slides-to-scroll` | integer | 1 | How many slides to scroll at a time |
+| `data-autoplay` | boolean | false | Should the slideshow play automatically |
+| `data-autoplay-speed` | integer | 5000 | Slideshow speed in ms |
+
+
+### Slideup
+Full width element that is fixed to the bottom of the screen.  This class provides a simple way to open and close the slideup as well as lifecycle events.
+
+```javascript
+var $el = $('[data-slideup]');
+var options = { closeSelector: '.close-me' };
+var slideup = new slate.models.Slideup( $el, options);
+
+// Later...
+
+$el.on('hidden.slideup', function() {
+  console.log('Slideup hidden');
+});
+
+slideup.hide();
+```
+
+| Event Type         | Description   |
+| :----------------- | :------------ |
+| `hide.slideup`      | This event is fired immediately when the hide instance method has been called. |
+| `hidden.slideup`    | This event is fired when the slideup has finished being hidden from the user (will wait for CSS transitions to complete). |
+| `show.slideup`      | This event fires immediately when the show instance method is called. |
+| `shown.slideup`     | This event is fired when the slideup has been made visible to the user (will wait for CSS transitions to complete). |
+
+### Slideup Alert
+One time use instance of Slideup.  Displays on creation and uses a javascript timeout to hide and remove it from the DOM.
+
+```javascript
+new slate.models.SlideupAlert({
+  title: 'Slideup title',
+  text: 'Alert message here'
+});
 ```
 
 ### User

@@ -72,6 +72,18 @@
   @include flex-basis(0);
   @include flex-grow(2);
 
+  // Space out each nav
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+
+  &.header-nav--left {
+    padding-left: 0;
+  }
+
+  &.header-nav--right {
+    padding-right: 0;
+  }  
+
   &.header-nav--left,
   &.header-nav--right {
     @include flex-grow(3);
@@ -90,6 +102,11 @@
   &.header-nav--logo {
     
     &:not(.header-nav--left) {
+      
+      @media (max-width: $header-bp-min - 1px) {
+        padding-left: 0;
+      }
+
       @media (min-width: $header-bp-min) {
         @include justify-content(center);  
       }      

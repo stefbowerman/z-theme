@@ -21,7 +21,10 @@ window.theme = window.theme || {};
 
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
+// =require slate/models/drawer.js
 // =require slate/models/slideshow.js
+// =require slate/models/slideup.js
+// =require slate/models/slideupAlert.js
 // =require slate/models/quickView.js
 // =require slate/models/collectionFilters.js
 // =require slate/models/collectionSort.js
@@ -31,6 +34,7 @@ window.theme = window.theme || {};
 // =require sections/collection.js
 // =require sections/pencilBanner.js
 // =require sections/subscriptionModal.js
+// =require sections/subscriptionSlideup.js
 // =require sections/instagramFeed.js
 // =require sections/slideshow.js
 // =require sections/header.js
@@ -44,6 +48,7 @@ window.theme = window.theme || {};
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 // =require templates/page-styles.js
+// =require templates/page-components.js
 
 (function($) {
 
@@ -57,6 +62,7 @@ window.theme = window.theme || {};
     sections.register('collection', theme.Collection);
     sections.register('pencil-banner', theme.PencilBanner);
     sections.register('subscription-modal', theme.SubscriptionModal);
+    sections.register('subscription-slideup', theme.SubscriptionSlideup);
     sections.register('instagram-feed', theme.InstagramFeed);
     sections.register('slideshow', theme.Slideshow);
     sections.register('header', theme.Header);
@@ -73,9 +79,21 @@ window.theme = window.theme || {};
     // Common a11y fixes
     slate.a11y.pageLinkFocus($(window.location.hash));    
 
-    // Wrap RTE videos and tables to force responsive layout.
-    slate.rte.fixTables();
-    slate.rte.iframeReset();
+    // Target tables to make them scrollable
+    slate.rte.wrapTables({
+      $tables: $('.rte table'),
+      tableWrapperClass: 'table-responsive'
+    });
+
+    // Target iframes to make them responsive
+    var iframeSelectors =
+      '.rte iframe[src*="youtube.com/embed"],' +
+      '.rte iframe[src*="player.vimeo"]';
+
+    slate.rte.wrapIframe({
+      $iframes: $(iframeSelectors),
+      iframeWrapperClass: 'rte__video-wrapper'
+    });
 
     // Apply UA classes to the document
     slate.utils.userAgentBodyClass();    

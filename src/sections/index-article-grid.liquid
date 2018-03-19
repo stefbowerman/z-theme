@@ -1,22 +1,17 @@
-
 {% assign article_count = 0 %}
 {% capture content_grid_html %}
   {% for block in section.blocks %}
     {% if block.type == "article" %}
-      {% assign article_handle = block.settings.article %}
-      {% assign article = articles[article_handle] %}
-      {% if article_handle != blank %}
-        <div class="content-grid__item" {{ block.shopify_attributes }}>
-          {% include 'article-card', 
-                      article: article,
-                      show_excerpt: section.settings.show_excerpt,
-                      show_author: section.settings.show_author,
-                      show_date: section.settings.show_date
-                      show_tags: section.settings.show_tags
-          %}
-        </div>
-        {% assign article_count = article_count | plus: 1 %}
-      {% endif %}
+      <div class="content-grid__item" {{ block.shopify_attributes }}>
+        {% include 'article-card', 
+                    article: articles[block.settings.article],
+                    show_excerpt: section.settings.show_excerpt,
+                    show_author: section.settings.show_author,
+                    show_date: section.settings.show_date
+                    show_tags: section.settings.show_tags
+        %}
+      </div>
+      {% assign article_count = article_count | plus: 1 %}
     {% endif %}
   {% endfor %}   
 {% endcapture %}
@@ -41,7 +36,6 @@
 {% schema %}
   {
     "name": "Article Grid",
-    "class": "index-section",
     "max_blocks": 3,
     "settings": [
       {

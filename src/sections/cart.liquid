@@ -34,7 +34,10 @@
 
                             {% for option in item.product.options %}
                               {% assign option_key = 'option' | append: forloop.index %}
-                              <li>{{ option }}: {{ item.variant[option_key] }}</li>
+                              {% assign option_val = item.variant[option_key] %}
+                              {% unless option == "Title" and option_val == "Default Title" %}
+                                <li>{{ option }}: {{ option_val }}</li>
+                              {% endunless %}
                             {% endfor %}
 
                             {% unless item.properties == empty %}
