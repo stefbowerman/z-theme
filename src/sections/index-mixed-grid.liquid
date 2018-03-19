@@ -1,10 +1,25 @@
 {% capture content_grid_html %}
   {% for block in section.blocks %}
-    {% if block.type == "product" %}
-      <div class="content-grid__item" {{ block.shopify_attributes }}>
+    <div class="content-grid__item" {{ block.shopify_attributes }}>
+      {% if block.type == "product" %}
+
         {% include 'product-card', product: all_products[block.settings.product] %}
-      </div>
-    {% endif %}
+
+      {% elsif block.type == "article" %}
+
+        {% include 'article-card', article: articles[block.settings.article] %}
+
+      {% elsif block.type == "content" %}
+
+        {% include 'content-card',
+                    title: block.settings.title,
+                    subtitle: block.settings.subtitle,
+                    cta_text: block.settings.cta_text,
+                    cta_url: block.settings.cta_url
+        %}
+        
+      {% endif %}
+    </div> 
   {% endfor %}   
 {% endcapture %}
 
@@ -24,10 +39,9 @@
   {% endif %}
 </div>
 
-
 {% schema %}
   {
-    "name": "Product Grid",
+    "name": "Mixed Grid",
     "max_blocks": 4,
     "settings": [
       {
@@ -57,14 +71,51 @@
             "label": "Product"
           }
         ]
-      }
+      },
+      {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Article"
+          }
+        ]
+      },
+      {
+        "type": "content",
+        "name": "Tout",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Link"
+          }
+        ]
+      } 
     ],
     "presets": [
       {
-        "category": "Product",
-        "name": "Product Grid",
+        "category": "Misc",
+        "name": "Mixed Grid",
         "settings": {
-          "title": "Our Products"
+          "title": "Mixed Bag of Content"
         },        
         "blocks": []
       }

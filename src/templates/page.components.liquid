@@ -6,7 +6,7 @@
         <div class="page-header">
           <h1 class="page-header__title">Z-Theme Components</h1>
           <div class="page-header__subtitle">
-            This page is here to document available components for use on the site. These are hard coded in an alternate page template file, named <code>page.components.liquid</code>.
+            This page is here to document available components for use on the site. These are hard coded in an alternate page template file named <code>page.components.liquid</code>.
           </div>          
         </div>
 
@@ -14,6 +14,7 @@
         <ul>
           <li><a href="#docs-product-card">Product Card</a></li>
           <li><a href="#docs-article-card">Article Card</a></li>
+          <li><a href="#docs-content-card">Content Card</a></li>
           <li><a href="#docs-banners">Banners</a></li>
           <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
@@ -130,7 +131,19 @@
               </tr>  
             </tbody>
           </table>
-        </div>       
+        </div>
+
+        <h3 id="docs-content-card" class="docs-title">Content Card</h3>
+        <p>See <code>snippets/content-card.liquid</code>.</p>
+        <div class="docs-well docs-well--constrained">
+          {% include 'content-card',
+                      title: "Content Card Title"
+                      subtitle: "Subtitle goes here"
+                      text: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>",
+                      cta_text: "Shop Now"
+                      cta_url: "#"
+          %} 
+        </div>
 
         <h3 id="docs-banners" class="docs-title">Banners</h3>
         <p>Banners are one of the most flexible and re-usable components on the site.  They consist of a parent <code>.banner</code> element and any number of child <code>.banner__panel</code> elements. The parent <code>.banner</code> element accepts <code>.banner--large</code> and <code>.banner--small</code> modifier classes to create different sized banners.  Note that these modifier classes affect the vertical padding of the child banner panels.</p>
