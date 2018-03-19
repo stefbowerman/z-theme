@@ -58,18 +58,26 @@
 
 .banner__bg-container,
 .banner__bg-image {
-  position:absolute;
+  @include stretch-within;
   z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .banner__bg-image {
   background: {
     size: cover;
     position: center;
+  }
+}
+
+.banner__overlay {
+  @include stretch-within;
+
+  &.banner__overlay--light {
+    background-color: $banner-panel-overlay-light-color;
+  }
+
+  &.banner__overlay--dark {
+    background-color: $banner-panel-overlay-dark-color;
   }
 }
 
