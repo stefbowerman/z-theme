@@ -113,6 +113,18 @@
     }
   }
 
+  // Space out each nav
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+
+  &.header-nav--left {
+    padding-left: 0;
+  }
+
+  &.header-nav--right {
+    padding-right: 0;
+  }
+
   // Some menus don't need to be shown all the time
   &.header-nav--hide-on-mobile {
     @media (max-width: $header-bp-min - 1px) {

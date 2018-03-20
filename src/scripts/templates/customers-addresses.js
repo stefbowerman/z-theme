@@ -14,6 +14,12 @@ theme.customerAddresses = (function() {
     return;
   }
 
+  var selectors = {
+    addressNewToggle: '[data-address-new-toggle]',
+    addressEditToggle: '[data-address-edit-toggle][data-form-id]',
+    addressDelete: '[data-address-delete][data-form-id]'
+  };
+
   // Initialize observers on address selectors, defined in shopify_common.js
   if (Shopify) {
     new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
@@ -34,16 +40,19 @@ theme.customerAddresses = (function() {
   });
 
   // Toggle new/edit address forms
-  $('.address-new-toggle').on('click', function() {
+  $(selectors.addressNewToggle).on('click', function(e) {
+    e.preventDefault();
     $newAddressForm.toggleClass('hide');
   });
 
-  $('.address-edit-toggle').on('click', function() {
+  $(selectors.addressEditToggle).on('click', function(e) {
+    e.preventDefault();
     var formId = $(this).data('form-id');
     $('#EditAddress_' + formId).toggleClass('hide');
   });
 
-  $('.address-delete').on('click', function() {
+  $(selectors.addressDelete).on('click', function(e) {
+    e.preventDefault();
     var $el = $(this);
     var formId = $el.data('form-id');
     var confirmMessage = $el.data('confirm-message');
