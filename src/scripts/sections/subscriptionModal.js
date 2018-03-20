@@ -148,6 +148,10 @@ theme.SubscriptionModal = (function($, slate) {
 
     onDeselect: function() {
       this.hide();
+    },
+
+    onUnload: function() {
+      $('.modal-backdrop').remove();
     }
   });
 
