@@ -11,38 +11,46 @@ slate.quickView = (function() {
   var $body = $(document.body);
 
   var selectors = {
-    quickViewTrigger: '[data-quick-view-trigger]'
+    quickViewTrigger: '[data-quick-view-trigger]',
+    productCard: '[data-product-card]'
   };
 
   /**
    * QuickViewManager 
    *
    * - Creates and keeps track of quickviews on the page.
-   * - Makes sure only one is visible at a time and that we only load a quick view *once* per product
+   * - Makes sure only one is visible at a time and that we only load a quick view *once* per product card
    *
    * @constructor
    */
   function QuickViewManager() {
     this.name = 'quickViewManager';
-    this.quickViews = {};
+    this.quickViews = [];
 
     var isLoadingQuickView = false;
 
-    this.register = function(id, qv) {
+    this.register = function(qv) {
       if( !(qv instanceof slate.models.QuickView) ) {
         console.warn('['+this.name+'] - instance of slate.models.QuickView required when calling register');
         return;
       }
 
-      if(!this.quickViews.hasOwnProperty(id)) {
-        this.quickViews[id] = qv;
-      }
+      this.quickViews.push(qv);
 
       return this;
     };
 
-    this.getQuickViewByID = function(id) {
-      return this.quickViews[id];
+    this.getQuickViewByProductCard = function($productCard) {
+      var foundQV;
+
+      $.each(this.quickViews, function(i, qv) {
+        if( qv.$productCard.is($productCard) ) {
+          foundQV = qv;
+          return false;
+        }
+      });
+
+      return foundQV;
     };
 
     this.onResize = function() {
@@ -84,15 +92,17 @@ slate.quickView = (function() {
       }
 
       var quickViewManager = this;
-      var $productCard      = $trigger.parents('.product-card');
-      var id                = $productCard.attr('id');
-      var quickView         = this.getQuickViewByID(id);
+      var $productCard     = $trigger.parents(selectors.productCard);
+      var quickView        = this.getQuickViewByProductCard($productCard);
+      var triggerText      = $trigger.text(); // Cache this text so we can set it as loading
 
       if(quickView == undefined) {
 
         if(isLoadingQuickView) return; // Return early, we're already fetching a quick view, sorry!
 
         isLoadingQuickView = true;
+
+        $trigger.text('Loading');
 
         // generate a new QV
         quickView = new slate.models.QuickView({
@@ -104,10 +114,11 @@ slate.quickView = (function() {
 
         $productCard.one('loaded.quickView', function() {
           isLoadingQuickView = false;
+          $trigger.text(triggerText); // Return the button to it's original state
           quickViewManager.closeOpenQuickViews( quickView.open.bind(quickView) ); // Make sure all the QVs are closed before opening this new one
         });
 
-        quickViewManager.register(id, quickView);
+        quickViewManager.register(quickView);
       }
       else {
         if(!quickView.isOpen()) {
@@ -120,7 +131,6 @@ slate.quickView = (function() {
 
     return this;
   };
-
 
   var quickViewManager = new QuickViewManager();  
 
