@@ -104,7 +104,12 @@ window.theme = window.theme || {};
     }
 
     // Chosen JS plugin for select boxes
-    slate.utils.chosenSelects();    
+    slate.utils.chosenSelects();
+
+    // Global handler for form inputs that come back with errors applied
+    $('.form-group.has-error').on('change keydown', '.form-control', function() {
+      $(this).parents('.has-error').removeClass('has-error');
+    });
 
   });
 

@@ -57,10 +57,15 @@
         "default": true
       },
       {
-        "type": "text",
+        "type": "range",
         "id": "seen_expiration",
+        "min":  0,
+        "max":  60,
+        "step": 1,
+        "unit": "d",
         "label": "Days before showing again",
-        "default": "30"
+        "default": 30,
+        "info": "If a user submits their email or closes the form, this is how long we wait before showing again.  Set to '0' to never show again."
       },
       {
          "type": "header",
