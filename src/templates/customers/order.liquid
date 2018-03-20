@@ -29,6 +29,32 @@
 
           <h5 class="customer-order__title clearfix">{{ 'customer.order.title' | t: name: order.name }} <span style="float: right">{{ order.created_at | time_tag: format: 'month_day_year' }}</span></h2>
 
+          {% comment %} Stuff from slate updates that needs to get styled {% endcomment %}
+          {% if line_item.fulfillment %}
+            <dl>
+              <dt>{{ 'customer.order.fulfilled_at' | t }}</dt>
+              <dd>{{ line_item.fulfillment.created_at | date: format: 'month_day_year' }}</dd>
+
+              {% if line_item.fulfillment.tracking_url %}
+                <dt>{{ 'customer.order.tracking_url' | t }}</dt>
+                <dd>
+                  <a href="{{ line_item.fulfillment.tracking_url }}">
+                    {{ 'customer.order.track_shipment' | t }}
+                  </a>
+                </dd>
+              {% endif %}
+
+              <dt>{{ 'customer.order.tracking_company' | t }}</dt>
+              <dd>{{ line_item.fulfillment.tracking_company }}</dd>
+
+              {% if line_item.fulfillment.tracking_number %}
+                <dt>{{ 'customer.order.tracking_number' | t }}</dt>
+                <dd>{{ line_item.fulfillment.tracking_number }}</dd>
+              {% endif %}
+            </dl>
+          {% endif %}
+          {% comment %} End {% endcomment %}
+
           {% if order.cancelled %}
             <div class="customer-order__details--cancellation">
               <div class="row">
@@ -118,47 +144,25 @@
             <!-- END line-item -->
 
             <div class="customer-order__totals">
-              <div class="row">
-                <div class="col-sm-7 col-sm-offset-5 col-lg-5 col-lg-offset-7">
-                  <div data-shopify-total-lines>
-                    <div class="customer-order__subtotal  customer-order__subtotal--price">
-                      <h5 class="subtotal__label">{{ 'customer.order.subtotal' | t }}</h5>
-                      <h5 class="subtotal__value">{{ order.subtotal_price | money }}</h5>
-                    </div>
-                    {% for discount in order.discounts %}
-                      <div class="customer-order__subtotal customer-order__subtotal--discount">
-                        <h5 class="subtotal__label">{{ discount.code }} {{ 'customer.order.discount' | t }}</h5>
-                        <h5 class="subtotal__value">{{ discount.savings | money }}</h5>
-                      </div>
-                    {% endfor %}
-                    {% for shipping_method in order.shipping_methods %}
-                      <div class="customer-order__subtotal customer-order__subtotal--shipping">
-                        <h5 class="subtotal__label">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h5>
-                        <h5 class="subtotal__value">{{ shipping_method.price | money }}</h5>
-                      </div>
-                    {% endfor %}
-                    {% for tax_line in order.tax_lines %}
-                      <div class="customer-order__subtotal customer-order__subtotal--tax">
-                        <h5 class="subtotal__label">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</h5>
-                        <h5 class="subtotal__value">{{ tax_line.price | money }}</h5>
-                      </div>
-                    {% endfor %}
-                  </div>
-
-                  <div class="customer-order__total">
-                    <h5 class="subtotal__label">{{ 'customer.order.total' | t }}</h5>
-                    <h5 class="subtotal__value">
-                      {{ order.total_price | money }} {{ order.currency }}
-                    </h5>
-                  </div>
-                </div>
-              </div>
+              <p>{{ 'customer.order.subtotal' | t }}: <strong>{{ order.subtotal_price | money }}</strong></p>
+              {% for discount in order.discounts %}
+                <p>{{ discount.code }} {{ 'customer.order.discount' | t }}: <strong>{{ discount.savings | money }}</strong></p>
+              {% endfor %}
+              {% for shipping_method in order.shipping_methods %}
+                <p>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}): <strong>{{ shipping_method.price | money }}</strong></p>
+              {% endfor %}
+              {% for tax_line in order.tax_lines %}
+                <p>{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%): <strong>{{ tax_line.price | money }}</strong></p>
+              {% endfor %}
             </div>
+
+            <p>{{ 'customer.order.total' | t }}: <strong>{{ order.total_price | money }}</strong></p>
           </div>
         </div>
-        <div class="customer-order__post-script">
-          <a href="/account" class="cta cta-3">{{ 'customer.account.return' | t }}</a>
-        </div>
+
+        <p>
+          <a href="/account">{{ 'customer.account.return' | t }}</a>
+        </p>
       </div>
 
       {{ page_sidebar_html }}

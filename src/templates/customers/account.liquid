@@ -55,6 +55,12 @@
           {% if paginate.pages > 1 %}
             {% include 'pagination' %}
           {% endif %}
+
+          {% if customer.default_address %}
+            <h6>Billing &amp; Shipping Information</h6>
+            {{ customer.default_address | format_address }}
+            <a href="/account/addresses">Edit</a>
+          {% endif %}
         </div>
 
         {{ page_sidebar_html }}

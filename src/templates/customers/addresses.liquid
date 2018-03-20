@@ -15,486 +15,92 @@
 
         <div class="page-header">
           <h1 class="page-header__title">
-            {% if customer.first_name %}
-              {{ 'Welcome, ' | append: customer.first_name | append: '!' }}
-            {% else %}
-              {{ 'customer.account.title' | t }}
-            {% endif %}
+            {{ 'customer.addresses.title' | t }}
           </h1>
         </div>
 
         <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
-          <div class="account__customer-details">
-            <div class="row">
-              <div class="col-sm-10 col-md-8">
-                <div class="account__customer-details--email">
-                  {% if customer.email %}
-                    <span>{{ customer.email }}</span>
-                  {% endif %}
-                </div>
 
-                {%- comment %} Add Address {% endcomment -%}
-                <div class="account__customer-details--add-address">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                      <button type="button" class="btn btn--add-address" data-address-new-toggle>{{ 'customer.addresses.add_new' | t }}</button>
-                    </div>
-                  </div>
+          <div id="AddressNewForm" class="hide">
+            {% include 'customer-new-address-form' %}
+          </div>
 
-                  <div id="AddressNewForm" class="form--add-address form-horizontal hide">
-                    {% form 'customer_address', customer.new_address %}
+          {% for address in customer.addresses %}
 
-                      <h3 class="customer-details__form-title h5">{{ 'customer.addresses.add_new' | t }}</h3>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressFirstNameNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.first_name' | t }}
-                        </label>
-
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[first_name]"
-                            id="AddressFirstNameNew"
-                            class="form-control"
-                            value="{{ form.first_name }}"
-                            placeholder="{{ 'customer.addresses.first_name' | t }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-
-                        <label for="AddressLastNameNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.last_name' | t }}
-                        </label>
-
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[last_name]"
-                            id="AddressLastNameNew"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.last_name' | t }}"
-                            value="{{ form.last_name }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressCompanyNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.company' | t }}
-                        </label>
-
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[company]"
-                            id="AddressCompanyNew"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.company' | t }}"
-                            value="{{ form.company }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressAddress1New" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.address1' | t }}
-                        </label>
-
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[address1]"
-                            id="AddressAddress1New"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.address1' | t }}"
-                            value="{{ form.address1 }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressAddress2New" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.address2' | t }}
-                        </label>
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[address2]"
-                            id="AddressAddress2New"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.address2' | t }}"
-                            value="{{ form.address2 }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressCityNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.city' | t }}
-                        </label>
-                        <div class="col-xs-12 col-lg-10">
-                          <input type="text"
-                            name="address[city]"
-                            id="AddressCityNew"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.city' | t }}"
-                            value="{{ form.city }}"
-                            autocapitalize="words">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressCountryNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.country' | t }}
-                        </label>
-                        <div class="col-xs-12 col-lg-10">
-                          <select
-                            name="address[country]"
-                            id="AddressCountryNew"
-                            class="form-control"
-                            data-default="{{ form.country }}">
-                            {{ country_option_tags }}
-                          </select>
-                        </div>
-                      </div>
-
-                      <div id="AddressProvinceContainerNew" class="form-group collapse-xs" style="display: none">
-                        <label for="AddressProvinceNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.province' | t }}
-                        </label>
-                        <div class="col-xs-12 col-lg-10">
-                          <select
-                            name="address[province]"
-                            id="AddressProvinceNew"
-                            class="form-control"
-                            data-default="{{ form.province }}">
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <label for="AddressPhoneNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.phone' | t }}
-                        </label>
-                        <div class="col-xs-12 col-lg-4">
-                          <input type="tel"
-                            name="address[phone]"
-                            id="AddressPhoneNew"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.phone' | t }}"
-                            value="{{ form.phone }}"
-                            pattern="[0-9\-]*">
-                        </div>
-
-                        <label for="AddressZipNew" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                          {{ 'customer.addresses.zip' | t }}
-                        </label>
-
-                        <div class="col-xs-12 col-lg-4">
-                          <input type="text"
-                          name="address[zip]"
-                          id="AddressZipNew"
-                          class="form-control"
-                          placeholder="{{ 'customer.addresses.zip' | t }}"
-                          value="{{ form.zip }}"
-                          autocapitalize="characters">
-                        </div>
-                      </div>
-
-                      <div class="form-group collapse-xs">
-                        <div class="col-xs-12 col-lg-6">
-                          <div class="checkbox">
-                            {{ form.set_as_default_checkbox }}
-
-                            <label for="address_default_address_new">
-                              {{ 'customer.addresses.set_default' | t }}
-                            </label>
-                            <span class="checkbox-ui"></span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-xs-6">
-                          <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.addresses.add' | t }}">
-                        </div>
-                        <div class="col-xs-6">
-                          <button type="button" class="btn btn-default btn-block" data-address-new-toggle>
-                            {{ 'customer.addresses.cancel' | t }}
-                          </button>
-                        </div>
-                      </div>
-                    {% endform %}
-                  </div>
-
-                  {% if customer.addresses_count > 0 %}
-                    <h3 class="customer-details__form-title h5">{{ 'customer.addresses.title' | t }}</h3>
-                  {% endif %}
-
-                  {% for address in customer.addresses %}
-                    {%- comment %} Edit Address Form {% endcomment -%}
-                    <div id="EditAddress_{{ address.id }}" class="form--edit-address form-horizontal hide">
-                      {% form 'customer_address', address %}
-                        <h4>{{ 'customer.addresses.edit_address' | t }}</h4>
-
-                        <div class="form-group collapse-xs">
-                          <label for="AddressFirstName_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.first_name' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[first_name]"
-                            id="AddressFirstName_{{ form.id }}"
-                            placeholder="{{ 'customer.addresses.first_name' | t }}"
-                            class="form-control"
-                            value="{{ form.first_name }}"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-                        <div class="form-group collapse-xs">
-                          <label for="AddressLastName_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.last_name' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[last_name]"
-                            id="AddressLastName_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.last_name' | t }}"
-                            value="{{ form.last_name }}"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-                        <div class="form-group collapse-xs">
-                          <label for="AddressCompany_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.company' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[company]"
-                            id="AddressCompany_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.company' | t }}"
-                            value="{{ form.company }}"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-
-                        <div class="form-group collapse-xs collapse-sm">
-                          <label for="AddressAddress1_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.address1' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[address1]"
-                            id="AddressAddress1_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.address1' | t }}"
-                            value="{{ form.address1 }}"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-
-                        <div class="form-group collapse-xs collapse-sm">
-                          <label for="AddressAddress2_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.address2' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[address2]"
-                            id="AddressAddress2_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.address2' | t }}"
-                            value="{{ form.address2 }}"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-
-                        <div class="form-group collapse-xs">
-                          <label for="AddressCity_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.city' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[city]"
-                            id="AddressCity_{{ form.id }}"
-                            placeholder="{{ 'customer.addresses.city' | t }}"
-                            value="{{ form.city }}"
-                            class="form-control"
-                            autocapitalize="words">
-                          </div>
-                        </div>
-                        <div class="form-group collapse-xs">
-                          <label for="AddressCountry_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.country' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <select
-                              name="address[country]"
-                              id="AddressCountry_{{ form.id }}"
-                              class="form-control"
-                              class="address-country-option"
-                              data-form-id="{{ form.id }}"
-                              data-default="{{ form.country }}">
-                              {{ country_option_tags }}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div id="AddressProvinceContainer_{{ form.id }}" class="form-group collapse-xs" style="display: none">
-                          <label for="AddressProvince_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.province' | t }}
-                          </label>
-
-                          <div class="col-xs-12 col-lg-10">
-                            <select
-                              name="address[province]"
-                              id="AddressProvince_{{ form.id }}"
-                              class="form-control"
-                              data-default="{{ form.province }}">
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="AddressZip_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.zip' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="text"
-                            name="address[zip]"
-                            id="AddressZip_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.zip' | t }}"
-                            value="{{ form.zip }}"
-                            autocapitalize="characters">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="AddressPhone_{{ form.id }}" class="control-label col-lg-2 hidden-xs hidden-sm hidden-md">
-                            {{ 'customer.addresses.phone' | t }}
-                          </label>
-                          <div class="col-xs-12 col-lg-10">
-                            <input type="tel"
-                            name="address[phone]"
-                            id="AddressPhone_{{ form.id }}"
-                            class="form-control"
-                            placeholder="{{ 'customer.addresses.phone' | t }}"
-                            value="{{ form.phone }}"
-                            pattern="[0-9\-]*">
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="col-xs-12 col-lg-6 col-lg-offset-2">
-                            <div class="checkbox">
-                              {{ form.set_as_default_checkbox }}
-
-                              <label for="address_default_address_{{ form.id }}">
-                                {{ 'customer.addresses.set_default' | t }}
-                              </label>
-                              <span class="checkbox-ui"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-xs-6">
-                            <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.addresses.update' | t }}">
-                          </div>
-                          <div class="col-xs-6">
-                            <button type="button" class="btn btn-default btn-block" data-address-edit-toggle data-form-id="{{ form.id }}">
-                              {{ 'customer.addresses.cancel' | t }}
-                            </button>
-                          </div>
-                        </div>
-                      {% endform %}
-                    </div>
-                  {% endfor %}
-                </div>
-                <div class="account__customer-details--address-list">
-                  <div class="address-list">
-                    {% for address in customer.addresses %}
-                      {% if address == customer.default_address %}
-                        <h6 style="margin-bottom: 5px;">{{ 'customer.addresses.default' | t }}</h6>
-                      {% endif %}
-
-                      <div class="address-list__address">
-                        {{ address | format_address }}
-
-                        <div class="address__edit-address">
-                          <a href="#" class="cta cta-3" data-address-edit-toggle data-form-id="{{ address.id }}">
-                            {{ 'customer.addresses.edit' | t }}
-                          </a>
-                          &nbsp;&nbsp;
-                          <a href="#" class="cta cta-3" data-address-delete data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
-                            {{ 'customer.addresses.delete' | t }}
-                          </a>
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
+            <div id="EditAddress_{{ address.id }}" class="hide">
+              {% include 'customer-edit-address-form', address: address %}
             </div>
-            <div class="row">
-              <div class="col-sm-10 col-md-8">
-                <hr class="hr--thin hr--light">
+
+          {% endfor %}
+
+          {% for address in customer.addresses %}
+            {% if address == customer.default_address %}
+              <h6>{{ 'customer.addresses.default' | t }}</h6>
+            {% endif %}
+
+            {{ address | format_address }}
+
+            <p>
+              <a href="#" class="cta" data-address-edit-toggle data-form-id="{{ address.id }}">
+                {{ 'customer.addresses.edit' | t }}
+              </a>
+              |
+              <a href="#" data-address-delete data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+                {{ 'customer.addresses.delete' | t }}
+              </a>
+            </p>
+          {% endfor %}
+
+          <button type="button" class="btn" data-address-new-toggle>{{ 'customer.addresses.add_new' | t }}</button>       
+
+          <hr />
+
+          <a href="#recover" id="RecoverPassword" class="btn btn-primary">{{ 'customer.recover_password.title' | t }}</a>
+
+          <div class="form-success hide" id="ResetSuccess">
+            {{ 'customer.recover_password.success' | t }}
+          </div>
+
+          {% if form.posted_successfully? %}
+            {% assign resetPassword = true %}
+          {% endif %}
+
+          <div id="RecoverPasswordForm" class="hide">
+
+            <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+            {% form 'recover_customer_password' %}
+              {{ form.errors | default_errors }}
+
+              {% if form.posted_successfully? %}
+                <span class="hide reset-password-success"></span>
+              {% endif %}
+
+              <div class="form-group">
+                <label for="RecoverEmail" class="control-label">
+                  {{ 'customer.recover_password.email' | t }}
+                </label>
+                <input type="email"
+                  name="email"
+                  id="RecoverEmail"
+                  class="form-control"
+                  placeholder="{{ 'customer.recover_password.email' | t }}"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off">
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-10 col-md-8">
 
-                <a href="#recover" id="RecoverPassword" class="btn btn-primary">{{ 'customer.recover_password.title' | t }}</a>
-
-                <div class="form-success hide" id="ResetSuccess">
-                  {{ 'customer.recover_password.success' | t }}
-                </div>
-
-                {% if form.posted_successfully? %}
-                  {% assign resetPassword = true %}
-                {% endif %}
-
-                <div id="RecoverPasswordForm" class="form--recover-password form-horizontal hide">
-                  {% form 'recover_customer_password' %}
-                    {{ form.errors | default_errors }}
-
-                    {% if form.posted_successfully? %}
-                      <span class="hide reset-password-success"></span>
-                    {% endif %}
-
-                    <div class="form-group">
-                      <label for="RecoverEmail" class="control-label col-md-3 hidden-xs hidden-sm">
-                        {{ 'customer.recover_password.email' | t }}
-                      </label>
-                      <div class="col-xs-12 col-sm-12 col-md-9">
-                        <input type="email"
-                        name="email"
-                        id="RecoverEmail"
-                        class="form-control"
-                        placeholder="{{ 'customer.recover_password.email' | t }}"
-                        spellcheck="false"
-                        autocomplete="off"
-                        autocapitalize="off">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="col-sm-6">
-                        <input type="submit" class="btn btn-primary form-control" value="{{ 'customer.recover_password.submit' | t }}">
-                      </div>
-                      <div class="col-sm-6">
-                        <button type="button" class="btn btn-default form-control" id="HideRecoverPasswordLink">
-                          {{ 'customer.recover_password.cancel' | t }}
-                        </button>
-                      </div>
-                    </div>
-
-                  {% endform %}
-
-                </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="{{ 'customer.recover_password.submit' | t }}">
+                <button type="button" class="btn btn-link" id="HideRecoverPasswordLink">
+                  {{ 'customer.recover_password.cancel' | t }}
+                </button>
               </div>
-            </div>
-          </div>        
-        </div>
+
+            {% endform %}
+
+          </div>
+         </div>
 
         {{ page_sidebar_html }}
 
