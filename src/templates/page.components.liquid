@@ -3,12 +3,10 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
-        <div class="page-header">
-          <h1 class="page-header__title">Z-Theme Components</h1>
-          <div class="page-header__subtitle">
-            This page is here to document available components for use on the site. These are hard coded in an alternate page template file named <code>page.components.liquid</code>.
-          </div>          
-        </div>
+        {% include 'page-header',
+                   title: 'Z-Theme Components',
+                   subtitle: 'This page is here to document available components for use on the site. These are hard coded in an alternate page template file named <code>page.components.liquid</code>.'
+        %}
 
         <h3>Table of Contents</h3>
         <ul>
