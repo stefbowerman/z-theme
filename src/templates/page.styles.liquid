@@ -597,12 +597,12 @@
 
         <h4 class="docs-subtitle">Page Header</h4>
 
-        <p>Use this element at the top of pages to add consistent titles + subtitles.  You can also use this element without the subtitle if necessary.</p>
+        <p>Use this element at the top of pages to add consistent titles + subtitles.  You can also use this element without the subtitle if necessary.  This element also works with <strong>left</strong> and <strong>right</strong> modifier classes to change text alignment.</p>
 
-        <div class="page-header">
-          <h1 class="page-header__title">I'm a page title</h1>
-          <p class="page-header__subtitle">I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read.</p>
-        </div>
+        {% include 'page-header',
+            title: "I'm a page title",
+            subtitle: "I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read."
+        %}
 
         <h3 id="docs-frames" class="docs-title">Frames</h3>
         <p>Use frames to create elements with defined aspect ratios.  All frames require the <code>.frame</code> base class and a modifier class to define their aspect ratio.  There is also a child element <code>.frame__inner</code> that is positioned absolutely and stretches the full dimensions of the frame.</p>

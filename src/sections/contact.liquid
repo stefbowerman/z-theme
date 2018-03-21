@@ -1,9 +1,7 @@
 <div class="layout-content-wrapper">
   <div class="container">
     
-    <div class="page-header">
-      <h1 class="page-header__title">{{ section.settings.title }}</h1>
-    </div>
+    {% include 'page-header', title: section.settings.title %}
 
     <div style="max-width: 680px; margin-left: auto; margin-right: auto;">
       

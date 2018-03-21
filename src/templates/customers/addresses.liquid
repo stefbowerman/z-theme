@@ -13,11 +13,8 @@
     <div class="container">
       <div class="row">
 
-        <div class="page-header">
-          <h1 class="page-header__title">
-            {{ 'customer.addresses.title' | t }}
-          </h1>
-        </div>
+        {% assign title = 'customer.addresses.title' | t %}
+        {% include 'page-header', title: title %}
 
         <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
 
