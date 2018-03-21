@@ -1,0 +1,119 @@
+<div class="layout-content-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+        {% include 'page-header',
+                   title: 'How-to Guide',
+                   subtitle: 'This page is here to give instruction on how to use or build commonly needed pieces of functionality.'
+        %}
+
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#docs-creating-n-ups">Creating (n)-ups</a></li>
+          <li><a href="#docs-recharge-ajax-cart">ReCharge + AJAX Cart</a></li>
+          <li><a href="#docs-swatches">Swatches</a></li>
+        </ul>
+
+        <h3 id="docs-creating-n-ups" class="docs-title">Creating (n)-ups</h3>
+        
+        <h3 id="docs-recharge-ajax-cart" class="docs-title">ReCharge + AJAX Cart</h3>
+        <p>ReCharge works by creating hidden products to hold subscription data.  These products can be added to the cart but because they are technically hidden, we can't use the JS API to pull any information about them.  By default, when the user's cart is updated via the AJAX Cart, we fetch data for each individual product to render the cart, as the product info attached to the cart object is incomplete.</p>
+
+        <p>This poses a problem as we can't use ReCharge in conjunction with the fully featured AJAX Cart.  To get around this, make the following updates to the AJAX Cart files.</p>
+
+        <h4 class="docs-subtitle">FILE: scripts/slate/ajaxCart.js</h4>
+        <ol>
+          <li>
+            <p>Remove the function <code>slate.AjaxCart.prototype._getCartTemplateData</code></p>
+          </li>
+          <li>
+            <p>Modify <code>slate.AjaxCart.buildCart</code> to accept the cart object that gets returns from the shopify API instead of the <code>cartTemplateData</code> object that was returned from the method we removed above.</p>
+            <p>Remove all references to the product property of the <code>cartTemplateData</code> object and add a <code>recharge_interval</code> property to the cart item to display inside the template</p>
+            <div class="docs-code-example">
+              <pre>
+                <code>
+/* Remove the code that looks like this */
+
+if(products.hasOwnProperty(item.product_id)) {
+  var product = products[item.product_id];
+  for (var i = item.variant_options.length - 1; i >= 0; i--) {
+    var name  = product.options[i].name;
+    var value = item.variant_options[i];
+
+    item.variant_options[i] = {
+      name: name,
+      value: value
+    }
+
+    // Don't show this info if it's the default variant that Shopify creates
+    if(value == "Default Title") {
+      delete item.variant_options[i];
+    }
+  }
+}
+
+/* And add the following code */
+
+if(item.properties) {
+  if(item.properties.shipping_interval_frequency && item.properties.shipping_interval_unit_type) {
+    // Add property like "15 days"
+    item.recharge_interval = item.properties.shipping_interval_frequency + ' ' + item.properties.shipping_interval_unit_type;
+  }
+}
+                </code>
+              </pre>
+            </div>
+          </li>           
+          <li>
+            <p>Lastly, remove any references to the <code>_getCartTemplateData</code> method that we removed.</p>
+            <div class="docs-code-example">
+              <pre>
+                <code>
+/* Find and replace things that look like this */
+
+then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this))
+
+/* With this */
+
+then(this.buildCart.bind(this));
+                </code>
+              </pre>
+            </div>            
+          </li>       
+        </ol>
+
+        <h4 class="docs-subtitle">FILE: sections/ajax-cart.liquid</h4>
+        <div class="docs-code-example">
+          <pre>
+            <code>
+{% raw %}
+/* Replace the variant options loop that looks like this */
+
+{{#if variant_options}}
+  {{#each variant_options}}
+    &lt;li&gt;
+      {{ name }}: {{ value }}
+    &lt;/li&gt;
+  {{/each}}
+{{/if}}
+
+/* With this */
+
+&lt;li&gt;{{ variant_title }}&lt;/li&gt;
+{{#if recharge_interval}}
+  &lt;li&gt;Delivery: Every {{ recharge_interval }}&lt;/li&gt;
+{{/if}}
+{% endraw %}
+            </code>
+          </pre>
+        </div>   
+
+
+        <h3 id="docs-swatches" class="docs-title">Swatches</h3>
+
+
+      </div>
+    </div>
+  </div>
+</div>
