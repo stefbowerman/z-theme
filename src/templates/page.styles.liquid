@@ -278,7 +278,7 @@
         </div>
 
         <h3 id="docs-content-grid" class="docs-title">Content Grid</h3>
-        <p>This is a more rigid grid for laying out content, typically products and articles.  It uses the same sizing and gutters as the normal grid.  There is one base version with several modifier classes that allow you some level of flexibility.  The default layout is 1 across on mobile devices, and 3-across on screens larger than <code>$screen-md-min</code>.</p>
+        <p>This is a more rigid grid for laying out content, typically products and articles.  It uses the same sizing and gutters as the normal grid.  There is one base version with several modifier classes that allow you some level of flexibility.  The default layout is 1 across on mobile devices, and 3-col on screens larger than <code>$screen-md-min</code>.</p>
 
         <div class="content-grid show-grid">
           {% for i in (1..6) %}
@@ -289,10 +289,10 @@
         </div>
 
         <h4 class="docs-subtitle">Alternate Content Grid Layouts</h4>
-        <p>Modifier classes are available to create 2-across and 4-across layouts on screens larger than <code>$screen-md-min</code>.</p>
+        <p>Modifier classes are available to create 2-col and 4-col layouts on screens larger than <code>$screen-md-min</code>.</p>
 
         <p>2 Across</p>
-        <div class="content-grid content-grid--2-across show-grid">
+        <div class="content-grid content-grid--2-col show-grid">
           {% for i in (1..4) %}
             <div class="content-grid__item">
               <div>Grid item {{ i }}</div>
@@ -301,10 +301,54 @@
         </div>
 
         <p>4 Across</p>
-        <div class="content-grid content-grid--4-across show-grid">
+        <div class="content-grid content-grid--4-col show-grid">
           {% for i in (1..8) %}
             <div class="content-grid__item">
               <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h4 class="docs-subtitle">Flush Content Grid</h4>
+        <p>Use the <code>content-grid--flush</code> modifier class to make all grid items flush with each other.</p>
+        <div class="content-grid content-grid--flush show-grid">
+          {% for i in (1..6) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <br />
+        <p>Combine with frames to make tiled layouts.</p>
+
+        <div class="content-grid content-grid--flush">
+          {% assign bg_colors = '2892D7:173753:7880B5:1B4353:1D70A2:3891A6' | split: ':' %}
+          {% for i in (1..6) %}
+            <div class="content-grid__item" style="background-color: #{{ bg_colors[forloop.index0] }}">
+              <div class="frame frame--6x4">
+                <div class="frame__inner flex-align-items-center flex-justify-center">
+                  <span class="u-color-white">Grid item {{ forloop.index }}</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <br />
+        <p>You can also use the grid item modifier classes to create grid items that span multiple columns.</p>
+        <p>Here we're using a 4 column content grid with 2 modified grid items.</p>
+        <div class="content-grid content-grid--flush content-grid--4-col">
+          {% for i in (1..6) %}
+            {% assign class = "content-grid__item" %}
+            {% if i == 1 or i == 6 %}
+              {% assign class = class | append: ' content-grid__item--2-col' %}
+            {% endif %}
+            <div class="{{ class }}">
+              {% assign color_modify = 360 | divided_by: 80 | times: i | floor %}
+              <div class="flex-align-items-center flex-justify-center" style="padding: 100px 30px; color: white; background-color: {{ '#3891A6' | color_modify: 'hue', color_modify }}">
+                Grid item {{ forloop.index }}
+              </div>
             </div>
           {% endfor %}
         </div>

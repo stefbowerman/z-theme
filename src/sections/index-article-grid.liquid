@@ -21,7 +21,7 @@
     {% if section.settings.title != blank %}
       <h3 class="content-header">{{ section.settings.title }}</h3>
     {% endif %}
-    <div class="content-grid content-grid--centered content-grid--{{ article_count }}-across">
+    <div class="content-grid content-grid--centered content-grid--{{ article_count }}-col">
       {{ content_grid_html }}
     </div>
     {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
