@@ -61,7 +61,7 @@
         ====================
         {% endcomment %}
 
-        <div class="content-grid content-grid--3-across">
+        <div class="content-grid content-grid--3-col">
           {% for article in blog.articles %}
             <div class="content-grid__item">
               {% include 'article-card', article: article, show_author: false, show_tags: false %}

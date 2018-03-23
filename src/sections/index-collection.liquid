@@ -6,7 +6,7 @@
   {% assign collection_handle = section.settings.collection %}
   {% assign collection = collections[collection_handle] %}
   {% if collection_handle != blank and collection.products.size > 0 %}
-    <div class="content-grid content-grid--{{ section.settings.products_per_row }}-across">
+    <div class="content-grid content-grid--{{ section.settings.products_per_row }}-col">
       {% for product in collection.products limit: section.settings.limit %}
         <div class="content-grid__item">
           {% include 'product-card', product: product %}

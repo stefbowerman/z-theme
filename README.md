@@ -11,6 +11,13 @@ to provide an unopinionated starting point.
 
 For full Slate API documentation, go check out their [API docs](https://shopify.github.io/slate/).
 
+### Quick Links
+- Production: [ `shopify_url` ]
+- Staging:  [ `shopify_url` ]
+- Dev:  [ `shopify_url` ]
+- Dev 1:  [ `shopify_url` ]
+- Dev 2:  [ `shopify_url` ]
+
 ---
 
 ## Getting Started
