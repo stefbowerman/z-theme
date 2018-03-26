@@ -4,7 +4,10 @@
     {% comment %} Customer Account sidebar menu {% endcomment %}
     <h5 class="page-sidebar__title">{{ 'customer.account.title' | t }}</h5>
     <ul class="page-sidebar__menu">
-      <li {% if template.name == 'account' or template.name == 'order' %}class="is-active"{% endif %}>
+      <li {% if template.name == 'account' %}class="is-active"{% endif %}>
+        <a href="/account">Home</a>
+      </li>
+      <li {% if template.name == 'order' %}class="is-active"{% endif %}>
         <a href="/account/orders">{{ 'customer.orders.title' | t }}</a>
       </li>
       <li {% if template.name == 'addresses' %}class="is-active"{% endif %}>
@@ -25,9 +28,7 @@
         {% endif %}
       {% endif %}
 
-      <li>
-        <a href="/account/logout">{{ 'layout.customer.log_out' | t }}</a>
-      </li>
+      <li>{{ 'layout.customer.log_out' | t | | customer_logout_link }}</li>
     </ul>
   {% endcapture %}
 
