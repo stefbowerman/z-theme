@@ -12,7 +12,8 @@
 theme.InstagramFeed = (function($, Instafeed) {
 
   var selectors = {
-    target: '[data-instagram-feed-target]'
+    target: '[data-instagram-feed-target]',
+    template: 'script[data-instagram-media-template]'
   };
 
   var classes = {
@@ -31,19 +32,18 @@ theme.InstagramFeed = (function($, Instafeed) {
     this.name = 'instagramFeed';
     this.namespace = '.'+this.name;
 
+    this.$target = $(selectors.target, this.$container);
+
+    // Compile this once during initialization
+    this.template = Handlebars.compile($(selectors.template).html());    
+
     this.settings = {
       accessToken: this.$container.attr('data-access-token'),
-      target: $(selectors.target).get(0), // Instafeed needs a bare DOM element to work with
-      get: 'user'
+      get: 'user',
+      mock: true,
+      success: this.onInstafeedMockSuccess.bind(this),
+      limit: this.$container.attr('data-limit') || 8
     };
-
-    /*
-     *  Set 'mock' to true in order to override the default behavior (auto inserting images in the target element)
-     *
-     *  this.settings.mock = true;
-     *  this.settings.success = onInstafeedMockSuccess.bind(this)
-     *
-     */
 
     if(!this.settings.accessToken) {
       console.warn('[InstagramFeed] - An access token is required to interact with the Instagram API');
@@ -93,28 +93,18 @@ theme.InstagramFeed = (function($, Instafeed) {
    */
     onInstafeedMockSuccess: function(feed) {
       
-      /*
-       *  Add implementation details here
-       *
-       *  e.g. Loop through the feed data to return an array of images with src + caption properties, then append them to the DOM
-       *
-       *  var $target = $(selectors.target);
-       *  var photos  = feed.data.map(function (photo) {
-       *                 return {
-       *                   src: photo.images && photo.images.standard_resolution && photo.images.standard_resolution.url,
-       *                   caption: photo.caption && photo.caption.text || ''
-       *                 };
-       *               });
-       *
-       *
-       *  photos.forEach(function(photo){
-       *     var $i = $(new Image);
-       *
-       *     $i.attr('src', photo.src);
-       *     $target.append($i)
-       *  });
-       *
-       */
+      var self = this;
+
+      feed.data.forEach(function(photo){
+
+        var data = {
+          url: photo.link,
+          src: photo.images && photo.images.standard_resolution && photo.images.standard_resolution.url,
+          caption: photo.caption && photo.caption.text || ''
+        };
+
+        self.$target.append(self.template(data));
+      });
 
     },
 
