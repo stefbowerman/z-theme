@@ -145,7 +145,7 @@
   border-top: 1px solid #ccc;
   
   @media (min-width: $screen-md-min) {
-    margin-top: 40px; // match page-header
+    margin-top: 0;
     padding-top: 0;
     border-top: none;
   }

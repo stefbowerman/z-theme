@@ -7,7 +7,7 @@
   {% assign has_sidebar = true %}
 {% endif %}
 
-{% paginate customer.orders by 3 %}
+{% paginate customer.orders by 5 %}
 
   <div class="layout-content-wrapper">
     <div class="container">
@@ -53,14 +53,64 @@
           {% endif %}
 
           {% if paginate.pages > 1 %}
-            {% include 'pagination' %}
+            <div class="u-ta-right">
+              {% include 'pagination' %}
+            </div>
           {% endif %}
 
           {% if customer.default_address %}
+            <hr />
             <h6>Billing &amp; Shipping Information</h6>
             {{ customer.default_address | format_address }}
-            <a href="/account/addresses">Edit</a>
+            <p class="small"><a href="/account/addresses">Edit</a></p>
           {% endif %}
+
+          <hr />
+          <a href="#recover" id="RecoverPassword" class="btn btn-primary">{{ 'customer.recover_password.title' | t }}</a>
+
+          <div class="form-success hide" id="ResetSuccess">
+            {{ 'customer.recover_password.success' | t }}
+          </div>
+
+          {% if form.posted_successfully? %}
+            {% assign resetPassword = true %}
+          {% endif %}
+
+          <div id="RecoverPasswordForm" class="hide">
+            <h4>{{ 'customer.recover_password.title' | t }}</h4>
+            <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+            {% form 'recover_customer_password' %}
+              {{ form.errors | default_errors }}
+
+              {% if form.posted_successfully? %}
+                <span class="hide reset-password-success"></span>
+              {% endif %}
+
+              <div class="form-group">
+                <label for="RecoverEmail" class="control-label">
+                  {{ 'customer.recover_password.email' | t }}
+                </label>
+                <input type="email"
+                  name="email"
+                  id="RecoverEmail"
+                  class="form-control"
+                  placeholder="{{ 'customer.recover_password.email' | t }}"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off">
+              </div>
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="{{ 'customer.recover_password.submit' | t }}">
+                <button type="button" class="btn btn-link" id="HideRecoverPasswordLink">
+                  {{ 'customer.recover_password.cancel' | t }}
+                </button>
+              </div>
+
+            {% endform %}
+
+          </div>
         </div>
 
         {{ page_sidebar_html }}
