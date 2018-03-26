@@ -275,6 +275,39 @@
 
         <p>Drawers are elements that are fixed to the side of the screen and are hidden by default.  Opening them will transition the element on screen and apply a backdrop to focus user attention and act as a clickable area that dismisses the drawer.</p>
 
+        <p>The example below is included statically to use as reference while styling.  Clicking the triggers below will show a live, working demo.</p>
+
+        <div class="docs-well docs-well--constrained">
+          <div class="drawer is-visible" style="position: relative; z-index: 1">
+            <div class="drawer__inner">
+              <div class="drawer__header">
+                <a href="#" class="drawer__close" data-drawer-close>
+                  {% include 'icon-close' %}
+                </a>        
+                <h5 class="drawer__header-title">Example Drawer</h5>
+              </div>
+              <div class="drawer__body">
+                <div class="drawer__body-contents">
+                  <p>Drawer contents goes here, inside the body.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.</p>
+                </div>
+              </div>
+              <div class="drawer__body drawer__body--flush">
+                <div class="drawer__body-contents" style="background-color: #F3F3F3">
+                  <p>Use the <code>.drawer__body--flush</code> modifier class to allow the drawer body contents to extend to the edge.</p>
+                </div>
+              </div>
+              <div class="drawer__footer">
+                <p><a href="#" class="btn btn-primary btn-block">Use the footer for a CTA</a></p>
+                <p class="u-ta-center small">Or for promotional messaging</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p>You can use the drawer with or without a backdrop.  If the backdrop is used, scrolling will be killed on the body when the drawer is opened.</p>
 
         <p>The API closely follows the one for Bootstrap's modals.  You can create the drawer programatically by calling the <code>Drawer</code> constructor and passing in options or by using <code>data-*</code> attributes to specify the element, trigger and options.  The example below uses the data API.</p>        
@@ -370,6 +403,22 @@
 
         <h3 id="docs-slideup" class="docs-title">Slideup</h3>
         <p>Slideups are similar to drawers in that they are fixed to the screen but they are positioned at the bottom of the viewport and are generally used for site notices as opposed to site functionality.</p>
+
+        <p>The example below is included statically to use as reference while styling.  Clicking the trigger below will show a live, working demo.</p>        
+
+        <div class="docs-well">
+          <div class="slideup is-visible" style="position: relative; z-index: 1">
+            <div class="container">
+              <a href="#" class="slideup__close" data-slideup-close>{% include 'icon-close' %}</a>
+              <div class="slideup__content">
+                <h4 class="slideup__title">Slideup Title</h4>
+                <div class="slideup__text">
+                  <p class="p1">Throw some text in here that you want to force the user to see.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>    
 
         <p>The API closely follows the one for Bootstrap's modals.  You can create the slideup programatically by calling the <code>Slideup</code> constructor and passing in options or by using <code>data-*</code> attributes to specify the element, trigger and options.  The example below uses the data API.</p>
 
