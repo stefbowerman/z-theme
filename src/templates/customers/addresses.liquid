@@ -7,14 +7,16 @@
   {% assign has_sidebar = true %}
 {% endif %}
 
+{% assign title = 'customer.addresses.title' | t %}
+
 {% paginate customer.addresses by 5 %}
 
   <div class="layout-content-wrapper">
     <div class="container">
-      <div class="row">
 
-        {% assign title = 'customer.addresses.title' | t %}
-        {% include 'page-header', title: title %}
+      {% include 'page-header', title: title %}
+
+      <div class="row">
 
         <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
 

@@ -15,14 +15,16 @@
   {% assign has_sidebar = true %}
 {% endif %}
 
+{% assign created_at = order.created_at | time_tag: format: 'month_day_year' %}
+{% assign title = 'customer.order.title' | t: name: order.name %}
+{% assign subtitle = 'Placed: ' | append: created_at %}
+
 <div class="layout-content-wrapper">
   <div class="container">
-    <div class="row">
 
-      {% assign created_at = order.created_at | time_tag: format: 'month_day_year' %}
-      {% assign title = 'customer.order.title' | t: name: order.name %}
-      {% assign subtitle = 'Placed: ' | append: created_at %}
-      {% include 'page-header', title: title, subtitle: subtitle %}
+    {% include 'page-header', title: title, subtitle: subtitle %}
+
+    <div class="row">
       
       <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
 
