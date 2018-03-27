@@ -94,13 +94,13 @@
   // Default to showing it in the center on large screens, but allow it flush left if necessary
   &.header-nav--logo {
 
-    &:not(.header-nav--left) {
+    // These flex properties cause the width of the logo container to be determined by the width itself instead of adding extra whitespace
+    // This gives us more room to use for menus. :)
+    // Move these rules into the `&:not(.header-nav--left)` selector below if you want a left aligned logo and center menu that is *actually* centered with the screen
+    @include flex-grow(inherit);
+    @include flex-basis(auto);    
 
-      // These flex properties cause the width of the logo container to be determined by the width itself instead of adding extra whitespace
-      // This gives us more room to use for menus. :)
-      // Only do this when the logo is centered.
-      @include flex-grow(inherit);
-      @include flex-basis(auto);      
+    &:not(.header-nav--left) {      
       
       @media (max-width: $header-bp-min - 1px) {
         padding-left: 0;
