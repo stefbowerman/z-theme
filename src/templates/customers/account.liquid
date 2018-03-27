@@ -7,21 +7,22 @@
   {% assign has_sidebar = true %}
 {% endif %}
 
+{% capture title %}
+  {% if customer.first_name %}
+    {{ 'Welcome, ' | append: customer.first_name | append: '!' }}
+  {% else %}
+    {{ 'customer.account.title' | t }}
+  {% endif %}
+{% endcapture %}
+
 {% paginate customer.orders by 5 %}
 
   <div class="layout-content-wrapper">
     <div class="container">
+      
+      {% include 'page-header', title: title %}
+
       <div class="row">
-
-        {% capture title %}
-          {% if customer.first_name %}
-            {{ 'Welcome, ' | append: customer.first_name | append: '!' }}
-          {% else %}
-            {{ 'customer.account.title' | t }}
-          {% endif %}
-        {% endcapture %}
-
-        {% include 'page-header', title: title %}
 
         <div class="page-content{% if has_sidebar %} page-content--has-sidebar{% endif %}">
 

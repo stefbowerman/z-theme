@@ -1,9 +1,11 @@
+{% assign title = 'customer.register.title' | t %}
+
 <div class="layout-content-wrapper">
   <div class="container">
-    <div class="row">
 
-      {% assign title = 'customer.register.title' | t %}
-      {% include 'page-header', title: title %}
+    {% include 'page-header', title: title %}
+    
+    <div class="row">
 
       <div class="col-sm-6 col-sm-offset-3">
         {% form 'create_customer' %}
