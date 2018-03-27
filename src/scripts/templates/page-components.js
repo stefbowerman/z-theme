@@ -22,7 +22,8 @@
     e.preventDefault();
 
     new slate.models.SlideupAlert({
-      text: $(this).find('input').first().val()
+      title: $(this).find('input[name="title"]').val(),
+      text: $(this).find('input[name="text"]').val()
     });
   })
 

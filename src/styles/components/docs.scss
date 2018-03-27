@@ -28,11 +28,10 @@
 
 .docs-well {
   padding: $grid-gutter-width / 2;
-  margin: 0 (-1 * ($grid-gutter-width / 2));
+  margin: $spacer*2 (-1 * ($grid-gutter-width / 2));
   border: 1px solid darken($body-bg, 15%);
   border-radius: 3px;
   box-shadow: -4px 6px 10px -8px transparentize(darken($body-bg, 20%), 0.2);
-  margin-bottom: $spacer*2;
 
   &.docs-well--dark {
     background-color: $color-black;

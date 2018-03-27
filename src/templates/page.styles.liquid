@@ -27,6 +27,7 @@
           <li><a href="#docs-forms">Forms</a></li>
           <li><a href="#docs-page-elements">Page Elements</a></li>
           <li><a href="#docs-frames">Frames</a></li>
+          <li><a href="#docs-panels">Panels</a></li>
           <li><a href="#docs-misc-elements">Miscellaneous elements</a></li>
           <li><a href="#docs-iconography">Iconography</a></li>
           <li><a href="#docs-ui-elements">UI Elements</a></li>
@@ -679,7 +680,66 @@
                 </div>
             </div>
           </div>
-        </div>        
+        </div>
+
+        <h3 id="docs-panels" class="docs-title">Panels</h3>
+
+        <p>Panels are generic containers for content that have a header and a body.  They don't get used very much, but the base <code>.panel</code> element is needed for the collapse / accordion plugin to work so we've included it here.  The base element should remain unstyled.  All the styling you see below is set on the child <code>.panel__*</code> classes.</p>
+
+        <div class="docs-well">
+          <div class="panel">
+            <div class="panel__header">            
+              <h4 class="panel__title">
+                Panel Item Title <span class="panel__title-icon">{% include 'icon-rss' %}</span>
+              </h4>
+            </div>
+            <div class="panel__body">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+          </div>
+        </div>
+
+        <p>Wrap multiple panels with a <code>.panel-group</code> element to make them vertically flush with eachother.</p>        
+
+        <div class="docs-well">
+          <div class="panel-group">
+            <div class="panel">
+              <div class="panel__header">            
+                <h4 class="panel__title">
+                  Panel Item Title <span class="panel__title-icon">{% include 'icon-rss' %}</span>
+                </h4>
+              </div>
+              <div class="panel__body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__header">            
+                <h4 class="panel__title">
+                  Panel Item Title <span class="panel__title-icon">{% include 'icon-account' %}</span>
+                </h4>
+              </div>
+              <div class="panel__body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </div>
+            </div>
+          </div>         
+        </div>
 
         <h3 id="docs-misc-elements" class="docs-title">Miscellaneous elements</h3>
 
