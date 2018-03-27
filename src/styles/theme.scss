@@ -19,6 +19,7 @@
 @import url('global/grid.scss');
 @import url('global/layout.scss');
 @import url('global/flexbox.scss');
+@import url('global/component-animations.scss');
 
 /*================ COMPONENTS ================*/
 // Components are small elements that may be re-used in multiple modules
@@ -51,6 +52,7 @@
 @import url('components/slideup.scss');
 @import url('components/arrows.scss');
 @import url('components/drawer.scss');
+@import url('components/panels.scss');
 
 /*================ MODULES ================*/
 // Modules are larger pieces of functionality that consume components

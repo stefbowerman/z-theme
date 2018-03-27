@@ -54,6 +54,7 @@
  */
  // =require vendor/bootstrap.transition.js
  // =require vendor/bootstrap.modal.js
+ // =require vendor/bootstrap.collapse.js
 
  
 /*!

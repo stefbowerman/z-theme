@@ -111,6 +111,21 @@ window.theme = window.theme || {};
       $(this).parents('.has-error').removeClass('has-error');
     });
 
+    // Global handler for collapse plugin to add state class for open panels
+    var panelIsOpenClass = 'is-open';
+
+    $document.on('show.bs.collapse', '.collapse', function(e) {
+      $(e.currentTarget).parents('.panel').addClass(panelIsOpenClass);
+    });
+
+    $document.on('hide.bs.collapse', '.collapse', function(e) {
+      $(e.currentTarget).parents('.panel').removeClass(panelIsOpenClass);
+    });    
+
+    $('.collapse.in').each(function() {
+      $(this).parents('.panel').addClass(panelIsOpenClass);
+    });    
+
   });
 
 }(jQuery));
