@@ -31,7 +31,6 @@
 .header-container {
   @extend .container-fluid;
   @include display-flex;
-  @include flex-grow(1);
   @include justify-content(space-between);
   max-width: $container-xl;
   height: 100%;
@@ -69,8 +68,7 @@
   @include display-flex;
   @include align-items(center);
   @include justify-content(flex-start);
-  @include flex-basis(0);
-  @include flex-grow(2);
+  @include flex(1);
 
   // Space out each nav
   padding-left: $grid-gutter-width/2;
@@ -82,34 +80,32 @@
 
   &.header-nav--right {
     padding-right: 0;
+    @include justify-content(flex-end);
   }  
 
-  &.header-nav--left,
-  &.header-nav--right {
-    @include flex-grow(3);
+  &.header-nav--center {
+    @media (min-width: $header-bp-min) {
+      @include justify-content(center);  
+    } 
   }
 
-  &.header-nav--left {
-
-  }
-
-  &.header-nav--right {
-    @include justify-content(flex-end);
-  }
 
   // For the logo block, it can either be &.header-nav--center, or .header-nav--left
   // Default to showing it in the center on large screens, but allow it flush left if necessary
   &.header-nav--logo {
-    
+
     &:not(.header-nav--left) {
+
+      // These flex properties cause the width of the logo container to be determined by the width itself instead of adding extra whitespace
+      // This gives us more room to use for menus. :)
+      // Only do this when the logo is centered.
+      @include flex-grow(inherit);
+      @include flex-basis(auto);      
       
       @media (max-width: $header-bp-min - 1px) {
         padding-left: 0;
       }
-
-      @media (min-width: $header-bp-min) {
-        @include justify-content(center);  
-      }      
+  
     }
   }
 
