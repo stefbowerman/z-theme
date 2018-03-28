@@ -122,4 +122,7 @@
     background-color: $color-white;
     border-color: darken($color-white, 5%);
   }
+  &.styleguide-color__swatch--primary {
+    background-color: $color-primary;
+  }
 }

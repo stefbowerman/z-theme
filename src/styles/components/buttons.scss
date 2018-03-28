@@ -73,6 +73,9 @@ a.btn {
 .btn-primary {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border, $btn-primary-hover-color, $btn-primary-hover-bg, $btn-primary-hover-border);
 }
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border, $btn-secondary-hover-color, $btn-secondary-hover-bg, $btn-secondary-hover-border);
+}
 
 
 // Link buttons
@@ -83,6 +86,9 @@ a.btn {
   color: $link-color;
   font-weight: normal;
   border-radius: 0;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-size: inherit;
 
   &,
   &:active,
