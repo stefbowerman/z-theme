@@ -8,7 +8,9 @@
   {% include 'product-card',
               product: { product } - required
               quick_view: { boolean } - optional, defaults to false
+              lazy_load: { boolean } - optional, defaults to false,
               show_swatches: { boolean } - optional, defaults to true
+              show_reviews: { boolean } - optional, defaults to false
   %}
 
 {% endcomment -%}
@@ -17,9 +19,19 @@
   {% assign quick_view = false %}
 {% endif %}
 
+{% if lazy_load == blank %}
+  {% assign lazy_load = false %}
+{% endif %}
+
 {% if show_swatches == blank %}
   {% assign show_swatches = true %}
 {% endif %}
+
+{% if show_reviews == blank %}
+  {% assign show_reviews = false %}
+{% endif %}
+
+{% assign alt_swatch_identifier = 'swatch' %} {% comment %} Used to find swatch images attached at the product level.  We don't want to display them in the gallery. {% endcomment %}
 
 {% if product %}
   
@@ -34,14 +46,32 @@
       {% if product.featured_image %}
         <div class="product-card__gallery">
           <a href="{{ product_url }}">
-            <div class="product-card__gallery-image">
-              <img src="{{ product.featured_image.src | img_url: product_image_dimension }}" alt="{{ product.featured_image.alt | escape }}">
-            </div>
-            {% if product.images.size > 1 %}
-              {% comment %} Use the second product image as the alt.  Alt product image always gets lazy loaded (see productCard.js) {% endcomment %}
-              <div class="product-card__gallery-image product-card__gallery-image--alt">
-                <img data-src="{{ product.images[1].src | img_url: product_image_dimension }}" alt="{{ product.images[1].alt | escape }}" data-product-card-alt-lazy />
+            {% if lazy_load %}
+              <div class="product-card__gallery-image" style="height: 0; padding-bottom: {{ product.featured_image.height | times: 100 | divided_by: product.featured_image.width | append: '%' }}" data-product-card-gallery>
+                <img data-src="{{ product.featured_image.src | img_url: product_image_dimension }}" alt="{{ product.featured_image.alt | escape }}" data-product-card-main-lazy>
+                <div class="product-card__gallery-placeholder"></div>
               </div>
+            {% else %}
+              <div class="product-card__gallery-image" data-product-card-gallery>
+                <img src="{{ product.featured_image.src | img_url: product_image_dimension }}" alt="{{ product.featured_image.alt | escape }}">
+              </div>
+            {% endif %}
+            {% if product.images.size > 1 %}
+              {% assign alternate_image = false %}
+              {% for i in (1..product.images.size) %}
+                {% assign img = product.images[i] %}
+                {% assign img_alt_downcase = img.alt | downcase %}
+                {% unless img_alt_downcase contains alt_swatch_identifier %}
+                  {% assign alternate_image = img %}
+                  {% break %}
+                {% endunless %}
+              {% endfor %}
+              {% if alternate_image %}
+                {% comment %} Alt product image always gets lazy loaded {% endcomment %}
+                <div class="product-card__gallery-image product-card__gallery-image--alt">
+                  <img data-src="{{ alternate_image.src | img_url: product_image_dimension }}" alt="{{ alternate_image.alt | escape }}" data-product-card-alt-lazy />
+                </div>
+              {% endif %}
             {% endif %}
           </a>
           {% if quick_view %}
@@ -112,6 +142,10 @@
             <p class="p3">{{ settings.low_inventory_notice_message }}</p>
           {% endif %}
         {% endif %}
+
+        {% if show_reviews %}
+          {% comment %} Add your review provider markup here {% endcomment %}
+        {% endif %}          
 
       </div>
     </div>

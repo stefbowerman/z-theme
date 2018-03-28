@@ -55,7 +55,6 @@
                 {% include 'collection-sort' %}
               {% endif %}
             </div>
-            {% endif %}
           </div>
         </div>
 
@@ -65,8 +64,15 @@
 
         <div class="content-grid">
           {% for product in collection.products %}
+
+            {% comment %} Lazy load all product images below the fold.  Adjust the limit as needed {% endcomment %}
+            {% assign lazy_load = false %}
+            {% if forloop.index > 10 %}
+              {% assign lazy_load = true %}
+            {% endif %}
+
             <div class="content-grid__item">
-              {% include 'product-card', product: product, quick_view: true %}
+              {% include 'product-card', product: product, quick_view: true, lazy_load: lazy_load %}
             </div>
           {% endfor %}
         </div>

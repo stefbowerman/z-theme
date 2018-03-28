@@ -42,6 +42,19 @@
   }
 }
 
+.product-card__gallery-placeholder {
+  @include stretch-within;
+  background: $body-bg;
+  opacity: 1;
+
+  // Hide the placeholder once the loading is complete
+  .is-loaded & {
+    opacity: 0;
+    pointer-events: none;
+    @include transition(opacity $transition-timing-function-out $transition-duration-base);
+  }
+}
+
 .product-card__info {
   text-align: $product-card-text-align;
 }
