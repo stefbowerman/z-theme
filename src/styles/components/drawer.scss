@@ -18,6 +18,7 @@ body.drawer-open {
   border: 1px solid $drawer-border-color;
   pointer-events: none;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   @include translateX(100%);
   @include transition(all $transition-duration-base $transition-timing-function-base);
 

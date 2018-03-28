@@ -1,24 +1,29 @@
-{% comment %}
-  Filters Snippet
+{%- comment %}
+
+  Collection Filters
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'collection-filters',
+              filter_types: { array } - ['color:Red, color:Dark Green, style:Polo']
+  %}
 
   It looks through all the tags looking for certain tags that will become filters.
 
-  The tags using for filtering are the ones that starts with:
-    - `color:`
-    - `size:`
+  The tags used for filters are the ones that start with the filter_types passed in.
 
   Tags are case-sensitive, so we will not do any transformation to them for filtering and transform them only for presentational purpose (capitalize).
-{% endcomment %}
 
-{% unless collection == empty %}
+{% endcomment -%}
+
+{% unless collection == empty and filter_types != blank %}
 
   {% assign collection_url = collection.url %}
   {% comment %} collection.url returns nothing for the 'all' collection {% endcomment %}
   {% if collection.handle == 'all' %}
     {% assign collection_url = '/collections/all' %}
   {% endif %}
-
-  {% assign filter_types = 'color,size' | split: "," %}
 
   {%- capture filters_html %}
 
@@ -34,10 +39,8 @@
 
         {%- for tag in collection.all_tags -%}
 
-          {% comment %} turns 'color:Dark Blue' into 'color' {% endcomment %}
-          {%- assign tag_type = tag | split: ':' | first -%}
-          {% comment %} turns 'color:Dark Blue' into 'Dark Blue' {% endcomment %}
-          {%- assign tag_display = tag | split: ':' | last -%}
+          {%- assign tag_type = tag | split: ':' | first -%} {% comment %} turns 'color:Dark Blue' into 'color' {% endcomment %}
+          {%- assign tag_display = tag | split: ':' | last -%} {% comment %} turns 'color:Dark Blue' into 'Dark Blue' {% endcomment %}
           
           {% if tag_type == filter_type %}
             {% assign filter_type_options_count = filter_type_options_count | plus: 1 %}
@@ -68,7 +71,7 @@
     {{ filters_html }}
 
     {% if current_tags %}
-      <a href="{{ collection_url }}" data-filters-clear>Clear all filters</a>
+      <a href="{{ collection_url }}">Clear all filters</a>
     {% endif %}
   {% endif %}
 

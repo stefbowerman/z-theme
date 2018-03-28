@@ -616,42 +616,86 @@
 
         <p>The above example uses the <code>panel</code> element with it's associated <code>.panel__*</code> child elements but you can apply the accordion behavior to any elements as long as they are wrapped with <code>.panel</code>.</p>    
 
-        <div class="docs-well">
-          <div id="accordion-example-2" role="tablist" aria-multiselectable="true">
-            <div class="panel">
-              <a href="#collapse-accordion-a"
-                 data-toggle="collapse"
-                 aria-expanded="false"
-                 data-parent="#accordion-example-2"
-                 aria-controls="collapse-accordion-a">Parent Category 1</a>
-              <div id="collapse-accordion-a" class="collapse">
-                <div>
-                  <ul>
-                    <li>Subcategory 1</li>
-                    <li>Subcategory 2</li>
-                    <li>Subcategory 3</li>
-                  </ul>
+        <h4 class="docs-subtitle">Expandable List</h4>
+
+        <p>The expandable list is it's own component and should be wrapped in a <code>.panel</code> element.  Each list is made up of a header and body with child items.  See <code>styles/components/expandable-list.scss</code> for styling.</p>
+
+        <div class="docs-well docs-well--constrained">
+          <div class="panel">
+            <div class="expandable-list">
+              <div class="expandable-list__header">
+                <a href="#sublist-1" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="sublist-1">
+                  Category 1 {% include 'icon-arrow-down' %}
+                </a>
+              </div>
+              <div id="sublist-1" class="collapse">
+                <div class="expandable-list__body">
+                  <div class="expandable-list__item is-selected">
+                    <a href="#" class="expandable-list__item-title">
+                      Subcategory 1
+                      <div class="expandable-list__item-status-icon">
+                        {% include 'icon-checkmark' %}
+                      </div>
+                    </a>
+                  </div>
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 2
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 3
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 4
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div class="panel">
-              <a href="#collapse-accordion-b"
-                 data-toggle="collapse"
-                 aria-expanded="false"
-                 data-parent="#accordion-example-2"
-                 aria-controls="collapse-accordion-b">Parent Category 2</a>
-              <div id="collapse-accordion-b" class="collapse">
-                <div>
-                  <ul>
-                    <li>Subcategory A</li>
-                    <li>Subcategory B</li>
-                    <li>Subcategory C</li>
-                  </ul>
+          </div>
+          <div class="panel">
+            <div class="expandable-list">
+              <div class="expandable-list__header">
+                <a href="#sublist-2" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="true" aria-controls="sublist-2">
+                  Category 2 {% include 'icon-arrow-down' %}
+                </a>
+              </div>
+              <div id="sublist-2" class="collapse in">
+                <div class="expandable-list__body">
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 1
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
+                  <div class="expandable-list__item is-selected">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 2
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 3
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
+                  <div class="expandable-list__item">
+                    <a href="#" class="expandable-list__item-title">
+                    Subcategory 4
+                    <div class="expandable-list__item-status-icon">{% include 'icon-checkmark' %}</div>
+                  </a>
+                  </div>
                 </div>
               </div>
-            </div>
-
+            </div>      
           </div>
         </div>
 

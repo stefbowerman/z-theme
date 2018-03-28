@@ -9,12 +9,7 @@
  theme.Collection = (function(slate) {
 
   var selectors = {
-    collectionJson: '[data-collection-json]',
-    mobileFiltersToggle: '[data-mobile-filters-toggle]'
-  };
-
-  var classes = {
-
+    collectionJson: '[data-collection-json]'
   };
   
   function Collection(container) {
@@ -35,14 +30,10 @@
     this.filters = new slate.models.CollectionFilters( container, this.collectionData );
     this.sort    = new slate.models.CollectionSort( container, this.collectionData );
 
-    $(selectors.mobileFiltersToggle, this.$container).on('click', this.onMobileFiltersToggleClick.bind(this));
   }
 
   Collection.prototype = $.extend({}, Collection.prototype, {
-    onMobileFiltersToggleClick: function(e) {
-      e.preventDefault();
-      console.log('['+this.name+'] - Implement method to toggle mobile filters');
-    }
+
   });
 
   return Collection;
