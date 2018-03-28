@@ -1,5 +1,5 @@
 /**
- * Model - Collection Filters
+ * Model - Collection Filters - Desktop + Mobile
  * ------------------------------------------------------------------------------
  *
  * @namespace - models.collectionFilters
@@ -13,8 +13,14 @@ slate.models.CollectionFilters = (function(){
   
   var selectors = {
     filterSelect: '[data-filters-type][data-filters-type-select]',
-    filtersClear: '[data-filters-clear]'
+    mobileFilterGroup: '[data-mobile-filter-group]',
+    mobileFilterTag: '[data-mobile-filter-tag][data-mobile-filter-type]',
+    mobileFilterApply: '[data-mobile-filter-apply]'    
   };
+
+  var classes = {
+    mobileFilterTagSelected: 'is-selected'
+  };  
 
   /**
    * CollectionFilters constructor
@@ -35,8 +41,12 @@ slate.models.CollectionFilters = (function(){
 
     this.collectionData = collectionData;
 
-    this.$container.on('change', selectors.filterSelect, this.applyFilters.bind(this));
-    this.$container.on('click',  selectors.filtersClear, this.onFilterClearClick.bind(this));
+    this.$filterSelects    = $(selectors.filterSelect, this.$container);
+    this.$mobileFilterTags = $(selectors.mobileFilterTag, this.$container);
+
+    this.$container.on('change', selectors.filterSelect, this.onFilterSelectChange.bind(this));
+    this.$container.on('click',  selectors.mobileFilterTag, this.onMobileFilterTagClick.bind(this));
+    this.$container.on('click',  selectors.mobileFilterApply, this.onMobileFilterApplyClick.bind(this))
 
     this._sortFilters();
   }
@@ -44,20 +54,13 @@ slate.models.CollectionFilters = (function(){
   CollectionFilters.prototype = $.extend({}, CollectionFilters.prototype, {
 
     /**
-     * Returns a url for the current collection with selected filters
+     * Returns a url for the current collection with selected tags
      *
      * @return {string} - url
      */
-    _getCollectionUrlWithFilters: function() {
+    _getCollectionUrlWithTags: function(tags) {
       var collectionUrl = this.collectionData.url;
-      var tags = [];
-
-      $(selectors.filterSelect, this.container).find('option:selected').each(function(){
-        // Make sure we don't push empty strings
-        if($(this).val()){
-          tags.push( $(this).val() );
-        }
-      });
+      var tags = tags || [];
 
       tags = tags.map(function (str) {
         return str
@@ -69,20 +72,21 @@ slate.models.CollectionFilters = (function(){
       return tags.length ? collectionUrl + '/' + tags.join('+') : collectionUrl;
     },
 
-    /**
-     * Filtering has nothing to do with the query string so make sure we don't mess with it.
-     *
-     * @return (string) - Empty string or query string with '?' prefix
-     */
-    _getQueryString: function() {
-      var queryString = location.search && location.search.substr(1) || '';
+    _getSelectedTags: function() {
+      return $.map(this.$filterSelects.find('option:selected'), function(opt, i) {
+        // Make sure we don't push empty strings
+        if($(opt).val()) {
+          return $(opt).val();
+        }
+      });
+    },
 
-      // Add the '?' prefix if there is an actual query
-      if(queryString.length){
-        queryString = '?' + queryString;
-      }
-
-      return queryString;
+    _getSelectedMobileTags: function() {
+      return $.map(this.$mobileFilterTags, function(tag, i) {
+        if($(tag).hasClass(classes.mobileFilterTagSelected)) {
+          return $(tag).data('mobile-filter-tag');
+        }
+      });
     },
 
     _sortingFunctions: {
@@ -106,7 +110,7 @@ slate.models.CollectionFilters = (function(){
     _sortFilters: function() {
       var self = this;
 
-      $(selectors.filterSelect, this.$container).each(function(){
+      this.$filterSelects.each(function(){
         var $select = $(this);
         var $toSort = $select.find('option');
         var sortingFunction = self._sortingFunctions[ $select.data('filters-type') ];
@@ -120,23 +124,68 @@ slate.models.CollectionFilters = (function(){
     },
 
     /**
-     * Redirects the browser to the collection page with any filters applied
+     * Redirects the browser to the passed in URL while mainting the query string
+     *
+     * @param (string) url
      */
-    applyFilters: function() {
-      window.location.href = this._getCollectionUrlWithFilters() + this._getQueryString();
+    redirect: function(url) {
+      window.location.href = url + slate.utils.getQueryString();
     },
 
     /**
      * Redirects the browser to the collection page without any filters applied
      */
     clear: function() {
-      window.location.href = this.collectionData.url + this._getQueryString();
+      window.location.href = this.collectionData.url + slate.utils.getQueryString();
+    },   
+
+    /**
+     * Applies the selected filter options
+     * Looks for selected options and creates a URL for them, then redirects the browser
+     *
+     * @param (event) e - click event
+     */
+    onFilterSelectChange: function(e) {
+
+      var selectedTags = this._getSelectedTags();
+      var url = this._getCollectionUrlWithTags(selectedTags);
+
+      this.redirect(url);      
     },
 
-    onFilterClearClick: function(e) {
+    /**
+     * Toggles the selected class for the clicked on filter tag while removing the selected class from other filter tags in the same group
+     *
+     * @param (event) e - click event
+     */
+    onMobileFilterTagClick: function(e) {
       e.preventDefault();
-      this.clear();
-    }
+
+      var $tag = $(e.currentTarget);
+      var tagIsSelected = $tag.hasClass(classes.mobileFilterTagSelected);
+      
+      $tag.parents(selectors.mobileFilterGroup).find(selectors.mobileFilterTag).removeClass(classes.mobileFilterTagSelected);
+
+      if(!tagIsSelected) {
+        $tag.addClass(classes.mobileFilterTagSelected);  
+      }
+      
+    },
+
+    /**
+     * Applies the selected mobile filter tags.
+     * Looks for selected tags and creates a URL for them, then redirects the browser
+     *
+     * @param (event) e - click event
+     */
+    onMobileFilterApplyClick: function(e) {
+      e.preventDefault();
+
+      var selectedTags = this._getSelectedMobileTags();
+      var url = this._getCollectionUrlWithTags(selectedTags);
+
+      this.redirect(url);
+    }    
   });
 
   return CollectionFilters;

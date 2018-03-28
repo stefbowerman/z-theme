@@ -107,6 +107,22 @@ slate.utils = {
   },
 
   /**
+   * Returns empty string or query string with '?' prefix
+   *
+   * @return (string)
+   */
+  getQueryString: function() {
+    var queryString = location.search && location.search.substr(1) || '';
+
+    // Add the '?' prefix if there is an actual query
+    if(queryString.length){
+      queryString = '?' + queryString;
+    }
+
+    return queryString;
+  },
+
+  /**
    * Constructs a version of the current URL with the passed in key value pair as part of the query string
    *
    * @param {String} key
