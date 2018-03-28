@@ -5,10 +5,16 @@
 /*================ Color Variables ================*/
 
 /* NOTE: As you add more colors here, update utilities.scss with matching text / background color utility classes */
-$color-black: #000;
-$color-white: #FFF;
-$color-grey:  #CCC;
+$color-black:       #000;
+$color-white:       #FFF;
+$color-grey:        #CCC;
 
+// Theme Colors
+$text-color:        $color-black;
+$body-bg:           $color-white;
+$color-primary:     #049271;
+
+// Dot Colors
 $color-dot-white:   $color-white;
 $color-dot-black:   $color-black;
 $color-dot-grey:    $color-grey;
@@ -22,9 +28,6 @@ $color-dot-red:     #C13242;
 $color-dot-green:   #00A465;
 $color-dot-yellow:  #EEE57A;
 $color-dot-blue:    #4E85E6;
-
-$text-color:    $color-black;
-$body-bg:       $color-white;
 
 /*================ Typography Variables ================*/
 
@@ -74,7 +77,7 @@ $headings-margin-bottom:    1rem;
 
 $link-color:                $color-black !default;
 $link-decoration:           none !default;
-$link-hover-color:          lighten($link-color, 16%) !default;
+$link-hover-color:          lighten($link-color, 9%) !default;
 $link-hover-decoration:     none !default;
 
 /*================ Spacing Variables ================*/
@@ -135,11 +138,18 @@ $btn-default-hover-bg:           darken($color-white, 9%) !default;
 $btn-default-hover-border:       $color-black !default;
 
 $btn-primary-color:              $color-white !default;
-$btn-primary-bg:                 $color-black !default;
-$btn-primary-border:             $color-black !default;
-$btn-primary-hover-color:        $color-black !default;
-$btn-primary-hover-bg:           $color-white !default;
-$btn-primary-hover-border:       $color-black !default;
+$btn-primary-bg:                 $color-primary !default;
+$btn-primary-border:             $color-primary !default;
+$btn-primary-hover-color:        $color-white !default;
+$btn-primary-hover-bg:           darken($color-primary, 9%) !default;
+$btn-primary-hover-border:       $color-primary !default;
+
+$btn-secondary-color:            $color-white !default;
+$btn-secondary-bg:               $color-black !default;
+$btn-secondary-border:           $color-black !default;
+$btn-secondary-hover-color:      $color-black !default;
+$btn-secondary-hover-bg:         $color-white !default;
+$btn-secondary-hover-border:     $color-black !default;
 
 $btn-link-disabled-color:        $color-grey !default;
 
