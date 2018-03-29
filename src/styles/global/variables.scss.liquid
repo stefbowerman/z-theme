@@ -295,6 +295,8 @@ $z-index-header: 100;
 $z-index-drawer-backdrop: 199;
 $z-index-drawer: 200;
 $z-index-ajax-cart: 200;
+$z-index-overlay-backdrop: 299;
+$z-index-overlay: 300;
 $z-index-modal-background:  1049 !default;
 $z-index-modal:  1050;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
@@ -379,6 +381,10 @@ $transition-timing-function-dropdown-out: $transition-timing-function-out;
 $transition-duration-slide:               $transition-duration-slow;
 $transition-timing-function-slide-in:     cubic-bezier(0.13, 0.58, 0.15, 0.95);
 $transition-timing-function-slide-out:    cubic-bezier(0, 0.6, 0.21, 0.85);
+
+$transition-duration-overlay:             $transition-duration-slow;
+$transition-timing-function-overlay-in:   $transition-timing-function-in;
+$transition-timing-function-overlay-out:  $transition-timing-function-out;
 
 //== Modals
 //
@@ -540,3 +546,8 @@ $panel-expand-icon-stroke-width:        2px;
 // #Expandable List
 $expandable-list-item-padding-vertical: 12px;
 $expandable-list-item-border:           1px solid #EFEFEF;
+
+// #Overlays
+$overlay-bg-color:                     $body-bg;
+$overlay-transition-duration:          $transition-duration-slow;
+

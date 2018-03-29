@@ -17,6 +17,7 @@
           <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
           <li><a href="#docs-modals">Modals</a></li>
+          <li><a href="#docs-overlays">Overlays</a></li>
           <li><a href="#docs-drawer">Drawer</a></li>
           <li><a href="#docs-slideup">Slideup</a></li>
           <li><a href="#docs-slideup-alert">Slideup Alert</a></li>
@@ -284,6 +285,35 @@
           </div>
         </div>
 
+        <h3 id="docs-overlays" class="docs-title">Overlays</h3>
+
+        <p>Overlays are similar to modals but are more generic and have more flexibility.  They use a data-api that is similar to modals.</p>
+        <p><strong>NOTE:</strong> These are still a work in progress, I'm having trouble with the close button on mobile.</p>
+
+        <p>
+          <button data-toggle="overlay" data-target="#test-overlay" class="btn btn-primary">Trigger overlay</button>
+        </p>
+
+        <div id="test-overlay" class="overlay" tabindex="-1">
+          <div class="overlay__cover">
+            <div class="overlay__overflow">
+              <a href="#" class="overlay__close" data-overlay-close>{% include 'icon-close' %}</a>
+              <div class="overlay__content">    
+                {% comment %} Put whatever you want in here{% endcomment %}
+                  <h1>Here's some important stuff</h1>
+                  {% for i in (1..10) %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h3 id="docs-drawer" class="docs-title">Drawer</h3>
 
         <p>Drawers are elements that are fixed to the side of the screen and are hidden by default.  Opening them will transition the element on screen and apply a backdrop to focus user attention and act as a clickable area that dismisses the drawer.</p>
@@ -505,7 +535,7 @@
           </table>
         </div>
 
-        <h3 id="docs-slideup" class="docs-title">Slideup Alert</h3>
+        <h3 id="docs-slideup-alert" class="docs-title">Slideup Alert</h3>
         <p>Slideup alerts are one time alerts that utilize the slideup class.  Use the form below to test how alerts will show up.</p>
 
         <form class="form-inline" data-slideup-alert-form>
