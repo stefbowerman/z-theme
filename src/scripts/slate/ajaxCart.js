@@ -132,7 +132,8 @@
       this.events = {
         RENDER:  'render'  + this.namespace,
         DESTROY: 'destroy' + this.namespace,
-        SCROLL:  'scroll'  + this.namespace
+        SCROLL:  'scroll'  + this.namespace,
+        UPDATE:  'update'  + this.namespace //  Use this as a global event to hook into whenever the cart changes
       };
 
       // Cache products here as we fetch them via ajax so we can make less successive requests
@@ -160,6 +161,10 @@
           console.warn('['+this.name+'] - Handlebars template required to initialize');
           return;
         }
+
+        this.$container      = $(selectors.container);
+        this.$cartBadge      = $(selectors.cartBadge);
+        this.$cartBadgeCount = $(selectors.cartBadgeCount);        
 
         // Compile this once during initialization
         this.template = Handlebars.compile($(selectors.template).html());
@@ -385,8 +390,9 @@
          */        
 
         $window.trigger(this.events.DESTROY);
-        $(selectors.container).empty().append( this.template(cart) );
+        this.$container.empty().append( this.template(cart) );
         $window.trigger(this.events.RENDER);
+        $window.trigger(this.events.UPDATE);
 
         this.updateCartCount(cart);
       },
@@ -397,16 +403,14 @@
       * @param {Object} cart - JSON representation of the cart.
       */
       updateCartCount: function(cart) {
-        var $badge = $(selectors.cartBadge);
-        var $count = $(selectors.cartBadgeCount);
 
-        $count.html(cart.item_count);
+        this.$cartBadgeCount.html(cart.item_count);
 
         if(cart.item_count) {
-          $badge.addClass(classes.cartBadgeHasItems);
+          this.$cartBadge.addClass(classes.cartBadgeHasItems);
         }
         else {
-          $badge.removeClass(classes.cartBadgeHasItems);
+          this.$cartBadge.removeClass(classes.cartBadgeHasItems);
         }
       },
 
