@@ -13,6 +13,7 @@
           <li><a href="#docs-product-card">Product Card</a></li>
           <li><a href="#docs-article-card">Article Card</a></li>
           <li><a href="#docs-content-card">Content Card</a></li>
+          <li><a href="#docs-overlay-card">Overlay Card</a></li>
           <li><a href="#docs-banners">Banners</a></li>
           <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
@@ -146,16 +147,119 @@
         </div>
 
         <h3 id="docs-content-card" class="docs-title">Content Card</h3>
+        <p>Generic card for displaying text content and a call to action.</code>.</p>
         <p>See <code>snippets/content-card.liquid</code>.</p>
         <div class="docs-well docs-well--constrained">
           {% include 'content-card',
-                      title: "Content Card Title"
-                      subtitle: "Subtitle goes here"
+                      title: "Content Card Title",
+                      subtitle: "Subtitle goes here",
                       text: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>",
-                      cta_text: "Shop Now"
+                      cta_text: "Shop Now",
                       cta_url: "#"
           %} 
         </div>
+
+        <h3 id="docs-overlay-card" class="docs-title">Overlay Card</h3>
+        <p>A card with background image and overlaid text.</p>
+        <p>See <code>snippets/overlay-card.liquid</code>.</p>
+
+        <div class="docs-well docs-well--constrained">
+
+          <style type="text/css">
+            #overlay-card-overlay-card-test .overlay-card__bg {
+              background-image: url({{ 'test-bg-1.jpg' | asset_img_url: '800x'}});
+            }
+          </style>
+
+          {% include 'overlay-card',
+                      id: 'overlay-card-test',
+                      title: "Overlay Card Title",
+                      subtitle: "Subtitle goes here",
+                      text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
+                      url: '#',
+                      overlay_bg_brightness: 'light'
+          %} 
+        </div>
+
+        <p>Play with the options and apply a blend mode to the background and make something cool.</p>
+     
+        <div class="docs-well docs-well--constrained">
+          <div style="height: 500px;">
+
+            <style type="text/css">
+              #overlay-card-overlay-card-test-2 .overlay-card__bg {
+                background-image: url({{ 'test-bg-1.jpg' | asset_img_url: '800x'}});
+              }
+              #overlay-card-overlay-card-test-2 .overlay-card__bg:before {
+                background-color: #b50244;
+                mix-blend-mode: multiply;
+              }
+            </style>
+
+            {% include 'overlay-card',
+                        id: 'overlay-card-test-2',
+                        title: 'Overlay Card Title',
+                        subtitle: 'Subtitle goes here',
+                        text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
+                        url: '#',
+                        overlay_bg_brightness: 'dark',
+                        content_vertical_alignment: 'bottom',
+                        light_text: true
+            %}
+          </div>
+        </div>
+
+        <h4 class="docs-subtitle">Snippet API</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Values</th>                
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>background_image</code></td>
+                <td>Image</td>
+                <td>None</td>
+                <td>Shopify image object.</td>
+              </tr>
+              <tr>
+                <td><code>background_image_vertical_alignment</code></td>
+                <td>String</td>
+                <td>center</td>
+                <td>Controls vertical alignment of the background image.  Accepts any valid CSS background-position value.</td>
+              </tr>
+              <tr>
+                <td><code>background_image_width</code></td>
+                <td>Integer</td>
+                <td>800</td>
+                <td>Controls crop width of the background image.</td>
+              </tr>
+              <tr>
+                <td><code>overlay_bg_brightness</code></td>
+                <td>"Dark" / "Light"</td>
+                <td>None</td>
+                <td>Enables a dark or light layer over the background image.</td>
+              </tr>
+              <tr>
+                <td><code>content_vertical_alignment</code></td>
+                <td>"Top" / "Bottom"</td>
+                <td>"Top"</td>
+                <td>Controls vertical alignment of card content</td>
+              </tr>
+              <tr>
+                <td><code>light_text</code></td>
+                <td>Boolean</td>
+                <td>False</td>
+                <td>Makes content display in a light color.</td>
+              </tr> 
+            </tbody>
+          </table>
+        </div>        
 
         <h3 id="docs-banners" class="docs-title">Banners</h3>
         <p>Banners are one of the most flexible and re-usable components on the site.  They consist of a parent <code>.banner</code> element and any number of child <code>.banner__panel</code> elements. The parent <code>.banner</code> element accepts <code>.banner--large</code> and <code>.banner--small</code> modifier classes to create different sized banners.  Note that these modifier classes affect the vertical padding of the child banner panels.</p>
