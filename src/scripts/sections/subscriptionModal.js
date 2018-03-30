@@ -58,7 +58,7 @@ theme.SubscriptionModal = (function($, slate) {
     /**
      * These are the cookies that we'll use to keep track of how much the user has seen / interacted with the popup
      */
-    this.cookies = {}
+    this.cookies = {};
 
     this.cookies.seen = slate.user.generateCookie('subscriptionModalSeen');
     this.cookies.seen.value = slate.utils.hashFromString(this.$modal.text()).toString(); // Set the cookie value based on the content
@@ -123,7 +123,7 @@ theme.SubscriptionModal = (function($, slate) {
       }      
 
       if( slate.user.hasCookie(this.cookies.seen.name) && slate.user.getCookieValue(this.cookies.seen.name) == this.cookies.seen.value) {
-        return false
+        return false;
       }
 
       return true;

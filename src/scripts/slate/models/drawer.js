@@ -80,7 +80,7 @@ slate.models.Drawer = (function($, Modernizr) {
                       .appendTo($body);
 
         this.$backdrop.one(this.transitionEndEvent, cb);
-        this.$backdrop.one('click', this.hide.bind(this))
+        this.$backdrop.one('click', this.hide.bind(this));
 
         // debug this...
         setTimeout(function() {
@@ -99,7 +99,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
       if(this.$backdrop) {
         this.$backdrop.one(this.transitionEndEvent, function(){
-          _this.$backdrop && _this.$backdrop.remove()
+          _this.$backdrop && _this.$backdrop.remove();
           _this.$backdrop = null;
           cb();
         });
@@ -188,7 +188,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
   $document.on('click.drawer', '[data-toggle="drawer"]', function (e) {
 
-    var $this   = $(this)
+    var $this   = $(this);
     var $target = $($this.attr('data-target'));
     var options = $.extend($target.data(), $this.data());
     var data    = $this.data('drawer');

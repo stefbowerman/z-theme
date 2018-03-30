@@ -82,7 +82,7 @@ theme.Product = (function($, slate) {
       this.onResize();      
     }
 
-  };
+  }
 
   Product.prototype = $.extend({}, Product.prototype, {
 

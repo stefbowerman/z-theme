@@ -14,14 +14,13 @@
   
   function Collection(container) {
     this.$container = $(container);
-    var sectionId = this.$container.attr('data-section-id');
 
     this.name = 'collection';
     this.namespace = '.'+this.name;
 
     // Stop parsing if we don't have the collection json script tag
     if (!$(selectors.collectionJson, this.$container).html()) {
-      console.warn('['+this.name+'] - Element matching ' + selectors.collectionJson + ' required.')
+      console.warn('['+this.name+'] - Element matching ' + selectors.collectionJson + ' required.');
       return;
     }
 
@@ -38,4 +37,5 @@
 
   return Collection;
 
- })(slate)
+ })(slate);
+ 

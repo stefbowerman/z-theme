@@ -84,8 +84,7 @@
       type: 'post',
       dataType: 'json',
       url: '/cart/change.js',
-      data: 'quantity=' + qty + '&id=' + variantId,
-      dataType: 'json'
+      data: 'quantity=' + qty + '&id=' + variantId
     });
   };
 
@@ -127,7 +126,7 @@
     * Adds an `init` method with access to private variables inside the contructor
     */
     function AjaxCart() {
-      this.name = 'ajaxCart'
+      this.name = 'ajaxCart';
       this.namespace = '.' + this.name;
       this.events = {
         RENDER:  'render'  + this.namespace,
@@ -245,7 +244,7 @@
           if(!_this.productStore.hasOwnProperty(cart.items[i].product_id)) {
             requests.push(ShopifyAPI.getProduct(cart.items[i].handle));
           }
-        };
+        }
 
         $.when.apply($, requests).then(function(resp){
 
@@ -363,7 +362,7 @@
               item.variant_options[i] = {
                 name: name,
                 value: value
-              }
+              };
 
               // Don't show this info if it's the default variant that Shopify creates
               if(value == "Default Title") {

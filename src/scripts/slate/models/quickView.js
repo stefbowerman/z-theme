@@ -55,12 +55,12 @@
     if(typeof this.settings.$productCard == undefined) {
       console.warn('['+this.name+'] - $productCard element required to initialize');
       return;
-    };
+    }
 
     if(typeof this.settings.url != "string" || this.settings.url.length == 0 || this.settings.url.indexOf('quick-view') == -1) {
       console.warn('['+this.name+'] - valid URL required to initialize');
       return;
-    };
+    }
 
     // Elements we'll need for everything to work
     this.$productCard           = this.settings.$productCard;
@@ -72,7 +72,7 @@
 
     this.stateIsOpen               = false;
     this.supportsCssTransitions    = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
-    this.productDetailFormInstance = null
+    this.productDetailFormInstance = null;
 
     this.events = {
       OPEN:   'open'   + this.namespace,
@@ -87,10 +87,10 @@
     this.$productCard.height( this.$productCardContents.outerHeight(true) );
 
     // Initial ajax request to get the quick view content
-    $.get(this.settings.url, this._onAjaxSuccess.bind(this))
+    $.get(this.settings.url, this._onAjaxSuccess.bind(this));
 
     return this;
-  };
+  }
 
   QuickView.prototype = {
 
