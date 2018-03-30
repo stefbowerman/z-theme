@@ -12,12 +12,54 @@
       <div class="drawer__body">
         <div class="drawer__body-contents">
           {% comment %} Menus {% endcomment %}
-          {% if section.settings.primary_linklist and linklists[section.settings.primary_linklist].links.size > 0 %}
             <div class="mobile-menu-block mobile-menu-block--primary">
-              Primary Menu
-              {% comment %} Need to add this stuff here {% endcomment %}
+              {% if section.settings.primary_linklist and linklists[section.settings.primary_linklist].links.size > 0 %}
+                {% for link in linklists[section.settings.primary_linklist].links %}
+                  {% assign sublist_id = 'mobile-primary-menu-' | append: forloop.index %}
+                  <div class="panel">
+                    <div class="expandable-list">
+                      <div class="expandable-list__header">
+                        {% if link.links.size > 0 %}
+                          <a href="#{{ sublist_id }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ sublist_id }}">
+                            {{ link.title }} {% include 'icon-arrow-down' %}
+                          </a>
+                        {% else %}
+                          <a href="{{ link.url }}" class="expandable-list__header-title">{{ link.title }}</a>                      
+                        {% endif %}
+                      </div>
+                      {% if link.links.size > 0 %}
+                        <div id="{{ sublist_id }}" class="collapse">
+                          <div class="expandable-list__body">
+                            {% for sublink in link.links %}
+                              <div class="expandable-list__item">
+                                <a href="{{ sublink.url }}" class="expandable-list__item-title">{{ sublink.title }}</a>                          
+                              </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+
+              {% if section.settings.search_enabled %}
+                <form action="/search" method="get" role="search">
+                  <div class="minimal-input-box">
+                    <label for="Search" class="label-hidden">
+                      {{ 'general.search.placeholder' | t }}
+                    </label>
+                    <input type="hidden" name="type" value="product,article" />
+                    <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input"/>
+                    <button type="submit" class="minimal-input-box__submit">
+                      {% include 'icon-search' %}
+                      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+                    </button>
+                  </div>
+                </form>
+              {% endif %}
             </div>
-          {% endif %}
+          
 
           {% capture social_list_items %}
             {%- assign social_accounts = 'Twitter, Facebook, Pinterest, Instagram, Snapchat, Tumblr, Youtube, Vimeo' | split: ', ' -%}
@@ -71,6 +113,12 @@
   {
     "name": "Mobile Menu",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "search_enabled",
+        "label" : "Show search form",
+        "default": true
+      },    
       {
         "type": "link_list",
         "id": "primary_linklist",

@@ -44,7 +44,11 @@ theme.MobileMenu = (function($) {
 
     onDeselect: function() {
       this.drawer.hide();
-    }
+    },
+
+    onUnload: function() {
+      this.drawer && $('.drawer-backdrop').remove();
+    },
   });
 
   return MobileMenu;
