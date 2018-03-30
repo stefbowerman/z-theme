@@ -36,7 +36,7 @@
                   leave: "mouseleave"
                 };
 
-  };
+  }
 
   DropdownManager.prototype = {
     register: function($trigger) {

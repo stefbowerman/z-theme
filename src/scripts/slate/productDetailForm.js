@@ -126,7 +126,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     };
 
     return this;
-  };
+  }
 
   ProductDetailForm.prototype = $.extend({}, ProductDetailForm.prototype, {
 
@@ -384,13 +384,16 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       var $galleries = $(selectors.productGallery, this.$container);
 
+      function getVariantGalleryForOption(option) {
+        return $galleries.filter(function() {
+          return $(this).data('variant-gallery') == option;
+        });
+      }
+
       if (variant) {
         if ($galleries.length > 1) {
           for (var i = 3; i >= 1; i--) {
-            var option = variant['option' + i];
-            var $variantGallery = $galleries.filter(function() {
-              return $(this).data('variant-gallery') == option;
-            });
+            var $variantGallery = getVariantGalleryForOption(variant['option' + i]);
 
             if ($variantGallery.length && $variantGallery.hasClass(classes.hide)) {
               $galleries.not($variantGallery).addClass(classes.hide);
@@ -448,4 +451,4 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
   return ProductDetailForm;
 
-})(jQuery, Modernizr, slate)
+})(jQuery, Modernizr, slate);

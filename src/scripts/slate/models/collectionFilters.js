@@ -46,7 +46,7 @@ slate.models.CollectionFilters = (function(){
 
     this.$container.on('change', selectors.filterSelect, this.onFilterSelectChange.bind(this));
     this.$container.on('click',  selectors.mobileFilterTag, this.onMobileFilterTagClick.bind(this));
-    this.$container.on('click',  selectors.mobileFilterApply, this.onMobileFilterApplyClick.bind(this))
+    this.$container.on('click',  selectors.mobileFilterApply, this.onMobileFilterApplyClick.bind(this));
 
     this._sortFilters();
   }
@@ -60,7 +60,8 @@ slate.models.CollectionFilters = (function(){
      */
     _getCollectionUrlWithTags: function(tags) {
       var collectionUrl = this.collectionData.url;
-      var tags = tags || [];
+      
+      tags = tags || [];
 
       tags = tags.map(function (str) {
         return str

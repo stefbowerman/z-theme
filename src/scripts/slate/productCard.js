@@ -39,7 +39,7 @@ slate.productCard = (function() {
       $lazyImg.attr('src', $lazyImg.data('src'));
       $lazyImg.removeAttr('data-src');
     }
-  };
+  }
 
   $(document).ready(function() {
 

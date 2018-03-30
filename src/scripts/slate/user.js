@@ -8,20 +8,20 @@
 
 slate.user = (function(Cookies) {
 
-  var cookiePrefix = '_ztheme_'
+  var cookiePrefix = '_ztheme_';
 
  /**
   * User constructor
   */
   function User() {
-    this.name = 'user'
+    this.name = 'user';
     this.namespace = '.' + this.name;
 
     // Do any initialization here
     // For instance, you could increment a cookie that tracks visits to the site
 
     return this;
-  };
+  }
 
   User.prototype = $.extend({}, User.prototype, {
 
@@ -112,7 +112,7 @@ slate.user = (function(Cookies) {
     * @return {Self}
     */
     removeCookie: function(cookieName) {
-      Cookies.remove( cookieName )
+      Cookies.remove( cookieName );
       return this;
     }
   });

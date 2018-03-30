@@ -7,8 +7,6 @@
 
 theme.Footer = (function($) {
 
-  var $window = $(window);
-
   var selectors = {
 
   };
@@ -24,7 +22,7 @@ theme.Footer = (function($) {
     this.name = 'footer';
     this.namespace = '.'+this.name;
 
-  };
+  }
 
   Footer.prototype = $.extend({}, Footer.prototype, {
 

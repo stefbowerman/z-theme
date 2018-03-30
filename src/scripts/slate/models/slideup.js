@@ -16,7 +16,7 @@ slate.models.Slideup = (function($, Modernizr) {
 
   var selectors = {
     close: '[data-slideup-close]',
-  }
+  };
 
   var classes = {
     slideup: 'slideup',
@@ -131,7 +131,7 @@ slate.models.Slideup = (function($, Modernizr) {
 
   $document.on('click.slideup', '[data-toggle="slideup"]', function (e) {
 
-    var $this   = $(this)
+    var $this   = $(this);
     var $target = $($this.attr('data-target'));
     var options = $.extend($target.data(), $this.data());
     var data    = $this.data('slideup');

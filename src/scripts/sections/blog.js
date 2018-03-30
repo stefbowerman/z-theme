@@ -14,20 +14,15 @@ theme.Blog = (function($) {
     nextPageLink: '[data-next-page]',
   };
 
-  var classes = {
-    tagIsActive: 'is-active'
-  };
-
   function Blog(container) {
 
-    _this = this;
     this.$container = $(container);
 
     this.name = 'blog';
     this.namespace = '.'+this.name;
 
     this.$container.on('click', selectors.nextPageLink, this.onNextPageLinkClick.bind(this));
-  };
+  }
 
   Blog.prototype = $.extend({}, Blog.prototype, {
 
@@ -36,12 +31,10 @@ theme.Blog = (function($) {
       var self     = this;
       var $link    = $(e.currentTarget);
       var url      = $link.attr('href');
-      var linkText = $link.html();
-
 
       $.ajax({
         url: url,
-        beforeSend: function( xhr ) {
+        beforeSend: function() {
           $link.html(theme.strings.loading || 'Loading');
         }
       })
