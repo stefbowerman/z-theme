@@ -9,7 +9,7 @@
 
 // Container that the modal scrolls within
 .overlay {
-  display: none;
+  display: block;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -20,6 +20,7 @@
   background: $overlay-bg-color;
   z-index: $z-index-overlay;
   -webkit-overflow-scrolling: touch;
+  pointer-events: none;
 
   // Prevent Chrome on Windows from adding a focus outline. For details, see
   // https://github.com/twbs/bootstrap/pull/10951.
@@ -34,47 +35,42 @@
   }
 
   &.is-visible {
-    display: block;
-  }
-
-  &.is-faded-in {
+    pointer-events: auto;
     opacity: 1;
-    @include transition(opacity $transition-duration-overlay $transition-timing-function-overlay-in);  
+    @include transition(opacity $transition-duration-overlay $transition-timing-function-overlay-in);    
   }
 }
 
-.overlay__cover {
-  @include stretch-within;
+.overlay__content-wrapper {
   @include display-flex;
   @include align-items(center);
-}
-
-.overlay__overflow {
   height: 100%;
-  width: 100%;
-  padding-top: $grid-gutter-width * 2;
-  padding-bottom: $grid-gutter-width * 2;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .overlay__content {
+  width: 100%;
   @include container-fixed;
   max-width: $container-xl;
-
+  margin: auto;
+  padding-top: $grid-gutter-width*3;
+  padding-bottom: $grid-gutter-width*3;
+  opacity: 0;
   @include translateY(-30px);
-  @include transition-transform($transition-duration-overlay $transition-timing-function-overlay-out);
+  @include transition(all $transition-duration-overlay $transition-timing-function-overlay-out $transition-duration-none);
 
-  .is-faded-in & {
+  .is-visible & {
+    opacity: 1;
     @include translateY(0%);
-    @include transition-transform($transition-duration-overlay $transition-timing-function-overlay-in);
+    // @include transition(all $transition-duration-overlay/2 $transition-timing-function-overlay-in $transition-duration-overlay/2);
+    @include transition(opacity $transition-duration-overlay/2 cubic-bezier(0, 0, 0.23, 1.43) $transition-duration-overlay/2, transform $transition-duration-overlay $transition-timing-function-overlay-opacity-in $transition-duration-overlay/2);
   }
 }
 
 .overlay__close {
-  position: absolute;
-  z-index: 1;
-  top: $grid-gutter-width/2;
-  right: $grid-gutter-width/2;
+  .overlay > & {
+    position: fixed;
+    z-index: 1;
+    top: $grid-gutter-width/2;
+    right: $grid-gutter-width/2;
+  }
 }

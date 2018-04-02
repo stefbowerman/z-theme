@@ -864,6 +864,16 @@
           </div>
         </div>
 
+        <br /><br />
+        <p>Large</p>
+        <div class="minimal-input-box minimal-input-box--large">
+          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+          <button type="submit" class="minimal-input-box__submit">
+            {% include 'icon-search' %}
+            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+        </div>
+
         <h4 class="docs-subtitle">Dots</h4>
 
         <p>Dots are an alternate UI used primarily for displaying / selecting variant option values. They respond to the two state classes <code>.is-active</code> and <code>.is-disabled</code>.  Active dots will show a border around them, disabled dots will show with partial opacity and a strike through.</p>

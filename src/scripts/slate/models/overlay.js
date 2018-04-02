@@ -16,16 +16,13 @@ slate.models.Overlay = (function($, Modernizr) {
   var $body     = $(document.body);
 
   var selectors = {
-    close: '[data-overlay-close]',
-    cover: '.overlay__cover'
-  }
+    close: '[data-overlay-close]'
+  };
 
   var classes = {
     overlay: 'overlay',
     visible: 'is-visible',
-    fadedIn: 'is-faded-in',
-    coverVisible: 'is-visible',
-    bodyOverlayOpen: 'overlay-open',
+    bodyOverlayOpen: 'overlay-open'
   };
 
  /**
@@ -36,11 +33,10 @@ slate.models.Overlay = (function($, Modernizr) {
   */
   function Overlay(el, options) {
 
-    this.name = 'slideup';
+    this.name = 'overlay';
     this.namespace = '.'+this.name;
 
     this.$el      = $(el);
-    this.$cover   = this.$el.find(selectors.cover);
 
     this.stateIsOpen            = false;
     this.transitionEndEvent     = slate.utils.whichTransitionEnd();    
@@ -77,7 +73,6 @@ slate.models.Overlay = (function($, Modernizr) {
      */    
     onHidden: function() {
       $body.removeClass(classes.bodyOverlayOpen);
-      this.$el.removeClass(classes.visible);
 
       var e = $.Event(this.events.HIDDEN);
       this.$el.trigger(e);
@@ -106,7 +101,7 @@ slate.models.Overlay = (function($, Modernizr) {
 
       $document.off(this.events.FOCUS);
 
-      this.$el.removeClass(classes.fadedIn);
+      this.$el.removeClass(classes.visible);      
 
       if(this.supportsCssTransitions) {
         this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
@@ -129,10 +124,6 @@ slate.models.Overlay = (function($, Modernizr) {
       $body.addClass(classes.bodyOverlayOpen);
       this.$el.addClass(classes.visible);
 
-      this.$el[0].offsetWidth; // force reflow before animating element
-
-      this.$el.addClass(classes.fadedIn); // animated class
-
       if(this.supportsCssTransitions) {      
         this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
       }
@@ -145,7 +136,7 @@ slate.models.Overlay = (function($, Modernizr) {
       $document.off(this.events.FOCUS);
       $document.on(this.events.FOCUS, $.proxy(function(e) {
         if (document !== e.target && this.$element[0] !== e.target && !this.$element.has(e.target).length) {
-          this.$el.trigger('focus')
+          this.$el.trigger('focus');
         }
       }, this));
     },
@@ -176,7 +167,7 @@ slate.models.Overlay = (function($, Modernizr) {
 
   $document.on('click.overlay', '[data-toggle="overlay"]', function (e) {
 
-    var $this   = $(this)
+    var $this   = $(this);
     var $target = $($this.attr('data-target'));
     var options = $.extend($target.data(), $this.data());
     var data    = $this.data('overlay');

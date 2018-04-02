@@ -372,6 +372,8 @@ $transition-timing-function-base:         ease-in-out;
 $transition-timing-function-in:           ease-out;
 $transition-timing-function-out:          ease-in;
 $transition-timing-function-in-out-ui:    cubic-bezier(0.42, 0, 0.13, 1.04);
+$transition-timing-function-hard-in:      cubic-bezier(0, 0, 0, 1);
+$transition-timing-function-hard-out:     cubic-bezier(1, 0, 1, 1);
 
 // Header + dropdowns
 $transition-duration-dropdown:            $transition-duration-base;
@@ -384,8 +386,10 @@ $transition-timing-function-slide-in:     cubic-bezier(0.13, 0.58, 0.15, 0.95);
 $transition-timing-function-slide-out:    cubic-bezier(0, 0.6, 0.21, 0.85);
 
 $transition-duration-overlay:             $transition-duration-slow;
-$transition-timing-function-overlay-in:   $transition-timing-function-in;
+$transition-timing-function-overlay-in:   cubic-bezier(0, 0, 0.23, 1.43);
 $transition-timing-function-overlay-out:  $transition-timing-function-out;
+$transition-timing-function-overlay-opacity-in: $transition-timing-function-hard-in;
+$transition-timing-function-overlay-opacity-out: $transition-timing-function-hard-out;
 
 //== Modals
 //
@@ -491,7 +495,8 @@ $banner-panel-overlay-dark-color:       transparentize($color-black, 0.5);
 
 
 // #Minimal Input
-$minimal-input-height:                  31px;
+$minimal-input-height:                  33px;
+$minimal-input-height-large:            60px;
 
 // #Quick View
 $quick-view-margin-vertical:            60px;
@@ -559,5 +564,5 @@ $expandable-list-item-border:           1px solid #EFEFEF;
 
 // #Overlays
 $overlay-bg-color:                     $body-bg;
-$overlay-transition-duration:          $transition-duration-slow;
+$overlay-transition-duration:          $transition-duration-base;
 
