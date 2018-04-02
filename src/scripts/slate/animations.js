@@ -67,7 +67,7 @@ slate.animations = (function($) {
       k = key;
     }
     return _transitionTimingFunctions[k];
-  };  
+  }
 
   return {
     getTransitionTimingDuration: getTransitionTimingDuration,

@@ -25,7 +25,7 @@
       title: $(this).find('input[name="title"]').val(),
       text: $(this).find('input[name="text"]').val()
     });
-  })
+  });
 
   $body.on('click', 'a[href="#"]', function(){
     return false;

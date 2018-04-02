@@ -40,7 +40,7 @@ slate.AjaxKlaviyoForm = (function($) {
   */
   function AjaxKlaviyoForm(form, options) {
 
-    this.name = 'ajaxKlaviyoForm'
+    this.name = 'ajaxKlaviyoForm';
     this.namespace = '.' + this.name;
     this.events = {
       SUBMIT: 'submit' + this.namespace
@@ -75,7 +75,7 @@ slate.AjaxKlaviyoForm = (function($) {
     this.settings.onInit();
 
     return this;
-  };
+  }
 
   AjaxKlaviyoForm.prototype = $.extend({}, AjaxKlaviyoForm.prototype, {
     onBeforeSend: function() {
@@ -153,4 +153,4 @@ slate.AjaxKlaviyoForm = (function($) {
   });
 
   return AjaxKlaviyoForm;
-})(jQuery)
+})(jQuery);

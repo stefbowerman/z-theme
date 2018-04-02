@@ -84,8 +84,7 @@
       type: 'post',
       dataType: 'json',
       url: '/cart/change.js',
-      data: 'quantity=' + qty + '&id=' + variantId,
-      dataType: 'json'
+      data: 'quantity=' + qty + '&id=' + variantId
     });
   };
 
@@ -127,12 +126,13 @@
     * Adds an `init` method with access to private variables inside the contructor
     */
     function AjaxCart() {
-      this.name = 'ajaxCart'
+      this.name = 'ajaxCart';
       this.namespace = '.' + this.name;
       this.events = {
         RENDER:  'render'  + this.namespace,
         DESTROY: 'destroy' + this.namespace,
-        SCROLL:  'scroll'  + this.namespace
+        SCROLL:  'scroll'  + this.namespace,
+        UPDATE:  'update'  + this.namespace //  Use this as a global event to hook into whenever the cart changes
       };
 
       // Cache products here as we fetch them via ajax so we can make less successive requests
@@ -160,6 +160,10 @@
           console.warn('['+this.name+'] - Handlebars template required to initialize');
           return;
         }
+
+        this.$container      = $(selectors.container);
+        this.$cartBadge      = $(selectors.cartBadge);
+        this.$cartBadgeCount = $(selectors.cartBadgeCount);        
 
         // Compile this once during initialization
         this.template = Handlebars.compile($(selectors.template).html());
@@ -245,7 +249,7 @@
           if(!_this.productStore.hasOwnProperty(cart.items[i].product_id)) {
             requests.push(ShopifyAPI.getProduct(cart.items[i].handle));
           }
-        };
+        }
 
         $.when.apply($, requests).then(function(resp){
 
@@ -363,7 +367,7 @@
               item.variant_options[i] = {
                 name: name,
                 value: value
-              }
+              };
 
               // Don't show this info if it's the default variant that Shopify creates
               if(value == "Default Title") {
@@ -385,8 +389,9 @@
          */        
 
         $window.trigger(this.events.DESTROY);
-        $(selectors.container).empty().append( this.template(cart) );
+        this.$container.empty().append( this.template(cart) );
         $window.trigger(this.events.RENDER);
+        $window.trigger(this.events.UPDATE);
 
         this.updateCartCount(cart);
       },
@@ -397,16 +402,14 @@
       * @param {Object} cart - JSON representation of the cart.
       */
       updateCartCount: function(cart) {
-        var $badge = $(selectors.cartBadge);
-        var $count = $(selectors.cartBadgeCount);
 
-        $count.html(cart.item_count);
+        this.$cartBadgeCount.html(cart.item_count);
 
         if(cart.item_count) {
-          $badge.addClass(classes.cartBadgeHasItems);
+          this.$cartBadge.addClass(classes.cartBadgeHasItems);
         }
         else {
-          $badge.removeClass(classes.cartBadgeHasItems);
+          this.$cartBadge.removeClass(classes.cartBadgeHasItems);
         }
       },
 

@@ -12,7 +12,7 @@
   
   var selectors = {
     dot: '.dot'
-  }
+  };
 
   if( !$body.is('.template-page-styles') ){
     return;

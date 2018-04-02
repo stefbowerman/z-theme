@@ -25,7 +25,7 @@
     this.$trigger = $trigger;
     this.$el      = $( this.$trigger.data('dropdown-trigger') );
     this.blockId  = this.$trigger.data('block').toString();
-  };
+  }
 
   Dropdown.prototype = {
 

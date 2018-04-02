@@ -52,7 +52,7 @@ theme.Header = (function($) {
       this.onScroll(); // hit this one time on init to make sure everything is good 
     }
 
-  };
+  }
 
   Header.prototype = $.extend({}, Header.prototype, {
 

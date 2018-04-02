@@ -45,3 +45,8 @@ slate build # Creates a production-ready `dist` bundle
 All developers who wish to contribute through code or issues, take a look at the
 [Code of Conduct](https://github.com/zehnergroup/master/CODE_OF_CONDUCT.md).
 
+### NPM Scripts
+
+```bash
+npm run jshint # Runs code linter on JS files
+```

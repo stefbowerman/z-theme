@@ -34,7 +34,7 @@ slate.AjaxMailChimpForm = (function($) {
   */
   function AjaxMailChimpForm(form, options) {
 
-    this.name = 'ajaxMailChimpForm'
+    this.name = 'ajaxMailChimpForm';
     this.namespace = '.' + this.name;
     this.events = {
       SUBMIT: 'submit' + this.namespace
@@ -68,7 +68,7 @@ slate.AjaxMailChimpForm = (function($) {
     this.settings.onInit();
 
     return this;
-  };
+  }
 
   AjaxMailChimpForm.prototype = $.extend({}, AjaxMailChimpForm.prototype, {
     regexes: {
@@ -187,4 +187,4 @@ slate.AjaxMailChimpForm = (function($) {
   });
 
   return AjaxMailChimpForm;
-})(jQuery)
+})(jQuery);

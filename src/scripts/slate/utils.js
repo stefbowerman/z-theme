@@ -76,7 +76,7 @@ slate.utils = {
    * @returns {*} - Returns the resolved value
    */
   defaultTo: function(value, defaultValue) {
-    return (value == null || value !== value) ? defaultValue : value
+    return (value == null || value !== value) ? defaultValue : value;
   },
 
   /**
@@ -131,9 +131,11 @@ slate.utils = {
    * @return {String}
    */
   getUrlWithUpdatedQueryStringParameter: function(key, value, uri) {
-    var uri = uri != undefined ? uri : window.location.href;
+    uri = uri || window.location.href;
+    
     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
     var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+
     if (uri.match(re)) {
       return uri.replace(re, '$1' + key + "=" + value + '$2');
     }
@@ -149,8 +151,9 @@ slate.utils = {
    * @return {String}
    */
   getUrlWithRemovedQueryStringParameter: function(parameterKeyToRemove, uri) {
-    var uri = uri != undefined ? uri : window.location.href,
-        rtn = uri.split("?")[0],
+    uri = uri || window.location.href;
+
+    var rtn = uri.split("?")[0],
         param,
         params_arr = [],
         queryString = (uri.indexOf("?") !== -1) ? uri.split("?")[1] : "";
@@ -209,7 +212,8 @@ slate.utils = {
   userAgentBodyClass: function() {
     var ua = navigator.userAgent,
         d = document.documentElement,
-        classes = d.className;
+        classes = d.className,
+        matches;
 
     // Detect iOS (needed to disable zoom on form elements)
     // http://stackoverflow.com/questions/9038625/detect-if-device-is-ios/9039885#9039885
@@ -217,7 +221,7 @@ slate.utils = {
       classes += ' ua-ios';
 
       // Add class for version of iOS
-      var matches = ua.match(/((\d+_?){2,3})\slike\sMac\sOS\sX/);
+      matches = ua.match(/((\d+_?){2,3})\slike\sMac\sOS\sX/);
       if ( matches ) {
         classes += ' ua-ios-' + matches[1];// e.g. ua-ios-7_0_2
       }
@@ -236,7 +240,7 @@ slate.utils = {
     // Detect Android (needed to disable print links on old devices)
     // http://www.ainixon.me/how-to-detect-android-version-using-js/
     if ( /Android/.test(ua) ) {
-      var matches = ua.match(/Android\s([0-9\.]*)/);
+      matches = ua.match(/Android\s([0-9\.]*)/);
       classes += matches ? ' ua-aos ua-aos-' + matches[1].replace(/\./g,'_') : ' ua-aos';
     }
 

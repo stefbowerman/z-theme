@@ -62,7 +62,7 @@ theme.SubscriptionSlideup = (function($, slate) {
     /**
      * These are the cookies that we'll use to keep track of how much the user has seen / interacted with the slideup
      */
-    this.cookies = {}
+    this.cookies = {};
 
     this.cookies.seen = slate.user.generateCookie('subscriptionSlideupSeen');
     this.cookies.seen.value = slate.utils.hashFromString(this.$el.text()).toString(); // Set the cookie value based on the content
@@ -129,7 +129,7 @@ theme.SubscriptionSlideup = (function($, slate) {
       }
 
       if( slate.user.hasCookie(this.cookies.seen.name) && slate.user.getCookieValue(this.cookies.seen.name) == this.cookies.seen.value) {
-        return false
+        return false;
       }
 
       return true;

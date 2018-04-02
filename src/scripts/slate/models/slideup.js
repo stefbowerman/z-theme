@@ -16,7 +16,7 @@ slate.models.Slideup = (function($, Modernizr) {
 
   var selectors = {
     close: '[data-slideup-close]',
-  }
+  };
 
   var classes = {
     slideup: 'slideup',
@@ -68,7 +68,6 @@ slate.models.Slideup = (function($, Modernizr) {
      * Called after the closing animation has run
      */    
     onHidden: function() {
-      this.stateIsOpen = false;
       var e = $.Event(this.events.HIDDEN);
       this.$el.trigger(e);
     },
@@ -85,33 +84,35 @@ slate.models.Slideup = (function($, Modernizr) {
       var e = $.Event(this.events.HIDE);
       this.$el.trigger(e);
 
-      if(this.stateIsOpen) {  
-        this.$el.removeClass(classes.visible);
+      if(!this.stateIsOpen) return;
 
-        if(this.supportsCssTransitions) {
-          this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
-        }
-        else {
-          this.onHidden();
-        }
-      }   
+      this.stateIsOpen = false;
+
+      this.$el.removeClass(classes.visible);
+
+      if(this.supportsCssTransitions) {
+        this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
+      }
+      else {
+        this.onHidden();
+      }
     },
 
     show: function() {
       var e = $.Event(this.events.SHOW);
       this.$el.trigger(e);
 
-      if(!this.stateIsOpen) {
-        this.stateIsOpen = true;
+      if(this.stateIsOpen) return;
 
-        this.$el.addClass(classes.visible);
+      this.stateIsOpen = true;
 
-        if(this.supportsCssTransitions) {
-          this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
-        }
-        else {
-          this.onShown();
-        }
+      this.$el.addClass(classes.visible);
+
+      if(this.supportsCssTransitions) {
+        this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
+      }
+      else {
+        this.onShown();
       }
     },
 
@@ -130,7 +131,7 @@ slate.models.Slideup = (function($, Modernizr) {
 
   $document.on('click.slideup', '[data-toggle="slideup"]', function (e) {
 
-    var $this   = $(this)
+    var $this   = $(this);
     var $target = $($this.attr('data-target'));
     var options = $.extend($target.data(), $this.data());
     var data    = $this.data('slideup');

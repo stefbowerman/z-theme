@@ -130,7 +130,7 @@ slate.quickView = (function() {
     $window.on('resize', $.throttle(50, this.onResize.bind(this)));
 
     return this;
-  };
+  }
 
   var quickViewManager = new QuickViewManager();  
 

@@ -80,7 +80,7 @@ slate.models.Drawer = (function($, Modernizr) {
                       .appendTo($body);
 
         this.$backdrop.one(this.transitionEndEvent, cb);
-        this.$backdrop.one('click', this.hide.bind(this))
+        this.$backdrop.one('click', this.hide.bind(this));
 
         // debug this...
         setTimeout(function() {
@@ -99,7 +99,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
       if(this.$backdrop) {
         this.$backdrop.one(this.transitionEndEvent, function(){
-          _this.$backdrop && _this.$backdrop.remove()
+          _this.$backdrop && _this.$backdrop.remove();
           _this.$backdrop = null;
           cb();
         });
@@ -135,42 +135,42 @@ slate.models.Drawer = (function($, Modernizr) {
       var e = $.Event(this.events.HIDE);
       this.$el.trigger(e);
 
-      if(this.stateIsOpen) {        
-        this.$el.removeClass(classes.visible);
+      if(!this.stateIsOpen) return;
 
-        if(this.settings.backdrop) {
-          this.removeBackdrop();
-        }        
+      this.$el.removeClass(classes.visible);
 
-        if(this.supportsCssTransitions) {
-          this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
-        }
-        else {
-          this.onHidden();
-        }
-      }     
+      if(this.settings.backdrop) {
+        this.removeBackdrop();
+      }        
+
+      if(this.supportsCssTransitions) {
+        this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
+      }
+      else {
+        this.onHidden();
+      }
     },
 
     show: function() {
       var e = $.Event(this.events.SHOW);
       this.$el.trigger(e);
 
-      if(!this.stateIsOpen) {
-        this.stateIsOpen = true;
+      if(this.stateIsOpen) return;
 
-        this.$el.addClass(classes.visible);
+      this.stateIsOpen = true;
 
-        if(this.settings.backdrop) {
-          this.addBackdrop();
-        }
+      this.$el.addClass(classes.visible);
 
-        if(this.supportsCssTransitions) {
-          this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
-        }
-        else {
-          this.onShown();
-        }        
+      if(this.settings.backdrop) {
+        this.addBackdrop();
       }
+
+      if(this.supportsCssTransitions) {
+        this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
+      }
+      else {
+        this.onShown();
+      }        
     },
 
     toggle: function() {
@@ -188,7 +188,7 @@ slate.models.Drawer = (function($, Modernizr) {
 
   $document.on('click.drawer', '[data-toggle="drawer"]', function (e) {
 
-    var $this   = $(this)
+    var $this   = $(this);
     var $target = $($this.attr('data-target'));
     var options = $.extend($target.data(), $this.data());
     var data    = $this.data('drawer');
