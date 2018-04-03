@@ -1,0 +1,473 @@
+<div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="cms-page">
+
+    {% include 'page-hero',
+                id: section.id,
+                background_image: section.settings.background_image,
+                background_image_small: section.settings.background_image_small,
+                content_max_width: section.settings.content_max_width,
+                content_alignment: section.settings.content_alignment,
+                light_text: section.settings.content_light_text,
+                title: section.settings.title,
+                subtitle: section.settings.subtitle,
+                cta_url: section.settings.cta_url,
+                cta_text: section.settings.cta_text
+    %}
+
+    {% for block in section.blocks %}  
+      <div {{ block.shopify_attributes }}>
+        {% if block.type == "spacer" %}
+        
+          {% include 'spacer', id: block.id, height_name: block.settings.height_name %}
+
+        {% elsif block.type == "promo" %}
+        
+          {% include 'promo',
+              id: block.id,
+              layout: block.settings.layout,
+              type: block.settings.type,
+              content_max_width: block.settings.content_max_width,
+              image: block.settings.image,
+              image_small: block.settings.image_small,
+              image_flush: block.settings.image_flush,
+              title: block.settings.title,
+              text: block.settings.text,
+              cta_url: block.settings.cta_url,
+              cta_text: block.settings.cta_text
+          %}
+        
+        {% elsif block.type == "article_grid" %}
+          <!-- Article Grid -->
+          {% assign article_count = 0 %}
+          {% capture article_grid_html %}
+            {% for i in (1..3) %}
+              {% capture article_settings_handle %}article_{{ i }}{% endcapture %}
+              {% assign article = articles[block.settings[article_settings_handle]] %}
+              {% if article != blank %}
+                <div class="content-grid__item">
+                  {% include 'article-card', article: article %}
+                </div>
+                {% assign article_count = article_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          {% endcapture %}
+
+          <div class="container">
+            {% if block.settings.title != blank %}
+              <h3 class="content-header">{{ block.settings.title }}</h3>
+            {% endif %}
+            <div class="content-grid content-grid--centered content-grid--{{ article_count }}-col">
+              {{ article_grid_html }}
+            </div>
+            {% if block.settings.cta_text != blank and block.settings.cta_url != blank %}
+              <div class="content-footer">
+                <a href="{{ block.settings.cta_url }}" class="btn btn-primary">
+                  {{ block.settings.cta_text }}                 
+                </a>
+              </div>          
+            {% endif %}
+          </div>
+          <!-- END Article Grid -->
+        {% elsif block.type == "product_grid" %}
+
+          {% assign product_count = 0 %}
+          {% capture product_grid_html %}
+            {% for i in (1..3) %}
+              {% capture product_setting_handle %}product_{{ i }}{% endcapture %}
+              {% assign product_handle = block.settings[product_setting_handle] %}
+              {% assign product = all_products[product_handle] %}
+              {% if product_handle != blank %}
+                <div class="content-grid__item">
+                  {% include 'product-card', product: product %}
+                </div>
+                {% assign product_count = product_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}   
+          {% endcapture %}
+
+          <!-- Product Grid -->
+          <div class="container">
+            {% if block.settings.title != blank %}
+              <h3 class="content-header">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if product_grid_html != blank %}
+              <div class="content-grid content-grid--centered">
+                {{ product_grid_html }}
+              </div>
+            {% endif %}
+            {% if block.settings.cta_text != blank and block.settings.cta_url != blank %}
+              <div class="content-footer">
+                <a href="{{ block.settings.cta_url }}" class="btn btn-primary">
+                  {{ block.settings.cta_text }}        
+                </a>
+              </div>          
+            {% endif %}
+          </div>
+
+        {% elsif block.type == "banner" %}
+
+          <!-- Banner -->
+          {% capture banner_panel_html %}
+              {% include 'banner-panel',
+                      id: block.id,
+                      content_alignment: block.settings.content_alignment,
+                      content_max_width: block.settings.content_max_width,
+                      background_image: block.settings.background,
+                      background_image_small: block.settings.background_image_small,
+                      light_text: block.settings.light_text,
+                      title: block.settings.title,
+                      title_alignment: block.settings.title_alignment,
+                      text: block.settings.text,
+                      text_alignment: block.settings.text_alignment,
+                      cta_1_url: block.settings.cta_url,
+                      cta_1_text: block.settings.cta_text
+              %}
+          {% endcapture %}
+
+          {% if banner_panel_html != blank %}
+            <div class="banner">
+              {{ banner_panel_html }}
+            </div>
+          {% endif %}
+          <!-- END Banner -->
+
+        {% endif %}
+      </div>
+    {% endfor %}
+
+</div>
+
+{% schema %}
+  {
+    "name": "Page - CMS",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Page Hero - Content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Page Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Page Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      },
+      {
+        "type": "header",
+        "content": "Page Hero - Design"
+      },
+      {
+        "type": "checkbox",
+        "id" : "content_light_text",
+        "label": "Light Text",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id":   "content_max_width",
+        "min":  300,
+        "max":  850,
+        "step": 25,
+        "unit": "px",
+        "label": "Max Content Width",
+        "default": 450
+      },      
+      {
+        "type":      "select",
+        "id":        "content_alignment",
+        "label":     "Content Alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "right", "label": "Right" }
+        ],
+        "default":   "center"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_small",
+        "label": "Background Image - Small Screens"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "spacer",
+        "name": "Spacer",
+        "settings": [
+          {
+            "type":      "select",
+            "id":        "height_name",
+            "label":     "Height",
+            "options": [
+              { "value": "small", "label": "Small" },
+              { "value": "medium", "label": "Medium" },
+              { "value": "large", "label": "Large" },
+              { "value": "xlarge", "label": "Extra Large" },
+              { "value": "huge", "label": "Huge" }
+            ],
+            "default":   "medium"
+          }
+        ]
+      },
+      {
+        "type": "article_grid",
+        "name": "Article Grid",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+             "type": "article",
+             "id": "article_1",
+             "label": "Article 1"
+          },
+          {
+             "type": "article",
+             "id": "article_2",
+             "label": "Article 2"
+          },
+          {
+             "type": "article",
+             "id": "article_3",
+             "label": "Article 3"
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Link"
+          }
+        ]
+      },   
+      {
+        "type": "product_grid",
+        "name": "Product Grid",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },        
+          {
+            "type": "product",
+            "id": "product_1",
+            "label": "Product 1"
+          },
+          {
+            "type": "product",
+            "id": "product_2",
+            "label": "Product 2"
+          },
+          {
+            "type": "product",
+            "id": "product_3",
+            "label": "Product 3"
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Link"
+          }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Link"
+          },
+          {
+            "type": "header",
+            "content": "Design"
+          },
+          {
+            "type": "range",
+            "id":   "content_max_width",
+            "min":  300,
+            "max":  850,
+            "step": 25,
+            "unit": "px",
+            "label": "Max Content Width",
+            "default": 450
+          },
+          {
+            "type": "checkbox",
+            "id" : "light_text",
+            "label": "Light Text",
+            "default": false
+          },
+          {
+            "type":      "select",
+            "id":        "content_alignment",
+            "label":     "Content Alignment",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "center", "label": "Center" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default":   "center"
+          },
+          {
+            "type":      "select",
+            "id":        "title_alignment",
+            "label":     "Title Alignment",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "center", "label": "Center" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default":   "center"
+          },
+          {
+            "type":      "select",
+            "id":        "text_alignment",
+            "label":     "Text Alignment",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "center", "label": "Center" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default":   "center"
+          },
+          {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image_small",
+            "label": "Background Image - Mobile"
+          }
+        ]
+      },
+      {
+        "type": "promo",
+        "name": "Promo",
+        "settings": [
+          {
+            "type": "select",
+            "id": "layout",
+            "label": "Layout",
+            "options": [
+              { "value": "left", "label": "Image Left" },
+              { "value": "right", "label": "Image Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Content Split",
+            "options": [
+              { "value": "1", "label": "30/70" },
+              { "value": "2", "label": "40/60" },
+              { "value": "3", "label": "50/50" },
+              { "value": "4", "label": "60/40" },
+              { "value": "5", "label": "70/30" }
+            ],
+            "default": "3"
+          },      
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "range",
+            "id":   "content_max_width",
+            "min":  300,
+            "max":  850,
+            "step": 25,
+            "unit": "px",
+            "label": "Max Content Width",
+            "default": 450
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Link"
+          },
+          {
+            "type": "checkbox",
+            "id" : "image_flush",
+            "label": "Make image flush",
+            "default": false
+          },      
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_small",
+            "label": "Image - Mobile"
+          }  
+        ]  
+      }
+    ]
+  }
+{% endschema %}
