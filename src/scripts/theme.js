@@ -112,7 +112,7 @@ window.theme = window.theme || {};
       $(this).parents('.has-error').removeClass('has-error');
     });
 
-    // Global handler for collapse plugin to add state class for open panels
+    // START - Global handler for collapse plugin to add state class for open panels
     var panelIsOpenClass = 'is-open';
 
     $document.on('show.bs.collapse', '.collapse', function(e) {
@@ -125,7 +125,19 @@ window.theme = window.theme || {};
 
     $('.collapse.in').each(function() {
       $(this).parents('.panel').addClass(panelIsOpenClass);
-    });    
+    });
+    // END - Global handler for collapse plugin to add state class for open panels
+
+    // If we have the search overlay, make sure we focus the input when it opens
+    var $searchOverlay = $('#search-overlay');
+    if($searchOverlay.length) {
+      $searchOverlay.on('shown.overlay', function() {
+        // Due to CSS animations, this timeout is requirec
+        setTimeout(function(){
+          $searchOverlayfind('input[type="search"]').focus();
+        }, 10);
+      });
+    }
 
   });
 

@@ -10,12 +10,11 @@
 
         <h3>Table of Contents</h3>
         <ul>
-          <li><a href="#docs-creating-n-ups">Creating (n)-ups</a></li>
-          <li><a href="#docs-recharge-ajax-cart">ReCharge + AJAX Cart</a></li>
           <li><a href="#docs-swatches">Swatches</a></li>
+          <li><a href="#docs-recharge-ajax-cart">ReCharge + AJAX Cart</a></li>
         </ul>
 
-        <h3 id="docs-creating-n-ups" class="docs-title">Creating (n)-ups</h3>
+        <h3 id="docs-swatches" class="docs-title">Swatches</h3>        
         
         <h3 id="docs-recharge-ajax-cart" class="docs-title">ReCharge + AJAX Cart</h3>
         <p>ReCharge works by creating hidden products to hold subscription data.  These products can be added to the cart but because they are technically hidden, we can't use the JS API to pull any information about them.  By default, when the user's cart is updated via the AJAX Cart, we fetch data for each individual product to render the cart, as the product info attached to the cart object is incomplete.</p>
@@ -107,11 +106,7 @@ then(this.buildCart.bind(this));
 {% endraw %}
             </code>
           </pre>
-        </div>   
-
-
-        <h3 id="docs-swatches" class="docs-title">Swatches</h3>
-
+        </div>
 
       </div>
     </div>

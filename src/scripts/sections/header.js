@@ -12,8 +12,6 @@ theme.Header = (function($) {
 
   var selectors = {
     header: '[data-header]',
-    searchOpen: '[data-search-open]',
-    searchClose: '[data-search-close]',
     dropdownTrigger: '[data-dropdown-trigger][data-block]',
   };
 
@@ -43,8 +41,6 @@ theme.Header = (function($) {
 
     this.$container.on('pointerenter mouseenter', this.onMouseEnter.bind(this));
     this.$container.on('pointerleave mouseleave', this.onMouseLeave.bind(this));
-    this.$container.on('click',   selectors.searchOpen, this.onSearchOpenClick.bind(this));
-    this.$container.on('click',   selectors.searchClose, this.onSearchCloseClick.bind(this));
 
     // We pass in the fixed behavior as a class on the body of the site
     if($body.hasClass(classes.siteHasFixedHeader)) {
@@ -83,24 +79,6 @@ theme.Header = (function($) {
 
     onMouseLeave: function() {
       this.dropdownManager.closeAllDropdowns();
-    },    
-
-    onSearchOpenClick: function(e) {
-      e.preventDefault();
-      this.openSearch();
-    },
-
-    onSearchCloseClick: function(e) {
-      e.preventDefault();
-      this.closeSearch();
-    },
-
-    openSearch: function() {
-      console.log('['+this.name+'] - openSearch');
-    },
-
-    closeSearch: function() {
-      console.log('['+this.name+'] - closeSearch');
     },    
 
     /**
