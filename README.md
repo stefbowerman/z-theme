@@ -1,4 +1,4 @@
-![ZG](http://i.imgur.com/kTma7I0.jpg)
+![ZG](https://i.imgur.com/KBnzMey.png)
 
 # Z-Theme
 
@@ -7,7 +7,6 @@ Z-Theme is a boilerplate Shopify theme built on top of [Slate](https://shopify.g
 > Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
 >
 > It allows you to sync local files with your live shop, deploy to multiple environments at the same time, and organize stylesheets and scripts in a flexible way.
-to provide an unopinionated starting point.
 
 For full Slate API documentation, go check out their [API docs](https://shopify.github.io/slate/).
 
@@ -23,7 +22,6 @@ For full Slate API documentation, go check out their [API docs](https://shopify.
 ## Getting Started
 
 - Install Slate: `npm install -g @shopify/slate`
-- Fork the [repo](https://github.com/zehnergroup/z-theme/), then clone it
 - In the project directory, install dependences with `npm install`
 - Setup your shopify dev store
 - [Generate API credentials](https://help.shopify.com/api/getting-started/api-credentials#get-credentials-through-the-shopify-admin) for your local environment
@@ -40,10 +38,8 @@ slate start [-e][-m] # Runs build, deploy, then watcher
 slate watch [-e][-n] # Runs watcher, then deploy
 slate deploy [-e][-m] # Builds `dist` folder and replaces the theme set in config.yml
 slate build # Creates a production-ready `dist` bundle
+slate zip # Creates a zip file for manually uploading your theme
 ```
-
-All developers who wish to contribute through code or issues, take a look at the
-[Code of Conduct](https://github.com/zehnergroup/master/CODE_OF_CONDUCT.md).
 
 ### NPM Scripts
 

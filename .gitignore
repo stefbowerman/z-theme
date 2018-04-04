@@ -1,5 +1,6 @@
 # Shopify-specific
 dist/
+upload/
 config.yml
 
 # Logs
