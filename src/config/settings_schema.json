@@ -52,7 +52,7 @@
       },      
       {
         "type": "header",
-        "content": "Sharing links"
+        "content": "Accounts"
       },
       {
         "type": "text",
@@ -118,17 +118,6 @@
         "type": "image_picker",
         "id": "sharing_image_3",
         "label": "Image #3"
-      }
-    ]
-  },
-  {
-    "name": "Cart",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "cart_notes_enable",
-        "label": "Enable cart notes",
-        "default": true
       }
     ]
   },
