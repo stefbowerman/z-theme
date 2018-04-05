@@ -18,18 +18,18 @@ development:
   theme_id: 
   store: 
   ignore_files:
-    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+    - settings_data.json
 
 production:
   password: 
   theme_id: 
   store: 
   ignore_files:
-    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+    - settings_data.json
 
 staging:
   password: 
   theme_id: 
   store: 
   ignore_files:
-    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+    - settings_data.json

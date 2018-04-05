@@ -46,7 +46,7 @@
   {% assign background_image_width = 800 %}
 {% endif %}
 
-{% assign background_image_width = background_image_width | append: 'x' %}
+{% assign background_image_size = background_image_width | append: 'x' %}
 
 {% assign has_url = false %}
 {% if url != blank %}
@@ -75,7 +75,7 @@
     #overlay-card-{{ id }} .overlay-card__bg {
       background-position: center {{ background_image_vertical_alignment }};
       {% if background_image %}
-        background-image: url({{ background_image | img_url: background_image_width }});
+        background-image: url({{ background_image | img_url: background_image_size }});
       {% endif %}
     }
   </style>
