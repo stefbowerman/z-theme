@@ -3,7 +3,6 @@
  * ------------------------------------------------------------------------------
  *
  * Requires:
- *  - Modernizr
  *  - snippets/slideup-template.liquid
  *
  * @namespace - models.SlideupAlert
@@ -11,7 +10,7 @@
 
 slate.models = slate.models || {};
 
-slate.models.SlideupAlert = (function($, Modernizr) {
+slate.models.SlideupAlert = (function($) {
 
   var $body = $(document.body);
 
@@ -96,4 +95,4 @@ slate.models.SlideupAlert = (function($, Modernizr) {
   });
 
   return SlideupAlert;
-}(jQuery, Modernizr));
+}(jQuery));

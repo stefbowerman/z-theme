@@ -21,6 +21,7 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Slideup Alert](#slideup-alert)
 - [User](#user)
 - [Utilities](#utilities)
+- [YotpoAPI](#yotpoapi)
 
 ### Ajax Cart
 
@@ -275,3 +276,9 @@ Call this to apply user agenct specific classes to the body tag to use as css / 
 ##### `slate.utils.hashFromString`
 
 Call this to turn a string into a 32 bit integer.  Useful for hashing content into a some-what unique identifier to use for cookies.
+
+### YotpoAPI
+
+We've built a wrapper around the Yotpo javascript api that is exposed via `slate.yotpoAPI`.  It requires an app key attached to `window.yotpoConfig.appKey` in order to work.  This is brought into the theme as a theme setting - see `settings_schema.json`.
+
+All API calls made through this library return promises which, if successful, return response data as shown in the Yotpo API docs.
