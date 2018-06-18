@@ -53,6 +53,11 @@
   align-items: $align;
 }
 
+@mixin align-self($align) {
+  -webkit-align-self: $align;
+  align-self: $align;
+}
+
 @mixin flex-wrap($wrap) {
   -webkit-flex-wrap: $wrap;
   -moz-flex-wrap: $wrap;

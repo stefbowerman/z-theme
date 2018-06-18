@@ -11,6 +11,7 @@
   }
   main#MainContent {
     @include flex;
+    @include flex-direction(column);
   }
 }
 
@@ -26,6 +27,10 @@
     }
   }
 
+}
+
+.layout-main-content {
+  @include flex-direction(column);
 }
 
 // Use this as the only direct child of main#MainContent on pages where you don't want the content flush to the header and footer

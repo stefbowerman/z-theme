@@ -93,7 +93,9 @@
     {% comment %}{% section 'header-logo-left' %} {% endcomment %}
 
     <main role="main" id="MainContent">
-      {{ content_for_layout }}
+      <div class="layout-main-content">
+        {{ content_for_layout }}
+      </div>
     </main>
 
     {% section 'footer' %}
