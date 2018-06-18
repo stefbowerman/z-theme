@@ -2,13 +2,9 @@
 // AJAX Cart
 // -------------------------
 
-// START - Styles for testing
-[data-ajax-cart-container] {
-  position: fixed;
-  top: 30px;
-  right: 30px;
+body.ajax-cart-open {
+  overflow: hidden;
 }
-// END - Styles for testing
 
 .ajax-cart-container {
   position: fixed;
@@ -16,10 +12,12 @@
   top: 0;
   right: 0;
   width: 100%;
-  max-width: $ajax-cart-width;
+  max-height: 100%;
   background: $ajax-cart-bg;
   border: 1px solid $ajax-cart-border-color;
   pointer-events: none;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   @include translateX(100%);
   @include transition(all $transition-duration-base $transition-timing-function-base);
 
@@ -27,6 +25,11 @@
     pointer-events: auto;
     @include translateX(0%);
     @include transition(all $transition-duration-base $transition-timing-function-base);
+  }
+
+  // Ensure that the cart is full width on screen sizes below this
+  @media (min-width: $screen-xs-min) {
+    max-width: $ajax-cart-width;
   }
 }
 
@@ -133,5 +136,24 @@
 
   p:last-child {
     margin-bottom: 0;
+  }
+}
+
+.ajax-cart-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-index-ajax-cart-backdrop;
+  background-color: $drawer-backdrop-color;
+  opacity: 0;
+  pointer-events: none;
+  @include transition(all $transition-duration-slide $transition-timing-function-slide-out);
+
+  &.is-visible {
+    opacity: $drawer-backdrop-opacity;
+    pointer-events: auto;
+    @include transition(all $transition-duration-slide $transition-timing-function-slide-in);
   }
 }

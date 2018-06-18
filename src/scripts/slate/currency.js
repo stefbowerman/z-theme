@@ -65,7 +65,18 @@ slate.Currency = (function() {
     return formatString.replace(placeholderRegex, value);
   }
 
+  /**
+   * Removes '.00' if found at the end of the string
+   *
+   * @param  {string} value - formatted price (see above)
+   * @return {string} value - formatted value
+   */
+  function stripZeroCents(string) {
+    return string.replace(/\.00$/,'');
+  }
+
   return {
-    formatMoney: formatMoney
+    formatMoney: formatMoney,
+    stripZeroCents: stripZeroCents
   };
 })();

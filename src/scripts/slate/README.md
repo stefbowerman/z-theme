@@ -15,6 +15,7 @@ We have added (or added to) the following modules:
 - [Breakpoints](#breakpoints)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
+- [Currency](#currency)
 - [Drawer](#drawer)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
@@ -131,6 +132,15 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 ```javascript
 var sorting = new slate.models.CollectionSort( container, collectionData );
 ``` 
+
+### Currency
+
+##### `slate.currency.stripZeroCents`
+
+```javascript
+
+slate.utils.stripZeroCents('$120.00'); // outputs - '$120'
+```
 
 ### Drawer
 Element that hides off screen and animates in.  This class provides a simple way to open and close the drawer as well as lifecycle events.
