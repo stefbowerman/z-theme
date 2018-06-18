@@ -1,12 +1,12 @@
-# Z-Theme JavaScript - Slate
+# JavaScript - Slate
 
-Since Z-Theme is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
+Slate attaches a handful of objects to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
 
-In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Z-Theme, we have added and modified several properties of this namespace which are documented below.
+In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building this, we have added and modified several properties of this namespace which are documented below.
 
 ## Modules
 
-In building Z-Theme, we have added (or added to) the following modules:
+We have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
 - [Ajax MailChimp Form](#ajax-mailchimp-form)
@@ -213,11 +213,9 @@ new slate.models.SlideupAlert({
 
 ### User
 
-Z-Theme includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
+A singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
 
 ### Utilities
-
-Z-Theme has added the following methods to `window.slate.utils`.
 
 ##### `slate.utils.getQueryParams`
 

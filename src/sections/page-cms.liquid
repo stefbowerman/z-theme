@@ -52,12 +52,13 @@
           {% endcapture %}
 
           <div class="container">
-            {% if block.settings.title != blank %}
-              <h3 class="content-header">{{ block.settings.title }}</h3>
-            {% endif %}
+
+            {% include 'content-header', title: block.settings.title %}
+
             <div class="content-grid content-grid--centered content-grid--{{ article_count }}-col">
               {{ article_grid_html }}
             </div>
+
             {% if block.settings.cta_text != blank and block.settings.cta_url != blank %}
               <div class="content-footer">
                 <a href="{{ block.settings.cta_url }}" class="btn btn-primary">
@@ -65,6 +66,7 @@
                 </a>
               </div>          
             {% endif %}
+            
           </div>
           <!-- END Article Grid -->
         {% elsif block.type == "product_grid" %}
@@ -86,14 +88,15 @@
 
           <!-- Product Grid -->
           <div class="container">
-            {% if block.settings.title != blank %}
-              <h3 class="content-header">{{ block.settings.title }}</h3>
-            {% endif %}
+            
+            {% include 'content-header', title: block.settings.title %}
+
             {% if product_grid_html != blank %}
               <div class="content-grid content-grid--centered">
                 {{ product_grid_html }}
               </div>
             {% endif %}
+
             {% if block.settings.cta_text != blank and block.settings.cta_url != blank %}
               <div class="content-footer">
                 <a href="{{ block.settings.cta_url }}" class="btn btn-primary">
@@ -101,6 +104,7 @@
                 </a>
               </div>          
             {% endif %}
+
           </div>
 
         {% elsif block.type == "banner" %}

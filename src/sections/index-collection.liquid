@@ -1,7 +1,6 @@
 <div class="container">
-  {% if section.settings.title != blank %}
-    <h3 class="content-header">{{ section.settings.title }}</h3>
-  {% endif %}
+  
+  {% include 'content-header', title: section.settings.title %}
 
   {% assign collection_handle = section.settings.collection %}
   {% assign collection = collections[collection_handle] %}
@@ -20,6 +19,7 @@
       <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
     </div>
   {% endif %}
+  
 </div>
 
 {% schema %}

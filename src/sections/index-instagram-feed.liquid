@@ -4,9 +4,7 @@
      data-limit="{{ section.settings.limit }}">
   <div class="container">
 
-    {% if section.settings.title != blank %}
-      <h3 class="content-header">{{ section.settings.title }}</h3>
-    {% endif %}
+    {% include 'content-header', title: section.settings.title %}
 
     {% if section.settings.access_token != blank %}
       <div class="content-grid content-grid--flush content-grid--{{ section.settings.images_per_row }}-col" data-instagram-feed-target></div>
