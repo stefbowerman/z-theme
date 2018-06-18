@@ -51,24 +51,37 @@
 
         <h3 id="docs-colors" class="docs-title">Colors</h3>
 
-        <h4 class="docs-subtitle">Main Colors</h4>
-        <div class="docs-well">
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--black"></div>
-            <p>Black<br />#000<br />$color-black</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--grey"></div>
-            <p>Dark Grey<br />#CCC<br />$color-grey</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--white"></div>
-            <p>White<br />#FFF<br />$color-white</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--primary"></div>
-            <p>Primary<br />#049271<br />$color-primary</p>
-          </div>          
+        {% assign grey_scale_colors = '' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'black:Black:#000:$color-black' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'grey:Grey:#CCC:$color-grey' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'white:White:#FFF:$color-white' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | split: '|' %}
+
+        <h4 class="docs-subtitle">Greyscale</h4>
+        <div>
+          {% for color in grey_scale_colors %}
+            {% assign parts = color | split: ':' %}
+            <div class="styleguide-color">
+              <div class="styleguide-color__swatch styleguide-color__swatch--{{ parts[0] }}"></div>
+              <p>{{ parts[1] }}<br />{{ parts[2] }}<br /><code>{{ parts[3] }}</code></p>
+            </div>            
+          {% endfor %}         
+        </div>
+
+        {% assign main_colors = '' %}
+        {% assign main_colors = main_colors | append: 'emerald:Emerald:#049271:$color-emerald' | append: '|' %}
+        
+        {% assign main_colors = main_colors | split: '|' %}
+
+        <h4 class="docs-subtitle">Main</h4>
+        <div>
+          {% for color in main_colors %}
+            {% assign parts = color | split: ':' %}
+            <div class="styleguide-color">
+              <div class="styleguide-color__swatch styleguide-color__swatch--{{ parts[0] }}"></div>
+              <p>{{ parts[1] }}<br />{{ parts[2] }}<br /><code>{{ parts[3] }}</code></p>
+            </div>            
+          {% endfor %}         
         </div>
 
 
@@ -871,12 +884,14 @@
 
         <h4 class="docs-subtitle">Minimal Input</h4>
         <p>Normal</p>
-        <div class="minimal-input-box">
-          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
-          <button type="submit" class="minimal-input-box__submit">
-            {% include 'icon-search' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
+        <div class="docs-well docs-well--accent">
+          <div class="minimal-input-box">
+            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </div>
         </div>
 
         <br /><br />
@@ -893,12 +908,14 @@
 
         <br /><br />
         <p>Large</p>
-        <div class="minimal-input-box minimal-input-box--large">
-          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
-          <button type="submit" class="minimal-input-box__submit">
-            {% include 'icon-search' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
+        <div class="docs-well docs-well--accent">
+          <div class="minimal-input-box minimal-input-box--large">
+            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </div>
         </div>
 
         <h4 class="docs-subtitle">Dots</h4>
