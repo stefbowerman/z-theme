@@ -20,13 +20,10 @@
               overlay: { string } - optional - accepted values are "light" and "dark"
               light_text: { boolean }
               title: { string }
-              title_alignment: { string } - optional - defaults to "center"
               text: { string }
               text_alignment: { string } - optional - defaults to "center"
-              cta_1_url: { url }
-              cta_1_text { string }
-              cta_2_url: { url }
-              cta_2_text: { string }
+              cta_url: { url }
+              cta_text { string }
   %}
 
 {% endcomment -%}
@@ -35,7 +32,6 @@
 {% assign background_image_vertical_alignment = background_image_vertical_alignment | default: 'center' %}
 {% assign background_image_medium_vertical_alignment = background_image_medium_vertical_alignment | default: 'center' %}
 {% assign background_image_small_vertical_alignment = background_image_small_vertical_alignment | default: 'center' %}
-{% assign title_alignment = title_alignment | default: 'center' %}
 {% assign text_alignment = text_alignment | default: 'center' %}
 
 {% comment %} Check for missing arguments {% endcomment %}
@@ -49,18 +45,13 @@
   {% assign has_text = true %}
 {% endif %}
 
-{% assign has_cta_1 = false %}
-{% if cta_1_url != blank and cta_1_text != blank %}
-  {% assign has_cta_1 = true %}
-{% endif %}
-
-{% assign has_cta_2 = false %}
-{% if cta_2_url != blank and cta_2_text != blank %}
-  {% assign has_cta_2 = true %}
+{% assign has_cta = false %}
+{% if cta_url != blank and cta_text != blank %}
+  {% assign has_cta = true %}
 {% endif %}
 
 {% comment %} Only show the banner panel if there is text or a cta or a background image {% endcomment %}
-{% if has_title or has_text or has_cta_1 or has_cta_2 or background_image %}
+{% if has_title or has_text or has_cta or background_image %}
 
   <div id="banner__panel-{{ id }}" class="banner__panel{% if light_text %} banner__panel--light{% endif %}">
 
@@ -70,18 +61,13 @@
         padding-top: {{ vertical_padding | append: 'px' }};
         padding-bottom: {{ vertical_padding | append: 'px' }};
       }
-      {% endif %}      
-      #banner__panel-{{ id }} .banner__title {
-        text-align: {{ title_alignment }};
-      }
-      #banner__panel-{{ id }} .banner__text {
-        text-align: {{ text_alignment }};
-      }
-      {% if content_max_width != blank %}
-      #banner__panel-{{ id }} .banner__content-container {
-        max-width: {{ content_max_width | append: 'px' }};
-      }
       {% endif %}
+      #banner__panel-{{ id }} .banner__content-container {
+        text-align: {{ text_alignment }};
+        {% if content_max_width != blank %}
+          max-width: {{ content_max_width | append: 'px' }};
+        {% endif %}
+      }
       #banner__panel-{{ id }} .banner__bg-image {
         background-position: center {{ background_image_vertical_alignment }};
       }
@@ -140,11 +126,8 @@
         {% endif %}
 
         {% capture cta_html %}
-          {% if has_cta_1 %}
-            <a href="{{ cta_1_url }}" class="btn btn-primary">{{ cta_1_text }}</a>
-          {% endif %}
-          {% if has_cta_2 %}
-            <a href="{{ cta_2_url }}" class="btn btn-primary">{{ cta_2_text }}</a>
+          {% if has_cta %}
+            <a href="{{ cta_url }}" class="btn btn-primary">{{ cta_text }}</a>
           {% endif %}
         {% endcapture %}
 

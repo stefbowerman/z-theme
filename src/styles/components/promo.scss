@@ -61,12 +61,6 @@ $type-first-col-widths-reverse: percentage(8/12), percentage(7/12), percentage(6
 .promo__col {
   padding-left: $grid-gutter-width / 2;
   padding-right: $grid-gutter-width / 2;
-
-  // If the promo has the "--image-flush" modifier class applied, remove horizontal padding from the column containing the image
-  .promo--image-flush &.promo__col--image {
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 .promo__col-inner {

@@ -12,7 +12,6 @@
               content_max_width: { number } - optional - only applied above $screen-md-min
               image: { image }
               image_small: { image }
-              image_flush: { boolean } - optional - defaults to "false"
               frame_ratio: { string } - optional - see frames.scss
               frame_ratio_small: { string } - optional - see frames.scss - defaults to frame_ratio if set
               title: { string } - optional
@@ -22,9 +21,6 @@
   %}
 
 {% endcomment -%}
-
-{% comment %} Defaults {% endcomment %}
-{% assign image_flush = image_flush | default: false %}
 
 {% if layout != "left" or layout != "right" %}
   {% assign layout = "left" %}
@@ -70,9 +66,6 @@
   promo promo--layout-{{ layout }}
   {% if promo_type != blank %}
     promo--type-{{ promo_type }}
-  {% endif %}
-  {% if image_flush == true %}
-    promo--image-flush
   {% endif %}
 {% endcapture %}
 
