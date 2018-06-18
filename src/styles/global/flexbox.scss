@@ -132,28 +132,28 @@
 // Align Self
 // -------------------------
 
-.flex-align-self-end { align-self: flex-end; }
-.flex-align-self-center { align-self: center; }
-.flex-align-self-start { align-self: flex-start; }
+.flex-align-self-end { @include align-self(flex-end); }
+.flex-align-self-center { @include align-self(center); }
+.flex-align-self-start { @include align-self(flex-start); }
 
 // -------------------------
 // Align Items
 // -------------------------
 
 .flex-align-items-start {
-  align-items: flex-start;
+  @include align-items(flex-start);
   @include display-flex;
 }
 
 .flex-align-items-center {
   @include display-flex;
-  align-items: center;
+  @include align-items(center);
 }
 
 .flex-align-right,
 .flex-align-items-end {
   @include display-flex;
-  align-items: flex-end;
+  @include align-items(flex-end);
 }
 
 
@@ -163,26 +163,26 @@
 
 .flex-justify-left {
   @include display-flex;
-  justify-content: flex-start;
+  @include justify-content(flex-start);
 }
 
 .flex-justify-right {
   @include display-flex;
-  justify-content: flex-end;
+  @include justify-content(flex-end);
 }
 
 .flex-justify-center {
   @include display-flex;
-  justify-content: center;
+  @include justify-content(center);
 }
 
 .u-justifyContent--between,
 .flex-justify-between {
-  justify-content: space-between;
+  @include justify-content(space-between);
 }
 
 .flex-justify-around {
-  justify-content: space-around;
+  @include justify-content(space-around);
 }
 
 .flex-wrap { flex-wrap: wrap; }

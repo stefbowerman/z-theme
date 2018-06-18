@@ -1,7 +1,8 @@
 <div data-section-id="{{ section.id }}"
      data-section-type="subscription-modal"
-     data-seen-expiration="{{ section.settings.seen_expiration }}"
-     data-enabled="{{ section.settings.enabled }}">
+     data-enabled="{{ section.settings.enabled }}"
+     data-delay="{{ section.settings.delay }}"
+     data-seen-expiration="{{ section.settings.seen_expiration }}">
   
   <div class="modal fade subscription-modal" id="subscription-modal" tabindex="-1" role="dialog" aria-labelledby="subscription-modal-title" data-subscription-modal>
     <div class="modal-dialog" role="document">
@@ -55,6 +56,16 @@
         "id": "enabled",
         "label": "Enabled?",
         "default": true
+      },
+      {
+        "type": "range",
+        "id": "delay",
+        "min":  0,
+        "max":  10,
+        "step": 1,
+        "unit": "s",
+        "label": "Seconds to wait before displaying",
+        "default": 3
       },
       {
         "type": "range",

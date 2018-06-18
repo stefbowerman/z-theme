@@ -20,13 +20,9 @@
 
 {% endcomment -%}
 
-{% if current_variant == blank %}
-  {%- assign current_variant = product.selected_or_first_available_variant -%}
-{% endif %}
-
-{% if show_share_buttons == blank %}
-  {% assign show_share_buttons = true %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign current_variant = current_variant | default: product.selected_or_first_available_variant %}
+{% assign show_share_buttons = show_share_buttons | default: true %}
 
 {% if template.name == 'product' and template.suffix == 'quick-view' %}
   {% assign is_quick_view = true %}
@@ -103,7 +99,7 @@
                     These data attributes are used to attach click events and update the selected variant when one is clicked.
                     The child element should respond to some sort of 'active' class to reflect the selected value.
 
-                    See: `scrips/sections/product.js` - Product.prototype.onVariantOptionValueClick
+                    See: `scripts/slate/productDetailForm.js` - Product.prototype.onVariantOptionValueClick
 
                     For example, to show a list of sizes..
 

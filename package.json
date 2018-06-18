@@ -2,6 +2,7 @@
   "name": "Z-Theme",
   "description": "A shopify starter theme for Zehner Group",
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3",
     "jshint": "^2.9.5",

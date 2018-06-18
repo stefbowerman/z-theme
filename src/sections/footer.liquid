@@ -18,16 +18,16 @@
             {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
             {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
             {% assign linklist_handle = section.settings[menu_setting_handle] %}
-            {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
               <div class="footer-menu">
                 <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
-                <ul class="footer-menu__list">
-                  {% for link in linklists[linklist_handle].links %}
-                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                  {% endfor %}
-                </ul>
+                {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
+                  <ul class="footer-menu__list">
+                    {% for link in linklists[linklist_handle].links %}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
-            {% endif %}
           {% endfor %}
         </div>
       </div>

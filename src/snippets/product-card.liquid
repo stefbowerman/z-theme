@@ -15,21 +15,11 @@
 
 {% endcomment -%}
 
-{% if quick_view == blank %}
-  {% assign quick_view = false %}
-{% endif %}
-
-{% if lazy_load == blank %}
-  {% assign lazy_load = false %}
-{% endif %}
-
-{% if show_swatches == blank %}
-  {% assign show_swatches = true %}
-{% endif %}
-
-{% if show_reviews == blank %}
-  {% assign show_reviews = false %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign quick_view = quick_view       | default: false %}
+{% assign lazy_load = lazy_load         | default: false %}
+{% assign show_swatches = show_swatches | default: true %}
+{% assign show_reviews = show_reviews   | default: false %}
 
 {% assign alt_swatch_identifier = 'swatch' %} {% comment %} Used to find swatch images attached at the product level.  We don't want to display them in the gallery. {% endcomment %}
 

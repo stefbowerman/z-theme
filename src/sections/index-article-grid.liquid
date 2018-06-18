@@ -16,21 +16,23 @@
   {% endfor %}   
 {% endcapture %}
 
-{% if content_grid_html != blank %}
-  <div class="container">
-    {% if section.settings.title != blank %}
-      <h3 class="content-header">{{ section.settings.title }}</h3>
-    {% endif %}
+<div class="container">
+
+  {% include 'content-header', title: section.settings.title %}
+
+  {% if content_grid_html != blank %}
     <div class="content-grid content-grid--centered content-grid--{{ article_count }}-col">
       {{ content_grid_html }}
     </div>
-    {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
-      <div class="content-footer">
-        <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
-      </div>
-    {% endif %}    
-  </div>
-{% endif %}
+  {% endif %}
+
+  {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+    <div class="content-footer">
+      <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
+    </div>
+  {% endif %} 
+     
+</div>
 
 
 {% schema %}

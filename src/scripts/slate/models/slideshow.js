@@ -37,6 +37,16 @@ slate.models.Slideshow = (function($, Modernizr) {
     this.$wrapper   = $el.is(selectors.slideshowWrapper) ? $el : $el.closest(selectors.slideShowWrapper);
     this.$slideshow = this.$wrapper.find(selectors.slideshow);
 
+    if(!this.$wrapper.length){
+      console.warn('['+this.name+'] - Element matching '+selectors.slideshowWrapper+' required to initialize');
+      return;
+    }
+
+    if(!this.$slideshow.length){
+      console.warn('['+this.name+'] - Element matching '+selectors.slideshow+' required to initialize');
+      return;
+    }
+
     var fade = this.$slideshow.attr('data-fade') && this.$slideshow.attr('data-fade').length ? this.$slideshow.data('fade') : true; // Allows us to pass data-fade="false".  $.fn.attr coerces to string, $.fn.data does *not*
 
     var defaults = {
@@ -59,7 +69,6 @@ slate.models.Slideshow = (function($, Modernizr) {
 
     this.settings = $.extend({}, defaults, options);
 
-    this.$wrapper.on('click', selectors.pauseToggle, this.onPauseToggleClick.bind(this));    
     this.$slideshow.on('init', this.slideshowA11y.bind(this));
     this.$slideshow.slick(this.settings);
 
@@ -153,19 +162,6 @@ slate.models.Slideshow = (function($, Modernizr) {
       }
     },
 
-    togglePause: function() {
-      var slick = this.$slideshow.slick('getSlick');
-
-      if(this.settings.autoplay){
-        if(slick.paused){
-          this.unpause();
-        }
-        else {
-          this.pause();
-        }
-      }
-    },
-
    /**
     * Finds and displays a slide associated with the blockId passed in.
     * Note:  Block IDs are not required on slides for the slideshow to work
@@ -177,12 +173,8 @@ slate.models.Slideshow = (function($, Modernizr) {
       var $slide = $(selectors.slide, this.$slideshow).filter('[data-block-id="' + blockId + '"]:not(.slick-cloned)');
       
       this.$slideshow.slick('slickGoTo', $slide.data('slick-index') );
-    },
-
-    onPauseToggleClick: function(evt) {
-      evt.preventDefault();
-      this.togglePause();
     }
+
   });
 
   return Slideshow;

@@ -21,10 +21,12 @@
 
 {% endcomment -%}
 
-{% comment %} Set defaults {% endcomment %}
-{% if background_image_vertical_alignment == blank %}
-  {% assign background_image_vertical_alignment = 'center' %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign light_text = light_text | default: false %}
+{% assign background_image_width = background_image_width | default: 800 %}
+{% assign background_image_vertical_alignment = background_image_vertical_alignment | default: 'center' %}
+
+{% assign background_image_size = background_image_width | append: 'x' %}
 
 {% assign valid_content_vertical_alignment = false %}
 {% assign content_vertical_alignment = content_vertical_alignment | downcase %}
@@ -37,16 +39,6 @@
 {% if overlay_bg_brightness  != blank and "dark light" contains overlay_bg_brightness  %}
   {% assign valid_overlay_bg_brightness = true %}
 {% endif %}
-
-{% if light_text == blank %}
-  {% assign light_text = false %}
-{% endif %}
-
-{% if background_image_width == blank %}
-  {% assign background_image_width = 800 %}
-{% endif %}
-
-{% assign background_image_size = background_image_width | append: 'x' %}
 
 {% assign has_url = false %}
 {% if url != blank %}

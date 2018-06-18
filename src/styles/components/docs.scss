@@ -43,6 +43,12 @@
     border-radius: 0;
   }
 
+  &.docs-well--accent {
+    background-color: darken($body-bg, 4%);
+    border-color: darken($body-bg, 4%);
+    border-radius: 0;
+  }
+
   &.docs-well--constrained {
     max-width: 500px;
   }  
@@ -108,6 +114,15 @@
 .styleguide-color {
   display: inline-block;
   margin-right: 15px;
+  margin: 0 15px 15px 0;
+
+  code {
+    padding: 0;
+    background: none;
+    border: none;
+    color: $text-color;
+    font-size: $font-size-small;
+  }
 }
 
 .styleguide-color__swatch {
@@ -116,17 +131,9 @@
   margin-bottom: 10px;
   border: 1px solid transparent;
 
-  &.styleguide-color__swatch--black {
-    background-color: $color-black;
-  }
-  &.styleguide-color__swatch--grey {
-    background-color: $color-grey;
-  }
-  &.styleguide-color__swatch--white {
-    background-color: $color-white;
-    border-color: darken($color-white, 5%);
-  }
-  &.styleguide-color__swatch--primary {
-    background-color: $color-primary;
-  }
+  &.styleguide-color__swatch--black { background-color: $color-black; }
+  &.styleguide-color__swatch--grey { background-color: $color-grey; }
+  &.styleguide-color__swatch--white { background-color: $color-white; border-color: darken($color-white, 5%); }
+  &.styleguide-color__swatch--primary { background-color: $color-primary; }
+  &.styleguide-color__swatch--emerald { background-color: $color-emerald; }
 }

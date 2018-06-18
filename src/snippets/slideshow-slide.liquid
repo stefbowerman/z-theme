@@ -22,21 +22,11 @@
 
 {% endcomment -%}
 
-{% if background_image_vertical_alignment == blank %}
-  {% assign background_image_vertical_alignment = 'center' %}
-{% endif %}
-
-{% if background_image_aspect_ratio == blank %}
-  {% assign background_image_aspect_ratio = '6x4' %}
-{% endif %}
-
-{% if background_image_small_vertical_alignment == blank %}
-  {% assign background_image_small_vertical_alignment = 'center' %}
-{% endif %}
-
-{% if background_image_small_aspect_ratio == blank %}
-  {% assign background_image_small_aspect_ratio = '3x4' %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign background_image_vertical_alignment = background_image_vertical_alignment | default: 'center' %}
+{% assign background_image_aspect_ratio = background_image_aspect_ratio | default: '6x4' %}
+{% assign background_image_small_vertical_alignment = background_image_small_vertical_alignment | default: 'center' %}
+{% assign background_image_small_aspect_ratio = background_image_small_aspect_ratio | default: '3x4' %}
 
 {% if text_position != 'top' or text_position != 'bottom' %}
   {% assign text_position = 'bottom' %}

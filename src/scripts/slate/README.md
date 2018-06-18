@@ -1,12 +1,12 @@
-# Z-Theme JavaScript - Slate
+# JavaScript - Slate
 
-Since Z-Theme is built on top of slate, there are a handful of objects that come attached to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
+Slate attaches a handful of objects to the `window.slate` namespace.  These objects have already been documented by the Slate team on [their website](https://shopify.github.io/slate/js-examples/), which you should have a look at before moving on.
 
-In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building Z-Theme, we have added and modified several properties of this namespace which are documented below.
+In keeping with their code convention, any module scripts that are independent of specific templates or sections should be attached to `window.slate` for consumption by theme code.  In building this, we have added and modified several properties of this namespace which are documented below.
 
 ## Modules
 
-In building Z-Theme, we have added (or added to) the following modules:
+We have added (or added to) the following modules:
 
 - [Ajax Cart](#ajax-cart)
 - [Ajax MailChimp Form](#ajax-mailchimp-form)
@@ -15,6 +15,7 @@ In building Z-Theme, we have added (or added to) the following modules:
 - [Breakpoints](#breakpoints)
 - [Collection Filters](#collection-filters)
 - [Collection Sort](#collection-sort)
+- [Currency](#currency)
 - [Drawer](#drawer)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
@@ -132,6 +133,15 @@ To use, create a new instance and pass in an HTMLElement containing elements req
 var sorting = new slate.models.CollectionSort( container, collectionData );
 ``` 
 
+### Currency
+
+##### `slate.currency.stripZeroCents`
+
+```javascript
+
+slate.utils.stripZeroCents('$120.00'); // outputs - '$120'
+```
+
 ### Drawer
 Element that hides off screen and animates in.  This class provides a simple way to open and close the drawer as well as lifecycle events.
 
@@ -213,11 +223,9 @@ new slate.models.SlideupAlert({
 
 ### User
 
-Z-Theme includes a singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
+A singleton object that handles logic related to the user's session.  It has several methods for setting, retrieving, and checking for the existence of browser cookies.
 
 ### Utilities
-
-Z-Theme has added the following methods to `window.slate.utils`.
 
 ##### `slate.utils.getQueryParams`
 
@@ -275,3 +283,13 @@ Call this to apply user agenct specific classes to the body tag to use as css / 
 ##### `slate.utils.hashFromString`
 
 Call this to turn a string into a 32 bit integer.  Useful for hashing content into a some-what unique identifier to use for cookies.
+
+##### `slate.utils.pluralize`
+
+```javascript
+var quantity = 1;
+slate.utils.pluralize(quantity, 'story', 'stories'); // outputs - 'story'
+
+var quantity = 10
+slate.utils.pluralize(quantity, 'story', 'stories'); // outputs - 'stories'
+```

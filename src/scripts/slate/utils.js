@@ -124,6 +124,8 @@ slate.utils = {
 
   /**
    * Constructs a version of the current URL with the passed in key value pair as part of the query string
+   * Will also remove the key if an empty value is passed in
+   * See: https://gist.github.com/niyazpk/f8ac616f181f6042d1e0
    *
    * @param {String} key
    * @param {String} value
@@ -131,17 +133,31 @@ slate.utils = {
    * @return {String}
    */
   getUrlWithUpdatedQueryStringParameter: function(key, value, uri) {
+
     uri = uri || window.location.href;
-    
+
+    // remove the hash part before operating on the uri
+    var i = uri.indexOf('#');
+    var hash = i === -1 ? ''  : uri.substr(i);
+    uri = i === -1 ? uri : uri.substr(0, i);
+
     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
     var separator = uri.indexOf('?') !== -1 ? "&" : "?";
 
-    if (uri.match(re)) {
-      return uri.replace(re, '$1' + key + "=" + value + '$2');
+    if (!value) {
+      // remove key-value pair if value is empty
+      uri = uri.replace(new RegExp("([?&]?)" + key + "=[^&]*", "i"), '');
+      if (uri.slice(-1) === '?') {
+        uri = uri.slice(0, -1);
+      }
+      // replace first occurrence of & by ? if no ? is present
+      if (uri.indexOf('?') === -1) uri = uri.replace(/&/, '?');
+    } else if (uri.match(re)) {
+      uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+      uri = uri + separator + key + "=" + value;
     }
-    else {
-      return uri + separator + key + "=" + value;
-    }
+    return uri + hash;
   },
 
   /**
@@ -292,6 +308,32 @@ slate.utils = {
       cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
     }
     return cookieEnabled;
-  }  
+  },
+
+  /**
+   * Pluralizes the unit for the nuber passed in.
+   * Usage mirrors the Shopify "pluralize" string filter
+   *
+   * @param {Number} number
+   * @param {String} singular
+   * @param {String} plural
+   * @return {String}
+   */
+  pluralize: function(number, singular, plural)  {
+    var output = '';
+
+    number = parseInt(number);
+
+    if(number == 1) {
+      output = singular;
+    }
+    else {
+      output = plural;
+      if (typeof plural == "undefined") {
+        output = singular + 's'; // last resort, turn singular into a plural
+      }
+    }
+    return output;
+  }
   
 };
