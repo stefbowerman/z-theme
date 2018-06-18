@@ -6,6 +6,10 @@
   margin: 0 -#{($dot-spacing / 2)} -#{$dot-bottom-margin}; // account for the 2px padding + 1px border on the dot
   padding: 0;
   overflow: hidden;
+
+  &.dots--small {
+    margin: 0 -#{($dot-small-spacing / 2)} -#{$dot-small-bottom-margin}; // account for the 2px padding + 1px border on the dot
+  }
 }
 
 .dot {
@@ -33,6 +37,23 @@
   &.is-active {
     border-color: $dot-active-border-color;
     @include transition( border-color $transition-duration-fast $transition-timing-function-in );
+  }
+
+  .dots--small & {
+    margin-left: $dot-small-spacing / 2;
+    margin-right: $dot-small-spacing / 2;
+    margin-bottom: $dot-small-spacing;
+    padding: $dot-small-padding;
+    height: $dot-small-size;
+    width: $dot-small-size;
+    border: $dot-small-border-width solid $dot-small-border-color;
+    border-radius: $dot-small-border-radius;
+    line-height: $dot-small-size - $dot-small-padding*2 - 3px;
+    font-size: $dot-small-font-size;
+
+    &.is-active {
+      border-color: $dot-small-active-border-color;
+    }
   }
 
   &.is-disabled {
