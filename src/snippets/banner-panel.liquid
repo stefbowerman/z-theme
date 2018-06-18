@@ -31,26 +31,12 @@
 
 {% endcomment -%}
 
-{% comment %} Set defaults {% endcomment %}
-{% if background_image_vertical_alignment == blank %}
-  {% assign background_image_vertical_alignment = 'center' %}
-{% endif %}
-
-{% if background_image_medium_vertical_alignment == blank %}
-  {% assign background_image_medium_vertical_alignment = 'center' %}
-{% endif %}
-
-{% if background_image_small_vertical_alignment == blank %}
-  {% assign background_image_small_vertical_alignment = 'center' %}
-{% endif %}
-
-{% if title_alignment == blank %}
-  {% assign title_alignment = 'center' %}
-{% endif %}
-
-{% if text_alignment == blank %}
-  {% assign text_alignment = 'center' %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign background_image_vertical_alignment = background_image_vertical_alignment | default: 'center' %}
+{% assign background_image_medium_vertical_alignment = background_image_medium_vertical_alignment | default: 'center' %}
+{% assign background_image_small_vertical_alignment = background_image_small_vertical_alignment | default: 'center' %}
+{% assign title_alignment = title_alignment | default: 'center' %}
+{% assign text_alignment = text_alignment | default: 'center' %}
 
 {% comment %} Check for missing arguments {% endcomment %}
 {% assign has_title = false %}

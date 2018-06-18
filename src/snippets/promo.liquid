@@ -23,16 +23,15 @@
 
 {% endcomment -%}
 
+{% comment %} Defaults {% endcomment %}
+{% assign image_flush = image_flush | default: false %}
+
 {% if layout != "left" or layout != "right" %}
   {% assign layout = "left" %}
 {% endif %}
 
 {% if type != blank and "1 2 3 4 5" contains type %}
   {% assign promo_type = type %}
-{% endif %}
-
-{% if image_flush == blank %}
-  {% assign image_flush = false %}
 {% endif %}
 
 {% if frame_ratio != blank and frame_ratio_small == blank %}

@@ -37,9 +37,8 @@
 {% assign product_swatch_size = '50x50' %}
 {% assign alt_swatch_identifier = 'swatch' %}
 
-{% if product_thumb_size == blank %}
-  {% assign product_thumb_size = '480x480' %}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign product_thumb_size = product_thumb_size | default: '480x480' %}
 
 {% if product != blank %}
 
