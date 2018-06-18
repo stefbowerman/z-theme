@@ -59,7 +59,6 @@ slate.models.Slideshow = (function($, Modernizr) {
 
     this.settings = $.extend({}, defaults, options);
 
-    this.$wrapper.on('click', selectors.pauseToggle, this.onPauseToggleClick.bind(this));    
     this.$slideshow.on('init', this.slideshowA11y.bind(this));
     this.$slideshow.slick(this.settings);
 
@@ -153,19 +152,6 @@ slate.models.Slideshow = (function($, Modernizr) {
       }
     },
 
-    togglePause: function() {
-      var slick = this.$slideshow.slick('getSlick');
-
-      if(this.settings.autoplay){
-        if(slick.paused){
-          this.unpause();
-        }
-        else {
-          this.pause();
-        }
-      }
-    },
-
    /**
     * Finds and displays a slide associated with the blockId passed in.
     * Note:  Block IDs are not required on slides for the slideshow to work
@@ -177,12 +163,8 @@ slate.models.Slideshow = (function($, Modernizr) {
       var $slide = $(selectors.slide, this.$slideshow).filter('[data-block-id="' + blockId + '"]:not(.slick-cloned)');
       
       this.$slideshow.slick('slickGoTo', $slide.data('slick-index') );
-    },
-
-    onPauseToggleClick: function(evt) {
-      evt.preventDefault();
-      this.togglePause();
     }
+
   });
 
   return Slideshow;
