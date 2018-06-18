@@ -37,6 +37,16 @@ slate.models.Slideshow = (function($, Modernizr) {
     this.$wrapper   = $el.is(selectors.slideshowWrapper) ? $el : $el.closest(selectors.slideShowWrapper);
     this.$slideshow = this.$wrapper.find(selectors.slideshow);
 
+    if(!this.$wrapper.length){
+      console.warn('['+this.name+'] - Element matching '+selectors.slideshowWrapper+' required to initialize');
+      return;
+    }
+
+    if(!this.$slideshow.length){
+      console.warn('['+this.name+'] - Element matching '+selectors.slideshow+' required to initialize');
+      return;
+    }
+
     var fade = this.$slideshow.attr('data-fade') && this.$slideshow.attr('data-fade').length ? this.$slideshow.data('fade') : true; // Allows us to pass data-fade="false".  $.fn.attr coerces to string, $.fn.data does *not*
 
     var defaults = {
