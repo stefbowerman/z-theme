@@ -273,3 +273,13 @@ Call this to apply user agenct specific classes to the body tag to use as css / 
 ##### `slate.utils.hashFromString`
 
 Call this to turn a string into a 32 bit integer.  Useful for hashing content into a some-what unique identifier to use for cookies.
+
+##### `slate.utils.pluralize`
+
+```javascript
+var quantity = 1;
+slate.utils.pluralize(quantity, 'story', 'stories'); // outputs - 'story'
+
+var quantity = 10
+slate.utils.pluralize(quantity, 'story', 'stories'); // outputs - 'stories'
+```

@@ -292,6 +292,32 @@ slate.utils = {
       cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
     }
     return cookieEnabled;
-  }  
+  },
+
+  /**
+   * Pluralizes the unit for the nuber passed in.
+   * Usage mirrors the Shopify "pluralize" string filter
+   *
+   * @param {Number} number
+   * @param {String} singular
+   * @param {String} plural
+   * @return {String}
+   */
+  pluralize: function(number, singular, plural)  {
+    var output = '';
+
+    number = parseInt(number);
+
+    if(number == 1) {
+      output = singular;
+    }
+    else {
+      output = plural;
+      if (typeof plural == "undefined") {
+        output = singular + 's'; // last resort, turn singular into a plural
+      }
+    }
+    return output;
+  }
   
 };
