@@ -11,7 +11,10 @@
   var $body = $(document.body);
   
   var selectors = {
-    slideupAlertForm: '[data-slideup-alert-form]'
+    slideupAlertForm: '[data-slideup-alert-form]',
+    qaSetMax: '[data-qa-set-max]',
+    qaToggleEnabled: '[data-qa-toggle-enabled]',
+    qa: '[data-quantity-adjuster]'
   };
 
   if( !$body.is('.template-page-components') ){
@@ -25,6 +28,16 @@
       title: $(this).find('input[name="title"]').val(),
       text: $(this).find('input[name="text"]').val()
     });
+  });
+
+  // Quantity Adjuster
+  $(selectors.qaSetMax).on('click', function(e) {
+    $(selectors.qa).find('input[type="number"]').attr('max', $(e.currentTarget).data('qa-set-max'));
+  });
+
+  $(selectors.qaToggleEnabled).on('click', function(e) {
+    var $qaInput = $(selectors.qa).find('input[type="number"]');
+    $qaInput.attr('disabled', !$qaInput.is(':disabled'));
   });
 
   $body.on('click', 'a[href="#"]', function(){

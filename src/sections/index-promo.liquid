@@ -19,7 +19,6 @@
               content_max_width: section.settings.content_max_width,
               image: section.settings.image,
               image_small: section.settings.image_small,
-              image_flush: section.settings.image_flush,
               title: section.settings.title,
               text: section.settings.text,
               cta_url: section.settings.cta_url,
@@ -46,11 +45,11 @@
         "id": "type",
         "label": "Content Split",
         "options": [
-          { "value": "1", "label": "30/70" },
-          { "value": "2", "label": "40/60" },
-          { "value": "3", "label": "50/50" },
-          { "value": "4", "label": "60/40" },
-          { "value": "5", "label": "70/30" }
+          { "value": "1", "label": "4/8" },
+          { "value": "2", "label": "5/7" },
+          { "value": "3", "label": "6/6" },
+          { "value": "4", "label": "7/5" },
+          { "value": "5", "label": "8/4" }
         ],
         "default": "3"
       },      
@@ -83,12 +82,6 @@
         "type": "url",
         "id": "cta_url",
         "label": "CTA Link"
-      },
-      {
-        "type": "checkbox",
-        "id" : "image_flush",
-        "label": "Make image flush",
-        "default": false
       },      
       {
         "type": "image_picker",

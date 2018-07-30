@@ -5,14 +5,19 @@
 /*================ Color Variables ================*/
 
 /* NOTE: As you add more colors here, update utilities.scss with matching text / background color utility classes */
+
+// Greyscale
 $color-black:       #000;
 $color-white:       #FFF;
 $color-grey:        #CCC;
 
+// Main Colors
+$color-emerald:     #049271;     
+
 // Theme Colors
 $text-color:        $color-black;
 $body-bg:           $color-white;
-$color-primary:     #049271;
+$color-primary:     $color-emerald;
 
 // Dot Colors
 $color-dot-white:   $color-white;
@@ -37,6 +42,7 @@ $font-family-base:          $font-family-sans-serif !default;
 
 $font-size-base:            1rem !default; // set to `16px`
 $font-size-large:           $font-size-base * 1.25;
+$font-size-medium:          $font-size-base * 1.125;
 $font-size-small:           $font-size-base * 0.875;
 $font-size-xsmall:          $font-size-base * 0.75;
 $font-size-h1:              $font-size-base * 2.5;
@@ -45,11 +51,17 @@ $font-size-h3:              $font-size-base * 1.75;
 $font-size-h4:              $font-size-base * 1.5;
 $font-size-h5:              $font-size-base * 1.25;
 $font-size-h6:              $font-size-base;
+$font-size-p1:              $font-size-base * 1.5;
+$font-size-p2:              $font-size-base;
+$font-size-p3:              $font-size-small;
 
 $font-weight-normal:        400;
 $font-weight-medium:        500;
 $font-weight-bold:          700;
 $font-weight-base:          $font-weight-normal !default;
+$font-weight-p1:            $font-weight-normal;
+$font-weight-p2:            $font-weight-normal;
+$font-weight-p3:            $font-weight-normal;
 
 $letter-spacing-base:       0.015em;
 $letter-spacing-h1:         0em;
@@ -58,6 +70,9 @@ $letter-spacing-h3:         0em;
 $letter-spacing-h4:         0em;
 $letter-spacing-h5:         0em;
 $letter-spacing-h6:         0em;
+$letter-spacing-p1:         0em;
+$letter-spacing-p2:         0em;
+$letter-spacing-p3:         0em;
 
 $line-height-base:          1.5; //** Unit-less `line-height` for use in components like buttons.
 $line-height-computed:      $font-size-base * $line-height-base !default; //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
@@ -67,6 +82,9 @@ $line-height-h3:            1.2;
 $line-height-h4:            1.2;
 $line-height-h5:            1.2;
 $line-height-h6:            1.2;
+$line-height-p1:            1.4;
+$line-height-p2:            1.4;
+$line-height-p3:            1.4;
 
 //** By default, this inherits from the `<body>`.
 $headings-font-family:      inherit !default;
@@ -295,7 +313,8 @@ $z-index-product-sticky-bar: 99;
 $z-index-header: 100;
 $z-index-drawer-backdrop: 199;
 $z-index-drawer: 200;
-$z-index-ajax-cart: 200;
+$z-index-ajax-cart-backdrop: 200;
+$z-index-ajax-cart: 201;
 $z-index-overlay-backdrop: 299;
 $z-index-overlay: 300;
 $z-index-modal-background:  1049 !default;
@@ -457,6 +476,10 @@ $drawer-backdrop-opacity:               0.6;
 $drawer-header-font-size:               $font-size-h5;
 $drawer-header-border-color:            $color-black;
 
+// #AJAX Cart
+$drawer-backdrop-color:                 $drawer-backdrop-color;
+$drawer-backdrop-opacity:               $drawer-backdrop-opacity;
+
 // #Footer
 $footer-bp-min:                         $screen-md-min;
 $footer-bg:                             $color-black;
@@ -515,6 +538,17 @@ $dot-spacing:                           6px;
 $dot-padding:                           2px;
 $dot-bottom-margin:                     $dot-spacing;
 
+// small dots
+$dot-small-border-width:                1px;
+$dot-small-border-radius:               0;
+$dot-small-border-color:                $dot-border-color;
+$dot-small-active-border-color:         $color-black;
+$dot-small-size:                        22px;
+$dot-small-spacing:                     0px;
+$dot-small-padding:                     0px;
+$dot-small-bottom-margin:               $dot-spacing;
+$dot-small-font-size:                   $font-size-xsmall;
+
 // #Page Hero
 $page-hero-padding-vertical:            150px;
 $page-hero-padding-small-vertical:      120px;
@@ -565,4 +599,11 @@ $expandable-list-item-border:           1px solid #EFEFEF;
 // #Overlays
 $overlay-bg-color:                     $body-bg;
 $overlay-transition-duration:          $transition-duration-base;
+
+// #Quantity Adjuster
+$quantity-adjuster-height:             40px;
+$quantity-adjuster-font-size:          $font-size-base;
+$quantity-adjuster-border-width:       1px;
+$quantity-adjuster-border-color:       $color-grey;
+$quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-adjuster-border-width);
 

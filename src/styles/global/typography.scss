@@ -35,49 +35,73 @@ h6, .h6 {
   }
 }
 
-h1, .h1 { 
+@mixin h1 {
   font-size: $font-size-h1;
   letter-spacing: $letter-spacing-h1;
   line-height: $line-height-h1;
 }
-h2, .h2 { 
+
+@mixin h2 {
   font-size: $font-size-h2;
   letter-spacing: $letter-spacing-h2;
   line-height: $line-height-h2;
 }
-h3, .h3 { 
+
+@mixin h3 {
   font-size: $font-size-h3;
   letter-spacing: $letter-spacing-h3;
   line-height: $line-height-h3;
 }
-h4, .h4 { 
+
+@mixin h4 {
   font-size: $font-size-h4;
   letter-spacing: $letter-spacing-h4;
   line-height: $line-height-h4;
 }
-h5, .h5 { 
+
+@mixin h5 {
   font-size: $font-size-h5;
   letter-spacing: $letter-spacing-h5;
   line-height: $line-height-h5;
 }
-h6, .h6 { 
+
+@mixin h6 {
   font-size: $font-size-h6;
   letter-spacing: $letter-spacing-h6;
   line-height: $line-height-h6;
+  font-family: $font-family-base;
 }
 
-
-.p1 {
-  font-size: $font-size-large;
+@mixin p1 {
+  font-size: $font-size-p1;
+  letter-spacing: $letter-spacing-p1;
+  line-height: $line-height-p1;
+  font-weight: $font-weight-p1;
 }
 
-.p2 {
-  // same as p
+@mixin p2 {
+  font-size: $font-size-p2;
+  letter-spacing: $letter-spacing-p2;
+  line-height: $line-height-p2;
+  font-weight: $font-weight-p2;
 }
 
-.p3 {
-  font-size: $font-size-small;
+@mixin p3 {
+  font-size: $font-size-p3;
+  letter-spacing: $letter-spacing-p3;
+  line-height: $line-height-p3;
+  font-weight: $font-weight-p3;
 }
+
+h1, .h1 { @include h1; }
+h2, .h2 { @include h2; }
+h3, .h3 { @include h3; }
+h4, .h4 { @include h4; }
+h5, .h5 { @include h5; }
+h6, .h6 { @include h6; }
+.p1, %p1 { @include p1; }
+.p2, %p2 { @include p2; }
+.p3, %p3 { @include p3; }
 
 .lead {
   margin-bottom: $line-height-computed;

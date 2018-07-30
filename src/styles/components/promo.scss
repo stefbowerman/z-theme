@@ -9,8 +9,9 @@
  */
 
 // The version of SCSS that Shopify is running doesn't support reverse() ... ugh
-$type-first-col-widths:         30%, 40%, 50%, 60%, 70%;
-$type-first-col-widths-reverse: 70%, 60%, 50%, 40%, 30%;
+// Since we're using a 12 column grid (unless you change it!) - let's make splits like 4/8, 5/7, 6/6, 7/5, 8/4 
+$type-first-col-widths:         percentage(4/12), percentage(5/12), percentage(6/12), percentage(7/12), percentage(8/12);
+$type-first-col-widths-reverse: percentage(8/12), percentage(7/12), percentage(6/12), percentage(5/12), percentage(4/12);
 
 .promo {
 
@@ -60,12 +61,6 @@ $type-first-col-widths-reverse: 70%, 60%, 50%, 40%, 30%;
 .promo__col {
   padding-left: $grid-gutter-width / 2;
   padding-right: $grid-gutter-width / 2;
-
-  // If the promo has the "--image-flush" modifier class applied, remove horizontal padding from the column containing the image
-  .promo--image-flush &.promo__col--image {
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 .promo__col-inner {

@@ -51,24 +51,37 @@
 
         <h3 id="docs-colors" class="docs-title">Colors</h3>
 
-        <h4 class="docs-subtitle">Main Colors</h4>
-        <div class="docs-well">
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--black"></div>
-            <p>Black<br />#000<br />$color-black</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--grey"></div>
-            <p>Dark Grey<br />#CCC<br />$color-grey</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--white"></div>
-            <p>White<br />#FFF<br />$color-white</p>
-          </div>
-          <div class="styleguide-color">
-            <div class="styleguide-color__swatch styleguide-color__swatch--primary"></div>
-            <p>Primary<br />#049271<br />$color-primary</p>
-          </div>          
+        {% assign grey_scale_colors = '' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'black:Black:#000:$color-black' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'grey:Grey:#CCC:$color-grey' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'white:White:#FFF:$color-white' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | split: '|' %}
+
+        <h4 class="docs-subtitle">Greyscale</h4>
+        <div>
+          {% for color in grey_scale_colors %}
+            {% assign parts = color | split: ':' %}
+            <div class="styleguide-color">
+              <div class="styleguide-color__swatch styleguide-color__swatch--{{ parts[0] }}"></div>
+              <p>{{ parts[1] }}<br />{{ parts[2] }}<br /><code>{{ parts[3] }}</code></p>
+            </div>            
+          {% endfor %}         
+        </div>
+
+        {% assign main_colors = '' %}
+        {% assign main_colors = main_colors | append: 'emerald:Emerald:#049271:$color-emerald' | append: '|' %}
+        
+        {% assign main_colors = main_colors | split: '|' %}
+
+        <h4 class="docs-subtitle">Main</h4>
+        <div>
+          {% for color in main_colors %}
+            {% assign parts = color | split: ':' %}
+            <div class="styleguide-color">
+              <div class="styleguide-color__swatch styleguide-color__swatch--{{ parts[0] }}"></div>
+              <p>{{ parts[1] }}<br />{{ parts[2] }}<br /><code>{{ parts[3] }}</code></p>
+            </div>            
+          {% endfor %}         
         </div>
 
 
@@ -81,6 +94,12 @@
         <h4>H4 Futura Bold</h4>
         <h5>H5 Futura Bold</h5>
         <h6>H6 Futura Bold</h6>
+
+        <h4 class="docs-subtitle">Type variations</h4>
+        <p class="lead">Lead Futura Regular</p>
+        <p class="p1">P1 Futura Regular</p>
+        <p class="p2">P2 Futura Regular</p>
+        <p class="p3">P3 Futura Regular</p>
 
         <h4 class="docs-subtitle">Paragraphs</h4>
         <p>
@@ -663,6 +682,31 @@
             subtitle: "I'm a page subtitle.  I have a maximum width applied to prevent lines of text from getting unnecessarily long and becoming hard to read."
         %}
 
+        <h4 class="docs-subtitle">Content Header / Footer</h4>
+        <p>Use these elements to create sections of content throughout the body of the page.  While page header should be used once at the top, the content header can be used multiple times.</p>
+
+        {% include 'content-header',
+            title: "Content Header Title Goes Here",
+            subtitle: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        %}
+
+        <div class="content-grid content-grid--flush">
+          {% assign bg_colors = '2892D7:173753:7880B5' | split: ':' %}
+          {% for i in (1..3) %}
+            <div class="content-grid__item" style="background-color: #{{ bg_colors[forloop.index0] }}">
+              <div class="frame frame--16x9">
+                <div class="frame__inner flex-align-items-center flex-justify-center">
+                  <span class="u-color-white">Content</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>          
+
+        <div class="content-footer">
+          <a href="#" class="btn btn-primary">CTA Goes down here</a>
+        </div>
+
         <h3 id="docs-frames" class="docs-title">Frames</h3>
         <p>Use frames to create elements with defined aspect ratios.  All frames require the <code>.frame</code> base class and a modifier class to define their aspect ratio.  There is also a child element <code>.frame__inner</code> that is positioned absolutely and stretches the full dimensions of the frame.</p>
         <div class="row">
@@ -846,12 +890,14 @@
 
         <h4 class="docs-subtitle">Minimal Input</h4>
         <p>Normal</p>
-        <div class="minimal-input-box">
-          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
-          <button type="submit" class="minimal-input-box__submit">
-            {% include 'icon-search' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
+        <div class="docs-well docs-well--accent">
+          <div class="minimal-input-box">
+            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </div>
         </div>
 
         <br /><br />
@@ -868,18 +914,42 @@
 
         <br /><br />
         <p>Large</p>
-        <div class="minimal-input-box minimal-input-box--large">
-          <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
-          <button type="submit" class="minimal-input-box__submit">
-            {% include 'icon-search' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
+        <div class="docs-well docs-well--accent">
+          <div class="minimal-input-box minimal-input-box--large">
+            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-search' %}
+              <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </div>
         </div>
 
         <h4 class="docs-subtitle">Dots</h4>
 
         <p>Dots are an alternate UI used primarily for displaying / selecting variant option values. They respond to the two state classes <code>.is-active</code> and <code>.is-disabled</code>.  Active dots will show a border around them, disabled dots will show with partial opacity and a strike through.</p>
         <div class="dots">
+          <div class="dot is-active" title="Small">
+            <div class="dot__inner">S</div>
+          </div>
+          <div class="dot" title="Medium">
+            <div class="dot__inner">M</div>
+          </div>
+          <div class="dot" title="Large">
+            <div class="dot__inner">L</div>
+          </div>
+          <div class="dot" title="Extra Large">
+            <div class="dot__inner">XL</div>
+          </div>
+          <div class="dot is-disabled" title="Extra Large">
+            <div class="dot__inner">OS</div>
+          </div>          
+        </div>
+
+        <br /><br />
+
+        <p>Use the <code>.dots--small</code> modifier class to create smaller dots when space is tight.</p>
+
+        <div class="dots dots--small">
           <div class="dot is-active" title="Small">
             <div class="dot__inner">S</div>
           </div>

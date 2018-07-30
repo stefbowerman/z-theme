@@ -1,6 +1,6 @@
-# Z-Theme JavaScript
+# JavaScript
 
-Z-Theme builds on the pre-existing javascript structure provided to us by Slate.  This structure allows us to easily add functionality in an organized way that focuses on re-usability of modules and share-ability of utilities.
+All javascript builds on the pre-existing javascript structure provided to us by Slate.  This structure allows us to easily add functionality in an organized way that focuses on re-usability of modules and share-ability of utilities.
 
 - [Structure](#structure)
 - [JavaScript Conventions](#javascript-conventions)

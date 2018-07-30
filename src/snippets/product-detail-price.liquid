@@ -11,9 +11,8 @@
 
 {% endcomment -%}
 
-{% if current_variant == blank %}
-  {%- assign current_variant = product.selected_or_first_available_variant -%}
-{% endif %}
+{% comment %} Defaults {% endcomment %}
+{% assign current_variant = current_variant | default: product.selected_or_first_available_variant %}
 
 <div data-price-wrapper>
   <span data-product-price>

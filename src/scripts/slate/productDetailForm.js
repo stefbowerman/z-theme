@@ -325,9 +325,6 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
       if(variant) {
         $productPrice.html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
 
-        // look for recharge stuff
-        // if recharge form -> look for selected radio on current variant
-
         if (variant.compare_at_price > variant.price) {
           $comparePrice.html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
           $compareEls.removeClass(classes.hide);

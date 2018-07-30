@@ -21,6 +21,7 @@ For full Slate API documentation, go check out their [API docs](https://shopify.
 
 ## Getting Started
 
+- Setup the `.editorconfig` [plug-in](https://editorconfig.org/#download) for your editor/IDE
 - Install Slate: `npm install -g @shopify/slate`
 - In the project directory, install dependences with `npm install`
 - Setup your shopify dev store

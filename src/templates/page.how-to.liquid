@@ -45,26 +45,22 @@
         <h4 class="docs-subtitle">FILE: scripts/slate/ajaxCart.js</h4>
         <ol>
           <li>
-            <p>Remove the function <code>slate.AjaxCart.prototype._getCartTemplateData</code></p>
-          </li>
-          <li>
-            <p>Modify <code>slate.AjaxCart.buildCart</code> to accept the cart object that gets returns from the shopify API instead of the <code>cartTemplateData</code> object that was returned from the method we removed above.</p>
-            <p>Remove all references to the product property of the <code>cartTemplateData</code> object and add a <code>recharge_interval</code> property to the cart item to display inside the template</p>
+            <p>Add a <code>recharge_interval</code> property to the cart item to display inside the template</p>
             <div class="docs-code-example">
               <pre>
                 <code>
 /* Remove the code that looks like this */
 
-if(products.hasOwnProperty(item.product_id)) {
-  var product = products[item.product_id];
+if(item.hasOwnProperty('product')) {
+  var product = item.product;
   for (var i = item.variant_options.length - 1; i >= 0; i--) {
-    var name  = product.options[i].name;
+    var name  = product.options[i];
     var value = item.variant_options[i];
 
     item.variant_options[i] = {
       name: name,
       value: value
-    }
+    };
 
     // Don't show this info if it's the default variant that Shopify creates
     if(value == "Default Title") {
@@ -84,23 +80,10 @@ if(item.properties) {
                 </code>
               </pre>
             </div>
-          </li>           
+          </li>
           <li>
-            <p>Lastly, remove any references to the <code>_getCartTemplateData</code> method that we removed.</p>
-            <div class="docs-code-example">
-              <pre>
-                <code>
-/* Find and replace things that look like this */
-
-then(this._getCartTemplateData.bind(this)).then(this.buildCart.bind(this))
-
-/* With this */
-
-then(this.buildCart.bind(this));
-                </code>
-              </pre>
-            </div>            
-          </li>       
+            <p>Remove the checkout button from the AJAX Cart.  Users will have to go to the cart page first before going on to checkout.</p>
+          </li>    
         </ol>
 
         <h4 class="docs-subtitle">FILE: sections/ajax-cart.liquid</h4>
@@ -124,6 +107,48 @@ then(this.buildCart.bind(this));
 {{#if recharge_interval}}
   &lt;li&gt;Delivery: Every {{ recharge_interval }}&lt;/li&gt;
 {{/if}}
+{% endraw %}
+            </code>
+          </pre>
+        </div>
+
+        <h4 class="docs-subtitle">FILE: sections/cart.liquid</h4>
+        <p>ReCharge adds the following properties to a product - <code>shipping_interval_frequency</code>, <code>shipping_interval_unit_type</code>, <code>shipping_id</code>.  These need to be added to the cart page template.</p>
+        <div class="docs-code-example">
+          <pre>
+            <code>
+{% raw %}
+/* Modify the item.properties loop to include the following recharge code */
+
+{% assign recharge_properties = &quot;shipping_interval_frequency:shipping_interval_unit_type:subscription_id&quot; | split: ':' %}
+{% assign product_is_recharge = false %}
+{% for p in item.properties %}
+  {% if recharge_properties contains p.first %}
+    {% assign product_is_recharge = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% unless item.properties == empty %}
+
+  {% comment %} Output the subscription info first {% endcomment %}
+  {% if product_is_recharge %}
+    &lt;li&gt;Delivered every {{ item.properties['shipping_interval_frequency'] }} {{ item.properties['shipping_interval_unit_type'] }}&lt;/li&gt;
+  {% endif %}
+
+  {% for p in item.properties %}
+    {% unless p.last == blank or recharge_properties contains p.first %}
+    &lt;li&gt;
+      {{ p.first }}:
+      {% if p.last contains '/uploads/' %}
+        &lt;a href=&quot;{{ p.last }}&quot;&gt;{{ p.last | split: '/' | last }}&lt;/a&gt;
+      {% else %}
+        {{ p.last }}
+      {% endif %}
+    &lt;/li&gt;
+    {% endunless %}
+  {% endfor %}
+{% endunless %}
 {% endraw %}
             </code>
           </pre>
