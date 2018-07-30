@@ -6,6 +6,8 @@
  *  - slick.min.js
  *  - Modernizr
  *
+ * - NOTE: Slideshow wrapper is *not* required to initialize, but it is required if you want to take advantage of the a11y code inside here
+ *
  * @namespace - models.Slideshow
 */
 
@@ -15,8 +17,7 @@ slate.models.Slideshow = (function($, Modernizr) {
 
   var selectors = {
     slideshowWrapper: '[data-slideshow-wrapper]',
-    slideshow: '[data-slideshow]',
-    slide: '[data-slideshow-slide]'
+    slideshow: '[data-slideshow]'
   };
 
   var KEYS = {
@@ -27,23 +28,18 @@ slate.models.Slideshow = (function($, Modernizr) {
  /**
   * Slideshow constructor
   *
-  * @param {HTMLElement | $} el - The actual slideshow or slideshow wrapper
+  * @param {HTMLElement | $} el - The actual slideshow element
   * @param {Object} options - Options passed into the slider initialize function
   */
   function Slideshow(el, options) {
 
     var $el = $(el);
 
-    this.$wrapper   = $el.is(selectors.slideshowWrapper) ? $el : $el.closest(selectors.slideShowWrapper);
-    this.$slideshow = this.$wrapper.find(selectors.slideshow);
-
-    if(!this.$wrapper.length){
-      console.warn('['+this.name+'] - Element matching '+selectors.slideshowWrapper+' required to initialize');
-      return;
-    }
+    this.$slideshow = $el;
+    this.$wrapper   = $el.closest(selectors.slideShowWrapper);
 
     if(!this.$slideshow.length){
-      console.warn('['+this.name+'] - Element matching '+selectors.slideshow+' required to initialize');
+      console.warn('['+this.name+'] - Slideshow element required to initialize');
       return;
     }
 
@@ -165,12 +161,13 @@ slate.models.Slideshow = (function($, Modernizr) {
    /**
     * Finds and displays a slide associated with the blockId passed in.
     * Note:  Block IDs are not required on slides for the slideshow to work
-    *        If used, the element matching `selectors.slide` must have a data-block-id attribute
+    *        If used, the slide element must have the attribute - data-block-id="{{ block.id }}"
     *
     * @param {string} blockId
     */
     goToSlideByBlockId: function(blockId) {
-      var $slide = $(selectors.slide, this.$slideshow).filter('[data-block-id="' + blockId + '"]:not(.slick-cloned)');
+      var slick = this.$slideshow.slick('getSlick');
+      var $slide = slick.$slides.filter('[data-block-id="' + blockId + '"]:not(.slick-cloned)');
       
       this.$slideshow.slick('slickGoTo', $slide.data('slick-index') );
     }

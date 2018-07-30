@@ -1,37 +1,35 @@
 <div data-section-id="{{ section.id }}" data-section-type="slideshow">
   {% if section.blocks.size > 0 %}
-    <div class="slideshow-wrapper" data-slideshow-wrapper>
-      <div class="slideshow" 
-           id="slideshow-{{ section.id }}" 
-           data-autoplay="{{ section.settings.autoplay }}" 
-           data-speed="{{ section.settings.autoplay_speed }}"
-           data-dots="{{ section.settings.dots }}"
-           data-fade="{{ section.settings.fade }}"
-           data-equal-heights="true"
-           data-slideshow>
-        {% for block in section.blocks %}
-          <div class="slideshow__slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
-            <div class="banner">
-              {% include 'banner-panel',
-                id: block.id,
-                content_alignment: block.settings.content_alignment,
-                content_max_width: block.settings.content_max_width,
-                background_image: block.settings.background_base,
-                background_image_vertical_alignment: block.settings.background_image_vertical_alignment,
-                background_image_medium: block.settings.background_medium,
-                background_image_medium_vertical_alignment: block.settings.background_medium_vertical_alignment,
-                background_image_small: block.settings.background_small,
-                background_image_small_vertical_alignment: block.settings.background_small_vertical_alignment,
-                light_text: block.settings.light_text,
-                title: block.settings.title,
-                text: block.settings.text,
-                cta_url: block.settings.cta_url,
-                cta_text: block.settings.cta_text
-              %}
-            </div>
+    <div class="slideshow" 
+         id="slideshow-{{ section.id }}" 
+         data-autoplay="{{ section.settings.autoplay }}" 
+         data-speed="{{ section.settings.autoplay_speed }}"
+         data-dots="{{ section.settings.dots }}"
+         data-fade="{{ section.settings.fade }}"
+         data-equal-heights="true"
+         data-slideshow>
+      {% for block in section.blocks %}
+        <div class="slideshow__slide" {{ block.shopify_attributes }} data-slideshow-slide data-block-id="{{ block.id }}">
+          <div class="banner">
+            {% include 'banner-panel',
+              id: block.id,
+              content_alignment: block.settings.content_alignment,
+              content_max_width: block.settings.content_max_width,
+              background_image: block.settings.background_base,
+              background_image_vertical_alignment: block.settings.background_image_vertical_alignment,
+              background_image_medium: block.settings.background_medium,
+              background_image_medium_vertical_alignment: block.settings.background_medium_vertical_alignment,
+              background_image_small: block.settings.background_small,
+              background_image_small_vertical_alignment: block.settings.background_small_vertical_alignment,
+              light_text: block.settings.light_text,
+              title: block.settings.title,
+              text: block.settings.text,
+              cta_url: block.settings.cta_url,
+              cta_text: block.settings.cta_text
+            %}
           </div>
-        {% endfor %}
-      </div>     
+        </div>
+      {% endfor %}
     </div>
   {% else %}
 

@@ -192,9 +192,9 @@ Single method that initializes event handlers for form input events.  Removes in
 Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
 
 ```javascript
-var $slideshowWrapper = $('[data-slideshow-wrapper]');
+var $slideshow = $('[data-slideshow]');
 var options = { arrows: true };
-var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
+var slideshow = new slate.models.Slideshow( $slideshow, options);
 ```
 
 To set options on the slideshow, you can either pass an object into the constructor or use data attributes on the slideshow element.  Data attribute options with take precedent over those passed into the constructor.  The list of available data-attributes is listed below.
