@@ -103,7 +103,7 @@ Returns the css timing function for the specified key
 
 ### Breakpoints
 
-Attaches a single method to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.
+Functions attached to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.
 
 ##### `slate.breakpoints.getBreakpointMinWidth`
 
@@ -112,6 +112,22 @@ Returns the minimum pixel width for the specified key
 | Parameters         | Type          | Description   |
 | :----------------- | :------------ | :------------ |
 | `key`  | string | Key mapping to a screen size (sm, md, ..) |
+
+```javascript
+slate.breakpoints.getBreakpointMinWidth('md'); // outputs - 992
+```
+
+##### `slate.breakpoints.getBreakpointMinWidthKeyForWidth`
+
+Returns the breakpoint name for the specified pixel width.
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `w`  | integer | pixel value |
+
+```javascript
+slate.breakpoints.getBreakpointMinWidthKeyForWidth(1000); // outputs - md
+```
 
 
 ### Collection Filters

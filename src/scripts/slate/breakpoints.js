@@ -88,7 +88,8 @@ slate.breakpoints = (function($) {
   $window.on('resize', $.throttle(20, onResize) );
 
   return {
-    getBreakpointMinWidth: getBreakpointMinWidth
+    getBreakpointMinWidth: getBreakpointMinWidth,
+    getBreakpointMinWidthKeyForWidth: getBreakpointMinWidthKeyForWidth
   };
 
 }(jQuery));
