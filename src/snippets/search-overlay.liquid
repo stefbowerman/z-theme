@@ -6,7 +6,7 @@
         <form action="/search" method="get" role="search">
           <input type="hidden" name="type" value="product,article" />
           <div class="minimal-input-box minimal-input-box--large">
-            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+            <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
             <button type="submit" class="minimal-input-box__submit">
               {% include 'icon-search' %}
               <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
