@@ -74,3 +74,16 @@ $header-z-index: 100;
 ul.policy-list {
 
 }
+
+// Desktop Design with min-width: 1000px
+@media screen and (min-width: $checkout-bp-md-min) {
+
+  .anyflexbox .content .wrap {
+    @include flex-direction(row);
+  }
+}
+
+// Mobile Design with max-width: 749px
+@media screen and (max-width: $checkout-bp-sm-max) {
+  
+}
