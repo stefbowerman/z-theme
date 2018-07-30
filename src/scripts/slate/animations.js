@@ -29,6 +29,7 @@ slate.animations = (function($) {
     fast:     150,
     fastest:  50,
     slow:     600,
+    medium:   400,
     none:     0
   };
 

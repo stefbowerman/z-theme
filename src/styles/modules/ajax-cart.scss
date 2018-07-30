@@ -19,13 +19,29 @@ body.ajax-cart-open {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   @include translateX(100%);
-  @include transition(all $transition-duration-base $transition-timing-function-base);
+  @include transition(all $transition-duration-slide $transition-timing-function-slide-out);
 
   &.is-open {
     pointer-events: auto;
     @include translateX(0%);
-    @include transition(all $transition-duration-base $transition-timing-function-base);
+    @include transition(all $transition-duration-slide $transition-timing-function-slide-in);
   }
+
+  // Ajax cart shield
+  &:before {
+    content: '';
+    @include stretch-within;
+    background: transparentize($ajax-cart-bg, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    @include transition(opacity $transition-duration-base $transition-timing-function-base);   
+  }
+
+  &.request-in-progress:before {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: $cursor-disabled;
+  }    
 
   // Ensure that the cart is full width on screen sizes below this
   @media (min-width: $screen-xs-min) {

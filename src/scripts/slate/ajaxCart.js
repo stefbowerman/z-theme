@@ -136,7 +136,8 @@
       backdrop: 'ajax-cart-backdrop',
       backdropVisible: 'is-visible',
       cartOpen: 'is-open',
-      cartBadgeHasItems: 'has-items'
+      cartBadgeHasItems: 'has-items',
+      cartRequestInProgress: 'request-in-progress'
     };
 
    /**
@@ -160,10 +161,11 @@
         backdrop: true
       };
 
-      this.$el         = $(selectors.container);
-      this.$backdrop   = null;
-      this.stateIsOpen = null;
+      this.$el                = $(selectors.container);
+      this.$backdrop          = null;
+      this.stateIsOpen        = null;
       this.transitionEndEvent = slate.utils.whichTransitionEnd();
+      this.requestInProgress  = false;
 
      /**
       * Initialize the cart
@@ -223,6 +225,8 @@
         $body.on('submit', selectors.addForm, function(e) {
           e.preventDefault();
 
+          if(this.requestInProgress) return;
+
           var $submitButton = $(e.target).find(selectors.addToCart);
           var $submitButtonText = $submitButton.find(selectors.addToCartText);
 
@@ -230,18 +234,22 @@
           $submitButton.prop('disabled', true);
           $submitButtonText.html(theme.strings.adding);
 
+          this._onRequestStart();
+
           ShopifyAPI.addItemFromForm( $(e.target) )
             .then(function(data) {
+              _this._onRequestFinish();
               // Reset button state
               $submitButton.prop('disabled', false);
               $submitButtonText.html(theme.strings.addToCart);
               _this.onItemAddSuccess.call(_this, data);
             })
             .fail(function(data) {
+              _this._onRequestFinish();
               // Reset button state
               $submitButton.prop('disabled', false);
               $submitButtonText.html(theme.strings.addToCart);
-              _this.onItemAddFail.call(_this, data) ;
+              _this.onItemAddFail.call(_this, data);
             });
         }.bind(this));
       },  
@@ -256,6 +264,12 @@
         return (parseFloat(qty) == parseInt(qty)) && !isNaN(qty) ? qty : 1;
       },
 
+     /**
+      * Ensure we are working with a valid number
+      *
+      * @param {element} el - cart item row or child element
+      * @return {obj}
+      */
       _getItemRowAttributes: function(el) {
         var $el = $(el);
         var $row = $el.is(selectors.item) ? $el : $el.parents(selectors.item);
@@ -266,6 +280,16 @@
           qty: this._validateQty($row.data('qty'))
         };
       },
+
+      _onRequestStart: function() {
+        this.requestInProgress = true;
+        this.$el.addClass(classes.cartRequestInProgress);
+      },
+
+      _onRequestFinish: function() {
+        this.requestInProgress = false;
+        this.$el.removeClass(classes.cartRequestInProgress);
+      },      
 
       addBackdrop: function(callback) {
 
@@ -358,6 +382,10 @@
       */
       buildCart: function(cart) {
 
+        // All AJAX Cart requests finish with rebuilding the cart
+        // So this is a good place to add this code
+        this._onRequestFinish();
+
         // Make adjustments to the cart object contents before we pass it off to the handlebars template
         cart.total_price = slate.Currency.formatMoney(cart.total_price, theme.moneyFormat);
         // cart.total_price = slate.Currency.stripZeroCents(cart.total_price);
@@ -431,7 +459,11 @@
       onItemRemoveClick: function(e) {
         e.preventDefault();
 
+        if(this.requestInProgress) return;
+
         var attrs = this._getItemRowAttributes(e.target);
+
+        this._onRequestStart();
         ShopifyAPI.changeItemQuantity(attrs.id, 0).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 
@@ -443,8 +475,11 @@
       onItemIncrementClick: function(e) {
         e.preventDefault();
 
+        if(this.requestInProgress) return;
+
         var attrs = this._getItemRowAttributes(e.target);
-        
+
+        this._onRequestStart();
         ShopifyAPI.changeItemQuantity(attrs.id, attrs.qty + 1).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 
@@ -456,9 +491,12 @@
       onItemDecrementClick: function(e) {
         e.preventDefault();
 
+        if(this.requestInProgress) return;
+
         var attrs = this._getItemRowAttributes(e.target);
         var newQty = (attrs.qty < 1 ? 0 : attrs.qty - 1);
 
+        this._onRequestStart();
         ShopifyAPI.changeItemQuantity(attrs.id, newQty).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 

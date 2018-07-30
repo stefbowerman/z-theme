@@ -23,7 +23,7 @@ slate.yotpoAPI = (function($) {
     this.namespace = '.' + this.name;
 
     if( !window.yotpoConfig || !window.yotpoConfig.hasOwnProperty('appKey') ) {
-      console.warn('['+this.name+'] - App key required to initialize.');
+      console.warn('['+this.name+'] - App key required to initialize.  If Yotpo isn\'t required, please remove this file.');
       return;
     }
 
