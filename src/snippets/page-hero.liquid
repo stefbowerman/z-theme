@@ -34,6 +34,11 @@
 #page-hero-{{ id }} .page-hero__bg-image {
   background-image: url({{ background_image | img_url: '1800x' }});
 }
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #page-hero-{{ id }} .page-hero__bg-image {
+    background-image: url({{ background_image | img_url: '2400x' }});
+  }
+}
 {% endif %}
 {% if content_max_width != blank %}
   #page-hero-{{ id }} .page-hero__content {
@@ -43,21 +48,42 @@
 @media (max-width: 991px) {
   #page-hero-{{ id }} .page-hero__bg-image {
     {% if background_image_medium %}
-      background-image: url({{ background_image_medium | img_url: '1400x' }});
+      background-image: url({{ background_image_medium | img_url: '1000x' }});
     {% elsif background_image %}
-      background-image: url({{ background_image | img_url: '1400x' }});
+      background-image: url({{ background_image | img_url: '1000x' }});
+    {% endif %}
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2) and (max-width: 991px),
+        (min-resolution: 192dpi)           and (max-width: 991px) {
+  #page-hero-{{ id }} .page-hero__bg-image {
+    {% if background_image_medium %}
+      background-image: url({{ background_image_medium | img_url: '1500x' }});
+    {% elsif background_image %}
+      background-image: url({{ background_image | img_url: '1500x' }});
     {% endif %}
   }
 }
 @media (max-width: 767px) {
   #page-hero-{{ id }} .page-hero__bg-image {
     {% if background_image_small %}
-      background-image: url({{ background_image_small | img_url: '1000x' }});
+      background-image: url({{ background_image_small | img_url: '800x' }});
     {% elsif background_image %}
-      background-image: url({{ background_image | img_url: '1000x' }});
+      background-image: url({{ background_image | img_url: '800x' }});
     {% endif %}
   }
 }
+@media (-webkit-min-device-pixel-ratio: 2) and (max-width: 767px),
+        (min-resolution: 192dpi)           and (max-width: 767px) {
+  #page-hero-{{ id }} .page-hero__bg-image {
+    {% if background_image_small %}
+      background-image: url({{ background_image_small | img_url: '1200x' }});
+    {% elsif background_image %}
+      background-image: url({{ background_image | img_url: '1200x' }});
+    {% endif %}
+  }
+}
+
 </style>
 
 <div id="page-hero-{{ id }}" class="page-hero page-hero--content-{{ content_alignment }} page-hero--text-{{ text_alignment }}{% if light_text %} page-hero--light{% endif %}">

@@ -141,8 +141,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           on: 'click',
           touch: false,
           escToClose: true,
-          zoomMagnify: 0.8,
-          zoomDuration: 300,
+          magnify: 0.8,
+          duration: 300,
           callback: function() {
             $zoomTarget.addClass(classes.zoomReady);
           },

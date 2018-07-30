@@ -113,7 +113,7 @@ slate.AjaxKlaviyoForm = (function($) {
           console.warn('['+this.name+'] - onSubmitFail error: "' + errors[i] + '"');
         }
       }
-      this.settings.onSubmitFail();
+      this.settings.onSubmitFail(errors);
     },
     onFormSubmit: function(e) {
       e.preventDefault();
@@ -141,9 +141,9 @@ slate.AjaxKlaviyoForm = (function($) {
         })
         .fail(function(jqXHR, textStatus) {        
           var errors = [];
-          if(jqXHR.responseJSON.hasOwnProperty('errors')) {
-            errors = jqXHR.responseJSON.errors;
-          }
+          if(jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.hasOwnProperty('errors')) {
+              errors = jqXHR.responseJSON.errors;
+            }
 
           _this.onSubmitFail(errors);
         });

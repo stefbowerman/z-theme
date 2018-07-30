@@ -17,6 +17,7 @@ We have added (or added to) the following modules:
 - [Collection Sort](#collection-sort)
 - [Currency](#currency)
 - [Drawer](#drawer)
+- [Forms](#forms)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
 - [Slideup Alert](#slideup-alert)
@@ -103,7 +104,7 @@ Returns the css timing function for the specified key
 
 ### Breakpoints
 
-Attaches a single method to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.
+Functions attached to `slate.breakpoints` to make working with breakpoints in javascript easier.  Also triggers a window event anytime a breakpoint is crossed.
 
 ##### `slate.breakpoints.getBreakpointMinWidth`
 
@@ -112,6 +113,22 @@ Returns the minimum pixel width for the specified key
 | Parameters         | Type          | Description   |
 | :----------------- | :------------ | :------------ |
 | `key`  | string | Key mapping to a screen size (sm, md, ..) |
+
+```javascript
+slate.breakpoints.getBreakpointMinWidth('md'); // outputs - 992
+```
+
+##### `slate.breakpoints.getBreakpointMinWidthKeyForWidth`
+
+Returns the breakpoint name for the specified pixel width.
+
+| Parameters         | Type          | Description   |
+| :----------------- | :------------ | :------------ |
+| `w`  | integer | pixel value |
+
+```javascript
+slate.breakpoints.getBreakpointMinWidthKeyForWidth(1000); // outputs - md
+```
 
 
 ### Collection Filters
@@ -168,13 +185,16 @@ Note:  This class also includes a data attribute based API to use drawers withou
 | `show.drawer`      | This event fires immediately when the show instance method is called. |
 | `shown.drawer`     | This event is fired when the drawer has been made visible to the user (will wait for CSS transitions to complete). |
 
+### Forms
+Single method that initializes event handlers for form input events.  Removes input validation states on blur.  Does _not_ apply validation states itself, that has to be done through other JS.  
+
 ### Slideshow
 Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
 
 ```javascript
-var $slideshowWrapper = $('[data-slideshow-wrapper]');
+var $slideshow = $('[data-slideshow]');
 var options = { arrows: true };
-var slideshow = new slate.models.Slideshow( $slideshowWrapper, options);
+var slideshow = new slate.models.Slideshow( $slideshow, options);
 ```
 
 To set options on the slideshow, you can either pass an object into the constructor or use data attributes on the slideshow element.  Data attribute options with take precedent over those passed into the constructor.  The list of available data-attributes is listed below.

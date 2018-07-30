@@ -136,7 +136,8 @@ theme.AboutUs = (function() {
   // Place all selectors at the top of this file
   // These should almost always be data-attributes (to keep css classes strictly presentational) that describe the elements they select
   var selectors = {
-    aboutButton: '[data-about-button]'
+    aboutButton: '[data-about-button]',
+    listItem: '[data-list-item]'
   };
 
   // Place all css classes at the top of this file that get used in functions down below.
@@ -150,11 +151,18 @@ theme.AboutUs = (function() {
   function AboutUs(container) {
     this.$container = $(container);
 
-    this.name = 'aboutUs', // namespaces should be camelCased.
+    this.name = 'aboutUs'; // namespaces should be camelCased.
     this.namespace = '.'+this.name; // namespaces are useful if you need to fire events that are section specific
 
-    // Be sure to bind all event handlers
-    $(selectors.aboutButton).on('click', this.onAboutButtonClick.bind(this));
+    // For any DOM elements that can be cached (don't change over the life of the page or there's a small number of them)
+    // set them as instance variables
+    this.$aboutButton = $(selectors.aboutButton, this.$container);
+
+    // Handler functions should be named " 'on' + selectorName + eventName "
+    // Cached elements get bound directly
+    // Non-cached elements get bound using delegated handlers - see below for usage
+    this.$aboutButton.on('click', this.onAboutButtonClick.bind(this));
+    this.$container.on('click', selectors.listItem, this.onListItemClick.bind(this));
   }
 
   // Add prototype methods
@@ -164,11 +172,18 @@ theme.AboutUs = (function() {
       //
     },
 
-    onAboutButtonClick: function() {
+    onAboutButtonClick: function(e) {
+      e.preventDefault();
       // 
     },
 
-    // I'm a section editor event handler
+    onListItemClick: function(e) {
+      var $listItem = $(e.currentTarget);
+
+      // Use the clicked on $listItem here
+    },    
+
+    // Any methods that apply *only* to the theme editor should go at the bottom of the file
     onSelect: function() {
       //
     }

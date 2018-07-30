@@ -8,7 +8,7 @@
 theme.Slideshow = (function($) {
 
   var selectors = {
-    slideshowWrapper: '[data-slideshow-wrapper]',
+    slideshow: '[data-slideshow]',
   };
 
   var classes = {
@@ -26,16 +26,11 @@ theme.Slideshow = (function($) {
     this.name = 'slideshow';
     this.namespace = '.'+this.name;
 
-    if( !$(selectors.slideshowWrapper, this.$container).length ){
-      console.warn('['+this.name+'] - Element matching '+selectors.slideshowWrapper+' required to initialize');
-      return;
-    }
-
     var settings = {
       // Put your settings here
     };
 
-    this.slideshow = new slate.models.Slideshow( $(selectors.slideshowWrapper, this.$container), settings);
+    this.slideshow = new slate.models.Slideshow( $(selectors.slideshow, this.$container), settings);
 
   }
 

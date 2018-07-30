@@ -36,14 +36,14 @@
 
         <h3 id="docs-type" class="docs-title">Type</h3>
         <div class="u-fw-bold" style="font-size: 18px;">
-          <p>FUTURA BOLD</p>
+          <p>SYSTEM / HELVETICA NEUE BOLD</p>
           <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
           <p>abcdefghijklmnopqrstuvwxyz</p>
           <p>0123456789</p>
         </div>
         <br />
         <div style="font-size: 18px;">
-          <p>FUTURA</p>
+          <p>SYSTEM / HELVETICA NEUE</p>
           <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
           <p>abcdefghijklmnopqrstuvwxyz</p>
           <p>0123456789</p>    
@@ -53,6 +53,7 @@
 
         {% assign grey_scale_colors = '' %}
         {% assign grey_scale_colors = grey_scale_colors | append: 'black:Black:#000:$color-black' | append: '|' %}
+        {% assign grey_scale_colors = grey_scale_colors | append: 'dark-grey:Dark Grey:#333:$color-dark-grey' | append: '|' %}
         {% assign grey_scale_colors = grey_scale_colors | append: 'grey:Grey:#CCC:$color-grey' | append: '|' %}
         {% assign grey_scale_colors = grey_scale_colors | append: 'white:White:#FFF:$color-white' | append: '|' %}
         {% assign grey_scale_colors = grey_scale_colors | split: '|' %}
@@ -88,18 +89,18 @@
         <h3 id="docs-typography" class="docs-title">Typography</h3>
 
         <h4 class="docs-subtitle">Headings</h4>
-        <h1>H1 Futura Bold</h1>
-        <h2>H2 Futura Bold</h2>
-        <h3>H3 Futura Bold</h3>
-        <h4>H4 Futura Bold</h4>
-        <h5>H5 Futura Bold</h5>
-        <h6>H6 Futura Bold</h6>
+        <h1>H1 System / Helvetica Neue Bold</h1>
+        <h2>H2 System / Helvetica Neue Bold</h2>
+        <h3>H3 System / Helvetica Neue Bold</h3>
+        <h4>H4 System / Helvetica Neue Bold</h4>
+        <h5>H5 System / Helvetica Neue Bold</h5>
+        <h6>H6 System / Helvetica Neue Bold</h6>
 
         <h4 class="docs-subtitle">Type variations</h4>
-        <p class="lead">Lead Futura Regular</p>
-        <p class="p1">P1 Futura Regular</p>
-        <p class="p2">P2 Futura Regular</p>
-        <p class="p3">P3 Futura Regular</p>
+        <p class="lead">Lead System / Helvetica Neue Regular</p>
+        <p class="p1">P1 System / Helvetica Neue Regular</p>
+        <p class="p2">P2 System / Helvetica Neue Regular</p>
+        <p class="p3">P3 System / Helvetica Neue Regular</p>
 
         <h4 class="docs-subtitle">Paragraphs</h4>
         <p>
@@ -125,16 +126,19 @@
         <ul>
           <li class="u-fw-normal">.u-fw-normal</li>
           <li class="u-fw-bold">.u-fw-bold</li>
-          <li class="u-color-black">.u-color-black</li>
-          <li class="u-color-grey">.u-color-grey</li>
-          <li class="u-color-white">.u-color-white</li>
           <li class="u-td-underline">.u-td-underline</li>
           <li class="u-td-strike">.u-td-strike</li>
+          <li class="u-ls-base">.u-ls-base</li>
+          <li class="u-color-black">.u-color-black</li>
+          <li class="u-color-dark-grey">.u-color-dark-grey</li>
+          <li class="u-color-grey">.u-color-grey</li>
+          <li class="u-color-white">.u-color-white</li>
         </ul>
 
         <h4 class="docs-subtitle">Background Color Utilities</h4>
         <ul style="max-width:400px;">
           <li class="u-bg-black u-color-white">.u-bg-black</li>
+          <li class="u-bg-dark-grey u-color-white">.u-bg-dark-grey</li>
           <li class="u-bg-grey">.u-bg-grey</li>
           <li class="u-bg-white">.u-bg-white</li>
         </ul>
@@ -515,12 +519,16 @@
             <input type="text" id="textHorizontal2" placeholder="Input 2" class="form-control">
           </div>
 
-          <select id="selectHorizontal1" class="form-control">
-            <option value="0">-- Choose --</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
+          <div class="form-group">
+            <label for="selectHorizontal1">Label 3</label>
+            <select id="selectHorizontal1" class="form-control">
+              <option value="0">-- Choose --</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <div class="help-block">I'm helper text to explain what's going on with this form input.</div>
+          </div>
         </form>
 
         <h4 class="docs-subtitle">Invisible labels</h4>

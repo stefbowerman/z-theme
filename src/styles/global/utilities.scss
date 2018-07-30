@@ -22,10 +22,14 @@
 .u-fs-small { font-size: $font-size-small; }
 .u-fs-xsmall { font-size: $font-size-xsmall; }
 
+// Letter Spacing
+.u-ls-base { letter-spacing: $letter-spacing-base; }
+
 // Text Colors
 .u-color-black { color: $color-black; }
 .u-color-white { color: $color-white; }
 .u-color-grey { color: $color-grey; }
+.u-color-dark-grey { color: $color-dark-grey; }
 .u-color-primary { color: $color-primary; }
 
 // Transformation
@@ -47,6 +51,7 @@
 .u-bg-white { background-color: $color-white; }
 .u-bg-black { background-color: $color-black; }
 .u-bg-grey { background-color: $color-grey; }
+.u-bg-dark-grey { background-color: $color-dark-grey; }
 .u-bg-primary { background-color: $color-primary; }
 
 /*================ Layout ================*/
@@ -68,6 +73,8 @@
 .u-pos-rel { position: relative; }
 .u-pos-abs { position: absolute; }
 .u-pos-fix { position: fixed; }
+.u-float-right { float: right; }
+.u-float-left { float: left; }
 
 /*================ Z-Index ================*/
 
