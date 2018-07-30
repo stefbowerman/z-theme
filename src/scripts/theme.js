@@ -20,6 +20,7 @@ window.theme = window.theme || {};
 // =require slate/quickView.js
 // =require slate/yotpoAPI.js
 // =require slate/quantityAdjuster.js
+// =require slate/forms.js
 
 // =require slate/models/dropdown.js
 // =require slate/models/dropdownManager.js
@@ -109,10 +110,8 @@ window.theme = window.theme || {};
     // Chosen JS plugin for select boxes
     slate.utils.chosenSelects();
 
-    // Global handler for form inputs that come back with errors applied
-    $('.form-group.has-error').on('change keydown', '.form-control', function() {
-      $(this).parents('.has-error').removeClass('has-error');
-    });
+    // Form event handling / validation
+    slate.forms.initialize();
 
     // START - Global handler for collapse plugin to add state class for open panels
     var panelIsOpenClass = 'is-open';

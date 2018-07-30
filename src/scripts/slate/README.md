@@ -17,6 +17,7 @@ We have added (or added to) the following modules:
 - [Collection Sort](#collection-sort)
 - [Currency](#currency)
 - [Drawer](#drawer)
+- [Forms](#forms)
 - [Slideshow](#slideshow)
 - [Slideup](#slideup)
 - [Slideup Alert](#slideup-alert)
@@ -183,6 +184,9 @@ Note:  This class also includes a data attribute based API to use drawers withou
 | `hidden.drawer`    | This event is fired when the drawer has finished being hidden from the user (will wait for CSS transitions to complete). |
 | `show.drawer`      | This event fires immediately when the show instance method is called. |
 | `shown.drawer`     | This event is fired when the drawer has been made visible to the user (will wait for CSS transitions to complete). |
+
+### Forms
+Single method that initializes event handlers for form input events.  Removes input validation states on blur.  Does _not_ apply validation states itself, that has to be done through other JS.  
 
 ### Slideshow
 Wrapper around slideshow library to make initialization and consistency much simpler.  Allows us to swap out the library at any time while mainting the API.  Exposes methods to simplify working with slideshows and theme section events.
