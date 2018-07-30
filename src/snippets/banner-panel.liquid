@@ -55,7 +55,7 @@
 
   <div id="banner__panel-{{ id }}" class="banner__panel{% if light_text %} banner__panel--light{% endif %}">
 
-      <style type="text/css">
+    <style type="text/css">
       {% if vertical_padding != blank %}
       #banner__panel-{{ id }} {
         padding-top: {{ vertical_padding | append: 'px' }};
@@ -68,12 +68,16 @@
           max-width: {{ content_max_width | append: 'px' }};
         {% endif %}
       }
-      #banner__panel-{{ id }} .banner__bg-image {
-        background-position: center {{ background_image_vertical_alignment }};
-      }
       {% if background_image %}
       #banner__panel-{{ id }} .banner__bg-image {
         background-image: url({{ background_image | img_url: '1800x' }});
+        background-position: center {{ background_image_vertical_alignment }};
+      }
+
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        #banner__panel-{{ id }} .banner__bg-image {
+          background-image: url({{ background_image | img_url: '2400x' }});
+        }
       }
       {% endif %}
 
@@ -81,11 +85,21 @@
         #banner__panel-{{ id }} .banner__bg-image {
           background-position: center {{ background_image_medium_vertical_alignment }};
           {% if background_image_medium %}
-            background-image: url({{ background_image_medium | img_url: '1400x' }});
+            background-image: url({{ background_image_medium | img_url: '1000x' }});
           {% elsif background_image %}
-            background-image: url({{ background_image | img_url: '1400x' }});
+            background-image: url({{ background_image | img_url: '1000x' }});
           {% endif %}
         }      
+      }
+      @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 991px),
+              (min-resolution: 192dpi)           and (max-width: 991px) {
+        #banner__panel-{{ id }} .banner__bg-image {
+          {% if background_image_medium %}
+            background-image: url({{ background_image_medium | img_url: '1500x' }});
+          {% elsif background_image %}
+            background-image: url({{ background_image | img_url: '1500x' }});
+          {% endif %}
+        }
       }
 
       @media (max-width: 767px) {
@@ -104,6 +118,16 @@
           {% endif %}
         }
       }
+      @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 767px),
+              (min-resolution: 192dpi)           and (max-width: 767px) {
+        #banner__panel-{{ id }} .banner__bg-image {
+          {% if background_image_small %}
+            background-image: url({{ background_image_small | img_url: '1200x' }});
+          {% elsif background_image %}
+            background-image: url({{ background_image | img_url: '1200x' }});
+          {% endif %}
+        }
+      }      
     </style>
 
     {% if background_image or background_image_medium or background_image_small %}
