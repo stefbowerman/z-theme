@@ -26,6 +26,47 @@
           <li><a href="#docs-quantity-adjuster">Quantity Adjuster</a></li>
         </ul>
 
+        <h3 class="docs-title">Note About Liquid Snippets</h3>
+        <p>The majority of the components listed on this page are generated using <a href="https://help.shopify.com/en/themes/liquid/tags/theme-tags#include" target="_blank">liquid snippets</a>.  The documentation for liquid snippets is fairly limited and glosses over a crucial aspect of how they work with regards to variables.  All the snippets that we've created are built to accept variables as arguments that affect the snippet output.  The majority of these snippets include default values defined inside the snippets themselves which allows you to pass in only the variables that you need.  Unfortunately, liquid doesn't have any concept of variable scoping <em>inside</em> the snippet so the distinction between variables inside and outside is a little loose.</p>
+
+        <p>Take the example below:</p>
+
+        <div class="docs-well docs-well--constrained">
+<pre style="margin: 0;">
+// snippets/test.liquid
+//
+// Usage - {% raw %}{% include 'test', color: { string } %}{% endraw %}
+{% raw %}
+{% if color == blank %}
+  {% assign color = 'red' %}
+{% endif %}
+
+The color is "{{ color }}"
+{% endraw %}
+</pre>          
+        </div>
+
+        <div class="docs-well">
+<pre style="margin: 0;">
+// Usage
+//  
+{% raw %}
+{% assign test_color = 'roygbiv' %} 
+{% include 'test', color: test_color %} <strong>// The color is "roygbiv"</strong>
+{% include 'test' %} <strong>// The color is "red"</strong>
+{{ color }} <strong>// red</strong>
+
+{% assign color = 'green' %}
+{% include 'test' %} <strong>// The color is "green"</strong>
+{% include 'test', color: 'blue' %} <strong>// The color is "blue"</strong>
+{% include 'test' %} <strong>// The color is "green"</strong>
+{% endraw %}
+</pre> 
+        </div>
+
+        <p>As you can see, if a variable is defined <em>inside</em> a snippet, it becomes available outside of the snippet anywhere <em>after</em> the point where that snippet was included.  In the example above, we defined <code>color</code> to be <code>red</code> inside the snippet and were able to output it's value immediately after including it.</p>
+        <p>The best protection against these kinds of variable scoping issues is to pass in argument values as variables with different names that those used inside the snippet.  In this case, passing in the color argument using the variable <code>test_color</code> avoids any variable naming confusion.</p>
+
         <h3 id="docs-product-card" class="docs-title">Product Card</h3>
         <p>See <code>snippets/product-card.liquid</code>.</p>
         {% assign all_collection = collections['all'] %}
@@ -278,21 +319,25 @@
                       content_alignment: "center",
                       title: "Banner Panel Title 1",
                       content_alignment: "left",
-                      text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                      text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                      light_text: false
           %}
           {% include 'banner-panel',
                       id: "abc123",
                       content_alignment: "center",
                       title: "Banner Panel Title 2",
                       content_alignment: "right",
-                      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                      light_text: false
           %}  
         </div>
 
         <h3 id="docs-page-hero" class="docs-title">Page Hero</h3>
         <p>Page heroes function similar to banners but should only be used at the top of a page.  They are typically used as an enhancement over the text-only <code>.page-header</code> element when we want to display text over a background image.  Although their base styling is similar, they are built separately from banners to allow more flexibility.  The snippet API is also slightly different to support different features.</p>
         
-        <p><strong>Note</strong>: Because of the limitations of liquid code and the fact that the page-hero snippet is built to accept an image object as opposed to an image fie url, it is impossible to pass a theme image asset to the snippet in order to show a fully featured example.  The example below shows the page hero without a background image, but one can be easily passed in as as a section setting (<code>section.settings.image</code>) or a reference from another object (<code>product.featured_image</code>).</p>
+        <p><strong>Note</strong>: Because of the limitations of liquid code and the fact that the page-hero snippet is built to accept an image object as opposed to an image file url, it is impossible to pass a theme image asset to the snippet in order to show a fully featured example.  The example below shows the page hero without a background image, but one can be easily passed in as as a section setting (<code>section.settings.image</code>) or a reference from another object (<code>product.featured_image</code>).</p>
+
+        {% assign subtitle = 'Subtext goes down here' %}
 
         {% include 'page-hero',
                     id: 'page-hero-123',
@@ -300,8 +345,9 @@
                     toptitle: 'Introductory text goes here',
                     subtitle: 'Subtext goes down here',
                     cta_url: '/collections/all',
-                    cta_text: 'Call to action link goes here'
-        %}
+                    cta_text: 'Call to action link goes here',
+                    light_text: false
+        %}        
 
         <h3 id="docs-promo" class="docs-title">Promo</h3>
         <p>Promos consist of an image and text laid out vertically on mobile and horizontally on desktop.  Listed below are the available options that affect layout / styling.</p>
