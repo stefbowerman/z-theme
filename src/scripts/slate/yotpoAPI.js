@@ -75,6 +75,8 @@ slate.yotpoAPI = (function($) {
         baseParams.source = 'yotpo_reviews';
       }
 
+      params = params || {};
+
       var endpoint = '/v1/widget/' + this.appKey + '/images/all.json?';
 
       var url = endpoint + $.param( $.extend(baseParams, params) );
@@ -97,12 +99,37 @@ slate.yotpoAPI = (function($) {
         console.warn('['+this.name+'] - product id required.');
         return;
       }
+
+      params = params || {};
       
       var endpoint = '/v1/widget/' + this.appKey + '/products/' + id + '/images.json?';
       
       var url = endpoint + $.param(params);
 
       return this._makeRequest(url);
+    },
+
+   /**
+    * Retrieve an album by name
+    * See: https://apidocs.yotpo.com/v1.0/reference?showHidden=dfd93#custom-albums
+    *
+    * @param {string} album name
+    * @param {object} params - plain object of key values mapping to optional query parameters defined in the docs.    
+    * @returns {promise} - see this._makeRequest
+    */
+    getCustomAlbum: function(albumName, params) {
+      if(!albumName) {
+        console.warn('['+this.name+'] - album name required.');
+        return;
+      }
+
+      params = params || {};
+      
+      var endpoint = '/v1/widget/' + this.appKey + '/albums/by_name?album_name=' + encodeURI(albumName);
+      
+      endpoint += '&' + $.param(params);
+      
+      return this._makeRequest(endpoint);
     },
 
    /**
@@ -119,6 +146,8 @@ slate.yotpoAPI = (function($) {
         console.warn('['+this.name+'] - product id required.');
         return;
       }
+
+      params = params || {};
 
       var endpoint = '/v1/widget/' + this.appKey + '/products/' + id + '/reviews.json?';
       

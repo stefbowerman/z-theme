@@ -134,9 +134,9 @@ window.theme = window.theme || {};
     var $searchOverlay = $('#search-overlay');
     if($searchOverlay.length) {
       $searchOverlay.on('shown.overlay', function() {
-        // Due to CSS animations, this timeout is requirec
+        // Due to CSS animations, this timeout is required
         setTimeout(function(){
-          $searchOverlayfind('input[type="search"]').focus();
+          $searchOverlay.find('input[type="search"]').focus();
         }, 10);
       });
     }

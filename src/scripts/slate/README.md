@@ -279,7 +279,7 @@ Get the correct name of the `transitionend` event for the browser being used.
 
 ##### `slate.utils.userAgentBodyClass`
 
-Call this to apply user agenct specific classes to the body tag to use as css / js hooks.
+Call this to apply user agent specific classes to the body tag to use as css / js hooks.
 
 ##### `slate.utils.hashFromString`
 
