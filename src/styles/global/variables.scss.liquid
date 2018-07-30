@@ -8,14 +8,15 @@
 
 // Greyscale
 $color-black:       #000;
-$color-white:       #FFF;
+$color-dark-grey:   #333;
 $color-grey:        #CCC;
+$color-white:       #FFF;
 
 // Main Colors
 $color-emerald:     #049271;     
 
 // Theme Colors
-$text-color:        $color-black;
+$text-color:        $color-dark-grey;
 $body-bg:           $color-white;
 $color-primary:     $color-emerald;
 
@@ -36,7 +37,7 @@ $color-dot-blue:    #4E85E6;
 
 /*================ Typography Variables ================*/
 
-$font-family-sans-serif:    "Futura", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-sans-serif:    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $font-family-monospace:     "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:          $font-family-sans-serif !default;
 
@@ -89,7 +90,7 @@ $line-height-p3:            1.4;
 //** By default, this inherits from the `<body>`.
 $headings-font-family:      inherit !default;
 $headings-font-weight:      $font-weight-bold !default;
-$headings-color:            $color-black !default;
+$headings-color:            $text-color !default;
 $headings-text-transform:   none;
 $headings-margin-bottom:    1rem;
 
@@ -307,10 +308,11 @@ $container-xl:                 $container-xlarge !default;
 
 
 /*================ Z-Index ================*/
-$z-index-slideup: 90;
-$z-index-dropdown: 99;
-$z-index-product-sticky-bar: 99;
-$z-index-header: 100;
+$z-index-slideup: 140;
+$z-index-dropdown: 149;
+$z-index-product-sticky-bar: 149;
+$z-index-header: 150;
+$z-index-pencil-banner: 151;
 $z-index-drawer-backdrop: 199;
 $z-index-drawer: 200;
 $z-index-ajax-cart-backdrop: 200;

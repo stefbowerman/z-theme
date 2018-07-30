@@ -5,8 +5,16 @@
 {% for block in section.blocks %}
   {% if block.type == "nav_item" %}
 
+    {% comment %} These variables get redefined / captured below {% endcomment %}
+    {% assign menu_item_html = '' %}
+    {% assign dropdown_html  = '' %}
+    {% assign dropdown_content_html = '' %}
+    {% assign dropdown_id = "dropdown-" | append: block.id %}  
+
+    {% assign cta_count = 0 %}
+
     {% comment %} Generate the dropdown contents and then we can check if it's blank {% endcomment %}
-    {% capture dropdown_menu_html %}
+    {% capture dropdown_menus_html %}
       {% if block.settings.linklist_1 != blank or block.settings.linklist_2 != blank %}
         {% for i in (1..MAX_DROPDOWN_MENUS) %}
           {% assign linklist_setting_handle = 'linklist_' | append: i %}
@@ -15,36 +23,77 @@
       {% endif %}
     {% endcapture %}
 
-    {% capture dropdown_cta_html %}
+    {% capture dropdown_ctas_html %}
       {% for i in (1..MAX_DROPDOWN_CTAS) %}
         {% assign cta_link_setting_handle  = "cta_" | append: i | append: "_url" %}
         {% assign cta_text_setting_handle  = "cta_" | append: i | append: "_text" %}
         {% assign cta_image_setting_handle = "cta_" | append: i | append: "_image" %}
-        {% include 'header-dropdown-cta',
-                    cta_link: block.settings[cta_link_setting_handle],
-                    cta_image: block.settings[cta_image_setting_handle],
-                    cta_text: block.settings[cta_text_setting_handle]
-        %}
+        {% capture dropdown_cta_html %}
+          {% include 'header-dropdown-cta',
+                      cta_link: block.settings[cta_link_setting_handle],
+                      cta_image: block.settings[cta_image_setting_handle],
+                      cta_text: block.settings[cta_text_setting_handle]
+          %}
+        {% endcapture %}
+
+        {% comment %} If the settings are there to render a CTA, then output it here in this capture block {% endcomment %}
+        {% if dropdown_cta_html != blank %}
+          {{ dropdown_cta_html }}
+          {% assign cta_count = cta_count | plus: 1 %}
+        {% endif %}        
       {% endfor %}
     {% endcapture %}
     {% comment %} END Generate the dropdown contents {% endcomment %}
 
-    {% assign has_dropdown = false %}
-    {% if dropdown_menu_html != blank or dropdown_cta_html != blank %}
-      {% assign has_dropdown = true %}
-    {% endif %}    
+    {% capture dropdown_content_html %}
 
-    {% capture menu_item_html %}
-      {% include 'header-menu-item',
-                 block_id: block.id,
-                 attributes: block.shopify_attributes,
-                 url: block.settings.url,
-                 title: block.settings.title,
-                 dropdown_menu_html: dropdown_menu_html,
-                 dropdown_cta_html: dropdown_cta_html
+      <div class="row">
+        <div class="col-md-4">
+          {% if dropdown_menus_html != blank %}
+            <div class="header-dropdown__menus">
+              {{ dropdown_menus_html }}
+            </div>
+          {% endif %}            
+        </div>
+        <div class="col-md-8">
+          {% if dropdown_ctas_html != blank %}
+            <div class="header-dropdown__ctas">
+              {{ dropdown_ctas_html }}
+            </div>
+          {% endif %}            
+        </div>
+      </div>
+
+    {% endcapture %}
+
+    {% comment %} Put the dropdown content inside a dropdown {% endcomment %}
+    {% capture dropdown_html %}
+      {% include 'header-dropdown',
+                  dropdown_id: dropdown_id,
+                  dropdown_content: dropdown_content_html
       %}
     {% endcapture %}
 
+    {% comment %} Now that we have the dropdown {% endcomment %}
+
+    {% assign has_dropdown = false %}
+    {% if dropdown_html != blank %}
+      {% assign has_dropdown = true %}
+    {% endif %}
+
+    {% comment %} Create a menu item {% endcomment %}
+    {% capture menu_item_html %}
+
+      <li class="header-nav__menu-item" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.url }}" {% if has_dropdown %}data-block="{{ block.id }}" data-dropdown-trigger="#{{ dropdown_id }}"{% endif %}>
+          {{ block.settings.title }}          
+        </a>
+      </li>
+
+    {% endcapture %}
+
+    {% comment %} Append the menu item + dropdown to the correct variable to be outputted later {% endcomment %}
+    {% assign dropdowns_html = dropdowns_html | append: dropdown_html %}
     {% assign menu_html = menu_html | append: menu_item_html %}
 
   {% endif %}
@@ -88,6 +137,9 @@
       </div>
 
     </div>
+
+    {{ dropdowns_html }}
+    
   </header>
 
 </div>

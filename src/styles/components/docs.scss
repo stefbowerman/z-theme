@@ -132,6 +132,7 @@
   border: 1px solid transparent;
 
   &.styleguide-color__swatch--black { background-color: $color-black; }
+  &.styleguide-color__swatch--dark-grey { background-color: $color-dark-grey; }
   &.styleguide-color__swatch--grey { background-color: $color-grey; }
   &.styleguide-color__swatch--white { background-color: $color-white; border-color: darken($color-white, 5%); }
   &.styleguide-color__swatch--primary { background-color: $color-primary; }

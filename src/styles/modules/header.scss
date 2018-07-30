@@ -216,11 +216,6 @@
     pointer-events: auto;
     @include transition(opacity $transition-duration-dropdown $transition-timing-function-dropdown-in);
   }
-
-  > .container-fluid {
-    @include flex-grow(1);
-    max-width: $container-xl;
-  }
 }
 
 .header-dropdown__menu {
