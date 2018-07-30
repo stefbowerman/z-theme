@@ -141,9 +141,9 @@ slate.AjaxKlaviyoForm = (function($) {
         })
         .fail(function(jqXHR, textStatus) {        
           var errors = [];
-          if(jqXHR.responseJSON.hasOwnProperty('errors')) {
-            errors = jqXHR.responseJSON.errors;
-          }
+          if(jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.hasOwnProperty('errors')) {
+              errors = jqXHR.responseJSON.errors;
+            }
 
           _this.onSubmitFail(errors);
         });

@@ -154,7 +154,7 @@ slate.AjaxMailChimpForm = (function($) {
       this.$submit.prop('disabled', false);
       response.result === 'success' ? this.settings.onSubscribeSuccess(rspMsg) : this.settings.onSubscribeFail(rspMsg);
     },
-    onSubmitFail: function() {
+    onSubmitFail: function(response) {
       this.settings.onSubmitFail();
     },
     onFormSubmit: function(e) {
@@ -179,7 +179,7 @@ slate.AjaxMailChimpForm = (function($) {
           _this.onSubmitDone(response);
         })
         .fail(function(response) {
-          _this.onSubmitFail();
+          _this.onSubmitFail(response);
         });
 
       return false;
