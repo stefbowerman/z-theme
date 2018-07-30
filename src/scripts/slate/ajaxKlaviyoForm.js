@@ -113,7 +113,7 @@ slate.AjaxKlaviyoForm = (function($) {
           console.warn('['+this.name+'] - onSubmitFail error: "' + errors[i] + '"');
         }
       }
-      this.settings.onSubmitFail();
+      this.settings.onSubmitFail(errors);
     },
     onFormSubmit: function(e) {
       e.preventDefault();
