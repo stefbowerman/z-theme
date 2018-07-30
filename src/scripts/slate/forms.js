@@ -66,6 +66,6 @@ slate.forms = (function($) {
 
   return {
     initialize: initialize
-  }
+  };
 
 }(jQuery));
