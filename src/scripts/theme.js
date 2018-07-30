@@ -18,6 +18,7 @@ window.theme = window.theme || {};
 // =require slate/productCard.js
 // =require slate/productDetailForm.js
 // =require slate/quickView.js
+// =require slate/yotpoAPI.js
 // =require slate/quantityAdjuster.js
 
 // =require slate/models/dropdown.js
@@ -133,9 +134,9 @@ window.theme = window.theme || {};
     var $searchOverlay = $('#search-overlay');
     if($searchOverlay.length) {
       $searchOverlay.on('shown.overlay', function() {
-        // Due to CSS animations, this timeout is requirec
+        // Due to CSS animations, this timeout is required
         setTimeout(function(){
-          $searchOverlayfind('input[type="search"]').focus();
+          $searchOverlay.find('input[type="search"]').focus();
         }, 10);
       });
     }

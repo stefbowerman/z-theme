@@ -50,6 +50,12 @@
       },
       moneyFormat: {{ shop.money_format | json }}
     };
+
+  {% if settings.yotpo_client_id != blank %}
+    window.yotpoConfig = {
+      appKey: '{{ settings.yotpo_client_id }}'
+    };
+  {% endif %}
   </script>
 
   {% if template.directory == 'customers' %}
