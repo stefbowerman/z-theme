@@ -65,6 +65,11 @@ slate.models.Slideshow = (function($, Modernizr) {
 
     this.settings = $.extend({}, defaults, options);
 
+    // Turn off dots if there's only one slide
+    if(this.$slideshow.children().length <= 1) {
+      this.settings.dots = false;
+    }    
+
     this.$slideshow.on('init', this.slideshowA11y.bind(this));
     this.$slideshow.slick(this.settings);
 

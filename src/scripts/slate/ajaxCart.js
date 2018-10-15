@@ -91,16 +91,16 @@
  /**
   * Change the quantity of an item in the users cart
   *
-  * @param {int} variantId - Variant to be adjust
+  * @param {int} line - Cart line
   * @param {int} qty - New quantity of the variant
   * @return {Promise} - JSON cart
   */
-  ShopifyAPI.changeItemQuantity = function(variantId, qty) {
+  ShopifyAPI.changeLineItemQuantity = function(line, qty) {
     return $.ajax({
       type: 'post',
       dataType: 'json',
       url: '/cart/change.js',
-      data: 'quantity=' + qty + '&id=' + variantId
+      data: 'quantity=' + qty + '&line=' + line
     });
   };
 
@@ -277,6 +277,7 @@
         return {
           $row: $row,
           id:  $row.data('id'),
+          line: ($row.index() + 1),
           qty: this._validateQty($row.data('qty'))
         };
       },
@@ -464,7 +465,7 @@
         var attrs = this._getItemRowAttributes(e.target);
 
         this._onRequestStart();
-        ShopifyAPI.changeItemQuantity(attrs.id, 0).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
+        ShopifyAPI.changeLineItemQuantity(attrs.line, 0).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 
      /**
@@ -480,7 +481,7 @@
         var attrs = this._getItemRowAttributes(e.target);
 
         this._onRequestStart();
-        ShopifyAPI.changeItemQuantity(attrs.id, attrs.qty + 1).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
+        ShopifyAPI.changeLineItemQuantity(attrs.line, attrs.qty + 1).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 
      /**
@@ -497,7 +498,7 @@
         var newQty = (attrs.qty < 1 ? 0 : attrs.qty - 1);
 
         this._onRequestStart();
-        ShopifyAPI.changeItemQuantity(attrs.id, newQty).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
+        ShopifyAPI.changeLineItemQuantity(attrs.line, newQty).then(ShopifyAPI.getCart).then(this.buildCart.bind(this));
       },
 
      /**

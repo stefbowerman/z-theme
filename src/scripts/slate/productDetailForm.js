@@ -343,8 +343,11 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     updateVariantOptionValues: function(variant) {
       if(variant) {
         // Loop through all the options and update the option value
-        for (var i = 3; i >= 1; i--) {
+        for (var i = 1; i <= 3; i++) {
           var variantOptionValue = variant['option' + i];
+
+          if(!variantOptionValue) break; // Break if the product doesn't have an option at this index
+
           // Since we are finding the variantOptionValueUI based on the *actual* value, we need to scope to the correct list
           // As some products can have the same values for different variant options (waist + inseam both use "32", "34", etc..)
           var $variantOptionValueList = $(selectors.variantOptionValueList, this.$container).filter('[data-option-position="'+i+'"]');

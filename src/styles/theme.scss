@@ -79,4 +79,5 @@
 @import url('global/responsive-utilities.scss');
 
 // DEV: Don't display Shopify's admin preview bar
-.shopify-preview-bar { display: none; }
+.shopify-preview-bar, 
+#preview-bar-iframe { display: none; }

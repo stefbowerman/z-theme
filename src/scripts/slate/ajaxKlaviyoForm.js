@@ -78,6 +78,13 @@ slate.AjaxKlaviyoForm = (function($) {
   }
 
   AjaxKlaviyoForm.prototype = $.extend({}, AjaxKlaviyoForm.prototype, {
+    logErrors: function(errors) {
+      if(Array.isArray(errors) && errors.length) {
+        for (var i = errors.length - 1; i >= 0; i--) {
+          console.warn('['+this.name+'] - onSubmitFail error: "' + errors[i] + '"');
+        }
+      }
+    },    
     onBeforeSend: function() {
       
       if(this.settings.onBeforeSend() == false) {
@@ -98,21 +105,18 @@ slate.AjaxKlaviyoForm = (function($) {
       this.$submit.prop('disabled', false);
 
       if(response.success) {
-        this.settings.onSubscribeSuccess();
+        this.settings.onSubscribeSuccess(response);
       }
       else {
-        this.settings.onSubscribeFail();
+        this.logErrors(response.errors);
+        this.settings.onSubscribeFail(response);
       }
     },
     onSubmitFail: function(errors) {
 
       this.$submit.prop('disabled', false);
 
-      if(errors instanceof Array && errors.length) {
-        for (var i = errors.length - 1; i >= 0; i--) {
-          console.warn('['+this.name+'] - onSubmitFail error: "' + errors[i] + '"');
-        }
-      }
+      this.logErrors(errors);
       this.settings.onSubmitFail(errors);
     },
     onFormSubmit: function(e) {
@@ -122,7 +126,7 @@ slate.AjaxKlaviyoForm = (function($) {
       $.ajax({
           async: true,
           crossDomain: true,
-          url: "https://manage.kmail-lists.com/subscriptions/external/subscribe",
+          url: "//manage.kmail-lists.com/ajax/subscriptions/subscribe",
           method: "POST",
           headers: {
               "content-type": "application/x-www-form-urlencoded",
@@ -142,8 +146,8 @@ slate.AjaxKlaviyoForm = (function($) {
         .fail(function(jqXHR, textStatus) {        
           var errors = [];
           if(jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.hasOwnProperty('errors')) {
-              errors = jqXHR.responseJSON.errors;
-            }
+            errors = jqXHR.responseJSON.errors;
+          }
 
           _this.onSubmitFail(errors);
         });

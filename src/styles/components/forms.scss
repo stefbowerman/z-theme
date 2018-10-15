@@ -792,7 +792,11 @@ input[type="checkbox"] {
     }
   }
 
-  // Remove the spinner    
+  // Remove the spinner - firefox + chrome
+  input[type="number"] {
+    -moz-appearance:textfield;
+  }
+
   input[type="number"]::-webkit-inner-spin-button, 
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;

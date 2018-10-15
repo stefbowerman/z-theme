@@ -101,8 +101,8 @@ slate.yotpoAPI = (function($) {
       }
 
       params = params || {};
-      
-      var endpoint = '/v1/widget/' + this.appKey + '/products/' + id + '/images.json?';
+
+      var endpoint = '/v1/widget/' + this.appKey + '/albums/product/' + id;
       
       var url = endpoint + $.param(params);
 
