@@ -94,7 +94,11 @@ slate.quantityAdjuster = (function() {
         this.$decrement.prop('disabled', true);
       }
       else {
-        if(val >= this._getMax()) {
+        if (val == this._getMax() && val == this._getMin()) {
+          this.$increment.prop('disabled', true);
+          this.$decrement.prop('disabled', true);
+        }
+        else if(val >= this._getMax()) {
           this.$increment.prop('disabled', true);
           this.$decrement.prop('disabled', false);
         }
@@ -114,7 +118,7 @@ slate.quantityAdjuster = (function() {
       if(this.$input.is(':disabled') || typeof amount == "undefined") return;
 
       amount = parseInt(amount);
-      
+
       var val = parseInt(this.$input.val());
       var newVal = val + amount;
 
@@ -194,7 +198,7 @@ slate.quantityAdjuster = (function() {
   }
 
   $(function() {
-    
+
     refresh();
 
     $(document)
