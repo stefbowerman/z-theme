@@ -193,7 +193,7 @@ select.form-control {
 
 // Fix site zooming on small iOS devices
 // se use JS to add user-agent specific classes to the body tag
-@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: $screen-sm-max) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: $screen-sm-max) {
   [class*="ios"] .form-control {
     font-size: 16px;
   }
@@ -339,7 +339,23 @@ input[type="checkbox"] {
 // Hide browser checkboxes / radio buttons and replace them with ones made via generated content
 .checkbox input[type="checkbox"],
 .radio input[type="radio"] {
-  display: none;
+  //The input must remain visible so keyboards can still tab onto it.
+  //We detect focus on these inputs, then apply styling to the sibling .ui-checkbox and .ui-radio elements below.
+  position:absolute;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  margin:0;
+  overflow:hidden;
+}
+
+.checkbox input[type="checkbox"]:focus + .checkbox-ui {
+  //Add focus styles for ui-checkboxes here.
+}
+
+.radio input[type="radio"]:focus + .radio-ui {
+  //Add focus styles for ui-radio buttons here.
 }
 
 .checkbox-ui,
@@ -711,7 +727,7 @@ input[type="checkbox"] {
     .control-label {
       text-align: left;
       margin-bottom: 0;
-      
+
       &.textarea-label {
         align-self: flex-start;
         padding-top: 1rem;
@@ -797,7 +813,7 @@ input[type="checkbox"] {
     -moz-appearance:textfield;
   }
 
-  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
