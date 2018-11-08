@@ -148,6 +148,7 @@
       "city": "City",
       "country": "Country",
       "province": "Province",
+      "state": "State",
       "zip": "Postal/Zip Code",
       "phone": "Phone",
       "set_default": "Set as default address",

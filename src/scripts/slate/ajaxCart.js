@@ -61,10 +61,12 @@
   */
   ShopifyAPI.getCart = function() {
     var promise = $.Deferred();
+
+    var url = slate.utils.isThemeEditor() ? '/cart.js' : '/cart?view=json'; // Theme editor inserts HTML comments in custom templates and breaks JSON response
     
     $.ajax({
       type: 'get',
-      url: '/cart?view=json',
+      url: url,
       success: function (data) {
         var cart = JSON.parse(data);
         promise.resolve(cart);
@@ -413,6 +415,9 @@
                 delete item.variant_options[i];
               }
             }
+          }
+          else {
+            delete item.variant_options; // skip it and use the variant title instead
           }
 
           return item;

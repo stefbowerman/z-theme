@@ -117,17 +117,24 @@
     </div>
 
     <div class="col-md-4">
-      <div id="AddressProvinceContainer_{{ form.id }}" class="form-group" style="display: none">
+      <div class="form-group">
+
+        {% assign form_country_handle = form.country | handle %}
+        {% assign state_label = 'customer.addresses.province' | t %}
+        {% if form_country_handle contains 'united-states' or form_country_handle == 'us' or form_country_handle == 'usa' %}
+          {% assign state_label = 'customer.addresses.state' | t %}
+        {% endif %}
+
         <label for="AddressProvince_{{ form.id }}" class="control-label">
-          {{ 'customer.addresses.province' | t }}
+          {{ state_label }}
         </label>
 
-        <select
+        <input type="text"
           name="address[province]"
           id="AddressProvince_{{ form.id }}"
           class="form-control"
-          data-default="{{ form.province }}">
-        </select>
+          placeholder="{{ state_label }}"
+          value="{{ form.province }}">
       </div>
     </div>
 

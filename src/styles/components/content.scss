@@ -2,6 +2,11 @@
 // Content Sections - Grid, Header, Footer
 // -----------------------------------------------------------------------------
 
+$content-grid-item-vertical-spacing:       $grid-gutter-width;
+$content-grid-item-vertical-spacing-tight: $grid-gutter-width / 2;
+$content-grid-item-vertical-spacing-loose: $grid-gutter-width * 2;
+
+
 .content-grid {
   @include display-flex;
   @include flex-wrap(wrap);
@@ -9,6 +14,7 @@
   @include flex-direction(row);
   margin-left: -$grid-gutter-width/2;
   margin-right: -$grid-gutter-width/2;
+  margin-bottom: -#{$content-grid-item-vertical-spacing}; // Cancel the bottom margin
 
   &.content-grid--centered {
     @include justify-content(center);
@@ -17,74 +23,87 @@
   &.content-grid--flush {
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 0;
+  }  
+
+  // For these modifiers, 'tight' and 'loose' refer to vertical spacing, not the horizontal spacing between grid items
+  &.content-grid--tight {
+    margin-bottom: -#{$content-grid-item-vertical-spacing-tight};
   }
+
+  &.content-grid--loose {
+    margin-bottom: -#{$content-grid-item-vertical-spacing-loose};
+  }  
 }
 
 .content-grid__item {
   @include flex(1);
   @include flex-basis(percentage(1/1));
-  margin-bottom: $grid-gutter-width;
+  margin-bottom: $content-grid-item-vertical-spacing;
   padding: 0 $grid-gutter-width/2;
   max-width: percentage(1/1);
 
-  @media (min-width: $screen-sm-min) {
-    margin-bottom: $grid-gutter-width*2;
-  }  
+  .content-grid--2-4 & {
+    @include flex-basis(percentage(1/2));
+    max-width: percentage(1/2);
+  }
+
+  @media (min-width: $screen-xs-min) {
+    .content-grid--1-2-4 &,
+    .content-grid--1-2-3 & {
+      @include flex-basis(percentage(1/2));
+      max-width: percentage(1/2);   
+    }
+  }
 
   // Default is to do 3 across on medium-up screens
   // Add support for 2 and 4 across using a modifier class on the parent .content-grid
   @media (min-width: $screen-md-min) {
-    @include flex-basis(percentage(1/3));
-    max-width: percentage(1/3);
+
+    &,
+    .content-grid--1-2-3 & {
+      @include flex-basis(percentage(1/3));
+      max-width: percentage(1/3);
+    }    
 
     .content-grid--2-col & {
       @include flex-basis(percentage(1/2));
       max-width: percentage(1/2);
     }
 
-    .content-grid--4-col & {
+    .content-grid--4-col &,
+    .content-grid--2-4 & {
       @include flex-basis(percentage(1/4));
       max-width: percentage(1/4);
     }
-
-    // Create modifiers for grid items to take up more than 1 grid slot
-    &.content-grid__item--2-col {
-      @include flex-basis(percentage(2/3));
-      max-width: percentage(2/3);
-
-      .content-grid--2-col & {
-        @include flex-basis(percentage(1));
-        max-width: percentage(1);
-      }
-
-      .content-grid--4-col & {
-        @include flex-basis(percentage(1/2));
-        max-width: percentage(1/2);
-      }      
-    }
-
-    &.content-grid__item--3-col {
-      @include flex-basis(percentage(1));
-      max-width: percentage(1);
-
-      .content-grid--4-col & {
-        @include flex-basis(percentage(3/4));
-        max-width: percentage(3/4);
-      }       
-    }
-
-    // Allow some grid items to always be full width no matter what
-    &.content-grid__item--full {
-      @include flex-basis(percentage(1));
-      max-width: percentage(1);
-    }
   }
+
+  @media (min-width: $screen-lg-min) {
+    .content-grid--1-2-4 & {
+      @include flex-basis(percentage(1/4));
+      max-width: percentage(1/4);      
+    }    
+  }
+
+  // Allow some grid items to always be full width no matter what
+  &.content-grid__item--full {
+    @include flex-basis(percentage(1));
+    max-width: percentage(1);
+  }  
 
   .content-grid--flush & {
     padding-left: 0;
     padding-right: 0;
     margin-bottom: 0;
   }
+
+  .content-grid--tight & {
+    margin-bottom: $content-grid-item-vertical-spacing-tight;
+  }
+
+  .content-grid--loose & {
+    margin-bottom: $content-grid-item-vertical-spacing-loose;
+  }  
 }
 
 .content-header,

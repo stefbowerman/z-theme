@@ -28,8 +28,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     productGallery: '[data-product-gallery]',
     productGallerySlideshow: '[data-product-gallery-slideshow]',
     productGallerySlideLink: '[data-product-gallery-slide-link]',
-    productGalleryThumbnail: '[data-product-gallery-thumbnail]',
-    productGalleryThumbnailSlide: '[data-product-gallery-thumbnail-slide]',    
+    productGalleryThumbnails: '[data-product-gallery-thumbnails]',
+    productGalleryThumbnailsSlide: '[data-product-gallery-thumbnails-slide]',    
     initialSlide: '[data-initial-slide]',
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
@@ -191,10 +191,20 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       $galleries.each(function() {
         var $slideshow  = $(this).find(selectors.productGallerySlideshow);
-        var $thumbnail = $(this).find(selectors.productGalleryThumbnail);
+        var $thumbnails = $(this).find(selectors.productGalleryThumbnails);
 
         // Look for element with the initialSlide selector.
         var initialSlide = $(this).find(selectors.initialSlide).length ? $(this).find(selectors.initialSlide).index() : 0;
+
+        var thumbnailsSlidesToShow;
+        var thumbnailsSlidesCount = $thumbnails.children().length;
+
+        // Slick has trouble when slideToShow == slideCount
+        if (thumbnailsSlidesCount < 4) {
+          thumbnailsSlidesToShow = Math.max(thumbnailsSlidesCount - 1, 1);
+        } else {
+          thumbnailsSlidesToShow = thumbnailsSlidesCount == 4 ? 3 : 4;
+        }        
 
         $slideshow.on({
           init: onSlideshowSlickInit,
@@ -207,7 +217,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           dots: false,
           swipe: Modernizr.touchevents,
           arrows: !Modernizr.touchevents,
-          asNavFor: '#' + $thumbnail.attr('id'),
+          asNavFor: '#' + $thumbnails.attr('id'),
           prevArrow: '<div class="slick-arrow slick-arrow--prev"><span class="arrow arrow--left"><span class="arrow__icon"></span></span></div>',
           nextArrow: '<div class="slick-arrow slick-arrow--next"><span class="arrow arrow--right"><span class="arrow__icon"></span></span></div>',
           initialSlide: initialSlide,
@@ -215,13 +225,13 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
           draggable: true
         });
 
-        $thumbnail.on('click', selectors.productGalleryThumbnailSlide, function() {
+        $thumbnails.on('click', selectors.productGalleryThumbnailsSlide, function() {
           $slideshow.slick('slickGoTo', $(this).data('slick-index'));
         });
 
-        $thumbnail.slick({
+        $thumbnails.slick({
           speed: 600,
-          slidesToShow: $thumbnail.find(selectors.productGalleryThumbnailSlide).length == 4 ? 3 : 4, // Slick has trouble when slidesToShow = slide number
+          slidesToShow: thumbnailsSlidesToShow,
           slidestoScroll: 1,
           arrows: false,
           asNavFor: '#' + $slideshow.attr('id'),
@@ -235,7 +245,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
       $galleries.not('.hide').each(function() {
         var $variantGallery = $(this);
         $variantGallery.find(selectors.productGallerySlideshow).slick('getSlick').refresh();
-        $variantGallery.find(selectors.productGalleryThumbnail).slick('getSlick').refresh();
+        $variantGallery.find(selectors.productGalleryThumbnails).slick('getSlick').refresh();
       });
     },
 
@@ -400,7 +410,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
               $variantGallery.removeClass(classes.hide);
               // Slick needs to make a lot of measurements in order to work, calling `refresh` forces this to happen
               $variantGallery.find(selectors.productGallerySlideshow).slick('getSlick').refresh();
-              $variantGallery.find(selectors.productGalleryThumbnail).slick('getSlick').refresh();
+              $variantGallery.find(selectors.productGalleryThumbnails).slick('getSlick').refresh();
             }
           }
         }

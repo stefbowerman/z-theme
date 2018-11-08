@@ -108,16 +108,15 @@
     </div>
     <div class="col-md-4">
 
-      <div id="AddressProvinceContainerNew" class="form-group" style="display: none">
+      <div class="form-group">
         <label for="AddressProvinceNew" class="control-label">
-          {{ 'customer.addresses.province' | t }}
+          {{ 'customer.addresses.state' | t }}
         </label>
-        <select
+        <input type="text"
           name="address[province]"
           id="AddressProvinceNew"
           class="form-control"
-          data-default="{{ form.province }}">
-        </select>
+          placeholder="{{ 'customer.addresses.state' | t }}">
       </div>
 
     </div>

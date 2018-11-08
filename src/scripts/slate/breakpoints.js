@@ -49,15 +49,11 @@ slate.breakpoints = (function($) {
   function getBreakpointMinWidthKeyForWidth(w) {
     w = w != undefined ? w : $window.width();
     
-    var previousKey;
     var foundKey;
 
     $.each(_breakpointMinWidths, function(k, bpMinWidth) {
-      if(w > bpMinWidth) {
-        previousKey = k;
-      }
-      else {
-        foundKey = previousKey;
+      if(w >= bpMinWidth) {
+        foundKey = k;
       }
     });
 

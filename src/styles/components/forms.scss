@@ -348,13 +348,14 @@ input[type="checkbox"] {
   height:0;
   margin:0;
   overflow:hidden;
+  clip: rect(0, 0, 0, 0);
 }
 
-.checkbox input[type="checkbox"]:focus + .checkbox-ui {
+.checkbox input[type="checkbox"]:focus ~ .checkbox-ui {
   //Add focus styles for ui-checkboxes here.
 }
 
-.radio input[type="radio"]:focus + .radio-ui {
+.radio input[type="radio"]:focus ~ .radio-ui {
   //Add focus styles for ui-radio buttons here.
 }
 

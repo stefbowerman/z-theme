@@ -25,9 +25,18 @@
 {% endcomment -%}
 
 {% comment %} Defaults {% endcomment %}
-{% assign content_alignment = content_alignment | default: 'center' %}
-{% assign text_alignment = text_alignment | default: content_alignment %}
-{% assign light_text = light_text | default: false %}
+{% if content_alignment == blank %}
+  {% assign content_alignment = 'center' %}
+{% endif %}
+
+{% if text_alignment == blank %}
+  {% assign text_alignment = content_alignment %}
+{% endif %}
+
+{% if light_text == blank %}
+  {% assign light_text = false %}
+{% endif %}
+{% comment %} End Defaults {% endcomment %}
 
 <style type="text/css">
 {% if background_image %}

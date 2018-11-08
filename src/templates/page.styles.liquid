@@ -30,7 +30,17 @@
           <li><a href="#docs-panels">Panels</a></li>
           <li><a href="#docs-misc-elements">Miscellaneous elements</a></li>
           <li><a href="#docs-iconography">Iconography</a></li>
-          <li><a href="#docs-ui-elements">UI Elements</a></li>
+          <li>
+            <a href="#docs-ui-elements">UI Elements</a>
+            <ul>
+              <li><a href="#docs-arrows">Arrows</a></li>
+              <li><a href="#docs-breadcrumbs">Breadcrumbs</a></li>
+              <li><a href="#docs-pagination">Pagination</a></li>
+              <li><a href="#docs-social-sharing">Social Sharing</a></li>
+              <li><a href="#docs-minimal-input">Minimal Input</a></li>
+              <li><a href="#docs-dots">Dots</a></li>
+            </ul>
+          </li>
         </ul>        
 
 
@@ -317,9 +327,9 @@
         </div>
 
         <h4 class="docs-subtitle">Alternate Content Grid Layouts</h4>
-        <p>Modifier classes are available to create 2-col and 4-col layouts on screens larger than <code>$screen-md-min</code>.</p>
+        <p>Modifier classes are available to create alternate grid layouts</p>
 
-        <p>2 Across</p>
+        <p>Use <code>.content-grid--2-col</code> to create a 2 column grid on screens larger than <code>$screen-md-min</code>.</p>
         <div class="content-grid content-grid--2-col show-grid">
           {% for i in (1..4) %}
             <div class="content-grid__item">
@@ -328,7 +338,9 @@
           {% endfor %}
         </div>
 
-        <p>4 Across</p>
+        <br /><br />
+
+        <p>Use <code>.content-grid--4-col</code> to create a 4 column grid on screens larger than <code>$screen-md-min</code>.</p>
         <div class="content-grid content-grid--4-col show-grid">
           {% for i in (1..8) %}
             <div class="content-grid__item">
@@ -337,7 +349,40 @@
           {% endfor %}
         </div>
 
-        <h4 class="docs-subtitle">Flush Content Grid</h4>
+        <br /><br />
+
+        <p>Use <code>.content-grid--2-4</code> to create a grid that switches from 2 to 4 columns.</p>
+        <div class="content-grid content-grid--2-4 show-grid">
+          {% for i in (1..8) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <br /><br />
+
+        <p>Use <code>.content-grid--1-2-4</code> to create a grid that switches from 1 to 2 to 4 columns.</p>
+        <div class="content-grid content-grid--1-2-4 show-grid">
+          {% for i in (1..8) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <br /><br />
+
+        <p>Use <code>.content-grid--1-2-3</code> to create a grid that switches from 1 to 2 to 3 columns.</p>
+        <div class="content-grid content-grid--1-2-3 show-grid">
+          {% for i in (1..6) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>    
+
+        <h4 class="docs-subtitle">Alternate Content Grid Spacing</h4>
         <p>Use the <code>content-grid--flush</code> modifier class to make all grid items flush with each other.</p>
         <div class="content-grid content-grid--flush show-grid">
           {% for i in (1..6) %}
@@ -364,26 +409,30 @@
         </div>
 
         <br />
-        <p>You can also use the grid item modifier classes to create grid items that span multiple columns.</p>
-        <p>Here we're using a 4 column content grid with 2 modified grid items.</p>
-        <div class="content-grid content-grid--flush content-grid--4-col">
+        <p>Use the <code>.content-grid--tight</code> and <code>.content-grid--loose</code> modifier classes to adjust vertical spacing between grid items.</p>
+        <br />
+        <h5>Tight Grid</h5>
+        <div class="content-grid content-grid--tight show-grid">
           {% for i in (1..6) %}
-            {% assign class = "content-grid__item" %}
-            {% if i == 1 or i == 6 %}
-              {% assign class = class | append: ' content-grid__item--2-col' %}
-            {% endif %}
-            <div class="{{ class }}">
-              {% assign color_modify = 360 | divided_by: 80 | times: i | floor %}
-              <div class="flex-align-items-center flex-justify-center" style="padding: 100px 30px; color: white; background-color: {{ '#3891A6' | color_modify: 'hue', color_modify }}">
-                Grid item {{ forloop.index }}
-              </div>
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
             </div>
           {% endfor %}
         </div>
 
+        <br />
+        <h5>Loose Grid</h5>
+        <div class="content-grid content-grid--loose show-grid">
+          {% for i in (1..6) %}
+            <div class="content-grid__item">
+              <div>Grid item {{ i }}</div>
+            </div>
+          {% endfor %}
+        </div>        
+
         <h3 id="docs-tables" class="docs-title">Tables</h3>
         <h4 class="docs-subtitle">Responsive Tables</h4>
-        <p>Wrap tables with a <code>.table-responsive</code> element to enable horizontal scrolling on small screens</p>
+        <p>Wrap tables with a <code>.table-responsive</code> element to enable horizontal scrolling on small screens.  All child table elements of an <code>.rte</code> element are wrapped by default via javascript.</p>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -497,8 +546,8 @@
 
         <p>
           <a href="#" class="btn btn-block">Block Level Default Button</a>
-          <a href="#" class="btn btn-block btn-primary">Block Level Default Button</a>
-          <a href="#" class="btn btn-block btn-secondary">Block Level Default Button</a>
+          <a href="#" class="btn btn-block btn-primary">Block Level Primary Button</a>
+          <a href="#" class="btn btn-block btn-secondary">Block Level Secondary Button</a>
         </p>
 
         <p>
@@ -850,7 +899,7 @@
 
         <h3 id="docs-ui-elements" class="docs-title">UI Elements</h3>
 
-        <h4 class="docs-subtitle">Arrows</h4>
+        <h4 id="docs-arrows" class="docs-subtitle">Arrows</h4>
         <p>Arrow elements are mostly used for slideshow controls.  The root element has the base <code>arrow</code> class applied to it and directional modifier classes are available.  By default, it has one child element that makes up the actual arrow icon.</p>
         <a href="#" class="arrow arrow--up">
           <span class="arrow__icon"></span>
@@ -881,7 +930,7 @@
           {% include 'icon-arrow-right' %}
         </a>
 
-        <h4 class="docs-subtitle">Breadcrumbs</h4>
+        <h4 id="docs-breadcrumbs" class="docs-subtitle">Breadcrumbs</h4>
 
         <nav class="breadcrumbs">
           <div class="breadcrumbs__crumb">
@@ -893,10 +942,22 @@
           <div class="breadcrumbs__crumb">Step 3</div>
         </nav>
 
-        <h4 class="docs-subtitle">Social Sharing</h4>
+        <h4 id="docs-pagination" class="docs-subtitle">Pagination</h4>
+
+        <div class="pagination">
+          <span class="prev"><a href="#">Prev</a></span>
+          <span class="page"><a href="#" title="">1</a></span>
+          <span class="page current">2</span>
+          <span class="page"><a href="#" title="">3</a></span>
+          <span class="deco">…</span>
+          <span class="page"><a href="#" title="">10</a></span>
+          <span class="next"><a href="#" title="">Next</a></span>
+        </div>        
+
+        <h4 id="docs-social-sharing" class="docs-subtitle">Social Sharing</h4>
         {% include 'social-sharing' %}
 
-        <h4 class="docs-subtitle">Minimal Input</h4>
+        <h4 id="docs-minimal-input" class="docs-subtitle">Minimal Input</h4>
         <p>Normal</p>
         <div class="docs-well docs-well--accent">
           <div class="minimal-input-box">
@@ -932,7 +993,7 @@
           </div>
         </div>
 
-        <h4 class="docs-subtitle">Dots</h4>
+        <h4 id="docs-dots" class="docs-subtitle">Dots</h4>
 
         <p>Dots are an alternate UI used primarily for displaying / selecting variant option values. They respond to the two state classes <code>.is-active</code> and <code>.is-disabled</code>.  Active dots will show a border around them, disabled dots will show with partial opacity and a strike through.</p>
         <div class="dots">

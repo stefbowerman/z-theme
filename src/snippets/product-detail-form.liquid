@@ -21,8 +21,14 @@
 {% endcomment -%}
 
 {% comment %} Defaults {% endcomment %}
-{% assign current_variant = current_variant | default: product.selected_or_first_available_variant %}
-{% assign show_share_buttons = show_share_buttons | default: true %}
+{% if current_variant == blank %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+{% endif %}
+
+{% if show_share_buttons == blank %}
+  {% assign show_share_buttons = true %}
+{% endif %}
+{% comment %} End Defaults {% endcomment %}
 
 {% if template.name == 'product' and template.suffix == 'quick-view' %}
   {% assign is_quick_view = true %}
@@ -175,7 +181,7 @@
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>
-      {{ product | json }}
+      {% include 'product-json', product: product %}
     </script>
   {% endunless %}
 

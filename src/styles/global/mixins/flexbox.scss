@@ -84,6 +84,11 @@
      -moz-flex-basis: $width;
       -ms-flex-basis: $width;
           flex-basis: $width;
+
+  // https://github.com/zehnergroup/z-theme/issues/229
+  @if $width == 0 {
+    -ms-flex-basis: 0px;
+  }
 }
 
 @mixin flex($fg: 1, $fs: null, $fb: null) {

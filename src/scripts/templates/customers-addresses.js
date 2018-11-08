@@ -20,25 +20,6 @@ theme.customerAddresses = (function() {
     addressDelete: '[data-address-delete][data-form-id]'
   };
 
-  // Initialize observers on address selectors, defined in shopify_common.js
-  if (Shopify) {
-    new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
-      hideElement: 'AddressProvinceContainerNew'
-    });
-  }
-
-  // Initialize each edit form's country/province selector
-  $('.address-country-option').each(function() {
-    var formId = $(this).data('form-id');
-    var countrySelector = 'AddressCountry_' + formId;
-    var provinceSelector = 'AddressProvince_' + formId;
-    var containerSelector = 'AddressProvinceContainer_' + formId;
-
-    new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
-      hideElement: containerSelector
-    });
-  });
-
   // Toggle new/edit address forms
   $(selectors.addressNewToggle).on('click', function(e) {
     e.preventDefault();

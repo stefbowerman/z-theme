@@ -22,13 +22,19 @@
                   <a href="{{ url }}" class="ajax-cart__item-title">{{ product_title }}</a>
                 </h5>
                 <ul class="ajax-cart__item-options">
-                  {{#if variant_options}}
-                    {{#each variant_options}}
-                      <li>
-                        {{ name }}: {{ value }}
-                      </li>
-                    {{/each}}
-                  {{/if}}
+                  {{#unless has_only_default_variant}}
+                    {{#if variant_options}}
+                      {{#each variant_options}}
+                        <li>
+                          {{ name }}: {{ value }}
+                        </li>
+                      {{/each}}
+                    {{else}}
+                      {{#if variant_title}}
+                        <li>{{ variant_title }}</li>
+                      {{/if}}
+                    {{/if}}
+                  {{/unless}}
                   <li><span class="ajax-cart__item-qty">Quantity: {{ quantity }}</span></li>
                   <li>
                     <a href="#" class="ajax-cart__item-remove" data-ajax-cart-item-remove>Remove</a>

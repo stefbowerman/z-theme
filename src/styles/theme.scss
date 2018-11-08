@@ -53,6 +53,7 @@
 @import url('components/panels.scss');
 @import url('components/expandable-list.scss');
 @import url('components/overlays.scss');
+@import url('components/yotpo.scss');
 
 /*================ MODULES ================*/
 // Modules are larger pieces of functionality that consume components
@@ -73,6 +74,7 @@
 @import url('templates/cart.scss');
 @import url('templates/collection.scss');
 @import url('templates/404.scss');
+@import url('templates/gift-card.scss');
 
 // Necessary bottom placement for specificity w/o `!important`
 @import url('global/utilities.scss');

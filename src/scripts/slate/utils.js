@@ -294,6 +294,11 @@ slate.utils = {
   chosenSelects: function($container) {
     var $selects = $container ? $('select.form-control', $container) : $('select.form-control');
     $selects.not('[data-no-chosen]').chosen();
+
+    // Allows browser autofill to function properly
+    $selects.on('change', function() {
+      $(this).trigger('chosen:updated');
+    });
   },
 
   /**

@@ -105,12 +105,12 @@
               </ul>
             </div>
             <div class="product-gallery__thumbnails-wrapper">
-              <ul id="slideshow-thumbs-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumbnails" data-product-gallery-thumbnail>
+              <ul id="slideshow-thumbs-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumbnails" data-product-gallery-thumbnails>
                 {% for image in product.images %}
                   {% assign image_alt_downcase = image.alt | downcase %}
                   {% if image_alt_downcase contains color_downcase %}
                     {% unless image_alt_downcase contains alt_swatch_identifier %}
-                      <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnail-slide>
+                      <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
                         <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
                       </li>
                     {% endunless %}
@@ -145,11 +145,11 @@
         </ul>
       </div>
       <div class="product-gallery__thumbnails-wrapper">
-        <ul id="slideshow-thumbs-{{ product.id }}" class="product-gallery__thumbnails list-unstyled" data-product-gallery-thumbnail>
+        <ul id="slideshow-thumbs-{{ product.id }}" class="product-gallery__thumbnails list-unstyled" data-product-gallery-thumbnails>
           {% for image in product.images %}
             {% assign image_alt_downcase = image.alt | downcase %}
             {% unless image_alt_downcase contains alt_swatch_identifier %}
-              <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnail-slide>
+              <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
                 <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
               </li>
             {% endunless %}

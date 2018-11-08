@@ -16,8 +16,14 @@
 {% endcomment -%}
 
 {% comment %} Defaults {% endcomment %}
-{% assign content_alignment = content_alignment | default: "left" %}
-{% assign text_alignment = text_alignment       | default: "left" %}
+{% if content_alignment == blank %}
+  {% assign content_alignment = 'left' %}
+{% endif %}
+
+{% if text_alignment == blank %}
+  {% assign text_alignment = 'left' %}
+{% endif %}
+{% comment %} End Defaults {% endcomment %}
 
 <style type="text/css">
   #rich-text-{{ id }} {
