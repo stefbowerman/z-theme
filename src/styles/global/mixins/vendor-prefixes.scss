@@ -15,6 +15,7 @@
 // - Transitions
 // - User Select
 // - Opacity
+// - Selection
 
 
 // Animations
@@ -265,4 +266,17 @@
   // IE8 filter
   $opacity-ie: ($opacity * 100);
   filter: alpha(opacity=$opacity-ie);
+}
+
+// Selection
+@mixin selection($color, $background-color) {
+  ::-moz-selection {
+    color: $color;
+    background-color: $background-color;
+  }
+
+  ::selection {
+    color: $color;
+    background-color: $background-color;
+  }
 }

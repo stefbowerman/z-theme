@@ -49,24 +49,24 @@
     {% comment %} END Generate the dropdown contents {% endcomment %}
 
     {% capture dropdown_content_html %}
-
-      <div class="row">
-        <div class="col-md-4">
-          {% if dropdown_menus_html != blank %}
-            <div class="header-dropdown__menus">
-              {{ dropdown_menus_html }}
-            </div>
-          {% endif %}            
+      {% if dropdown_menus_html != blank or dropdown_ctas_html != blank %}
+        <div class="row">
+          <div class="col-md-4">
+            {% if dropdown_menus_html != blank %}
+              <div class="header-dropdown__menus">
+                {{ dropdown_menus_html }}
+              </div>
+            {% endif %}            
+          </div>
+          <div class="col-md-8">
+            {% if dropdown_ctas_html != blank %}
+              <div class="header-dropdown__ctas">
+                {{ dropdown_ctas_html }}
+              </div>
+            {% endif %}            
+          </div>
         </div>
-        <div class="col-md-8">
-          {% if dropdown_ctas_html != blank %}
-            <div class="header-dropdown__ctas">
-              {{ dropdown_ctas_html }}
-            </div>
-          {% endif %}            
-        </div>
-      </div>
-
+      {% endif %}
     {% endcapture %}
 
     {% comment %} Put the dropdown content inside a dropdown {% endcomment %}

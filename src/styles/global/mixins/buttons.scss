@@ -5,7 +5,36 @@
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
 
-@mixin button-variant($color, $background, $border, $hover-color: $color, $hover-background: darken($background, 10%), $hover-border: darken($border, 12%)) {
+@mixin button-variant($color, $background, $border, $hover-color: $color, $hover-background: false, $hover-border: false) {
+
+  // Add support for transparent backgrounds
+  @if $hover-background {
+    $hover-background: $hover-background;
+  } @else if $hover-background == transparent {
+    $hover-background: transparent;
+  } @else {
+    $hover-background: darken($background, 12%);
+  }
+
+  // Add support for transparent borders
+  @if $hover-border {
+    $hover-border: $hover-border;
+  } @else if $background == transparent {
+    $hover-border: transparent;
+  } @else {
+    $hover-border: darken($border, 12%);
+  }
+
+  $active-focus-background: $hover-background;
+  @if $background != transparent {
+    $active-focus-background: darken($background, 17%);
+  }
+
+  $active-focus-border: $border;
+  @if $border != transparent {
+    $active-focus-border: darken($border, 25%);
+  }
+
   color: $color;
   background-color: $background;
   border-color: $border;
@@ -14,28 +43,28 @@
   &:focus,
   &.focus {
     color: $hover-color;
-    background-color: $hover-background; // darken($background, 10%);
-        border-color: darken($hover-border, 5%); // darken($border, 25%);
+    background-color: $hover-background;
+        border-color: $hover-border;
   }
   &:hover {
     color: $hover-color;
-    background-color: $hover-background; // darken($background, 10%);
-        border-color: $hover-border; // darken($border, 12%);
+    background-color: $hover-background;
+        border-color: $hover-border;
     transition: all ease-in-out .3s;
   }
   &:active,
   &.active,
   .open > &.dropdown-toggle {
     color: $color;
-    background-color: $hover-background; // darken($background, 10%);
-        border-color: $hover-border; //darken($border, 12%);
+    background-color: $hover-background;
+        border-color: $hover-border;
 
     &:hover,
     &:focus,
     &.focus {
       color: $color;
-      background-color: darken($background, 17%);
-          border-color: darken($border, 25%);
+      background-color: $active-focus-background;
+          border-color: $active-focus-border;
     }
   }
   &:active,

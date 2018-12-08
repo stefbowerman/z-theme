@@ -3,6 +3,9 @@
 // -------------------------
 
 .rte {
+
+  @include article-content;
+  
   img {
     height: auto;
   }

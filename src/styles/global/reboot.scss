@@ -522,3 +522,14 @@ template {
 [hidden] {
   display: none !important;
 }
+
+// Text selection colors
+::-moz-selection {
+  color: $selection-color;
+  background-color: $selection-bg;
+}
+
+::selection {
+  color: $selection-color;
+  background-color: $selection-bg;
+}

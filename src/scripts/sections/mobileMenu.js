@@ -47,7 +47,7 @@ theme.MobileMenu = (function($) {
     },
 
     onUnload: function() {
-      this.drawer && $('.drawer-backdrop').remove();
+      this.drawer.$backdrop && this.drawer.$backdrop.remove();
     },
   });
 

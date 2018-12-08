@@ -63,8 +63,7 @@ theme.Product = (function($, slate) {
     var productDetailForm = new slate.ProductDetailForm({
       $el: this.$container,
       $container: this.$container,
-      enableHistoryState: this.$container.data('enable-history-state') || false,
-      enableZoom: this.$container.data('zoom-enabled') || false
+      enableHistoryState: this.$container.data('enable-history-state') || false
     });
 
     productDetailForm.initialize();

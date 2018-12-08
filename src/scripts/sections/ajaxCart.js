@@ -52,7 +52,7 @@ theme.AjaxCart = (function($) {
     },
 
     onUnload: function() {
-
+      this.ajaxCart.$backdrop && this.ajaxCart.$backdrop.remove();
     }
   });
 

@@ -1,7 +1,7 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
-<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-zoom-enabled="{{ section.settings.zoom_enabled }}" data-sticky-form-enabled="{{ section.settings.sticky_form_enabled }}" itemscope itemtype="http://schema.org/Product">
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" data-sticky-form-enabled="{{ section.settings.sticky_form_enabled }}" itemscope itemtype="http://schema.org/Product">
 
   {% if section.settings.sticky_form_enabled %}
     <div class="product-sticky-bar" data-product-sticky-bar>
@@ -56,12 +56,6 @@
   {
     "name": "Product Page",
     "settings": [
-      {
-        "type": "checkbox",
-        "id": "zoom_enabled",
-        "label" : "Zoom enabled",
-        "default": true
-      },
       {
         "type": "checkbox",
         "id": "sticky_form_enabled",

@@ -162,13 +162,13 @@ body.ajax-cart-open {
   bottom: 0;
   left: 0;
   z-index: $z-index-ajax-cart-backdrop;
-  background-color: $drawer-backdrop-color;
+  background-color: $ajax-cart-backdrop-color;
   opacity: 0;
   pointer-events: none;
   @include transition(all $transition-duration-slide $transition-timing-function-slide-out);
 
   &.is-visible {
-    opacity: $drawer-backdrop-opacity;
+    opacity: $ajax-cart-backdrop-opacity;
     pointer-events: auto;
     @include transition(all $transition-duration-slide $transition-timing-function-slide-in);
   }

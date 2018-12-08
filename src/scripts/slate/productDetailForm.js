@@ -56,7 +56,6 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
    * @param { Object } config
    * @param { jQuery } config.$el - Main element, see snippets/product-detail-form.liquid
    * @param { jQuery } config.$container - Container to listen to scope events / element to listen to events on.  Defaults to config.$el
-   * @param { Boolean } config.enableZoom - Toggle zoom capabilities on / off
    * @param { Boolean } config.enableHistoryState - If set to "true", turns on URL updating when switching variants
    * @param { Function } config.onReady -  Called after the product form is initialized.
    */
@@ -75,7 +74,6 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
     var ready = false;
     var options = options || {};
     var defaults = {
-      enableZoom: true,
       enableHistoryState: true
     };
 
@@ -170,10 +168,8 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       function onSlideshowSlickBeforeChange(e, slick) {
         var $zoomTarget = $(slick.$slides[ slick.currentSlide ]);
-        if(self.settings.enableZoom) {
           destroyHoverZoom($zoomTarget);
         }
-      }
 
       function onSlideshowSlickAfterChange(e, slick) {
         var $zoomTarget = $(slick.$slides[ slick.currentSlide ]);
@@ -184,9 +180,7 @@ slate.ProductDetailForm = (function($, Modernizr, slate) {
 
       function onSlideshowSlickInit(e, slick) {
         var $zoomTarget = $(slick.$slides[ slick.currentSlide ]);
-        if(self.settings.enableZoom) {
-          initHoverZoom($zoomTarget);
-        }
+        initHoverZoom($zoomTarget);
       }
 
       $galleries.each(function() {

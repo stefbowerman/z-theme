@@ -17,13 +17,15 @@
 
 .docs-title {
   max-width: 450px;
-  margin: 180px 0 50px;
+  margin: 80px 0 50px;
+  padding-top: 100px; // Make room for header when using in-page links to jump to the title
   padding-bottom: 5px;
   border-bottom: 1px solid black;
 }
 
 .docs-subtitle {
-  margin: 80px 0 50px;
+  margin: 0 0 50px;
+  padding-top: 100px;
 }
 
 .docs-subsubtitle {

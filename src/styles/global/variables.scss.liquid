@@ -99,6 +99,9 @@ $link-decoration:           none !default;
 $link-hover-color:          lighten($link-color, 9%) !default;
 $link-hover-decoration:     none !default;
 
+$selection-color:           $color-white;
+$selection-bg:              $color-primary;
+
 /*================ Spacing Variables ================*/
 $spacer:                    1rem;
 $headings-margin-bottom:    $spacer * 1.5;
@@ -462,13 +465,6 @@ $header-dropdown-bg:                    $header-bg;
 $header-dropdown-box-shadow:            0px 8px 15px -10px transparentize($color-black, 0.85);
 $header-dropdown-menu-spacing:          25px; // Horizontal spacing between dropdown menus
 
-// #AJAX Cart
-$ajax-cart-width:                       400px;
-$ajax-cart-bg:                          $color-white;
-$ajax-cart-border-color:                darken($ajax-cart-bg, 5%);
-$ajax-cart-padding-vertical:            $grid-gutter-width;
-$ajax-cart-padding-horizontal:          $grid-gutter-width;
-
 // #Drawer
 $drawer-max-width:                      400px;
 $drawer-bg:                             $color-white;
@@ -481,8 +477,13 @@ $drawer-header-font-size:               $font-size-h5;
 $drawer-header-border-color:            $color-black;
 
 // #AJAX Cart
-$drawer-backdrop-color:                 $drawer-backdrop-color;
-$drawer-backdrop-opacity:               $drawer-backdrop-opacity;
+$ajax-cart-width:                       400px;
+$ajax-cart-bg:                          $color-white;
+$ajax-cart-border-color:                darken($ajax-cart-bg, 5%);
+$ajax-cart-padding-vertical:            $grid-gutter-width;
+$ajax-cart-padding-horizontal:          $grid-gutter-width;
+$ajax-cart-backdrop-color:              $drawer-backdrop-color;
+$ajax-cart-backdrop-opacity:            $drawer-backdrop-opacity;
 
 // #Footer
 $footer-bp-min:                         $screen-md-min;
