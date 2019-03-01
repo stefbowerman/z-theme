@@ -1,12 +1,24 @@
 {
   "name": "Z-Theme",
-  "description": "A shopify starter theme for Zehner Group",
+  "description": "A shopify starter theme for Zehner",
   "version": "0.1.0",
   "license": "UNLICENSED",
   "devDependencies": {
     "@shopify/slate-tools": "0.3.3",
+    "autoprefixer": "^9.4.9",
+    "cssnano": "^4.1.10",
+    "gulp-debug": "^4.0.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-size": "^3.0.0",
+    "gulp-watch": "^5.0.1",
     "jshint": "^2.9.5",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "merge-stream": "^1.0.1",
+    "path": "^0.12.7",
+    "run-sequence": "^2.2.1"
   },
   "dependencies": {
     "imagesloaded": "^4.1.4",
@@ -20,14 +32,15 @@
     "start": "npm i -g @shopify/slate && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
     "jshint": "jshint src/scripts/ --exclude src/scripts/vendor/ --reporter=node_modules/jshint-stylish",
-    "hooks": "cp gitHooks.sh ./.git/hooks/post-checkout && chmod +x ./.git/hooks/post-checkout"
+    "hooks": "cp gitHooks.sh ./.git/hooks/post-checkout && chmod +x ./.git/hooks/post-checkout",
+    "start-dev": "gulp start"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/zehnergroup/z-theme.git"
   },
   "keywords": [],
-  "author": "Justin Mather, Scott Harrington, Stefan Bowerman, Zehner Group",
+  "author": "Zehner",
   "bugs": {
     "url": "https://github.com/zehnergroup/z-theme/issues"
   },

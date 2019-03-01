@@ -45,7 +45,12 @@ slate zip # Creates a zip file for manually uploading your theme
 ### NPM Scripts
 
 ```bash
-npm run start # Installs Slate Globally and Locally to start working on any project.
+npm run start # Installs Slate globally and locally to start working on any project.
 npm run jshint # Runs code linter on JS files
 npm run hooks # Installs a Git Hook that prevents branch changes without stopping the watcher (sets a touch -a to the config.yml to force the watcher stop)
+npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and then starts a watcher
 ```
+
+### SCSS Development
+
+All styling is done via the scss files located in the `/src/_styles` directory.  There is a gulp task that compiles these and outputs them to the `/src/styles` directory.  Only compiled files should end up in this directory.  The reason for the 2 source directories is that by default, Slate watches for file changes in `/src/styles` and runs it's own task.  We get around this by creating a new underscore-prefixed directory where we can apply our own watcher.  Navigate to `/gulp/tasks/styles.js` if you need to make adjustments to the task.
