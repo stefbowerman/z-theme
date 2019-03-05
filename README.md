@@ -54,3 +54,6 @@ npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and the
 ### SCSS Development
 
 All styling is done via the scss files located in the `/src/_styles` directory.  There is a gulp task that compiles these and outputs them to the `/src/styles` directory.  Only compiled files should end up in this directory.  The reason for the 2 source directories is that by default, Slate watches for file changes in `/src/styles` and runs it's own task.  We get around this by creating a new underscore-prefixed directory where we can apply our own watcher.  Navigate to `/gulp/tasks/styles.js` if you need to make adjustments to the task.
+
+#### Notes
+- Turning off "prefer-destructing" because I have no idea how it works.
