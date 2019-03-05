@@ -11,6 +11,8 @@ const classes = {
   visible: 'is-visible'
 };
 
+let apiEnabled = false; // So we can only enable it once
+
 export default class Slideup {
   /**
    * Slideup constructor
@@ -108,25 +110,27 @@ export default class Slideup {
     e.preventDefault();
     this.hide();
   }
+
+  static enableDataAPI() {
+    if (apiEnabled) return;
+
+    $document.on('click.slideup', '[data-toggle="slideup"]', function(e) {
+      const $this   = $(this);
+      const $target = $($this.attr('data-target'));
+      const options = $.extend($target.data(), $this.data());
+      let data      = $this.data('slideup');
+
+      if ($this.is('a')) e.preventDefault();
+
+      if (!data) {
+        $this.data('slideup', (data = new Slideup($target, options)));
+        data.show();
+      }
+      else {
+        data.toggle();
+      }
+    });
+
+    apiEnabled = true;
+  }
 }
-
-
-// SLIDEUP DATA-API
-// ===============
-
-$document.on('click.slideup', '[data-toggle="slideup"]', function(e) {
-  const $this   = $(this);
-  const $target = $($this.attr('data-target'));
-  const options = $.extend($target.data(), $this.data());
-  let data      = $this.data('slideup');
-
-  if ($this.is('a')) e.preventDefault();
-
-  if (!data) {
-    $this.data('slideup', (data = new Slideup($target, options)));
-    data.show();
-  }
-  else {
-    data.toggle();
-  }
-});

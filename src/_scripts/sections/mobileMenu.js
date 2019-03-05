@@ -1,5 +1,5 @@
 import BaseSection from './base';
-import Drawer from '../models/drawer';
+import Drawer from '../ui/drawer';
 
 const selectors = {
   toggle: '[data-mobile-menu-toggle]',

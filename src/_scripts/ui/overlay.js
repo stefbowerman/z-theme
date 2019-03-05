@@ -13,6 +13,8 @@ const classes = {
   bodyOverlayOpen: 'overlay-open'
 };
 
+let apiEnabled = false; // So we can only enable it once
+
 /**
  * Overlay constructor
  *
@@ -21,7 +23,7 @@ const classes = {
  */
 export default class Overlay {
   constructor(el, options) {
-    this.name = 'drawer';
+    this.name = 'overlay';
     this.namespace = `.${this.name}`;
 
     this.$el = $(el);
@@ -144,24 +146,27 @@ export default class Overlay {
     e.preventDefault();
     this.hide();
   }
+
+  static enableDataAPI() {
+    if (apiEnabled) return;
+
+    $document.on('click.overlay', '[data-toggle="overlay"]', function(e) {
+      const $this   = $(this);
+      const $target = $($this.attr('data-target'));
+      const options = $.extend($target.data(), $this.data());
+      let data      = $this.data('overlay');
+
+      if ($this.is('a')) e.preventDefault();
+
+      if (!data) {
+        $this.data('overlay', (data = new Overlay($target, options)));
+        data.show();
+      }
+      else {
+        data.toggle();
+      }
+    });
+
+    apiEnabled = true;
+  }
 }
-
-// OVERLAY DATA-API
-// ===============
-
-$document.on('click.overlay', '[data-toggle="overlay"]', function(e) {
-  const $this   = $(this);
-  const $target = $($this.attr('data-target'));
-  const options = $.extend($target.data(), $this.data());
-  let data      = $this.data('overlay');
-
-  if ($this.is('a')) e.preventDefault();
-
-  if (!data) {
-    $this.data('overlay', (data = new Overlay($target, options)));
-    data.show();
-  }
-  else {
-    data.toggle();
-  }
-});

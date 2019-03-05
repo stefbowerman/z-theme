@@ -11,6 +11,9 @@ import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
 
 // UI
+import Drawer           from './ui/drawer';
+import Overlay          from './ui/overlay';
+import Slideup          from './ui/slideup';
 import QuantityAdjuster from './ui/quantityAdjuster';
 
 import SectionManager   from './sectionManager';
@@ -32,8 +35,6 @@ import SlideshowSection           from './sections/slideshow';
 
 // Models
 import ProductCard from './models/productCard';
-// Need to import this for the data API to work :-/
-import Overlay from './models/overlay'; // eslint-disable-line
 import quickViewManager from './models/quickViewManager';
 
 // Templates
@@ -65,6 +66,9 @@ Breakpoints.initialize();
   sectionManager.register('slideshow', SlideshowSection);
 
   // Initialize all UI
+  Drawer.enableDataAPI();
+  Overlay.enableDataAPI();
+  Slideup.enableDataAPI();
   QuantityAdjuster.initialize();
 
   $('.in-page-link').on('click', (evt) => {

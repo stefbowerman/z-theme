@@ -1,7 +1,7 @@
 import BaseSection from './base';
 import User from '../core/user';
 import * as Utils from '../core/utils';
-import Slideup from '../models/slideup';
+import Slideup from '../ui/slideup';
 
 const selectors = {
   slideup: '[data-subscription-slideup]',

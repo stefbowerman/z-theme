@@ -1,5 +1,5 @@
 import BaseTemplate from './base';
-import SlideupAlert from '../models/slideupAlert';
+import SlideupAlert from '../ui/slideupAlert';
 
 const $body = $(document.body);
   
