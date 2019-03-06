@@ -18,6 +18,10 @@ module.exports = {
       bundles: [{
         entries: 'theme.js',
         outputName: 'theme.js'
+      },
+      {
+        entries: 'checkout.js',
+        outputName: 'checkout.js'
       }]
     },
     eslint: {

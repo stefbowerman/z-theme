@@ -9,14 +9,13 @@ import * as RTE         from './core/rte';
 import * as A11Y        from './core/a11y';
 import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
+import SectionManager   from './core/sectionManager';
 
 // UI
 import Drawer           from './ui/drawer';
 import Overlay          from './ui/overlay';
 import Slideup          from './ui/slideup';
 import QuantityAdjuster from './ui/quantityAdjuster';
-
-import SectionManager   from './sectionManager';
 
 // Sections
 import HeaderSection              from './sections/header';

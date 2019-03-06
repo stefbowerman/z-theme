@@ -1,4 +1,4 @@
-import BaseSection from './sections/base';
+import BaseSection from '../sections/base';
 
 const SECTION_TYPE_ATTR = 'data-section-type';
 const SECTION_ID_ATTR = 'data-section-id';
