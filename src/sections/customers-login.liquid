@@ -1,12 +1,8 @@
 {%- comment %}
   Combines customer login + register forms into one template
-
-  Requires:
-  - bootstrap.scss
-  - customers-login.js
 {% endcomment -%}
 
-<div class="layout-content-wrapper flush-top">
+<div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="customers-login">
 
   {% assign page_hero_id = 'page-hero-' | append: section.id %}
   {% capture page_hero_title %}

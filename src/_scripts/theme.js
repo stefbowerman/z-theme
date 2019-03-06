@@ -32,6 +32,7 @@ import InstagramFeedSection       from './sections/instagramFeed';
 import SubscriptionModalSection   from './sections/subscriptionModal';
 import SubscriptionSlideupSection from './sections/subscriptionSlideup';
 import SlideshowSection           from './sections/slideshow';
+import CustomersLoginSection      from './sections/customersLogin';
 
 // Models
 import ProductCard from './models/productCard';
@@ -64,6 +65,7 @@ Breakpoints.initialize();
   sectionManager.register('subscription-modal', SubscriptionModalSection);
   sectionManager.register('subscription-slideup', SubscriptionSlideupSection);
   sectionManager.register('slideshow', SlideshowSection);
+  sectionManager.register('customers-login', CustomersLoginSection);
 
   // Initialize all UI
   Drawer.enableDataAPI();
