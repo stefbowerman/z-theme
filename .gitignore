@@ -2,8 +2,10 @@
 dist/
 upload/
 config.yml
-src/scripts/theme.js # This is in _scripts
-src/styles/ # All css files are in _styles
+
+# Files in _scripts / _styles
+src/scripts/theme.js
+src/styles/
 
 # Logs
 logs
