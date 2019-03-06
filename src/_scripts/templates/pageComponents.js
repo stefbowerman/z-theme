@@ -1,10 +1,12 @@
 import BaseTemplate from './base';
 import SlideupAlert from '../ui/slideupAlert';
+import Tabs from '../ui/tabs';
 
 const $body = $(document.body);
   
 const selectors = {
   slideupAlertForm: '[data-slideup-alert-form]',
+  tabContainer: '[data-tab-container]',
   qaSetMax: '[data-qa-set-max]',
   qaToggleEnabled: '[data-qa-toggle-enabled]',
   qa: '[data-quantity-adjuster]'
@@ -24,6 +26,9 @@ class PageComponentsTemplate extends BaseTemplate {
         text: $(this).find('input[name="text"]').val()
       });
     });
+
+    // Tabs
+    new Tabs($(selectors.tabContainer));
 
     // Quantity Adjuster
     $(selectors.qaSetMax).on('click', (e) => {

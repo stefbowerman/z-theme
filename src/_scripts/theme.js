@@ -14,6 +14,7 @@ import * as Breakpoints from './core/breakpoints';
 import Drawer           from './ui/drawer';
 import Overlay          from './ui/overlay';
 import Slideup          from './ui/slideup';
+import Tabs             from './ui/tabs';
 import QuantityAdjuster from './ui/quantityAdjuster';
 
 import SectionManager   from './sectionManager';
@@ -69,6 +70,7 @@ Breakpoints.initialize();
   Drawer.enableDataAPI();
   Overlay.enableDataAPI();
   Slideup.enableDataAPI();
+  Tabs.enableDataAPI();
   QuantityAdjuster.initialize();
 
   $('.in-page-link').on('click', (evt) => {
