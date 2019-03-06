@@ -72,7 +72,9 @@
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 
-  {{ content_for_header }} 
+  {{ content_for_header }}
+
+  {% include 'third-party-scripts-head' %}
 </head>
 
 {% capture body_class %}
@@ -118,6 +120,7 @@
 
   {% include 'slideup-template' %}
   {% include 'search-overlay' %}
+  {% include 'third-party-scripts-foot' %}
 
 </body>
 </html>

@@ -9,7 +9,6 @@ import * as RTE         from './core/rte';
 import * as A11Y        from './core/a11y';
 import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
-import SectionManager   from './core/sectionManager';
 
 // UI
 import Drawer           from './ui/drawer';
@@ -19,6 +18,7 @@ import Tabs             from './ui/tabs';
 import QuantityAdjuster from './ui/quantityAdjuster';
 
 // Sections
+import SectionManager             from './sections/sectionManager';
 import HeaderSection              from './sections/header';
 import FooterSection              from './sections/footer';
 import MobileMenuSection          from './sections/mobileMenu';
@@ -28,6 +28,7 @@ import AJAXCartSection            from './sections/ajaxCart';
 import PencilBannerSection        from './sections/pencilBanner';
 import CollectionSection          from './sections/collection';
 import BlogSection                from './sections/blog';
+import ArticleSection             from './sections/article';
 import InstagramFeedSection       from './sections/instagramFeed';
 import SubscriptionModalSection   from './sections/subscriptionModal';
 import SubscriptionSlideupSection from './sections/subscriptionSlideup';
@@ -61,6 +62,7 @@ Breakpoints.initialize();
   sectionManager.register('pencil-banner', PencilBannerSection);
   sectionManager.register('collection', CollectionSection);
   sectionManager.register('blog', BlogSection);
+  sectionManager.register('article', ArticleSection);
   sectionManager.register('instagram-feed', InstagramFeedSection);
   sectionManager.register('subscription-modal', SubscriptionModalSection);
   sectionManager.register('subscription-slideup', SubscriptionSlideupSection);

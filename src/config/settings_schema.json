@@ -146,20 +146,6 @@
         "info": "Should be at least 180px x 180px"
       }
     ]
-  },
-  {
-    "name": "Customer",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Account Pages"
-      },
-      {
-        "type": "link_list",
-        "id": "customer_account_menu",
-        "label": "Customer Account Menu"
-      }
-    ]
   }, 
   {
     "name": "Mailing List",

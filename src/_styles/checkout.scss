@@ -81,3 +81,15 @@ ul.policy-list {
 @media screen and (max-width: $checkout-bp-sm-max) {
   
 }
+
+html.js {
+
+  .content {
+    opacity: 0;
+    transition: opacity 450ms ease-out;
+  }
+
+  body.checkout-ready .content {
+    opacity: 1;
+  }
+}
