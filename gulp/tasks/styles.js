@@ -1,6 +1,5 @@
 const config = require('../config');
 const gulp = require('gulp');
-const handleErrors = require('../lib/handleErrors');
 const path = require('path');
 const sass = require('gulp-sass');
 const size = require('gulp-size');
@@ -9,8 +8,9 @@ const debug = require('gulp-debug');
 const insert = require('gulp-insert');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const mergeStream = require('merge-stream');
 const styleWarning = require('../lib/stylesWarning');
-const merge = require('merge-stream');
+const handleErrors = require('../lib/handleErrors');
 
 const sassOptions = {
   outputStyle: 'nested', // libsass doesn't support expanded yet
@@ -28,23 +28,20 @@ const postcssPlugins = [
 ];
 
 const stylePipeline = (src) => {
- return gulp.src(src)
+  const paths = {
+    src: path.join(config.root.src, config.tasks.styles.src, src),
+    dest: path.join(config.root.src, config.tasks.styles.dest)
+  };
+
+  return gulp.src(paths.src)
     .pipe(sass(sassOptions).on('error', sass.logError))
     .on('error', handleErrors)
     .pipe(postcss(postcssPlugins))
     .pipe(insert.prepend(styleWarning()))
-    .pipe(gulp.dest(path.join(config.root.src, config.tasks.styles.dest)))
+    .pipe(gulp.dest(paths.dest))
     .pipe(debug())
     .pipe(size({showFiles: true, title: 'CSS: size of'}));
 }
 
-gulp.task('styles', () => {
-
-  const mergeInstance = merge();
-
-  config.tasks.styles.files.forEach((filename) => {
-    mergeInstance.add( stylePipeline(path.join(config.root.src, config.tasks.styles.src, filename)) );
-  });
-
-  return mergeInstance;
-});
+// Run stylepipeline for each entry point file
+gulp.task('styles', () => mergeStream.apply(gulp, config.tasks.styles.files.map(stylePipeline)));

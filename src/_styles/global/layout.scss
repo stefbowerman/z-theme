@@ -10,7 +10,7 @@
     min-height: 100vh;
   }
   main#MainContent {
-    @include flex;
+    @include flex(1, 0, 0); // All three need to be specified for IE11
     @include flex-direction(column);
   }
 }

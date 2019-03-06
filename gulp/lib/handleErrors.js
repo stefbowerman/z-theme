@@ -10,5 +10,5 @@ module.exports = (errorObject) => {
   });
 
   // Keep gulp from hanging on this task
-  // if (typeof this.emit === 'function') this.emit('end');
+  if (typeof this.emit === 'function') this.emit('end');
 };
