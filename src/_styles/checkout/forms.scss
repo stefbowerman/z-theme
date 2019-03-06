@@ -52,6 +52,19 @@ input[type="checkbox"] {
   }
 }
 
+.field__caret {
+  border-left-color: $input-border;
+  transform: translate(0, 0); // Undo transform translation
+
+  .field--active & {
+    border-left-color: $input-border-focus;
+
+    .icon-svg--color-adaptive-lighter {
+      color: $input-border-focus;
+    }
+  }
+}
+
 .element-toggler {
   overflow: visible; // default cuts off checkbox / radio button shadows
 }
