@@ -15,13 +15,13 @@ const classes = {
 
 let apiEnabled = false; // So we can only enable it once
 
-/**
- * Overlay constructor
- *
- * @param {HTMLElement | $} el - The overlay element
- * @param {Object} options
- */
 export default class Overlay {
+  /**
+   * Overlay constructor
+   *
+   * @param {HTMLElement | $} el - The overlay element
+   * @param {Object} options
+   */  
   constructor(el, options) {
     this.name = 'overlay';
     this.namespace = `.${this.name}`;
