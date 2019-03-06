@@ -36,51 +36,45 @@
   {% endif %}
 {% endfor %}
 
-<div class="layout-content-wrapper flush-top">
+<div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="blog">
+  {% paginate blog.articles by 16 %}
 
-  <section data-section-id="{{ section.id }}" data-section-type="blog">
+   {% include 'page-hero',
+              id: section.id,
+              background_image: hero_background_image,
+              title: hero_title,
+              toptitle: hero_toptitle,
+              subtitle: hero_subtitle,
+              title_link: hero_title_link,
+              content_alignment: 'center',
+              light_text: hero_light_text
+     %}
 
-    {% paginate blog.articles by 16 %}
+    <div class="container">
 
-     {% include 'page-hero',
-                id: section.id,
-                background_image: hero_background_image,
-                title: hero_title,
-                toptitle: hero_toptitle,
-                subtitle: hero_subtitle,
-                title_link: hero_title_link,
-                content_alignment: 'center',
-                light_text: hero_light_text
-       %}
+      {% comment %}
 
-      <div class="container">
+      Article Previews
+      ====================
+      {% endcomment %}
 
-        {% comment %}
-
-        Article Previews
-        ====================
-        {% endcomment %}
-
-        <div class="content-grid content-grid--3-col">
-          {% for article in blog.articles %}
-            <div class="content-grid__item">
-              {% include 'article-card', article: article, show_author: false, show_tags: false %}
-            </div>
-          {% endfor %}
-        </div>
-
-        {% if paginate.next.is_link %}
-          {% comment %} See scripts/sections/blog.js {% endcomment %}
-          <div class="u-ta-center" style="padding: 10px 0" data-pagination>
-            <a href="{{ paginate.next.url }}" data-next-page>Load More</a>
+      <div class="content-grid content-grid--3-col">
+        {% for article in blog.articles %}
+          <div class="content-grid__item">
+            {% include 'article-card', article: article, show_author: false, show_tags: false %}
           </div>
-        {% endif %}
+        {% endfor %}
       </div>
 
-    {% endpaginate %}
+      {% if paginate.next.is_link %}
+        {% comment %} See _scripts/sections/blog.js {% endcomment %}
+        <div class="u-ta-center" style="padding: 10px 0" data-pagination>
+          <a href="{{ paginate.next.url }}" data-next-page>Load More</a>
+        </div>
+      {% endif %}
+    </div>
 
-  </section>
-
+  {% endpaginate %}
 </div>
 
 {% schema %}

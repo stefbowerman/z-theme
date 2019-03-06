@@ -5,6 +5,7 @@ config.yml
 
 # Files in _scripts / _styles
 src/scripts/theme.js
+src/scripts/checkout.js
 src/styles/
 
 # Logs
