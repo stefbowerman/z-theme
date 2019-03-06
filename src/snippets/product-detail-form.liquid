@@ -15,7 +15,6 @@
   {% include 'product-detail-form',
               product: { product } - required
               current_variant: { variant} - optional
-              show_share_buttons: { boolean } - optional - defaults to true
   %}
 
 {% endcomment -%}
@@ -23,10 +22,6 @@
 {% comment %} Defaults {% endcomment %}
 {% if current_variant == blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
-{% endif %}
-
-{% if show_share_buttons == blank %}
-  {% assign show_share_buttons = true %}
 {% endif %}
 {% comment %} End Defaults {% endcomment %}
 
