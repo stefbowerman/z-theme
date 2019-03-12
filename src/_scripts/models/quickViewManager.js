@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import QuickView from './quickView';
 import * as Animations from '../core/animations';

@@ -7,7 +7,11 @@ module.exports = {
       // Relative to root.src
       src: '/_styles',
       dest: '/styles',
-      files: ['theme.scss', 'checkout.scss'],
+      filePattern: ['src/_styles/**/*.scss'],
+      // files: ['theme.scss', 'checkout.scss'],
+      files: ['theme-2.scss'],
+      // files: ['theme.scss', 'theme-2.scss'],
+      // files: ['theme-2.scss', 'checkout.scss'],
       watchTask: 'styles',
       extensions: ['scss', 'css']
     },
@@ -15,11 +19,24 @@ module.exports = {
       src: '/_scripts',
       dest: '/scripts',
       extensions: ['js'],
+      // bundles: [{
+      //   entries: 'theme.js',
+      //   outputName: 'theme.js'
+      // }]
+      // bundles: [{
+      //   entries: 'theme.js',
+      //   outputName: 'theme.js'
+      // }, {
+      //   entries: 'vendor.js',
+      //   outputName: 'vendor.js'    
+      // }]      
       bundles: [{
         entries: 'theme.js',
         outputName: 'theme.js'
-      },
-      {
+      }, {
+        entries: 'vendor.js',
+        outputName: 'vendor.js'
+      }, {
         entries: 'checkout.js',
         outputName: 'checkout.js'
       }]
@@ -27,6 +44,6 @@ module.exports = {
     eslint: {
       filePattern: ['gulpfile.js/**/*.js', 'src/_scripts/**/*.js'],
       extensions: ['js']
-    },
+    }
   }
 };

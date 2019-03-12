@@ -4,21 +4,23 @@
      data-delay="{{ section.settings.delay }}"
      data-seen-expiration="{{ section.settings.seen_expiration }}">
   
-  <div class="modal fade subscription-modal" id="subscription-modal" tabindex="-1" role="dialog" aria-labelledby="subscription-modal-title" data-subscription-modal>
+  <div class="modal fade" id="subscription-modal" tabindex="-1" role="dialog" aria-labelledby="subscription-modal-title" data-subscription-modal>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <a href="#" class="close" data-dismiss="modal" aria-label="Close">{% include 'icon-close' %}</a>
           {% if section.settings.header_text != blank %}
             <h3 class="modal-title" id="subscription-modal-title">{{ section.settings.header_text }}</h3>
           {% endif %}
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            {% include 'icon-close' %}
+          </button>          
         </div>
         <div class="modal-body">
           {% if settings.newsletter_form_action == blank %}
             <div class="alert alert-danger small">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</div>
           {% endif %}          
           {% if section.settings.image %}
-            <img src="{{ section.settings.image | img_url: '600x' }}" class="subscription-modal__image" />
+            <img src="{{ section.settings.image | img_url: '600x' }}" class="img-fluid" />
           {% endif %}
 
           <form action="{{ settings.newsletter_form_action }}" method="post" data-subscription-modal-form>
@@ -40,7 +42,6 @@
             </h3>
           </div>
         </div>
-        <div class="modal-footer"></div>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@
     @include flex-direction(column);
     min-height: 100vh;
   }
+  /* stylelint-disable-next-line selector-max-id */
   main#MainContent {
     @include flex(1, 0, 0); // All three need to be specified for IE11
     @include flex-direction(column);
@@ -19,10 +20,10 @@
 
   // If we have a fixed header, make enough room at the top of the page for it.
   .site-fixed-header & {
-    position:relative;
+    position: relative;
     padding-top: $header-height-small;
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $header-bp-min) {
       padding-top: $header-height-base;
     }
   }

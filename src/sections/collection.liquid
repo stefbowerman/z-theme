@@ -28,36 +28,34 @@
           Make sure you put the if statements *inside* the .collection-filter-bar__grouping elements to always output tags even if they are empty.
           This will ensure that flex will always space them out appropriately
         {% endcomment %}
-        <div class="flex-row flex-align-items-center flex-justify-between">
-          <div class="collection-filter-bar__grouping">
-            {% if section.settings.enable_filters %}
-              
-              {% assign mobile_filter_id = 'mobile-filters' %}
+        <div class="collection-filter-bar__grouping">
+          {% if section.settings.enable_filters %}
+            
+            {% assign mobile_filter_id = 'mobile-filters' %}
 
-              {% include 'collection-mobile-filters', id: mobile_filter_id, filter_types: filter_types %}
+            {% include 'collection-mobile-filters', id: mobile_filter_id, filter_types: filter_types %}
 
-              <div class="visible-xs visible-sm">
-                <a href="#" data-toggle="drawer" data-target="#{{ mobile_filter_id }}" data-backdrop="true">
-                  <span style="margin-right: 6px;">{% include 'icon-filters' %}</span>
-                  Filter By
-                </a>
-              </div>
+            <div class="d-md-none">
+              <a href="#" data-toggle="drawer" data-target="#{{ mobile_filter_id }}" data-backdrop="true">
+                <span style="margin-right: 6px;">{% include 'icon-filters' %}</span>
+                Filter By
+              </a>
+            </div>
 
-              <div class="hidden-xs hidden-sm">
-                {% include 'collection-filters', filter_types: filter_types %}
-              </div>
+            <div class="d-none d-md-block">
+              {% include 'collection-filters', filter_types: filter_types %}
+            </div>
 
-            {% endif %}
-          </div>
-          <div class="collection-filter-bar__grouping">
-            {% if section.settings.enable_sort %}
-              {% include 'collection-sort' %}
-            {% endif %}
-          </div>
+          {% endif %}
+        </div>
+        <div class="collection-filter-bar__grouping">
+          {% if section.settings.enable_sort %}
+            {% include 'collection-sort' %}
+          {% endif %}
         </div>
       </div>
 
-      <p class="hidden-xs hidden-sm">
+      <p class="d-none d-md-block">
         <small>Showing {{ collection.products.size }} {{ collection.products.size | pluralize: 'Item', 'Items' }}</small>
       </p>      
 

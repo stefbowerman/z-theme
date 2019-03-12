@@ -16,7 +16,7 @@
  * The bootstrap collapse plugin depends on it but we'd like to be able to use the collapsible behavior on anything
  */
 .panel {
-  
+
 }
 
 .panel__header,
@@ -26,7 +26,7 @@
 }
 
 .panel__header {
-  
+
 }
 
 .panel__title {
@@ -53,13 +53,13 @@
   .panel__body {
     margin-bottom: 0;
   }
-  
+
   .panel + .panel {
     margin-top: 0;
 
     .panel__header {
       border-top: none;
-    }    
+    }
   }
 }
 
@@ -76,7 +76,7 @@
   &:after {
     content: "";
     position: absolute;
-    background: black;
+    background: $color-black;
   }
 
   &:before {

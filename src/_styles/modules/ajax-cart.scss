@@ -41,7 +41,7 @@ body.ajax-cart-open {
     opacity: 1;
     pointer-events: auto;
     cursor: $cursor-disabled;
-  }    
+  }
 
   // Ensure that the cart is full width on screen sizes below this
   @media (min-width: $screen-xs-min) {
@@ -136,10 +136,6 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__item-remove {
-
-}
-
-.ajax-cart__footer {
 
 }
 

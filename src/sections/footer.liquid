@@ -5,14 +5,14 @@
     <div class="row">
 
       {% comment %} Footer Block - Info {% endcomment %}
-      <div class="col-md-2">
+      <div class="col-lg-2">
         <div class="footer-block">
           Footer Info Block
         </div>
       </div>
 
       {% comment %} Footer Block - Menus {% endcomment %}
-      <div class="col-md-6">
+      <div class="col-lg-6">
         <div class="footer-block">
           {% for i in (1..MAX_FOOTER_MENUS) %}
             {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
@@ -33,7 +33,7 @@
       </div>
 
       {% comment %} Footer Block - Contact {% endcomment %}
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <div class="footer-block">
           {% if settings.newsletter_form_action == blank %}
             <div class="alert alert-danger small">A valid newsletter form action URL is required for this section.  Please go to <strong>General Settings -> Mailing List</strong> in the theme editor to add this information</div>
@@ -84,10 +84,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}</small>
-      </div>
+    <div>
+      <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}</small>
     </div>
 
   </div>

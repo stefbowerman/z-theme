@@ -3,26 +3,34 @@
    Provides gulp style logs to the bundle method in browserify.js
 */
 
-const gutil = require('gulp-util');
+const colors = require('ansi-colors');
+const log = require('fancy-log');
 const prettyHrtime = require('pretty-hrtime');
 let startTime;
 
 module.exports = {
   start(filepath) {
     startTime = process.hrtime();
-    gutil.log(gutil.colors.inverse('Bundling'), gutil.colors.green(filepath) + '...');
+    log(`Bundling: ${colors.green(filepath)}`);
   },
 
   watch(bundleName) {
-    gutil.log(gutil.colors.cyan('Watching files required by'), gutil.colors.yellow(bundleName));
+    log(`Watching files required by: ${colors.yellow(bundleName)}`);
   },
+
   minifyifying(bundleName) {
-    gutil.log(gutil.colors.yellow('minifyifying-ing'), gutil.colors.yellow(bundleName));
+    log(`Minifyify-ing ${colors.yellow(bundleName)}`)
   },
 
   end(filepath) {
     const taskTime = process.hrtime(startTime);
     const prettyTime = prettyHrtime(taskTime);
-    gutil.log(gutil.colors.bgMagenta('Bundled:'), gutil.colors.green(filepath), 'in', gutil.colors.magenta(prettyTime));
+    log(`Bundled: ${colors.green(filepath)} in ${colors.magenta(prettyTime)}`);
+  },
+
+  error(error) {
+    log.error(`${colors.bold.red('Bundle Error')}: ${error.message}`);
+
+    if (typeof this.emit === 'function') this.emit('end');
   }
 };

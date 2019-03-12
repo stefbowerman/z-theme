@@ -2,18 +2,18 @@
 //  Variables
 // --------------------------------------------------
 
-/*================ Color Variables ================*/
+/* ================ Color Variables ================ */
 
 /* NOTE: As you add more colors here, update utilities.scss with matching text / background color utility classes */
 
 // Greyscale
 $color-black:       #000;
 $color-dark-grey:   #333;
-$color-grey:        #CCC;
-$color-white:       #FFF;
+$color-grey:        #ccc;
+$color-white:       #fff;
 
 // Main Colors
-$color-emerald:     #049271;     
+$color-emerald:     #049271;
 
 // Theme Colors
 $text-color:        $color-dark-grey;
@@ -24,22 +24,22 @@ $color-primary:     $color-emerald;
 $color-dot-white:   $color-white;
 $color-dot-black:   $color-black;
 $color-dot-grey:    $color-grey;
-$color-dot-khaki:   #C0B095;
-$color-dot-pink:    #D885C1;
-$color-dot-orange:  #F48D52;
-$color-dot-purple:  #8174CD;
+$color-dot-khaki:   #c0b095;
+$color-dot-pink:    #d885c1;
+$color-dot-orange:  #f48d52;
+$color-dot-purple:  #8174cd;
 $color-dot-brown:   #816960;
-$color-dot-tan:     #D3B69F;
-$color-dot-red:     #C13242;
-$color-dot-green:   #00A465;
-$color-dot-yellow:  #EEE57A;
-$color-dot-blue:    #4E85E6;
+$color-dot-tan:     #d3b69f;
+$color-dot-red:     #c13242;
+$color-dot-green:   #00a465;
+$color-dot-yellow:  #eee57a;
+$color-dot-blue:    #4e85e6;
 
-/*================ Typography Variables ================*/
+/* ================ Typography Variables ================ */
 
-$font-family-sans-serif:    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$font-family-monospace:     "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:          $font-family-sans-serif !default;
+$font-family-sans-serif:    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default; /* stylelint-disable-line value-keyword-case */
+$font-family-monospace:     "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default; /* stylelint-disable-line value-keyword-case */
+$font-family-base:          $font-family-sans-serif !default; /* stylelint-disable-line value-keyword-case */
 
 $font-size-base:            1rem !default; // set to `16px`
 $font-size-large:           $font-size-base * 1.25;
@@ -65,15 +65,15 @@ $font-weight-p2:            $font-weight-normal;
 $font-weight-p3:            $font-weight-normal;
 
 $letter-spacing-base:       0.015em;
-$letter-spacing-h1:         0em;
-$letter-spacing-h2:         0em;
-$letter-spacing-h3:         0em;
-$letter-spacing-h4:         0em;
-$letter-spacing-h5:         0em;
-$letter-spacing-h6:         0em;
-$letter-spacing-p1:         0em;
-$letter-spacing-p2:         0em;
-$letter-spacing-p3:         0em;
+$letter-spacing-h1:         0;
+$letter-spacing-h2:         0;
+$letter-spacing-h3:         0;
+$letter-spacing-h4:         0;
+$letter-spacing-h5:         0;
+$letter-spacing-h6:         0;
+$letter-spacing-p1:         0;
+$letter-spacing-p2:         0;
+$letter-spacing-p3:         0;
 
 $line-height-base:          1.5; //** Unit-less `line-height` for use in components like buttons.
 $line-height-computed:      $font-size-base * $line-height-base !default; //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
@@ -102,7 +102,7 @@ $link-hover-decoration:     none !default;
 $selection-color:           $color-white;
 $selection-bg:              $color-primary;
 
-/*================ Spacing Variables ================*/
+/* ================ Spacing Variables ================ */
 $spacer:                    1rem;
 $headings-margin-bottom:    $spacer * 1.5;
 $paragraph-margin-bottom:   0.8rem; // Paragraphs (styles the p element)
@@ -183,7 +183,7 @@ $btn-border-radius-small:        0 !default;
 $btn-padding-base-vertical:      0.75rem !default;
 $btn-padding-base-horizontal:    3rem !default;
 
-/*================ Forms ================*/
+/* ================ Forms ================ */
 
 //** `<input>` background color
 $input-bg:                       #fff !default;
@@ -243,7 +243,7 @@ $alert-margin-bottom:            $spacer;
 $alert-border-width:             1px;
 
 $alert-success-bg:               #e1f7e1;
-$alert-success-border:           #DAF0DA;
+$alert-success-border:           #daf0da;
 $alert-success-text:             $text-color;
 
 $alert-danger-bg:                #f7e5e1;
@@ -254,7 +254,7 @@ $alert-info-bg:                  #d9edf7;
 $alert-info-border:              darken(adjust-hue(#d9edf7, -10), 7%);
 $alert-info-text:                $text-color;
 
-/*================ Media Query Breakpoints ================*/
+/* ================ Media Query Breakpoints ================ */
 //** Deprecated `$screen-xs-min` as of v3.2.0
 $screen-xs-min:              576px; // 480px !default;
 // Small screen / tablet
@@ -272,7 +272,7 @@ $screen-sm-max:              ($screen-md-min - 1) !default;
 $screen-md-max:              ($screen-lg-min - 1) !default;
 $screen-lg-max:              ($screen-xl-min - 1) !default;
 
-/*================ Bootstrap Grid ================*/
+/* ================ Bootstrap Grid ================ */
 
 $grid-columns:               12 !default;
 $grid-gutter-width:          30px !default; //** Padding between columns. Gets divided in half for the left and right.
@@ -285,7 +285,7 @@ $grid-float-breakpoint:      $screen-sm-min !default;
 $grid-float-breakpoint-max:  $screen-xs-max !default;
 
 
-/*================ Bootstrap Container Sizes ================*/
+/* ================ Bootstrap Container Sizes ================ */
 
 //## Define the maximum width of `.container` for different screen sizes.
 
@@ -310,7 +310,7 @@ $container-xlarge:             $screen-xl-min - $grid-gutter-width; // (1140px +
 $container-xl:                 $container-xlarge !default;
 
 
-/*================ Z-Index ================*/
+/* ================ Z-Index ================ */
 $z-index-slideup: 140;
 $z-index-dropdown: 149;
 $z-index-header: 150;
@@ -325,15 +325,15 @@ $z-index-modal-background:  1049 !default;
 $z-index-modal:  1050;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
-/*================ SVG ================*/
+/* ================ SVG ================ */
 $svg-select-icon: #{'{{ "ico-select.svg" | asset_url }}'};
 
 //== Form states and alerts
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-$state-danger-text:              #F00 !default;
-$state-danger-bg:                #F00 !default;
+$state-danger-text:              #f00 !default;
+$state-danger-bg:                #f00 !default;
 $state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
 //== Type
@@ -377,21 +377,21 @@ $transition-duration-base:    0.3s;
 $transition-duration-medium:  0.4s;
 $transition-duration-slow:    0.6s;
 
- /*
-  *  Names are a little confusing but - 
-  *  $transition-timing-function-in should be used on the `active` state that you're transitioning *to*
-  *  $transition-timing-function-out should be used on the `active` state that you're transitioning *from*
-  *
-  *  Usage - 
-  *  .element {
-  *     transition: all $transition-timing-function-out;
-  *     &:hover,
-  *     &:focus {
-  *      transition: all $transition-timing-function-in;
-  *     }
-  *   }
-  *
-  */
+/*
+ *  Names are a little confusing but -
+ *  $transition-timing-function-in should be used on the `active` state that you're transitioning *to*
+ *  $transition-timing-function-out should be used on the `active` state that you're transitioning *from*
+ *
+ *  Usage -
+ *  .element {
+ *     transition: all $transition-timing-function-out;
+ *     &:hover,
+ *     &:focus {
+ *      transition: all $transition-timing-function-in;
+ *     }
+ *   }
+ *
+ */
 
 $transition-timing-function-base:         ease-in-out;
 $transition-timing-function-in:           ease-out;
@@ -422,7 +422,7 @@ $transition-timing-function-overlay-opacity-out: $transition-timing-function-har
 
 //** Padding applied to the modal body
 $modal-inner-padding:         30px !default;
-//** 
+//**
 $modal-dialog-margin:         30px;
 //** Padding applied to the modal title
 $modal-title-padding:         30px !default;
@@ -431,7 +431,7 @@ $modal-title-line-height:     $line-height-base !default;
 //** Background color of modal content area
 $modal-content-bg:            $color-white !default;
 //** Modal content border color
-$modal-content-border-color:  rgba(0,0,0,.2) !default;
+$modal-content-border-color:  rgba(0, 0, 0, .2) !default;
 //** Modal content border color **for IE8**
 $modal-content-fallback-border-color: #999 !default;
 
@@ -444,7 +444,7 @@ $modal-lg:                    900px !default;
 $modal-md:                    600px !default;
 $modal-sm:                    300px !default;
 
-/*================ Module Variables ================*/
+/* ================ Module Variables ================ */
 
 // #Pencil Banner
 $pencil-banner-padding-vertical:        8px;
@@ -461,7 +461,7 @@ $header-text-color:                     $text-color;
 $header-logo-width:                     120px;
 
 $header-dropdown-bg:                    $header-bg;
-$header-dropdown-box-shadow:            0px 8px 15px -10px transparentize($color-black, 0.85);
+$header-dropdown-box-shadow:            0 8px 15px -10px transparentize($color-black, 0.85);
 $header-dropdown-menu-spacing:          25px; // Horizontal spacing between dropdown menus
 
 // #Drawer
@@ -548,8 +548,8 @@ $dot-small-border-radius:               0;
 $dot-small-border-color:                $dot-border-color;
 $dot-small-active-border-color:         $color-black;
 $dot-small-size:                        22px;
-$dot-small-spacing:                     0px;
-$dot-small-padding:                     0px;
+$dot-small-spacing:                     0;
+$dot-small-padding:                     0;
 $dot-small-bottom-margin:               $dot-spacing;
 $dot-small-font-size:                   $font-size-xsmall;
 
@@ -567,7 +567,7 @@ $spacer-height-xlarge:                  $spacer * 12;
 $spacer-height-huge:                    $spacer * 16;
 
 // #Slideup
-$slideup-bg:                            #EDEDED;
+$slideup-bg:                            #ededed;
 $slideup-content-max-width:             500px;
 $slideup-padding-vertical:              $grid-gutter-width;
 
@@ -575,30 +575,30 @@ $slideup-padding-vertical:              $grid-gutter-width;
 $arrow-dimension:                       50px;
 $arrow-padding:                         8px;
 $arrow-border-radius:                   50%;
-$arrow-bg:                              transparentize(#DDD, 0.5);
-$arrow-bg-hover:                        transparentize(#DDD, 0.3);
+$arrow-bg:                              transparentize(#ddd, 0.5);
+$arrow-bg-hover:                        transparentize(#ddd, 0.3);
 $arrow-icon-length:                     ($arrow-dimension - $arrow-padding * 2)/2;
 $arrow-icon-width:                      2px;
-$arrow-icon-color:                      red;
+$arrow-icon-color:                      #f00;
 $arrow-icon-tip-length:                 12px;
 $arrow-icon-tip-skew:                   45deg;
 
 // #Slideshow
 $slideshow-dot-size:                    10px;
 $slideshow-dot-color:                   $color-white;
-$slideshow-dot-active-color:            red;
+$slideshow-dot-active-color:            #f00;
 
 // #Panel
 $panel-padding-vertical:                $grid-gutter-width/2;
 $panel-padding-horizontal:              $grid-gutter-width;
 $panel-margin-vertical:                 $grid-gutter-width;
-$panel-border:                          1px solid #EFEFEF;
+$panel-border:                          1px solid #efefef;
 $panel-expand-icon-size:                20px;
 $panel-expand-icon-stroke-width:        2px;
 
 // #Expandable List
 $expandable-list-item-padding-vertical: 12px;
-$expandable-list-item-border:           1px solid #EFEFEF;
+$expandable-list-item-border:           1px solid #efefef;
 
 // #Overlays
 $overlay-bg-color:                     $body-bg;

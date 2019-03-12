@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Dropdown from './dropdown';
 import { find } from '../core/utils';
 

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import BaseSection from './base';
 import DropdownManager from '../models/dropdownManager';

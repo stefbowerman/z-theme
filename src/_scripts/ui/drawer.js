@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import * as Utils from '../core/utils';
 
 const $document = $(document);
@@ -14,8 +15,6 @@ const classes = {
   backdropVisible: 'is-visible',
   bodyDrawerOpen: 'drawer-open'
 };
-
-let apiEnabled = false; // So we can only enable it once
 
 export default class Drawer {
   /**
@@ -164,27 +163,22 @@ export default class Drawer {
     e.preventDefault();
     this.hide();
   }
-
-  static enableDataAPI() {
-    if (apiEnabled) return;
-
-    $document.on('click.drawer', '[data-toggle="drawer"]', function(e) {
-      const $this   = $(this);
-      const $target = $($this.attr('data-target'));
-      const options = $.extend($target.data(), $this.data());
-      let data      = $this.data('drawer');
-
-      if ($this.is('a')) e.preventDefault();
-
-      if (!data) {
-        $this.data('drawer', (data = new Drawer($target, options)));
-        data.show();
-      }
-      else {
-        data.toggle();
-      }
-    });
-
-    apiEnabled = true;
-  }
 }
+
+// Data API
+$document.on('click.drawer', '[data-toggle="drawer"]', function(e) {
+  const $this   = $(this);
+  const $target = $($this.attr('data-target'));
+  const options = $.extend($target.data(), $this.data());
+  let data      = $this.data('drawer');
+
+  if ($this.is('a')) e.preventDefault();
+
+  if (!data) {
+    $this.data('drawer', (data = new Drawer($target, options)));
+    data.show();
+  }
+  else {
+    data.toggle();
+  }
+});

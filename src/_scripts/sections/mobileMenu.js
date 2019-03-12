@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseSection from './base';
 import Drawer from '../ui/drawer';
 

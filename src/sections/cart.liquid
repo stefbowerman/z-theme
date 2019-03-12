@@ -1,8 +1,8 @@
 <div data-section-id="{{ section.id }}" data-section-type="cart">
   <div class="layout-content-wrapper">
     <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-9">
 
           {% assign page_title = 'cart.general.title' | t %}
           {% include 'page-header', title: page_title %}
@@ -55,10 +55,10 @@
                               {% endfor %}
                             {% endunless %}
 
-                            <li class="visible-xs">{{ item.line_price | money }}</li>
+                            <li class="d-md-none">{{ item.line_price | money }}</li>
                           </ul>
 
-                          <div class="visible-xs">
+                          <div class="d-md-none">
                             <div style="max-width: 80px;">
                               <select class="cart-list__item-quantity form-control" aria-label="{{ 'cart.general.item_quantity' | t }}" data-item-quantity-select="updates_{{ item.key }}">
                                 {% for i in (0..10) %}
@@ -95,19 +95,19 @@
                   {% endfor %}
                 </div>
                 <div class="cart-list__footer">
-                  <div class="cart-list__footer-row cart-list__footer-row--secondary hidden-xs">
+                  <div class="cart-list__footer-row cart-list__footer-row--secondary d-none d-md-block">
                     {{ 'cart.general.shipping_at_checkout' | t }}
                   </div>
                   <div class="cart-list__footer-row cart-list__footer-row--primary">
                     <div class="cart-list__footer-width-container">
-                      <p class="h5 u-color-text clearfix" style="margin-bottom: 2rem;">
-                        <span style="float: left;">{{ 'cart.general.subtotal' | t }}</span>
-                        <span style="float: right">{{ cart.total_price | money }}</span>
+                      <p class="h5 text-body clearfix" style="margin-bottom: 2rem;">
+                        <span class="float-left">{{ 'cart.general.subtotal' | t }}</span>
+                        <span class="float-right">{{ cart.total_price | money }}</span>
                       </p>
                       {% if cart.total_discounts > 0 %}
                         <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
                       {% endif %}
-                      <p class="visible-xs">{{ 'cart.general.shipping_at_checkout' | t }}<br /><br/></p>
+                      <p class="d-md-none">{{ 'cart.general.shipping_at_checkout' | t }}<br /><br/></p>
                     </div>
                     <div class="cart-list__footer-width-container">
                       <p>
@@ -129,7 +129,7 @@
             {% comment %}
             Cart empty state
             {% endcomment %}
-            <div class="supports-cookies u-ta-center">
+            <div class="supports-cookies text-center">
               <p>{{ 'cart.general.empty' | t }}</p>
               <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
             </div>
@@ -140,7 +140,7 @@
             Browser cookies are required to use the cart. If cookies aren't enabled in the
             browser a message is displayed prompting the user to enable them.
             {% endcomment %}
-            <div class="supports-no-cookies u-ta-center">
+            <div class="supports-no-cookies text-center">
               <p>{{ 'cart.general.cookies_required' | t }}</p>
             </div>
           {% endif %}

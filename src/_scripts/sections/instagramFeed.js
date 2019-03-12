@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Handlebars from 'handlebars';
 import Instafeed from 'instafeed.js';
 import BaseSection from './base';

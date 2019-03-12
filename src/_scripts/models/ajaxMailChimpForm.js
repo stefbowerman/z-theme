@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * AJAX MailChimp Library
  * -----------------------------------------------------------------------------
@@ -79,7 +81,7 @@ export default class AJAXMailChimpForm {
       return false;
     }
 
-    this.$form    = form instanceof jQuery ? form : $(form);
+    this.$form    = form instanceof $ ? form : $(form);
     this.$input   = this.$form.find('input[type="email"]');
     this.$submit  = this.$form.find('[type="submit"]');
     this.settings = $.extend({}, defaults, options);

@@ -1,7 +1,13 @@
-// jQuery Plugins
+// jQuery
+import $ from 'jquery';
 import 'jquery-zoom';
 import 'chosen-js';
 import 'jquery-unveil';
+import 'slick-carousel';
+
+// Bootstrap JS
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/modal';
 
 // Core
 import * as Utils       from './core/utils';
@@ -10,12 +16,12 @@ import * as A11Y        from './core/a11y';
 import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
 
-// UI
-import Drawer           from './ui/drawer';
-import Overlay          from './ui/overlay';
-import Slideup          from './ui/slideup';
-import Tabs             from './ui/tabs';
-import QuantityAdjuster from './ui/quantityAdjuster';
+// UI - Import all to enable data API
+import './ui/drawer';
+import './ui/overlay';
+import './ui/slideup';
+import './ui/tabs';
+import './ui/quantityAdjuster';
 
 // Sections
 import SectionManager             from './sections/sectionManager';
@@ -47,7 +53,7 @@ import './templates/pageComponents';
 Animations.initialize();
 Breakpoints.initialize();
 
-(($, Modernizr) => {
+((Modernizr) => {
   const $document = $(document);
   const $body = $(document.body);
 
@@ -68,13 +74,6 @@ Breakpoints.initialize();
   sectionManager.register('subscription-slideup', SubscriptionSlideupSection);
   sectionManager.register('slideshow', SlideshowSection);
   sectionManager.register('customers-login', CustomersLoginSection);
-
-  // Initialize all UI
-  Drawer.enableDataAPI();
-  Overlay.enableDataAPI();
-  Slideup.enableDataAPI();
-  Tabs.enableDataAPI();
-  QuantityAdjuster.initialize();
 
   $('.in-page-link').on('click', (evt) => {
     A11Y.pageLinkFocus($(evt.currentTarget.hash));
@@ -110,24 +109,24 @@ Breakpoints.initialize();
 
   // Form event handling / validation
   $body.on('change keydown', '.form-control', (e) => {
-    $(e.currentTarget).parents('.form-group').removeClass('has-error');
+    $(e.currentTarget).removeClass('is-invalid');
   });
 
-  // START - Global handler for collapse plugin to add state class for open panels
-  const panelIsOpenClass = 'is-open';
+  // START - Global handler for collapse plugin to add state class for open expandable lists
+  const isOpenClass = 'is-open';
 
   $document.on('show.bs.collapse', '.collapse', (e) => {
-    $(e.currentTarget).parents('.panel').addClass(panelIsOpenClass);
+    $(e.currentTarget).parents('.expandable-list').addClass(isOpenClass);
   });
 
   $document.on('hide.bs.collapse', '.collapse', (e) => {
-    $(e.currentTarget).parents('.panel').removeClass(panelIsOpenClass);
+    $(e.currentTarget).parents('.expandable-list').removeClass(isOpenClass);
   });
 
-  $('.collapse.in').each(function() {
-    $(this).parents('.panel').addClass(panelIsOpenClass);
+  $('.collapse.show').each(function() {
+    $(this).parents('.expandable-list').addClass(isOpenClass);
   });
-  // END - Global handler for collapse plugin to add state class for open panels
+  // END - Global handler for collapse plugin to add state class for open expandable lists
 
   // Init any Product Cards on the page
   $('[data-product-card]').each((i, el) => {
@@ -139,4 +138,4 @@ Breakpoints.initialize();
     e.preventDefault();
     quickViewManager.onQuickViewTriggerClick($(this));
   });
-})(jQuery, Modernizr);
+})(Modernizr);

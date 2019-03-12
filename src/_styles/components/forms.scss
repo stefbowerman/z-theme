@@ -84,7 +84,7 @@ input[type="checkbox"]:focus {
 // Allows styling of select elements,
 // Removes inner box shadow on mobile safari
 select:not([multiple]),
-input:not([type=checkbox]):not([type=radio]),
+input:not([type="checkbox"]):not([type="radio"]),
 textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -137,7 +137,7 @@ output {
 
   // Customize the `:focus` state to imitate native WebKit styles.
   @include form-control-focus;
-  
+
   // Placeholder
   &::placeholder {
     color: $input-color-placeholder;
@@ -195,7 +195,7 @@ select.form-control {
 
 // Fix site zooming on small iOS devices
 // se use JS to add user-agent specific classes to the body tag
-@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: $screen-sm-max) {
+@media screen and (min-resolution: 0) and (max-width: $screen-sm-max) {
   [class*="ios"] .form-control {
     font-size: 16px;
   }
@@ -208,7 +208,7 @@ select.form-control {
 // be added to `.form-control` as it's not specific enough. For details, see
 // https://github.com/twbs/bootstrap/issues/11586.
 
-input[type="search"] {
+input[type="search"] { /* stylelint-disable-line no-duplicate-selectors */
   -webkit-appearance: none;
 }
 
@@ -222,7 +222,7 @@ input[type="search"] {
 //
 // Note that as of 9.3, iOS doesn't support `week`.
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen and (min-resolution: 0) {
   input[type="date"],
   input[type="time"],
   input[type="datetime-local"],
@@ -311,6 +311,7 @@ input[type="search"] {
 // Some special care is needed because <label>s don't inherit their parent's `cursor`.
 //
 // Note: Neither radios nor checkboxes can be readonly.
+/* stylelint-disable-next-line no-duplicate-selectors */
 input[type="radio"],
 input[type="checkbox"] {
   &[disabled],
@@ -320,6 +321,7 @@ input[type="checkbox"] {
   }
 }
 // These classes are used directly on <label>s
+/* stylelint-disable-next-line no-duplicate-selectors */
 .radio-inline,
 .checkbox-inline {
   &.disabled,
@@ -328,6 +330,7 @@ input[type="checkbox"] {
   }
 }
 // These classes are used on elements with <label> descendants
+/* stylelint-disable-next-line no-duplicate-selectors */
 .radio,
 .checkbox {
   &.disabled,
@@ -804,16 +807,12 @@ input[type="checkbox"] {
     font-size: $quantity-adjuster-font-size;
     height: $quantity-adjuster-inner-height;
     cursor: pointer;
+    -moz-appearance: textfield; // Remove the spinner - firefox + chrome
 
     &[disabled] {
       opacity: 0.25;
       cursor: $cursor-disabled;
     }
-  }
-
-  // Remove the spinner - firefox + chrome
-  input[type="number"] {
-    -moz-appearance:textfield;
   }
 
   input[type="number"]::-webkit-inner-spin-button,

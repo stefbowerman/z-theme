@@ -24,9 +24,9 @@
 
   <div class="container">
 
-    <div class="row">
-      <div class="col-md-12 col-md-offset-0 col-lg-10 col-lg-offset-1">
-        <div class="form-success alert alert-success u-ta-center hide" id="ResetSuccess">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="form-success alert alert-success text-center hide" id="ResetSuccess">
           {{ 'customer.recover_password.success' | t }}
         </div>
         <div class="row">
@@ -40,39 +40,38 @@
 
                 {{ form.errors | default_errors }}
 
-                <div class="form-group {% if form.errors contains 'email' %}has-error{% endif %}">
-                  <label for="CustomerEmail" class="control-label">
+                <div class="form-group">
+                  <label for="CustomerEmail">
                     {{ 'customer.login.email' | t }}
                   </label>
 
                   <input type="email"
-                  name="customer[email]"
-                  id="CustomerEmail"
-                  class="form-control"
-                  placeholder="{{ 'customer.login.email' | t }}"
-                  spellcheck="false"
-                  autocomplete="off"
-                  autocapitalize="off"
-                  autofocus>
+                    name="customer[email]"
+                    id="CustomerEmail"
+                    class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+                    placeholder="{{ 'customer.login.email' | t }}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off">
                 </div>
 
                 {% if form.password_needed %}
-                  <div class="form-group  {% if form.errors contains 'password' %}has-error{% endif %}">
-                    <label for="CustomerPassword" class="control-label">
+                  <div class="form-group">
+                    <label for="CustomerPassword">
                       {{ 'customer.login.password' | t }}
                     </label>
 
                     <input type="password"
-                    name="customer[password]"
-                    id="CustomerPassword"
-                    class="form-control"
-                    placeholder="{{ 'customer.login.password' | t }}">
+                      name="customer[password]"
+                      id="CustomerPassword"
+                      class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}"
+                      placeholder="{{ 'customer.login.password' | t }}">
                   </div>
                 {% endif %}
 
                 {% if form.password_needed %}
                   <div class="form-group">
-                    <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
+                    <a href="#recover" id="RecoverPassword" class="form-text text-right">{{ 'customer.login.forgot_password' | t }}</a>
                   </div>
                 {% endif %}
 
@@ -101,17 +100,17 @@
                 {% endif %}
 
                 <div class="form-group">
-                  <label for="RecoverEmail" class="control-label">
+                  <label for="RecoverEmail">
                     {{ 'customer.recover_password.email' | t }}
                   </label>
                   <input type="email"
-                  name="email"
-                  id="RecoverEmail"
-                  class="form-control"
-                  placeholder="{{ 'customer.recover_password.email' | t }}"
-                  spellcheck="false"
-                  autocomplete="off"
-                  autocapitalize="off">
+                    name="email"
+                    id="RecoverEmail"
+                    class="form-control"
+                    placeholder="{{ 'customer.recover_password.email' | t }}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off">
                 </div>
 
                 <div class="form-group">
@@ -126,7 +125,7 @@
 
           </div>
 
-          <div class="col-sm-6 col-sm-offset-0 col-lg-5 col-lg-offset-2">
+          <div class="col-sm-6 col-lg-5 offset-lg-2">
             <h2 class="h4">{{ 'customer.register.title' | t }}</h2>
             <p>{{ 'customer.register.subtitle' | t }}</p>
 
@@ -141,7 +140,7 @@
               {% endif %}
 
               <div class="form-group">
-                <label for="FirstName" class="control-label">
+                <label for="FirstName">
                   {{ 'customer.register.first_name' | t }}
                 </label>
                 <input type="text"
@@ -149,12 +148,11 @@
                   id="FirstName"
                   class="form-control"
                   placeholder="{{ 'customer.register.first_name' | t }}"
-                  autofocus
                   {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
               </div>
 
               <div class="form-group">
-                <label for="LastName" class="control-label">
+                <label for="LastName">
                   {{ 'customer.register.last_name' | t }}
                 </label>
 
@@ -166,15 +164,15 @@
                   {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
               </div>
 
-              <div class="form-group {% if form.errors contains 'email' %}has-error{% endif %}">
-                <label for="Email" class="control-label">
+              <div class="form-group">
+                <label for="Email">
                   {{ 'customer.register.email' | t }}
                 </label>
 
                 <input type="email"
                   name="customer[email]"
                   id="Email"
-                  class="form-control"
+                  class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
                   placeholder="{{ 'customer.register.email' | t }}"
                   value="{% if form.email %}{{ form.email }}{% endif %}"
                   spellcheck="false"
@@ -182,25 +180,22 @@
                   autocapitalize="off">
               </div>
 
-              <div class="form-group {% if form.errors contains 'password' %}has-error{% endif %}">
-                <label for="CreatePassword" class="control-label">
+              <div class="form-group">
+                <label for="CreatePassword">
                   {{ 'customer.register.password' | t }}
                 </label>
 
                 <input type="password"
                   name="customer[password]"
                   id="CreatePassword"
-                  class="form-control"
+                  class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}"
                   placeholder="{{ 'customer.register.password' | t }}">
               </div>
 
               <div class="form-group">
-                <div class="checkbox">
-                  <label for="accepts-marketing">
-                    <input type="checkbox" name="customer[accepts_marketing]" checked="checked" value="true" id="accepts-marketing" />
-                    <span class="checkbox-ui"></span>
-                    Receive news and special offers
-                  </label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="customer[accepts_marketing]" checked="checked" value="true" id="accepts-marketing" class="custom-control-input"/>
+                  <label class="custom-control-label" for="accepts-marketing">Receive news and special offers</label>
                 </div>
               </div>
               

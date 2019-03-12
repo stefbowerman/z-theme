@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Cookies from 'js-cookie';
 
 const prefix = '_ztheme_';

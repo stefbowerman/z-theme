@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseTemplate from './base';
 import SlideupAlert from '../ui/slideupAlert';
 import Tabs from '../ui/tabs';

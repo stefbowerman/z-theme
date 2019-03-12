@@ -67,7 +67,7 @@ hr {
   border-top: $hr-border-width solid $hr-border-color;
 }
 
-/*================ Emphasis + Misc ================*/
+/* ================ Emphasis + Misc ================ */
 small,
 .small {
   font-size: $font-size-small;
@@ -102,7 +102,7 @@ small,
 
 @include bg-variant('.bg-danger', $state-danger-bg);
 
-/*================ Lists ================*/
+/* ================ Lists ================ */
 
 // Unordered and Ordered lists
 ul,
@@ -114,7 +114,7 @@ ol {
     margin-bottom: 0;
   }
 
-  li:not(last-child) {
+  li:not(:last-child) {
     margin-bottom: 5px;
   }
 }
@@ -185,7 +185,7 @@ dd {
 }
 
 
-/*================ Misc ================*/
+/* ================ Misc ================ */
 
 // Abbreviations and acronyms
 abbr[title],

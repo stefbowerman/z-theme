@@ -3,7 +3,7 @@
 // -------------------------
 
 // Base Class: .overlay-card
-// Modifier Classes: 
+// Modifier Classes:
 //   - .overlay-card--bg-dark
 //   - .overlay-card--bg-light
 //   - .overlay-card--content-top
@@ -37,7 +37,7 @@
 
     .overlay-card--bg-light & {
       background-color: $overlay-card-bg-overlay-light-color;
-    }    
+    }
   }
 }
 
@@ -99,7 +99,7 @@
     .overlay-card__bg,
     .overlay-card__contents {
       transform: transition $transition-duration-base $transition-timing-function-in-out-ui;
-    }    
+    }
     .overlay-card__bg {
       transform: scale(1.06);
     }

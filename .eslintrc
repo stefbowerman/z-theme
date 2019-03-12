@@ -17,8 +17,6 @@
     }
   },
   "globals": {
-    "jQuery": "readonly",
-    "$": "readonly",
     "Modernizr": "readonly",
     "theme": "readonly"
   },

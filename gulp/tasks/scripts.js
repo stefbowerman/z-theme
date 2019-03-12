@@ -12,7 +12,8 @@ const uglify = require('gulp-uglify');
 const uglifyify = require('uglifyify');
 const watchify = require('watchify');
 const bundleLogger = require('../lib/bundleLogger');
-const handleErrors = require('../lib/handleErrors');
+const colors = require('ansi-colors');
+const log = require('fancy-log');
 
 const browserifyThis = (bundleConfig) => {
   const paths = {
@@ -32,12 +33,17 @@ const browserifyThis = (bundleConfig) => {
     bundleLogger.start(paths.src);
 
     return b.bundle()
-      .on('error', handleErrors)
+      .on('error', function(error) {
+        bundleLogger.error(error);
+      })
       .pipe(source(bundleConfig.outputName))
       .pipe(buffer()) // optional, remove if no need to buffer file contents
       // .pipe(uglify())
       .pipe(gulp.dest(paths.dest))
-      .pipe(size({showFiles: true, title: 'JS: size of'}));
+      .pipe(size({showFiles: true, title: 'JS: size of'}))
+      .on('finish', function() {
+        bundleLogger.end(paths.src);
+      });
   };
 
   b = watchify(b);

@@ -10,7 +10,8 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const mergeStream = require('merge-stream');
 const styleWarning = require('../lib/stylesWarning');
-const handleErrors = require('../lib/handleErrors');
+const colors = require('ansi-colors');
+const log = require('fancy-log');
 
 const sassOptions = {
   outputStyle: 'nested', // libsass doesn't support expanded yet
@@ -21,7 +22,7 @@ const sassOptions = {
 const postcssPlugins = [
   autoprefixer(), // Browsers pulled from .browserslistrc
   cssnano({
-    discardUnused: true, // don't discard unused  at-rules (@keyframes for example that aren't used)
+    discardUnused: true, // don't discard unused at-rules (@keyframes for example that aren't used)
     zindex: false, // don't optimize z-index stacking... very dangerous
     autoprefixer: false // don't remove unnecessary prefixes. we're setting this above
   })
@@ -34,8 +35,11 @@ const stylePipeline = (src) => {
   };
 
   return gulp.src(paths.src)
-    .pipe(sass(sassOptions).on('error', sass.logError))
-    .on('error', handleErrors)
+    .pipe(sass(sassOptions))
+    .on('error', function(error) {
+      log.error(`${colors.bold.red('SCSS Compilation Error')}: ${error.message}`);
+      this.emit('end');
+    })
     .pipe(postcss(postcssPlugins))
     .pipe(insert.prepend(styleWarning()))
     .pipe(gulp.dest(paths.dest))

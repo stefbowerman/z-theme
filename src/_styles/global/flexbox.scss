@@ -207,7 +207,7 @@
   @media screen and (max-width: $screen-xs-max) { @include flex-direction(column); }
 
   &.flex-col-reverse {
-   @media screen and (max-width: $screen-xs-max) { @include flex-direction(column-reverse); }
+    @media screen and (max-width: $screen-xs-max) { @include flex-direction(column-reverse); }
   }
 }
 

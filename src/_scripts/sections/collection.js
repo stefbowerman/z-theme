@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseSection from './base';
 import CollectionFilters from '../view/collection/filters';
 import CollectionSort from '../view/collection/sort';

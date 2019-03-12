@@ -62,22 +62,20 @@
 
       {% comment %} Construct a list for the options if there's more than 1 {% endcomment %}
       {% if filter_type_options_count > 1 %}
-        <div class="panel">
-          <div class="expandable-list" data-mobile-filter-group>
-            <div class="expandable-list__header">
-              <a href="#{{ filter_type_id }}"
-                 class="expandable-list__header-title"
-                 data-toggle="collapse" 
-                 aria-expanded="{% if filter_type_active %}true{% else %}false{% endif %}"
-                 aria-controls="{{ filter_type_id }}">
-                {{ filter_type | capitalize }} {% include 'icon-arrow-down' %}
-              </a>
-            </div>
-
-            <div id="{{ filter_type_id }}" class="collapse {% if filter_type_active %}in{% endif %}">
-              {{ filter_type_body }}
-            </div>            
+        <div class="expandable-list" data-mobile-filter-group>
+          <div class="expandable-list__header">
+            <a href="#{{ filter_type_id }}"
+               class="expandable-list__header-title"
+               data-toggle="collapse" 
+               aria-expanded="{% if filter_type_active %}true{% else %}false{% endif %}"
+               aria-controls="{{ filter_type_id }}">
+              {{ filter_type | capitalize }} {% include 'icon-caret-down' %}
+            </a>
           </div>
+
+          <div id="{{ filter_type_id }}" class="collapse {% if filter_type_active %}show{% endif %}">
+            {{ filter_type_body }}
+          </div>            
         </div>
       {% endif %}
 

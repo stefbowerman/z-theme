@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const selectors = {
   el: '[data-product-card]',
   gallery: '[data-product-card-gallery]',

@@ -56,7 +56,7 @@
     right: 0;
     width: $arrow-icon-width;
   }
-  
+
   &:before {
     top: -#{$arrow-icon-tip-length};
     transform: rotate(-#{$arrow-icon-tip-skew});

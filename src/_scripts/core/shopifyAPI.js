@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * Retrieve a JSON respresentation of the users cart
  *

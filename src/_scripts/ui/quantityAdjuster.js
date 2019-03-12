@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * Quantity Adjuster Scripts
  * -----------------------------------------------------------------------------
@@ -18,8 +20,6 @@ const selectors = {
 };
 
 const dataKey = 'quantity-adjuster';
-
-let initialized = false;
 
 export default class QuantityAdjuster {
   /**
@@ -180,23 +180,17 @@ export default class QuantityAdjuster {
       QuantityAdjuster.ensureQuantityAdjuster(el);
     });
   }
-
-  static initialize() {
-    if (initialized) return;
-
-    const shopifyEvents = [
-      'shopify:section:unload',
-      'shopify:section:select',
-      'shopify:section:deselect',
-      'shopify:section:reorder',
-      'shopify:block:select',
-      'shopify:block:deselect'
-    ];
-
-    $(document).on(shopifyEvents.join(' '), QuantityAdjuster.refresh);
-
-    QuantityAdjuster.refresh();
-
-    initialized = true;
-  }
 }
+
+const shopifyEvents = [
+  'shopify:section:unload',
+  'shopify:section:select',
+  'shopify:section:deselect',
+  'shopify:section:reorder',
+  'shopify:block:select',
+  'shopify:block:deselect'
+];
+
+$(document).on(shopifyEvents.join(' '), QuantityAdjuster.refresh);
+
+QuantityAdjuster.refresh();

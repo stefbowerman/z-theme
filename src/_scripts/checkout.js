@@ -1,7 +1,10 @@
+// jQuery
+import $ from 'jquery';
+
 // Core
 import * as Image from './core/image';
 
-(($, Modernizr) => {
+((Modernizr) => {
   const $document = $(document);
   const $body = $(document.body);
 
@@ -57,4 +60,4 @@ import * as Image from './core/image';
 
     $body.addClass(classes.checkoutReady);
   });
-})(jQuery, Modernizr);
+})(Modernizr);

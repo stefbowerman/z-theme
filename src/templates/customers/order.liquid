@@ -31,7 +31,7 @@
         <div data-order="{{ order.id }}">
           {% if order.cancelled %}
             {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
-            <div class="alert alert-danger u-ta-center">
+            <div class="alert alert-danger text-center">
               <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}.  {{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
             </div>
             <br />
@@ -71,7 +71,7 @@
                         <p>{{ line_item.variant.title  | link_to: line_item.variant.url }}</p>
                       {% endif %}
                       <p>
-                        <span class="u-tt-uppercase">{{ 'customer.order.line_item_quantity' | t }}</span>: {{ line_item.quantity }}
+                        <span class="text-transform-none">{{ 'customer.order.line_item_quantity' | t }}</span>: {{ line_item.quantity }}
 
                         {% if line_item.quantity > 1 %}
                           ({{ line_item.quantity | times: line_item.price | money }} each)
@@ -98,13 +98,13 @@
                         </div>
                       {% endif %}
                     </td>
-                    <td class="u-ta-right">
+                    <td class="text-right">
                       <strong>{{ line_item.line_price | money }}</strong>
                     </td>
                   </tr>
                 {% endfor %}
               </tbody>
-              <tfoot class="u-ta-right">
+              <tfoot class="text-right">
                 <tr>
                   <td colspan="3">{{ 'customer.order.subtotal' | t }}: <strong>{{ order.subtotal_price | money }}</strong></td>
                 </tr>

@@ -67,10 +67,6 @@
  *   .slideup__form-success
  */
 
-.slideup__form-content {
-  position: relative;
-}
-
 .slideup__form-message {
   position: absolute;
   top: 0;
@@ -89,6 +85,8 @@
 }
 
 .slideup__form-content {
+
+  position: relative;
 
   .slideup__form {
     opacity: 1;

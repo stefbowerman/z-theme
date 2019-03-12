@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const classes = {
   open: 'is-open',
   forcedOpen: 'is-forced-open'

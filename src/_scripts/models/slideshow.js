@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const selectors = {
   slideshowWrapper: '[data-slideshow-wrapper]',
   slideshow: '[data-slideshow]'

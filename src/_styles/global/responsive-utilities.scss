@@ -19,6 +19,7 @@
 // Source: http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
 
 @at-root {
+  /* stylelint-disable-next-line at-rule-no-vendor-prefix */
   @-ms-viewport {
     width: device-width;
   }

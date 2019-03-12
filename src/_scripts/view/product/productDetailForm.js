@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import * as Utils from '../../core/utils';
 import * as Currency from '../../core/currency';
 import Variants from './variants';

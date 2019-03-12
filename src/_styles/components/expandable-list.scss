@@ -34,7 +34,7 @@
 
   .panel.is-open & svg.icon {
     transform: rotate(180deg);
-  }  
+  }
 }
 
 .expandable-list__body {
@@ -45,9 +45,9 @@
   padding: $expandable-list-item-padding-vertical 0;
 
   &:not(:last-of-type) {
-    border-bottom: $expandable-list-item-border;  
+    border-bottom: $expandable-list-item-border;
   }
-  
+
 }
 
 .expandable-list__item-title {

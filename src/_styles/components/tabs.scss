@@ -22,7 +22,7 @@
 
     &:not(:last-child) {
       margin-right: 5px;
-    }    
+    }
   }
 }
 
@@ -30,7 +30,7 @@
 
   &.is-active {
     cursor: default;
-    border-bottom: 1px solid $color-black
+    border-bottom: 1px solid $color-black;
   }
 }
 

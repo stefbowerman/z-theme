@@ -82,8 +82,8 @@
         {% else %}
           {% if image != blank %}
             {% if image_small != blank %}
-              <img src="{{ image       | img_url: '1600x' }}" class="hidden-xs hidden-sm" />
-              <img src="{{ image_small | img_url: '900x' }}"  class="visible-xs visible-xs" />
+              <img src="{{ image       | img_url: '1600x' }}" class="d-none  d-md-block" />
+              <img src="{{ image_small | img_url: '900x' }}"  class="d-block d-md-none" />
             {% else %}
               <img src="{{ image | img_url: '1600x' }}" />
             {% endif %}

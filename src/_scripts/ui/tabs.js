@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import * as Utils from '../core/utils';
 
@@ -16,8 +17,6 @@ const classes = {
   tabActive: 'is-active',
   tabPanelActive: 'is-active'
 };
-
-let apiEnabled = false; // So we can only enable it once
 
 export default class Tabs {
   /**
@@ -171,24 +170,18 @@ export default class Tabs {
     e.preventDefault();
     this.activate($(e.currentTarget));
   }
-
-  static enableDataAPI() {
-    if (apiEnabled) return;
-
-    $document.on('click.tabs', '[data-toggle="tab"]', function(e) {
-      e.preventDefault();
-
-      const $this      = $(this);
-      const $container = $this.parents(selectors.tabsContainer);
-      let data         = $container.data('tabs');
-
-      if (!data) {
-        data = new Tabs($container);
-        $container.data('tabs', data);
-        data.activate($(e.currentTarget));
-      }
-    });
-
-    apiEnabled = true;
-  }
 }
+
+$document.on('click.tabs', '[data-toggle="tab"]', function(e) {
+  e.preventDefault();
+
+  const $this      = $(this);
+  const $container = $this.parents(selectors.tabsContainer);
+  let data         = $container.data('tabs');
+
+  if (!data) {
+    data = new Tabs($container);
+    $container.data('tabs', data);
+    data.activate($(e.currentTarget));
+  }
+});

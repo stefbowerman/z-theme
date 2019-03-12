@@ -2,9 +2,8 @@
   {% if section.settings.banner_enabled %}
     <div class="pencil-banner">
       <div class="container">
-        <div class="hidden-xs hidden-sm">{{ section.settings.banner_content }}</div>
-        <div class="visible-xs visible-sm">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
-
+        <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
+        <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
         {% comment %}<a href="#" class="pencil-banner__close" data-pencil-banner-close>&times;</a>{% endcomment %}
       </div>
     </div>

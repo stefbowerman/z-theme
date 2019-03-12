@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default class BaseSection {
   constructor(container, name) {
     this.$container = container instanceof $ ? container : $(container);

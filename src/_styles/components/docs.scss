@@ -20,7 +20,7 @@
   margin: 80px 0 50px;
   padding-top: 100px; // Make room for header when using in-page links to jump to the title
   padding-bottom: 5px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $color-black;
 }
 
 .docs-subtitle {
@@ -53,7 +53,7 @@
 
   &.docs-well--constrained {
     max-width: 500px;
-  }  
+  }
 }
 
 .docs-code-example {
@@ -115,7 +115,6 @@
 
 .styleguide-color {
   display: inline-block;
-  margin-right: 15px;
   margin: 0 15px 15px 0;
 
   code {
@@ -136,7 +135,7 @@
   &.styleguide-color__swatch--black { background-color: $color-black; }
   &.styleguide-color__swatch--dark-grey { background-color: $color-dark-grey; }
   &.styleguide-color__swatch--grey { background-color: $color-grey; }
-  &.styleguide-color__swatch--white { background-color: $color-white; border-color: darken($color-white, 5%); }
+  &.styleguide-color__swatch--white { background-color: $color-white; border-color: darken($color-white, 5%); } /* stylelint-disable-line declaration-block-single-line-max-declarations */
   &.styleguide-color__swatch--primary { background-color: $color-primary; }
   &.styleguide-color__swatch--emerald { background-color: $color-emerald; }
 }

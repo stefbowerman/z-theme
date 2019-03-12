@@ -15,9 +15,8 @@
     
     {{ checkout_scripts }}
 
-    {% comment %} So we can use jQuery to update checkout page content {% endcomment %}
-    <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor-head.js' | asset_url }}"></script><!--<![endif]-->
-    <!--[if lt IE 9]><script src="{{ 'vendor-head.js' | asset_url }}"></script><![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}"></script><!--<![endif]-->
+    <!--[if lt IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
 
     <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'checkout.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
     <!--[if lt IE 9]><script src="{{ 'checkout.js' | asset_url }}"></script><![endif]-->    

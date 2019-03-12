@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseSection from './base';
 
 const SECTION_TYPE_ATTR = 'data-section-type';

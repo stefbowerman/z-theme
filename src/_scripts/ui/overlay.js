@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import * as Utils from '../core/utils';
 
 const $document = $(document);
@@ -12,8 +13,6 @@ const classes = {
   visible: 'is-visible',
   bodyOverlayOpen: 'overlay-open'
 };
-
-let apiEnabled = false; // So we can only enable it once
 
 export default class Overlay {
   /**
@@ -146,27 +145,22 @@ export default class Overlay {
     e.preventDefault();
     this.hide();
   }
-
-  static enableDataAPI() {
-    if (apiEnabled) return;
-
-    $document.on('click.overlay', '[data-toggle="overlay"]', function(e) {
-      const $this   = $(this);
-      const $target = $($this.attr('data-target'));
-      const options = $.extend($target.data(), $this.data());
-      let data      = $this.data('overlay');
-
-      if ($this.is('a')) e.preventDefault();
-
-      if (!data) {
-        $this.data('overlay', (data = new Overlay($target, options)));
-        data.show();
-      }
-      else {
-        data.toggle();
-      }
-    });
-
-    apiEnabled = true;
-  }
 }
+
+// Data API
+$document.on('click.overlay', '[data-toggle="overlay"]', function(e) {
+  const $this   = $(this);
+  const $target = $($this.attr('data-target'));
+  const options = $.extend($target.data(), $this.data());
+  let data      = $this.data('overlay');
+
+  if ($this.is('a')) e.preventDefault();
+
+  if (!data) {
+    $this.data('overlay', (data = new Overlay($target, options)));
+    data.show();
+  }
+  else {
+    data.toggle();
+  }
+});

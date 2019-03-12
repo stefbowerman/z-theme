@@ -1,4 +1,4 @@
-/*================ GLOBAL ================*/
+/* ================ GLOBAL ================ */
 @import 'global/variables';
 @import 'global/mixins';
 @import 'global/reboot';
@@ -9,19 +9,19 @@
 @import 'global/layout';
 @import 'global/flexbox';
 
-/*================ COMPONENTS ================*/
+/* ================ COMPONENTS ================ */
 @import 'components/buttons';
 @import 'components/forms';
 
-/*================ CHECKOUT ================*/
+/* ================ CHECKOUT ================ */
 $checkout-bp-sm-min: 750px;
 $checkout-bp-md-min: 1000px;
 $checkout-bp-sm-max: $checkout-bp-md-min - 1px;
 
 $checkout-grid-gutter-width: 30px;
-$checkout-bg: #FAFAFA;
-$checkout-border: #F00;
-$checkout-border-subtle: mix(#FFF, #F00, 80%);
+$checkout-bg: #fafafa;
+$checkout-border: #f00;
+$checkout-border-subtle: mix(#fff, #f00, 80%);
 
 $total-line-vertical-spacing: 17.5px;
 
@@ -36,7 +36,7 @@ $header-z-index: 100;
 @import 'checkout/sidebar';
 
 .icon-svg--color-accent {
-  color: #F00;
+  color: #f00;
   vertical-align: inherit;
 }
 
@@ -79,7 +79,7 @@ ul.policy-list {
 
 // Mobile Design with max-width: 749px
 @media screen and (max-width: $checkout-bp-sm-max) {
-  
+
 }
 
 html.js {

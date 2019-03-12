@@ -85,7 +85,7 @@
       size: auto;
       position: center;
       repeat: no-repeat;
-    }    
+    }
   }
 
   &.dots--small .dot__inner {
@@ -103,7 +103,7 @@
   &.dot--black {
     .dot__inner {
       border-color: $color-dot-black !important;
-      background-color: $color-dot-black !important; 
+      background-color: $color-dot-black !important;
     }
   }
   &.dot--grey,

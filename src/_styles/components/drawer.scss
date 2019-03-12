@@ -33,7 +33,7 @@ body.drawer-open {
     transform: translateX(0%);
     transition: all $transition-duration-base $transition-timing-function-base;
   }
-  
+
   // Ensure that the drawer is full width on screen sizes below this
   @media (min-width: $screen-xs-min) {
     max-width: $drawer-max-width;
@@ -81,7 +81,7 @@ body.drawer-open {
 
 .drawer__footer {
   margin-top: 20px;
-  padding: $headings-margin-bottom 0 0;  
+  padding: $headings-margin-bottom 0 0;
   border-top: 2px solid $drawer-border-color;
 }
 

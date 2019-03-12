@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <label for="AddressFirstNameNew" class="control-label">
+        <label for="AddressFirstNameNew">
           {{ 'customer.addresses.first_name' | t }}
         </label>
 
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="AddressLastNameNew" class="control-label">
+        <label for="AddressLastNameNew">
           {{ 'customer.addresses.last_name' | t }}
         </label>
 
@@ -36,7 +36,7 @@
   </div>
 
   <div class="form-group">
-    <label for="AddressCompanyNew" class="control-label">
+    <label for="AddressCompanyNew">
       {{ 'customer.addresses.company' | t }}
     </label>
 
@@ -50,7 +50,7 @@
   </div>
 
   <div class="form-group">
-    <label for="AddressAddress1New" class="control-label">
+    <label for="AddressAddress1New">
       {{ 'customer.addresses.address1' | t }}
     </label>
 
@@ -64,7 +64,7 @@
   </div>
 
   <div class="form-group">
-    <label for="AddressAddress2New" class="control-label">
+    <label for="AddressAddress2New">
       {{ 'customer.addresses.address2' | t }}
     </label>
     <input type="text"
@@ -77,7 +77,7 @@
   </div>
 
   <div class="form-group">
-    <label for="AddressCityNew" class="control-label">
+    <label for="AddressCityNew">
       {{ 'customer.addresses.city' | t }}
     </label>
     <input type="text"
@@ -93,7 +93,7 @@
     <div class="col-md-4">
 
       <div class="form-group">
-        <label for="AddressCountryNew" class="control-label">
+        <label for="AddressCountryNew">
           {{ 'customer.addresses.country' | t }}
         </label>
         <select
@@ -109,7 +109,7 @@
     <div class="col-md-4">
 
       <div class="form-group">
-        <label for="AddressProvinceNew" class="control-label">
+        <label for="AddressProvinceNew">
           {{ 'customer.addresses.state' | t }}
         </label>
         <input type="text"
@@ -123,7 +123,7 @@
     <div class="col-md-4">
 
       <div class="form-group">
-        <label for="AddressZipNew" class="control-label">
+        <label for="AddressZipNew">
           {{ 'customer.addresses.zip' | t }}
         </label>
         <input type="text"
@@ -138,7 +138,7 @@
   </div>
 
   <div class="form-group">
-    <label for="AddressPhoneNew" class="control-label">
+    <label for="AddressPhoneNew">
       {{ 'customer.addresses.phone' | t }}
     </label>
     <input type="tel"
@@ -148,16 +148,15 @@
       placeholder="{{ 'customer.addresses.phone' | t }}"
       value="{{ form.phone }}"
       pattern="[0-9\-]*">
-  </div>                  
+  </div>
 
   <div class="form-group">
-    <div class="checkbox">
-      {{ form.set_as_default_checkbox }}
-
-      <label for="address_default_address_new">
+    <div class="custom-control custom-checkbox">
+      {% comment %}{{ form.set_as_default_checkbox }}{% endcomment %}
+      <input type="checkbox" name="address[default]" value="1" class="custom-control-input" id="address_default_address_new" />
+      <label class="custom-control-label" for="address_default_address_new">
         {{ 'customer.addresses.set_default' | t }}
       </label>
-      <span class="checkbox-ui"></span>
     </div>
   </div>
 

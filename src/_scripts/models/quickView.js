@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
 import * as Utils from '../core/utils';
 import ProductDetailForm from '../view/product/productDetailForm';

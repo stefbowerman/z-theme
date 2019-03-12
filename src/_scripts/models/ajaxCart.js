@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Handlebars from 'handlebars';
 import * as Utils from '../core/utils';
 import * as ShopifyAPI from '../core/shopifyAPI';

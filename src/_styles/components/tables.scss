@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 // -------------------------
 // Tables
 // -------------------------
@@ -61,7 +63,7 @@ th {
   .table {
     background-color: $body-bg;
   }
-  
+
   > thead > tr > th {
     text-transform: uppercase;
     color: $color-black;
@@ -249,3 +251,4 @@ table {
     }
   }
 }
+/* stylelint-enable */

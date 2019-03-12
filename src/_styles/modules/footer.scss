@@ -9,7 +9,7 @@
 
   &, a, h1, h2, h3, h4, h5, h6 {
     color: $footer-text-color;
-  }  
+  }
 }
 
 .footer-block {
@@ -34,14 +34,14 @@
 
     & + & {
       margin-left: 30px;
-    }    
+    }
   }
 
   // Add extra horizontal spacing between menus on large screens
   // @media (min-width: $screen-lg-min) {
   //   & + & {
   //     margin-left: 80px;
-  //   } 
+  //   }
   // }
 
 }

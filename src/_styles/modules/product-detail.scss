@@ -89,7 +89,7 @@
 }
 
 // Target for zoom
-.product-gallery__slideshow-slide {
+.product-gallery__slideshow-slide { /* stylelint-disable-line no-duplicate-selectors */
   display: inline-block;
 
   &.is-zoomable {
@@ -100,6 +100,6 @@
   &.is-zoomed {
     cursor: zoom-out;
     cursor: -webkit-zoom-out;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
   }
 }

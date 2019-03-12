@@ -25,7 +25,7 @@
       {% endif %}
     {% endcapture %}
     {% capture hero_subtitle %}
-      <div class="u-tt-none">
+      <div class="text-transform-none">
         {% if article.author != blank %}
           By {{ article.author }} | 
         {% endif %}
@@ -68,7 +68,7 @@
 
       {% if paginate.next.is_link %}
         {% comment %} See _scripts/sections/blog.js {% endcomment %}
-        <div class="u-ta-center" style="padding: 10px 0" data-pagination>
+        <div class="text-center" style="padding: 10px 0" data-pagination>
           <a href="{{ paginate.next.url }}" data-next-page>Load More</a>
         </div>
       {% endif %}

@@ -24,7 +24,7 @@
 
   &.is-fixed {
     position: fixed;
-  }  
+  }
 }
 
 // Make a special version of .container that is fluid w/ max width and vertical flex-alignment of child elements
@@ -81,12 +81,12 @@
   &.header-nav--right {
     padding-right: 0;
     @include justify-content(flex-end);
-  }  
+  }
 
   &.header-nav--center {
     @media (min-width: $header-bp-min) {
-      @include justify-content(center);  
-    } 
+      @include justify-content(center);
+    }
   }
 
 
@@ -98,14 +98,14 @@
     // This gives us more room to use for menus. :)
     // Move these rules into the `&:not(.header-nav--left)` selector below if you want a left aligned logo and center menu that is *actually* centered with the screen
     @include flex-grow(inherit);
-    @include flex-basis(auto);    
+    @include flex-basis(auto);
 
-    &:not(.header-nav--left) {      
-      
+    &:not(.header-nav--left) {
+
       @media (max-width: $header-bp-min - 1px) {
         padding-left: 0;
       }
-  
+
     }
   }
 
@@ -120,7 +120,7 @@
     @media (min-width: $header-bp-min) {
       display: none;
     }
-  }  
+  }
 }
 
 // List of menu items
@@ -151,7 +151,7 @@
 .header-cart__badge {
   display: inline-block;
   position: relative;
-  
+
   &.has-items {
 
   }

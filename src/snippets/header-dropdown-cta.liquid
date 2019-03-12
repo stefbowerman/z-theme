@@ -6,8 +6,8 @@
   Usage:
 
   {% include 'header-dropdown-cta',
+              cta_image: { image } - required  
               cta_link: { url } - optional
-              cta_image: { image } - optional
               cta_text: { string } - optional
   %}
 
@@ -18,27 +18,11 @@
   {% assign has_cta_link = true %}
 {% endif %}
 
-{% if cta_image or cta_text != blank %}
+{% if cta_image %}
   <div class="header-dropdown__cta">
-    {% if cta_image %}
-
-      {% if has_cta_link %}<a href="{{ cta_link }}">{% endif %}
-        <div class="header-dropdown__cta-square" style="background-image: url({{ cta_image | img_url: '500x' }})"></div>
-        <span>{{ cta_text }}</span>
-      {% if has_cta_link %}</a>{% endif %}
-
-    {% else %}
-
-      <div class="header-dropdown__cta-square">
-        <span class="header-dropdown__cta-square-text">
-          {% if has_cta_link != blank %}
-            <a href="{{ cta_link }}">
-          {% endif %}
-            {{ cta_text }}
-          {% if has_cta_link != blank %}</a>{% endif %}
-        </span>
-      </div>
-
-    {% endif %}
+    {% if has_cta_link %}<a href="{{ cta_link }}">{% endif %}
+      <div class="header-dropdown__cta-image" style="background-image: url({{ cta_image | img_url: '600x' }})"></div>
+      <span>{{ cta_text }}</span>
+    {% if has_cta_link %}</a>{% endif %}
   </div>
 {% endif %}

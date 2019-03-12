@@ -7,11 +7,11 @@
 {% capture subtitle %}{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: article_date }}{% endcapture %}
 
 <div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="article">
-  <div class="container">
 
-    <div class="article-content-wrapper" data-article-content-wrapper>
-      <article role="article" itemscope itemtype="http://schema.org/Article">
+  <div class="article-content-wrapper" data-article-content-wrapper>
+    <article role="article" itemscope itemtype="http://schema.org/Article">
 
+      <div class="container-fluid-max">
         {% include 'page-hero',
                     id: article.id,
                     background_image: article.image,
@@ -19,9 +19,12 @@
                     title: article.title,
                     subtitle: subtitle
         %}
+      </div>
+      
+      <div class="container">
 
-        <div class="row">
-          <div class="col-lg-10 col-lg-offset-1 col-xl-8 col-xl-offset-2">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
 
             {% if settings.social_sharing_blog %}
               {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
@@ -42,10 +45,10 @@
             </div>
           </div>
         </div>
-      </article>
-    </div>
-
+      </div>
+    </article>
   </div>
+
 </div>
 
 {% schema %}

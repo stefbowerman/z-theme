@@ -21,7 +21,7 @@
                       <div class="expandable-list__header">
                         {% if link.links.size > 0 %}
                           <a href="#{{ sublist_id }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ sublist_id }}">
-                            {{ link.title }} {% include 'icon-arrow-down' %}
+                            {{ link.title }} {% include 'icon-caret-down' %}
                           </a>
                         {% else %}
                           <a href="{{ link.url }}" class="expandable-list__header-title">{{ link.title }}</a>                      
@@ -46,7 +46,7 @@
               {% if section.settings.search_enabled %}
                 <form action="/search" method="get" role="search">
                   <div class="minimal-input-box">
-                    <label for="Search" class="label-hidden">
+                    <label for="Search" class="sr-only">
                       {{ 'general.search.placeholder' | t }}
                     </label>
                     <input type="hidden" name="type" value="product,article" />

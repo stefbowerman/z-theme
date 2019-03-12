@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseTemplate from './base';
 
 const $body = $(document.body);
@@ -13,7 +14,8 @@ class PageStylesTemplate extends BaseTemplate {
 
   addEventHandlers() {
     $body.on('click', selectors.dot, function() {
-      $(this).toggleClass('is-active');
+      $(this).siblings().removeClass('is-active');
+      $(this).addClass('is-active');
     });
 
     $body.on('click', 'a[href="#"]', () => false);

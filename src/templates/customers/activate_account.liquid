@@ -6,9 +6,9 @@
 
     {% include 'page-header', title: title, subtitle: subtitle %}      
 
-    <div class="row">
+    <div class="row justify-content-center">
 
-      <div class="col-sm-6 col-sm-offset-3">
+      <div class="col-sm-6">
         {% form 'activate_customer_password' %}
           {{ form.errors | default_errors }}
 

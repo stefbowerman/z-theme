@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * Animation Helper Functions / constants
  * -----------------------------------------------------------------------------

@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 // -------------------------
 // Yotpo
 // -------------------------
@@ -28,7 +30,7 @@ $yotpo-icon-thumbs-down: false !default;
     font-family: $font-family-base !important;
     font-size: $font-size-base !important;
     line-height: $line-height-base !important;
-    color: $text-color !important;
+    color: $body-color !important;
   }
 
   a {
@@ -39,7 +41,7 @@ $yotpo-icon-thumbs-down: false !default;
       color: $link-hover-color !important;
     }
   }
-  
+
   .yotpo-icon {}
 
   .yotpo-icon-default-star,
@@ -105,8 +107,8 @@ $yotpo-icon-thumbs-down: false !default;
       }
     }
   }
-  
-  @if $yotpo-icon-thumbs-down {  
+
+  @if $yotpo-icon-thumbs-down {
     .yotpo-icon-thumbs-down {
       &:before {
         background-image: url($yotpo-icon-thumbs-down);
@@ -136,7 +138,7 @@ $yotpo-icon-thumbs-down: false !default;
 
   // Re-usable bordered box with padding+ margins
   .yotpo-regular-box {
-    border-top-color: $color-grey;
+    border-top-color: $gray-800;
     margin-left: 0;
     margin-right: 0;
     padding: 45px 0;
@@ -151,23 +153,23 @@ $yotpo-icon-thumbs-down: false !default;
     margin-bottom: -1px; // Make bottom border of active tab *flush* with border beneath it
 
     .yotpo-nav-tab.yotpo-active .yotpo-nav-wrapper {
-      border-color: $color-primary;
+      border-color: $primary;
     }
   }
 
   .write-question-button,
   .write-review-button {
-    
+
     &.yotpo-icon-btn {
       padding: 0;
-      border: 1px solid $color-grey;
-      border-width: 0 0 1px 0;
+      border: 1px solid $gray-500;
+      border-width: 0 0 1px;
       background: transparent;
     }
 
     .yotpo-icon-button-text {
-      color: $text-color !important;
-      font-size: $font-size-small !important;
+      color: $body-color !important;
+      font-size: $font-size-sm !important;
     }
 
     .yotpo-icon {
@@ -192,12 +194,12 @@ $yotpo-icon-thumbs-down: false !default;
       margin-left: 0;
     }
 
-    @media (min-width: $screen-lg-min) {
+    @include media-breakpoint-up('xl') {
       .yotpo-default-button.write-review-button,
       .yotpo-default-button.write-question-button {
         transform: translateX(200px);
-      }      
-    }    
+      }
+    }
   }
 
   &.yotpo-main-widget.yotpo-small .yotpo-bottomline.yotpo-bottomline-2-boxes {
@@ -224,13 +226,13 @@ $yotpo-icon-thumbs-down: false !default;
   }
 
   .write-review {
-    
+
     .review-star {
       cursor: pointer;
     }
 
     .socialize-wrapper .yotpo-or {
-      font-size: $font-size-small !important;
+      font-size: $font-size-sm !important;
       margin-top: 40px;
     }
   }
@@ -246,12 +248,11 @@ $yotpo-icon-thumbs-down: false !default;
     }
   }
 
-  .form-element .y-label,
-  .yotpo-header .y-label,
-  .socialize-wrapper .y-label {
-    font-size: $label-font-size !important;
-    font-weight: $label-font-weight;
-  }
+  // .form-element .y-label,
+  // .yotpo-header .y-label,
+  // .socialize-wrapper .y-label {
+
+  // }
 
   .yotpo-header-title {
     display: none;
@@ -259,26 +260,26 @@ $yotpo-icon-thumbs-down: false !default;
 
   // End From Styling
 
-  .yotpo-default-button,
-  input[type="button"].yotpo-default-button {
-    @extend .btn;
-    font-family: $font-family-base;
-    font-weight: $btn-font-weight !important;
-  }
-  
-  .primary-color-btn,
-  input[type="button"].primary-color-btn {
-    background-color: $btn-primary-bg !important;
-    color: $btn-primary-color !important;
-    border: 1px solid $btn-primary-border !important;
+  // .yotpo-default-button,
+  // input[type="button"].yotpo-default-button {
+  //   @extend .btn;
+  //   font-family: $font-family-base;
+  //   font-weight: $btn-font-weight !important;
+  // }
 
-    &:hover,
-    &:focus {
-      background-color: $btn-primary-hover-bg !important;
-      color: $btn-primary-hover-color !important;
-      border: 1px solid $btn-primary-hover-border !important;
-    }
-  }
+  // .primary-color-btn,
+  // input[type="button"].primary-color-btn {
+  //   background-color: $btn-primary-bg !important;
+  //   color: $btn-primary-color !important;
+  //   border: 1px solid $btn-primary-border !important;
+
+  //   &:hover,
+  //   &:focus {
+  //     background-color: $btn-primary-hover-bg !important;
+  //     color: $btn-primary-hover-color !important;
+  //     border: 1px solid $btn-primary-hover-border !important;
+  //   }
+  // }
 
   .primary-color-btn.yotpo-disabled,
   input[type="button"].primary-color-btn.yotpo-disabled {
@@ -297,7 +298,7 @@ $yotpo-icon-thumbs-down: false !default;
   //       color: $color-dark-grey !important;
   //       text-transform: none !important;
   //       border-color: $color-white !important;
-  
+
   //       .yotpo-icon { color: $color-dark-grey !important; }
   //     }
   //   }
@@ -306,7 +307,7 @@ $yotpo-icon-thumbs-down: false !default;
   .content-review {
     display: block !important;
     max-width: 650px;
-    font-size: $font-size-small !important;
+    font-size: $font-size-sm !important;
   }
 
   // Need .yotpo-review to override specificity
@@ -327,7 +328,7 @@ $yotpo-icon-thumbs-down: false !default;
         margin-bottom: 5px;
 
         .y-label.yotpo-font-bold {
-          font-size: $font-size-h4 !important;
+          font-size: $h4-font-size !important;
         }
       }
 
@@ -344,8 +345,8 @@ $yotpo-icon-thumbs-down: false !default;
       }
 
       .yotpo-review-date {
-        font-size: $font-size-small !important;
-        color: $color-grey !important;
+        font-size: $font-size-sm !important;
+        color: $gray-500 !important;
         font-weight: $font-weight-base;
         margin-top: 5px;
         margin-left: 10px;
@@ -354,7 +355,7 @@ $yotpo-icon-thumbs-down: false !default;
     }
 
     .yotpo-footer {
-      
+
       .footer-actions {
         display: none;
       }
@@ -363,16 +364,16 @@ $yotpo-icon-thumbs-down: false !default;
         float: none;
 
         .y-label {
-          color: $color-grey !important;
-          font-size: $font-size-small !important;
+          color: $gray-500 !important;
+          font-size: $font-size-sm !important;
           font-weight: $font-weight-bold;
 
           &.yotpo-sum {
             font-weight: $font-weight-normal !important;
-            font-size: $font-size-xsmall;
+            font-size: $font-size-xs;
 
             &[data-type="up"] {
-              color: $color-primary !important;
+              color: $primary !important;
             }
           }
         }
@@ -395,7 +396,7 @@ $yotpo-icon-thumbs-down: false !default;
     }
 
     .yotpo-footer {
-      
+
       .footer-actions,
       .footer-additional-actions {
         display: none;
@@ -407,7 +408,7 @@ $yotpo-icon-thumbs-down: false !default;
 
       .label-helpful {
         display: inline-block;
-      }        
+      }
     }
   }
 
@@ -423,7 +424,7 @@ $yotpo-icon-thumbs-down: false !default;
       }
 
       .y-label {
-        font-size: $font-size-small !important;
+        font-size: $font-size-sm !important;
         text-transform: capitalize;
       }
     }
@@ -433,13 +434,14 @@ $yotpo-icon-thumbs-down: false !default;
   .yotpo-tool-tip-question,
   .yotpo-tool-tip-answer {
 
-    border-color: $color-grey !important;
+    border-color: $gray-500 !important;
     max-width: 340px !important;
 
     // Match .content-review
     .tool-tip-content {
-      font-size: $font-size-small !important;
+      font-size: $font-size-sm !important;
     }
   }
 
 }
+/* stylelint-enable */

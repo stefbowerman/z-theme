@@ -2,12 +2,11 @@
 // Banners
 // -----------------------------------------------------------------------------
 
-
 .banner {
   position: relative;
   @include display-flex;
-  @include flex-direction(column); 
-  
+  @include flex-direction(column);
+
   @media (min-width: $screen-md-min) {
     @include flex-direction(row);
   }
@@ -19,6 +18,10 @@
     .banner__panel {
       min-height: 100%;
     }
+  }
+
+  .cta-group {
+    margin-top: 45px;
   }
 }
 
@@ -98,7 +101,7 @@
     &.banner__content-container--right {
       margin-right: 0;
     }
-    
+
     &.banner__content-container--center {
       //
     }
@@ -119,11 +122,5 @@
 .banner__text {
   p:last-child {
     margin-bottom: 0;
-  }
-}
-
-.banner {
-  .cta-group {
-    margin-top: 45px;
   }
 }
