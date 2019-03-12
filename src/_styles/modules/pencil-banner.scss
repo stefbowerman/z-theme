@@ -5,9 +5,10 @@
 
 .pencil-banner {
   position: relative;
-  z-index: $z-index-pencil-banner;
+  z-index: $zindex-pencil-banner;
   padding: $pencil-banner-padding-vertical 0;
   background-color: $pencil-banner-bg;
+  font-size: $font-size-sm;
   text-align: center;
 
   &, a {

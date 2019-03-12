@@ -8,7 +8,7 @@ body.ajax-cart-open {
 
 .ajax-cart-container {
   position: fixed;
-  z-index: $z-index-ajax-cart;
+  z-index: $zindex-ajax-cart;
   top: 0;
   right: 0;
   width: 100%;
@@ -44,7 +44,7 @@ body.ajax-cart-open {
   }
 
   // Ensure that the cart is full width on screen sizes below this
-  @media (min-width: $screen-xs-min) {
+  @include media-breakpoint-up('sm') {
     max-width: $ajax-cart-width;
   }
 }
@@ -157,7 +157,7 @@ body.ajax-cart-open {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: $z-index-ajax-cart-backdrop;
+  z-index: $zindex-ajax-cart-backdrop;
   background-color: $ajax-cart-backdrop-color;
   opacity: 0;
   pointer-events: none;

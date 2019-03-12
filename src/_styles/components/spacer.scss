@@ -5,19 +5,19 @@
 .spacer {
   height: $spacer-height-medium;
 
-  &.spacer--small {
+  &--small {
     height: $spacer-height-small;
   }
-  &.spacer--medium {
+  &--medium {
     height: $spacer-height-medium;
   }
-  &.spacer--large {
+  &--large {
     height: $spacer-height-large;
   }
-  &.spacer--xlarge {
+  &--xlarge {
     height: $spacer-height-xlarge;
   }
-  &.spacer--huge {
+  &--huge {
     height: $spacer-height-huge;
   }
 }

@@ -4,8 +4,8 @@
       <div class="col-md-10">
 
         {% include 'page-header',
-                   title: 'Z-Theme Components',
-                   subtitle: 'This page is here to document available components for use on the site. These are hard coded in an alternate page template file named <code>page.components.liquid</code>.'
+                    ph_title: 'Z-Theme Components',
+                    ph_subtitle: 'This page is here to document available components for use on the site. These are hard coded in an alternate page template file named <code>page.components.liquid</code>.'
         %}
 
         <h3>Table of Contents</h3>
@@ -195,11 +195,11 @@ The color is "{{ color }}"
         <p>See <code>snippets/content-card.liquid</code>.</p>
         <div class="docs-well docs-well--constrained">
           {% include 'content-card',
-                      title: "Content Card Title",
-                      subtitle: "Subtitle goes here",
-                      text: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>",
-                      cta_text: "Shop Now",
-                      cta_url: "#"
+                      cc_title: "Content Card Title",
+                      cc_subtitle: "Subtitle goes here",
+                      cc_text: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>",
+                      cc_cta_text: "Shop Now",
+                      cc_cta_url: "#"
           %} 
         </div>
 
@@ -216,12 +216,12 @@ The color is "{{ color }}"
           </style>
 
           {% include 'overlay-card',
-                      id: 'overlay-card-test',
-                      title: "Overlay Card Title",
-                      subtitle: "Subtitle goes here",
-                      text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
-                      url: '#',
-                      overlay_bg_brightness: 'light'
+                      oc_id: 'overlay-card-test',
+                      oc_title: "Overlay Card Title",
+                      oc_subtitle: "Subtitle goes here",
+                      oc_text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
+                      oc_url: '#',
+                      oc_overlay_bg_brightness: 'light'
           %} 
         </div>
 
@@ -241,14 +241,14 @@ The color is "{{ color }}"
             </style>
 
             {% include 'overlay-card',
-                        id: 'overlay-card-test-2',
-                        title: 'Overlay Card Title',
-                        subtitle: 'Subtitle goes here',
-                        text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
-                        url: '#',
-                        overlay_bg_brightness: 'dark',
-                        content_vertical_alignment: 'bottom',
-                        light_text: true
+                        oc_id: 'overlay-card-test-2',
+                        oc_title: 'Overlay Card Title',
+                        oc_subtitle: 'Subtitle goes here',
+                        oc_text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>',
+                        oc_url: '#',
+                        oc_overlay_bg_brightness: 'dark',
+                        oc_content_vertical_alignment: 'bottom',
+                        oc_light_text: true
             %}
           </div>
         </div>
@@ -266,37 +266,37 @@ The color is "{{ color }}"
             </thead>
             <tbody>
               <tr>
-                <td><code>background_image</code></td>
+                <td><code>oc_background_image</code></td>
                 <td>Image</td>
                 <td>None</td>
                 <td>Shopify image object.</td>
               </tr>
               <tr>
-                <td><code>background_image_vertical_alignment</code></td>
+                <td><code>oc_background_image_vertical_alignment</code></td>
                 <td>String</td>
                 <td>center</td>
                 <td>Controls vertical alignment of the background image.  Accepts any valid CSS background-position value.</td>
               </tr>
               <tr>
-                <td><code>background_image_width</code></td>
+                <td><code>oc_background_image_width</code></td>
                 <td>Integer</td>
                 <td>800</td>
                 <td>Controls crop width of the background image.</td>
               </tr>
               <tr>
-                <td><code>overlay_bg_brightness</code></td>
+                <td><code>oc_overlay_bg_brightness</code></td>
                 <td>"Dark" / "Light"</td>
                 <td>None</td>
                 <td>Enables a dark or light layer over the background image.</td>
               </tr>
               <tr>
-                <td><code>content_vertical_alignment</code></td>
+                <td><code>oc_content_vertical_alignment</code></td>
                 <td>"Top" / "Bottom"</td>
                 <td>"Top"</td>
                 <td>Controls vertical alignment of card content</td>
               </tr>
               <tr>
-                <td><code>light_text</code></td>
+                <td><code>oc_light_text</code></td>
                 <td>Boolean</td>
                 <td>False</td>
                 <td>Makes content display in a light color.</td>
@@ -316,20 +316,20 @@ The color is "{{ color }}"
 
         <div class="banner">
           {% include 'banner-panel',
-                      id: "123abc",
-                      content_alignment: "center",
-                      title: "Banner Panel Title 1",
-                      content_alignment: "left",
-                      text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                      light_text: false
+                      bp_id: "123abc",
+                      bp_content_alignment: "center",
+                      bp_title: "Banner Panel Title 1",
+                      bp_content_alignment: "left",
+                      bp_text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                      bp_light_text: false
           %}
           {% include 'banner-panel',
-                      id: "abc123",
-                      content_alignment: "center",
-                      title: "Banner Panel Title 2",
-                      content_alignment: "right",
-                      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                      light_text: false
+                      bp_id: "abc123",
+                      bp_content_alignment: "center",
+                      bp_title: "Banner Panel Title 2",
+                      bp_content_alignment: "right",
+                      bp_text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                      bp_light_text: false
           %}  
         </div>
 
@@ -341,13 +341,13 @@ The color is "{{ color }}"
         {% assign subtitle = 'Subtext goes down here' %}
 
         {% include 'page-hero',
-                    id: 'page-hero-123',
-                    title: 'Page Hero Title',
-                    toptitle: 'Introductory text goes here',
-                    subtitle: 'Subtext goes down here',
-                    cta_url: '/collections/all',
-                    cta_text: 'Call to action link goes here',
-                    light_text: false
+                    ph_id: 'page-hero-123',
+                    ph_title: 'Page Hero Title',
+                    ph_toptitle: 'Introductory text goes here',
+                    ph_subtitle: 'Subtext goes down here',
+                    ph_cta_url: '/collections/all',
+                    ph_cta_text: 'Call to action link goes here',
+                    ph_light_text: false
         %}        
 
         <h3 id="docs-promo" class="docs-title">Promo</h3>
@@ -365,31 +365,31 @@ The color is "{{ color }}"
             </thead>
             <tbody>
               <tr>
-                <td><code>layout</code></td>
+                <td><code>p_layout</code></td>
                 <td>Left / Right</td>
                 <td>Left</td>
                 <td>Positions image on the left / right side.</td>
               </tr>
               <tr>
-                <td><code>type</code></td>
+                <td><code>p_type</code></td>
                 <td>1 / 2 / 3 / 4 / 5</td>
                 <td>None</td>
                 <td>Different types determine how the two columns of the promo share space.  See <code>promo.scss</code> for the list of widths.</td>
               </tr>
               <tr>
-                <td><code>content_max_width</code></td>
+                <td><code>p_content_max_width</code></td>
                 <td>Integer</td>
                 <td>None</td>
                 <td>Sets the maximum width of the text content on desktop sized screens</td>
               </tr>
               <tr>
-                <td><code>frame_ratio</code></td>
+                <td><code>p_frame_ratio</code></td>
                 <td>String</td>
                 <td>None</td>
                 <td>If set, images will be applied as a background image to a frame element with this aspect ratio.  See <code>frames.scss</code></td>
               </tr>
               <tr>
-                <td><code>frame_ratio_small</code></td>
+                <td><code>p_frame_ratio_small</code></td>
                 <td>String</td>
                 <td>None</td>
                 <td>If set, images will be applied as a background image to a frame element with this aspect ratio on mobile sized screens.  See <code>frames.scss</code></td>
@@ -398,14 +398,14 @@ The color is "{{ color }}"
           </table>
         </div>
         {% include 'promo',
-                    id: 'abc-123',
-                    layout: 'left',
-                    type: 3,
-                    content_max_width: 500,
-                    title: 'Promo Title',
-                    text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>',
-                    cta_url: '#',
-                    cta_text: 'CTA Text'
+                    p_id: 'abc-123',
+                    p_layout: 'left',
+                    p_type: 3,
+                    p_content_max_width: 500,
+                    p_title: 'Promo Title',
+                    p_text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>',
+                    p_cta_url: '#',
+                    p_cta_text: 'CTA Text'
         %}
 
         <h3 id="docs-modals" class="docs-title">Modals</h3>

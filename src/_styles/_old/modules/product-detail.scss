@@ -1,0 +1,105 @@
+// --------------------------------------------------------
+// Product Detail
+// --------------------------------------------------------
+
+// Slideshow / Zoom
+// --------------------------------------------------------
+
+.product-galleries { position: relative; }
+
+// Make these go flush on mobile
+.product-gallery {
+  margin-left: -($grid-gutter-width / 2);
+  margin-right: -($grid-gutter-width / 2);
+
+  @media (min-width: $screen-sm-min) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.product-gallery__slideshow {
+  margin: 0 auto;
+  max-width: 500px;
+  list-style: none;
+  padding: 0;
+
+  &.slick-initialized { padding: 0; } // normalize the <ul>
+
+  @media (min-width: $screen-xs-min) { max-width: none; }
+}
+
+.product-gallery__slideshow-slide {
+
+  // Because we want the gallery to be flush, add back the grid padding here - see .product-gallery above
+  padding: 0 $grid-gutter-width / 2;
+  @media (min-width: $screen-sm-min) {
+    padding: 0;
+  }
+
+  position: relative; // zoom trigger is a direct child
+  display: none; // hide the featured image until slideshow has loaded
+
+  .slick-initialized & {
+    display: block; // reveal the featured image when slideshow is initialized
+
+    img {
+      width: 100%;
+
+      &:focus { outline: 0; }
+    }
+  }
+  &:focus { outline: 0; }
+}
+
+.product-gallery__zoom-trigger {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+}
+
+.product-gallery__arrow-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  @include display-flex;
+  @include align-items(center);
+
+  &.product-gallery__arrow-wrapper--left {
+    left: $grid-gutter-width/2;
+
+    @media (min-width: $screen-sm-min) {
+      left: 0;
+    }
+  }
+
+  &.product-gallery__arrow-wrapper--right {
+    right: $grid-gutter-width/2;
+
+    @media (min-width: $screen-sm-min) {
+      right: 0;
+    }
+  }
+}
+
+// Target for zoom
+.product-gallery__slideshow-slide { /* stylelint-disable-line no-duplicate-selectors */
+  display: inline-block;
+
+  &.is-zoomable {
+    cursor: zoom-in;
+    cursor: -webkit-zoom-in;
+  }
+
+  &.is-zoomed {
+    cursor: zoom-out;
+    cursor: -webkit-zoom-out;
+    border: 1px solid #ccc;
+  }
+}

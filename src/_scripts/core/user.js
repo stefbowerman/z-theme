@@ -22,83 +22,68 @@ const cookies = {
   }
 };
 
-class User {
-  constructor() {
-    this.name = 'user';
-    this.namespace = `.${this.name}`;
+/**
+ * Creates and returns a copy of one of the cookies available above
+ *
+ * @param {String} key
+ * @return {Object | undefined}
+ */
+export function generateCookie(key) {
+  let c = {};
 
-    // Do any initialization here
-    // For instance, you could increment a cookie that tracks visits to the site
+  if (cookies.hasOwnProperty(key)) {
+    c = $.extend(true, {}, cookies[key]);
+    c.name = prefix + c.name;
   }
-
-  /**
-   * Creates and returns a copy of one of the cookies available above
-   *
-   * @param {String} key
-   * @return {Object | undefined}
-   */
-  generateCookie(key) {
-    let c = {};
-
-    if (cookies.hasOwnProperty(key)) {
-      c = $.extend(true, {}, cookies[key]);
-      c.name = prefix + c.name;
-    }
-    else {
-      console.warn(`[${this.name}] - Cannot create cookie.  Key ${key} not found.`);
-    }
-    return c;
+  else {
+    console.warn(`[User] - Cannot create cookie.  Key ${key} not found.`);
   }
-
-  /**
-   * Sets a browser cookie
-   *
-   * @param {Object} cookie
-   * @param {String} cookie.name
-   * @param {String} cookie.value
-   * @param {Number} cookie.expiration - Time to expire in days, expires after session if left blank
-   */
-  setCookie(cookie) {
-    if (this.hasCookie(cookie.name) && this.getCookieValue(cookie.name) !== cookie.value) {
-      this.removeCookie(cookie.name);
-    }
-
-    const opts = cookie.hasOwnProperty('expiration') ? { expires: cookie.expiration } : {};
-    Cookies.set(cookie.name, cookie.value, opts);
-
-    return this;
-  }
-
-  /**
-   * Checks for the presence of a browser cookie by name (doesn't check for value equality)
-   *
-   * @param {String} cookieName
-   * @return {Boolean}
-   */
-  hasCookie(cookieName) {
-    return typeof Cookies.get(cookieName) !== 'undefined';
-  }
-
-  /**
-   * Returns value of browser cookie by name
-   *
-   * @param {String} cookieName
-   * @return {String | Undefined}
-   */
-  getCookieValue(cookieName) {
-    return this.hasCookie(cookieName) ? Cookies.get(cookieName) : undefined;
-  }
-
-  /**
-   * Removes a cookie by name
-   *
-   * @param {String} cookieName
-   * @return {Self}
-   */
-  removeCookie(cookieName) {
-    Cookies.remove(cookieName);
-    return this;
-  }
+  return c;
 }
 
-export default new User();
+/**
+ * Sets a browser cookie
+ *
+ * @param {Object} cookie
+ * @param {String} cookie.name
+ * @param {String} cookie.value
+ * @param {Number} cookie.expiration - Time to expire in days, expires after session if left blank
+ */
+export function setCookie(cookie) {
+  if (hasCookie(cookie.name) && getCookieValue(cookie.name) !== cookie.value) {
+    removeCookie(cookie.name);
+  }
+
+  const opts = cookie.hasOwnProperty('expiration') ? { expires: cookie.expiration } : {};
+  Cookies.set(cookie.name, cookie.value, opts);
+}
+
+/**
+ * Checks for the presence of a browser cookie by name (doesn't check for value equality)
+ *
+ * @param {String} cookieName
+ * @return {Boolean}
+ */
+export function hasCookie(cookieName) {
+  return typeof Cookies.get(cookieName) !== 'undefined';
+}
+
+/**
+ * Returns value of browser cookie by name
+ *
+ * @param {String} cookieName
+ * @return {String | Undefined}
+ */
+export function getCookieValue(cookieName) {
+  return hasCookie(cookieName) ? Cookies.get(cookieName) : undefined;
+}
+
+/**
+ * Removes a cookie by name
+ *
+ * @param {String} cookieName
+ * @return {Self}
+ */
+export function removeCookie(cookieName) {
+  Cookies.remove(cookieName);
+}

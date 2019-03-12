@@ -9,7 +9,7 @@ export default class SectionManager {
     this.constructors = {};
     this.instances = [];
 
-    if (window.Shopify.designMode) {
+    if (window.Shopify && window.Shopify.designMode) {
       $(document)
         .on('shopify:section:load', this.onSectionLoad.bind(this))
         .on('shopify:section:unload', this.onSectionUnload.bind(this))

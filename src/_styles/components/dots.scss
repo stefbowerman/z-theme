@@ -7,7 +7,7 @@
   padding: 0;
   overflow: hidden;
 
-  &.dots--small {
+  &--small {
     margin: 0 -#{($dot-small-spacing / 2)} -#{$dot-small-bottom-margin}; // account for the 2px padding + 1px border on the dot
   }
 }
@@ -28,7 +28,7 @@
   overflow: hidden;
 
   line-height: $dot-size - $dot-padding*2 - 2px;
-  font-size: $font-size-small;
+  font-size: $dot-small-font-size;
   text-transform: uppercase;
   text-align: center;
 
@@ -94,83 +94,16 @@
 
   // These dot modifier classes use !important to override inline background-color styles
   // That way, the inline style functions as a fallback if the modifier class doesn't exist (we create and apply these classes programatically, not always guaranteed to exist)
-  &.dot--white {
-    .dot__inner {
-      border-color: darken($color-dot-white, 10%) !important;
-      background-color: $color-dot-white !important;
-    }
-  }
-  &.dot--black {
-    .dot__inner {
-      border-color: $color-dot-black !important;
-      background-color: $color-dot-black !important;
-    }
-  }
-  &.dot--grey,
-  &.dot--gray {
-    .dot__inner {
-      border-color: $color-dot-grey !important;
-      background-color: $color-dot-grey !important;
-    }
-  }
-  &.dot--khaki {
-    .dot__inner {
-      border-color: $color-dot-khaki !important;
-      background-color: $color-dot-khaki !important;
-    }
-  }
-  &.dot--pink {
-    .dot__inner {
-      border-color: $color-dot-pink !important;
-      background-color: $color-dot-pink !important;
-    }
-  }
-  &.dot--orange {
-    .dot__inner {
-      border-color: $color-dot-orange !important;
-      background-color: $color-dot-orange !important;
-    }
-  }
-  &.dot--purple {
-    .dot__inner {
-      border-color: $color-dot-purple !important;
-      background-color: $color-dot-purple !important;
-    }
-  }
-  &.dot--brown {
-    .dot__inner {
-      border-color: $color-dot-brown !important;
-      background-color: $color-dot-brown !important;
-    }
-  }
-  &.dot--tan {
-    .dot__inner {
-      border-color: $color-dot-tan !important;
-      background-color: $color-dot-tan !important;
-    }
-  }
-  &.dot--red {
-    .dot__inner {
-      border-color: $color-dot-red !important;
-      background-color: $color-dot-red !important;
-    }
-  }
-  &.dot--green {
-    .dot__inner {
-      border-color: $color-dot-green !important;
-      background-color: $color-dot-green !important;
-    }
-  }
-  &.dot--yellow {
-    .dot__inner {
-      border-color: $color-dot-yellow !important;
-      background-color: $color-dot-yellow !important;
-    }
-  }
-  &.dot--blue {
-    .dot__inner {
-      border-color: $color-dot-blue !important;
-      background-color: $color-dot-blue !important;
+
+  @each $color, $value in $colors {
+    &.dot--#{$color} .dot__inner {
+      background-color: #{$value} !important;
+      @if $color == 'white' {
+        border-color: darken($value, 10%) !important;
+      }
+      @else {
+        border-color: #{$value} !important;
+      }
     }
   }
 }

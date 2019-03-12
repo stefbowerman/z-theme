@@ -3,9 +3,9 @@
 // -----------------------------------------------------------------------------
 
 .breadcrumbs {
-  @include display-flex;
+  display: flex;
 
-  @media screen and (min-width: $screen-xs-min) {
+  @include media-breakpoint-up('sm') {
     display: block;
   }
 }

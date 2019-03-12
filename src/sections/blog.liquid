@@ -40,14 +40,14 @@
   {% paginate blog.articles by 16 %}
 
    {% include 'page-hero',
-              id: section.id,
-              background_image: hero_background_image,
-              title: hero_title,
-              toptitle: hero_toptitle,
-              subtitle: hero_subtitle,
-              title_link: hero_title_link,
-              content_alignment: 'center',
-              light_text: hero_light_text
+               ph_id: section.id,
+               ph_background_image: hero_background_image,
+               ph_title: hero_title,
+               ph_toptitle: hero_toptitle,
+               ph_subtitle: hero_subtitle,
+               ph_title_link: hero_title_link,
+               ph_content_alignment: 'center',
+               ph_light_text: hero_light_text
      %}
 
     <div class="container">
@@ -58,7 +58,7 @@
       ====================
       {% endcomment %}
 
-      <div class="content-grid content-grid--3-col">
+      <div class="content-grid">
         {% for article in blog.articles %}
           <div class="content-grid__item">
             {% include 'article-card', article: article, show_author: false, show_tags: false %}

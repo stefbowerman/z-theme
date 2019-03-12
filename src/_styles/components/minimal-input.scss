@@ -30,18 +30,18 @@
 .minimal-input-box--inverted {
 
   .minimal-input-box__input {
-    color: $color-white;
+    color: $white;
 
     &:focus {
-      color: $color-white;
-      border-color: $color-white;
+      color: $white;
+      border-color: $white;
     }
   }
 
 
   .minimal-input-box__submit {
     svg {
-      fill: $color-white;
+      fill: $white;
     }
   }
 }
@@ -51,7 +51,7 @@
 
   .minimal-input-box__input {
     height: $minimal-input-height-large;
-    font-size: $font-size-large;
+    font-size: $font-size-lg;
   }
 
   .minimal-input-box__submit {

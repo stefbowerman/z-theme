@@ -6,34 +6,34 @@
   Usage:
 
   {% include 'content-card',
-              title: { string } - optional
-              subtitle: { string } - optional
-              text: { string } - optional
-              cta_text: { string } - optional
-              cta_url: { url } - optional
+              cc_title: { string } - optional
+              cc_subtitle: { string } - optional
+              cc_text: { string } - optional
+              cc_cta_text: { string } - optional
+              cc_cta_url: { url } - optional
   %}
 
 {% endcomment -%}
 
 <div class="content-card">
 
-  {% if title != blank or subtitle != blank %}
+  {% if cc_title != blank or cc_subtitle != blank %}
     <div class="content-card__header">
-      {% if title != blank %}
-        <h3 class="content-card__title">{{ title }}</h3>
+      {% if cc_title != blank %}
+        <h3 class="content-card__title">{{ cc_title }}</h3>
       {% endif %}
-      {% if subtitle != blank %}
-        <h5 class="content-card__subtitle">{{ subtitle }}</h5>
+      {% if cc_subtitle != blank %}
+        <h5 class="content-card__subtitle">{{ cc_subtitle }}</h5>
       {% endif %}
     </div>
   {% endif %}
 
-  {% if text != blank %}
-    <div class="content-card__body">{{ text }}</div>
+  {% if cc_text != blank %}
+    <div class="content-card__body">{{ cc_text }}</div>
   {% endif %}
 
-  {% if cta_text != blank and cta_url != blank %}
-    <a href="{{ cta_url }}" class="btn btn-primary btn-block">{{ cta_text }}</a>
+  {% if cc_cta_text != blank and cc_cta_url != blank %}
+    <a href="{{ cc_cta_url }}" class="btn btn-primary btn-block">{{ cc_cta_text }}</a>
   {% endif %}
 
 </div>

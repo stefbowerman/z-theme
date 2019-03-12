@@ -11,7 +11,7 @@
 }
 
 .tabs-list {
-  @include display-flex;
+  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -30,7 +30,7 @@
 
   &.is-active {
     cursor: default;
-    border-bottom: 1px solid $color-black;
+    border-bottom: 1px solid $black;
   }
 }
 

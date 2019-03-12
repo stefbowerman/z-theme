@@ -11,7 +11,7 @@ $cart-padding-v: 34px;
   font-family: $headings-font-family;
   font-weight: bold;
 
-  @media screen and (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     display: block;
   }
 }
@@ -19,9 +19,9 @@ $cart-padding-v: 34px;
 .cart-list__body {
   border-style: solid;
   border-width: 2px 0;
-  border-color: $color-black;
+  border-color: $black;
 
-  @media screen and (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     border-width: 1px 0;
   }
 }
@@ -30,9 +30,9 @@ $cart-padding-v: 34px;
   position: relative;
 
   &:not(:last-child) {
-    border-bottom: 2px solid $color-black;
+    border-bottom: 2px solid $black;
 
-    @media screen and (min-width: $screen-sm-min) {
+    @include media-breakpoint-up('md') {
       border-bottom-width: 1px;
     }
   }
@@ -48,7 +48,7 @@ $cart-padding-v: 34px;
   }
 
   // Make flush with left and right on larger screens
-  @media screen and (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     > div:first-child {
       padding-left: 0;
     }
@@ -65,7 +65,7 @@ $cart-padding-v: 34px;
 }
 
 .cart-list__footer > div {
-  @media (max-width: $screen-xs-min - 1) {
+  @include media-breakpoint-down('sm') {
     padding-left: 0;
     padding-right: 0;
   }
@@ -85,7 +85,7 @@ $cart-padding-v: 34px;
 
 .cart-list__col-remove {
   svg {
-    fill: $text-color;
+    fill: $body-color;
   }
 }
 
@@ -93,7 +93,7 @@ $cart-padding-v: 34px;
   padding-right: 20px; // Make extra room for the absolutely positioned remove button
 }
 
-@media screen and (min-width: $screen-sm-min) {
+@include media-breakpoint-up('md') {
 
   .cart-list__col-product {
     width: 50%;
@@ -130,7 +130,7 @@ $cart-padding-v: 34px;
   width: 100px;
   height: auto;
 
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     width: 120px;
   }
 }
@@ -138,7 +138,7 @@ $cart-padding-v: 34px;
 .cart-list__item-details {
   margin-left: 100px + $grid-gutter-width;
 
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     margin-left: 120px + $grid-gutter-width; // gutter between image and item details
   }
 }
@@ -148,12 +148,12 @@ $cart-padding-v: 34px;
   top: $cart-padding-v - 2px;
   right: -4px;
 
-  @media screen and (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     display: none;
   }
 
   svg {
-    fill: $text-color;
+    fill: $body-color;
   }
 }
 
@@ -168,77 +168,4 @@ $cart-padding-v: 34px;
 
 .additional-checkout-buttons {
   margin: 10px 0;
-
-  .additional-checkout-button {
-    position: relative !important;
-    margin-left: 0 !important; // overwrite injected style tag
-    border-radius: 0 !important;
-    background-color: $btn-default-bg !important;
-    border: 1px solid $btn-default-border !important;
-    width: 100% !important;
-    padding: 3px 0;
-    cursor: pointer;
-    transition: all ease-in-out $transition-duration-base;
-
-    &:hover,
-    &:focus {
-      background-color: darken($btn-default-bg, 10%) !important;
-      border-color: darken($btn-default-border, 12%) !important;
-    }
-
-    img {
-      transform: translateZ(0); // fix blurriness from scaling
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 0.8rem;
-    }
-  }
-
-  .additional-checkout-button--paypal-express,
-  .additional-checkout-button--amazon {
-    img {
-      visibility: hidden;
-    }
-    &:before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      background: {
-        position: center;
-        repeat: no-repeat;
-        size: 100% auto;
-      }
-    }
-  }
-
-  .additional-checkout-button--paypal-express {
-    &:before {
-      height: 22px;
-      width: 84px;
-      transform: translate(-42px, -12px);
-      background-image: url("{{ \'logo-paypal.png\' | asset_url }}");
-    }
-  }
-  .additional-checkout-button--amazon {
-    // Make the image clickable but not visible
-    img {
-      visibility: visible;
-      opacity: 0 !important;
-      z-index: 1;
-      pointer-events: auto;
-    }
-    &:before {
-      height: 20px;
-      width: 96px;
-      transform: translate(-48px, -8px);
-      background-image: url("{{ \'logo-amazon-pay.png\' | asset_url }}");
-    }
-  }
-  .additional-checkout-button--apple-pay {
-    .additional-checkout-button__logo {
-      background-image: -webkit-named-image(apple-pay-logo-black) !important;
-    }
-  }
 }

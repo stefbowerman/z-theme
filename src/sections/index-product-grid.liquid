@@ -10,10 +10,10 @@
 
 <div class="container">
   
-  {% include 'content-header', title: section.settings.title %}
+  {% include 'content-header', ch_title: section.settings.title %}
 
   {% if content_grid_html != blank %}
-    <div class="content-grid content-grid--centered content-grid--{{ section.blocks.size }}-col">
+    <div class="content-grid content-grid--centered content-grid--lg-{{ section.blocks.size }}-col">
       {{ content_grid_html }}
     </div>
   {% endif %}

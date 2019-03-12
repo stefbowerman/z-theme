@@ -17,7 +17,7 @@
   top: 20px;
   right: 14px;
 
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     right: 20px;
   }
 }

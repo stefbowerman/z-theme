@@ -1,0 +1,84 @@
+/* ================ VENDOR ================ */
+// Import these up here to allow overrides down below
+// @import 'vendor/slick.scss';
+// @import 'vendor/chosen.scss';
+
+/* ================ GLOBAL ================ */
+// @import 'global/variables';
+// @import 'global/mixins';
+// @import 'global/reboot';
+// @import 'global/fonts';
+// @import 'global/typography';
+// @import 'global/helper-classes';
+// @import 'global/grid';
+// @import 'global/layout';
+// @import 'global/flexbox';
+// @import 'global/component-animations';
+
+// Things currently being extended but not needed
+// @import 'components/buttons.scss';
+
+/* ================ COMPONENTS ================ */
+// Components are small elements that may be re-used in multiple modules
+// @import 'components/icons.scss';
+// @import 'components/blank-states.scss';
+// @import 'components/modals.scss';
+// @import 'components/tabs.scss';
+// @import 'components/drawer.scss';
+// @import 'components/panels.scss';
+// @import 'components/page.scss';
+// @import 'components/forms.scss';
+// @import 'components/rte.scss';
+// @import 'components/breadcrumbs.scss';
+// @import 'components/pagination.scss';
+// @import 'components/filters.scss';
+// @import 'components/tables.scss';
+// @import 'components/social-sharing.scss';
+// @import 'components/alerts.scss';
+// @import 'components/chosen.scss';
+// @import 'components/content.scss';
+// @import 'components/cards.scss';
+// @import 'components/quick-view.scss';
+// @import 'components/docs.scss';
+// @import 'components/banner.scss';
+// @import 'components/minimal-input.scss';
+// @import 'components/dots.scss';
+// @import 'components/promo.scss';
+// @import 'components/frames.scss';
+// @import 'components/spacer.scss';
+// @import 'components/slideup.scss';
+// @import 'components/arrows.scss';
+// @import 'components/expandable-list.scss';
+// @import 'components/overlays.scss';
+// @import 'components/yotpo.scss';
+
+/* ================ MODULES ================ */
+// Modules are larger pieces of functionality that consume components
+// It is common for there to only be one instance of each on a page
+// @import 'modules/header.scss';
+// @import 'modules/footer.scss';
+// @import 'modules/gift-card-template.scss';
+// @import 'modules/pencil-banner.scss';
+// @import 'modules/ajax-cart.scss';
+// @import 'modules/product-detail.scss';
+// @import 'modules/slideshow.scss';
+// @import 'modules/mobile-menu.scss';
+
+/* ================ TEMPLATES ================ */
+// Styles *specific* to a shopify template
+// Only use if there is no less specific / more logical place to put styles
+// Try to use the body template class as a CSS hook
+// @import 'templates/cart.scss';
+// @import 'templates/collection.scss';
+// @import 'templates/404.scss';
+// @import 'templates/gift-card.scss';
+
+// Necessary bottom placement for specificity w/o `!important`
+// @import 'global/utilities.scss';
+// @import 'global/responsive-utilities.scss';
+
+// DEV: Don't display Shopify's admin preview bar
+
+/* stylelint-disable-next-line selector-max-id */
+// #preview-bar-iframe,
+// .shopify-preview-bar { display: none; }

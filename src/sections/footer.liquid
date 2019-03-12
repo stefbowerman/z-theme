@@ -1,5 +1,72 @@
 {% assign MAX_FOOTER_MENUS = 3 %}
 
+{% assign footer_menu_html_desktop = '' %}
+{% assign footer_menu_html_mobile  = '' %}
+
+{% comment %} MENU Capture {% endcomment %}
+{% for i in (1..MAX_FOOTER_MENUS) %}
+  {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
+  {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
+  {% assign linklist_handle = section.settings[menu_setting_handle] %}
+  {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
+
+    {% capture desktop_html %}
+      <div class="footer-menu">
+        <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
+        {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
+          <ul class="footer-menu__list">
+            {% for link in linklists[linklist_handle].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endcapture %}
+
+    {% capture mobile_html %}
+      <div class="expandable-list">
+        <div class="expandable-list__header">
+          <a href="#{{ linklist_handle }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ linklist_handle }}">
+            {{ section.settings[menu_title_setting_handle] }} 
+            {% include 'icon-caret-down' %}
+          </a>
+        </div>
+        <div id="{{ linklist_handle }}" class="collapse">
+          <div class="expandable-list__body">
+            {% for link in linklists[linklist_handle].links %}
+              <div class="expandable-list__item">
+                <a href="{{ link.url }}" class="expandable-list__item-title">{{ link.title }}</a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endcapture %}
+
+    {% assign footer_menu_html_desktop = footer_menu_html_desktop | append: desktop_html %}
+    {% assign footer_menu_html_mobile  = footer_menu_html_mobile  | append: mobile_html %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} SOCIAL Capture {% endcomment %}
+{% capture social_list_items %}
+  {%- assign social_accounts = 'Facebook, Instagram, Twitter, Pinterest, Snapchat' | split: ', ' -%}
+  {% for social in social_accounts %}
+    {% assign social_handle = social | handleize %}
+    {% capture social_enabled_handle %}social_{{ social_handle }}_enabled{% endcapture %}
+    {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+    {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+    {% if settings[social_link] != blank and section.settings[social_enabled_handle] %}
+        <li>
+          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" target="_blank">
+            {% include social_icon %}
+            <span class="icon-fallback-text">{{ social }}</span>
+          </a>
+        </li>
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
   <div class="container">
     <div class="row">
@@ -14,21 +81,12 @@
       {% comment %} Footer Block - Menus {% endcomment %}
       <div class="col-lg-6">
         <div class="footer-block">
-          {% for i in (1..MAX_FOOTER_MENUS) %}
-            {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
-            {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
-            {% assign linklist_handle = section.settings[menu_setting_handle] %}
-              <div class="footer-menu">
-                <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
-                {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
-                  <ul class="footer-menu__list">
-                    {% for link in linklists[linklist_handle].links %}
-                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-              </div>
-          {% endfor %}
+          <div class="d-none d-lg-block">
+            {{ footer_menu_html_desktop }}
+          </div>
+          <div class="d-block d-lg-none">
+            {{ footer_menu_html_mobile }}
+          </div>
         </div>
       </div>
 
@@ -55,25 +113,6 @@
               </div>
             </div>
           </form>
-
-          {% comment %} Put the social stuff in a capture block because we use it twice in the footer {% endcomment %}
-          {% capture social_list_items %}
-            {%- assign social_accounts = 'Facebook, Instagram, Twitter, Pinterest, Snapchat' | split: ', ' -%}
-            {% for social in social_accounts %}
-              {% assign social_handle = social | handleize %}
-              {% capture social_enabled_handle %}social_{{ social_handle }}_enabled{% endcapture %}
-              {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-              {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-              {% if settings[social_link] != blank and section.settings[social_enabled_handle] %}
-                  <li>
-                    <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" target="_blank">
-                      {% include social_icon %}
-                      <span class="icon-fallback-text">{{ social }}</span>
-                    </a>
-                  </li>
-              {% endif %}
-            {% endfor %}
-          {% endcapture %}
 
           {% if social_list_items %}
             <ul class="footer-social-list">

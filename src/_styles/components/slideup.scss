@@ -4,7 +4,7 @@
 
 .slideup {
   position: fixed;
-  z-index: $z-index-slideup;
+  z-index: $zindex-slideup;
   bottom: 0;
   left: 0;
   right: 0;
@@ -42,16 +42,16 @@
   position: relative;
   max-width: $slideup-content-max-width;
   padding: 0 $grid-gutter-width;
-  @include center-block;
+  @extend .mx-auto;
 }
 
 .slideup__title {
   margin-bottom: 5px;
   text-align: center;
-  font-size: $font-size-h5;
+  font-size: $h5-font-size;
 
-  @media (min-width: $screen-sm-min) {
-    font-size: $font-size-h4;
+  @include media-breakpoint-up('md') {
+    font-size: $h4-font-size;
   }
 }
 
@@ -68,15 +68,11 @@
  */
 
 .slideup__form-message {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  @include stretch-within;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  bottom: 0;
-  @include display-flex;
-  @include align-items(center);
-  @include justify-content(center);
   pointer-events: none;
 
   .slideup__title:only-child {

@@ -24,17 +24,17 @@
 <div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="cms-page">
 
     {% include 'page-hero',
-                id: section.id,
-                background_image: section.settings.background_image,
-                background_image_small: section.settings.background_image_small,
-                content_max_width: section.settings.content_max_width,
-                content_alignment: section.settings.content_alignment,
-                light_text: section.settings.content_light_text,
-                height: section.settings.hero_height,
-                title: section.settings.title,
-                subtitle: section.settings.subtitle,
-                cta_url: section.settings.cta_url,
-                cta_text: section.settings.cta_text
+                ph_id: section.id,
+                ph_background_image: section.settings.background_image,
+                ph_background_image_small: section.settings.background_image_small,
+                ph_content_max_width: section.settings.content_max_width,
+                ph_content_alignment: section.settings.content_alignment,
+                ph_light_text: section.settings.content_light_text,
+                ph_height: section.settings.hero_height,
+                ph_title: section.settings.title,
+                ph_subtitle: section.settings.subtitle,
+                ph_cta_url: section.settings.cta_url,
+                ph_cta_text: section.settings.cta_text
     %}
 
     {% for block in section.blocks %}  
@@ -47,15 +47,15 @@
         
           <div class="container">
             {% include 'promo',
-                id: block.id,
-                layout: block.settings.layout,
-                type: block.settings.type,
-                content_max_width: block.settings.content_max_width,
-                image: block.settings.image,
-                title: block.settings.title,
-                text: block.settings.text,
-                cta_url: block.settings.cta_url,
-                cta_text: block.settings.cta_text
+                        p_id: block.id,
+                        p_layout: block.settings.layout,
+                        p_type: block.settings.type,
+                        p_content_max_width: block.settings.content_max_width,
+                        p_image: block.settings.image,
+                        p_title: block.settings.title,
+                        p_text: block.settings.text,
+                        p_cta_url: block.settings.cta_url,
+                        p_cta_text: block.settings.cta_text
             %}
           </div>
         
@@ -77,9 +77,9 @@
 
           <div class="container">
 
-            {% include 'content-header', title: block.settings.title %}
+            {% include 'content-header', ch_title: block.settings.title %}
 
-            <div class="content-grid content-grid--centered content-grid--{{ article_count }}-col">
+            <div class="content-grid content-grid--centered content-grid--lg-{{ article_count }}-col">
               {{ article_grid_html }}
             </div>
 
@@ -113,7 +113,7 @@
           <!-- Product Grid -->
           <div class="container">
 
-            {% include 'content-header', title: block.settings.title %}
+            {% include 'content-header', ch_title: block.settings.title %}
 
             {% if product_grid_html != blank %}
               <div class="content-grid content-grid--centered">
@@ -136,17 +136,17 @@
           <!-- Banner -->
           {% capture banner_panel_html %}
               {% include 'banner-panel',
-                      id: block.id,
-                      content_alignment: block.settings.content_alignment,
-                      content_max_width: block.settings.content_max_width,
-                      background_image: block.settings.background,
-                      background_image_small: block.settings.background_image_small,
-                      light_text: block.settings.light_text,
-                      title: block.settings.title,
-                      text: block.settings.text,
-                      text_alignment: block.settings.text_alignment,
-                      cta_url: block.settings.cta_url,
-                      cta_text: block.settings.cta_text
+                      bp_id: block.id,
+                      bp_content_alignment: block.settings.content_alignment,
+                      bp_content_max_width: block.settings.content_max_width,
+                      bp_background_image: block.settings.background,
+                      bp_background_image_small: block.settings.background_image_small,
+                      bp_light_text: block.settings.light_text,
+                      bp_title: block.settings.title,
+                      bp_text: block.settings.text,
+                      bp_text_alignment: block.settings.text_alignment,
+                      bp_cta_url: block.settings.cta_url,
+                      bp_cta_text: block.settings.cta_text
               %}
           {% endcapture %}
 
@@ -161,7 +161,7 @@
 
           <div class="container">
 
-            {% include 'content-header', title: block.settings.title %}
+            {% include 'content-header', ch_title: block.settings.title %}
 
             {% include 'richtext-block'
                         id: block.id,

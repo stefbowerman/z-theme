@@ -8,10 +8,8 @@ module.exports = {
       src: '/_styles',
       dest: '/styles',
       filePattern: ['src/_styles/**/*.scss'],
+      files: ['theme.scss'],
       // files: ['theme.scss', 'checkout.scss'],
-      files: ['theme-2.scss'],
-      // files: ['theme.scss', 'theme-2.scss'],
-      // files: ['theme-2.scss', 'checkout.scss'],
       watchTask: 'styles',
       extensions: ['scss', 'css']
     },

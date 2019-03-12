@@ -11,16 +11,16 @@
 // The version of SCSS that Shopify is running doesn't support reverse() ... ugh
 // Since we're using a 12 column grid (unless you change it!) - let's make splits like 4/8, 5/7, 6/6, 7/5, 8/4
 $type-first-col-widths:         percentage(4/12), percentage(5/12), percentage(6/12), percentage(7/12), percentage(8/12);
-$type-first-col-widths-reverse: percentage(8/12), percentage(7/12), percentage(6/12), percentage(5/12), percentage(4/12);
+$type-first-col-widths-reverse: reverse($type-first-col-widths);
 
 .promo {
 
-  @media (min-width: $screen-md-min) {
-    @include display-flex;
-    @include align-items(stretch);
+  @include media-breakpoint-up('lg') {
+    display: flex;
+    align-items: stretch;
 
-    &.promo--layout-right {
-      @include flex-direction(row-reverse);
+    &--layout-right {
+      flex-direction: row-reverse;
     }
 
     // By default, promos have 2 columns that split the space evenly
@@ -65,8 +65,8 @@ $type-first-col-widths-reverse: percentage(8/12), percentage(7/12), percentage(6
 
 .promo__col-inner {
   height: 100%;
-  @include display-flex;
-  @include align-items(center);
+  display: flex;
+  align-items: center;
 
   .promo__col--text & {
     padding-top: $grid-gutter-width;
@@ -85,7 +85,7 @@ $type-first-col-widths-reverse: percentage(8/12), percentage(7/12), percentage(6
 }
 
 .promo__text-wrapper {
-  @media (min-width: $screen-md-min) {
+  @include media-breakpoint-up('lg') {
     padding-left: $grid-gutter-width;
     padding-right: $grid-gutter-width;
   }

@@ -4,11 +4,11 @@
 
 .banner {
   position: relative;
-  @include display-flex;
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
 
-  @media (min-width: $screen-md-min) {
-    @include flex-direction(row);
+  @include media-breakpoint-up('lg') {
+    flex-direction: row;
   }
 
   // For banners inside sliders, make sure they are all equal height
@@ -27,23 +27,23 @@
 
 .banner__panel {
   position: relative;
-  @include display-flex();
-  @include align-items(center); // Vertically center stuff
-  @include justify-content(center); // Horizontally center stuff
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   padding-top:    $banner-panel-padding-vertical;
   padding-bottom: $banner-panel-padding-vertical;
 
-  @media (min-width: $screen-md-min) {
-    @include flex(1 1 0); // Make all panels equal width
+  @include media-breakpoint-up('lg') {
+    flex: (1 1 0); // Make all panels equal width
   }
 
-  &.banner__panel--light {
+  &--light {
 
     &, a,
     .banner__title,
     .banner__text {
-      color: $color-white;
+      color: $white;
     }
   }
 
@@ -75,34 +75,34 @@
 .banner__overlay {
   @include stretch-within;
 
-  &.banner__overlay--light {
+  &--light {
     background-color: $banner-panel-overlay-light-color;
   }
 
-  &.banner__overlay--dark {
+  &--dark {
     background-color: $banner-panel-overlay-dark-color;
   }
 }
 
 .banner__content-container {
   position: relative;
-  @include center-block;
+  @extend .mx-auto;
   text-align: center;
   max-width: 400px;
 
   // Center everything on mobile
-  // Apply these justification classes above medium
-  @media (min-width: $screen-md-min) {
+  // Apply these justification classes above large
+  @include media-breakpoint-up('lg') {
 
-    &.banner__content-container--left {
+    &--left {
       margin-left: 0;
     }
 
-    &.banner__content-container--right {
+    &--right {
       margin-right: 0;
     }
 
-    &.banner__content-container--center {
+    &--center {
       //
     }
   }

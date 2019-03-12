@@ -8,14 +8,14 @@
   margin: $grid-gutter-width 0;
   text-align: center;
 
-  &.page-header--left {
-    @media (min-width: $screen-sm-min) {
+  &--left {
+    @include media-breakpoint-up('md') {
       text-align: left;
     }
   }
 
-  &.page-header--right {
-    @media (min-width: $screen-sm-min) {
+  &--right {
+    @include media-breakpoint-up('md') {
       text-align: right;
     }
   }
@@ -29,7 +29,7 @@
   max-width: 50em;
   margin: 0 auto;
 
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up('md') {
     .page-header--left & {
       margin-left: 0;
     }
@@ -46,32 +46,32 @@
 
 // Page Hero
 .page-hero {
-  @include display-flex;
-  @include align-items(center);
+  display: flex;
+  align-items: center;
   position: relative;
   margin: 0 0 $page-hero-margin-bottom;
   padding-top: $page-hero-padding-small-vertical;
   padding-bottom: $page-hero-padding-small-vertical;
   text-align: center;
 
-  @media (min-width: $screen-md-min) {
+  @include media-breakpoint-up('lg') {
     padding-top: $page-hero-padding-vertical;
     padding-bottom: $page-hero-padding-vertical;
   }
 
-  &.page-hero--text-left {
-    @media (min-width: $screen-sm-min) {
+  &--text-left {
+    @include media-breakpoint-up('md') {
       text-align: left;
     }
   }
 
-  &.page-hero--text-right {
-    @media (min-width: $screen-sm-min) {
+  &--text-right {
+    @include media-breakpoint-up('md') {
       text-align: right;
     }
   }
 
-  &.page-hero--light a {
+  &--light a {
     color: $page-hero-light-text-color;
   }
 }
@@ -113,7 +113,7 @@
 }
 
 .page-hero__content {
-  @include center-block;
+  @extend .mx-auto;
 
   .page-hero--content-left & {
     margin-left: 0;
@@ -126,17 +126,17 @@
 
 // Page with sidebar
 .page-sidebar {
-  @extend .col-md-3;
-  @extend .col-xl-2;
-  @extend .col-md-pull-9;
-  @extend .col-xl-pull-10;
+  // @extend .col-md-3;
+  // @extend .col-xl-2;
+  // @extend .col-md-pull-9;
+  // @extend .col-xl-pull-10;
 }
 
 .page-content--has-sidebar {
-  @extend .col-md-9;
-  @extend .col-xl-10;
-  @extend .col-md-push-3;
-  @extend .col-xl-push-2;
+  // @extend .col-md-9;
+  // @extend .col-xl-10;
+  // @extend .col-md-push-3;
+  // @extend .col-xl-push-2;
 }
 
 .page-sidebar__content {
@@ -144,7 +144,7 @@
   padding-top: 2rem;
   border-top: 1px solid #ccc;
 
-  @media (min-width: $screen-md-min) {
+  @include media-breakpoint-up('lg') {
     margin-top: 0;
     padding-top: 0;
     border-top: none;
@@ -160,10 +160,6 @@
   text-transform: uppercase;
   font-family: $headings-font-family;
 
-  a {
-
-  }
-
   li {
     margin-bottom: 15px;
     padding-left: 20px;
@@ -178,17 +174,12 @@
         left: 0;
         height: 1px;
         width: 11px;
-        background-color: $color-black;
+        background-color: $black;
       }
 
       a {
-        color: $color-black;
+        color: $black;
       }
     }
   }
-}
-
-.page-content {
-
-  &.page-content--has-sidebar {}
 }

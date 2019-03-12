@@ -126,12 +126,12 @@ $yotpo-icon-thumbs-down: false !default;
       &,
       &:hover,
       &:focus {
-        color: $color-dark-grey !important;
+        color: $gray-800 !important;
       }
     }
 
     .text-m {
-      font-size: $font-size-small !important;
+      font-size: $font-size-sm !important;
       font-weight: $font-weight-bold;
     }
   }

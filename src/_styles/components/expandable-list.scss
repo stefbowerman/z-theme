@@ -2,13 +2,12 @@
 // Expandable List
 // -------------------------
 
-// .panel / .panel.is-open
-//   .expandable-list
-//     .expandable-list__header
-//       a.expandable-list__header-title
-//     .collapse
-//       .expandable-list__body
-//         .expandable-list__item / .expandable-list__item.is-selected
+// .expandable-list(.is-open)
+//   .expandable-list__header
+//     a.expandable-list__header-title
+//   .collapse
+//     .expandable-list__body
+//       .expandable-list__item / .expandable-list__item.is-selected
 
 .expandable-list {
 
@@ -22,23 +21,22 @@
 }
 
 .expandable-list__header-title {
-  @include display-flex;
-  @include align-items(center);
-  @include justify-content(space-between);
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   svg.icon {
     width: 15px;
     transition: transform $transition-duration-base $transition-timing-function-in-out-ui;
   }
 
-  .panel.is-open & svg.icon {
+  .expandable-list.is-open & svg.icon {
     transform: rotate(180deg);
   }
 }
 
 .expandable-list__body {
-  padding-left: 15px;
+
 }
 
 .expandable-list__item {

@@ -3,8 +3,10 @@
 // -------------------------
 
 .collection-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: $grid-gutter-width;
-  @include clearfix;
 }
 
 .collection-filter-bar__grouping {
@@ -21,12 +23,12 @@
 
   // Hide labels on small screens
   label {
-    @media (max-width: $screen-sm-max) {
+    @include media-breakpoint-down('md') {
       display: none;
     }
   }
 
-  @media (min-width: $screen-lg-min) {
+  @include media-breakpoint-down('xl') {
     width: 220px;
 
     &:not(:last-child) {

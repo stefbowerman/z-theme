@@ -3,12 +3,12 @@
 .chosen-container {
   width: 100% !important;
   max-width: 100%;
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
 
   .chosen-drop {
     box-shadow: none;
-    border-color: $input-border-focus;
-    border-top: 1px solid $input-border-focus;
+    border-color: $input-focus-border-color;
+    border-top: 1px solid $input-focus-border-color;
     clip: auto;
     opacity: 0;
     pointer-events: none;
@@ -27,17 +27,18 @@
     color: $input-color;
 
     li {
-      padding: $padding-base-vertical*2 $padding-base-horizontal;
+      padding: $spacer / 2;
       line-height: inherit;
       transition: all $transition-duration-fastest $transition-timing-function-base;
 
       &.result-selected {
-        color: $input-focus-color;
+        color: $input-color;
+        background-color: $gray-300;
       }
 
       &.highlighted {
-        background-color: $color-black;
-        color: $color-white;
+        color: $input-color;
+        background-color: $gray-200;
         background-image: none;
       }
     }
@@ -47,12 +48,8 @@
 .chosen-container-single {
   .chosen-single {
     @extend .form-control;
-    height: 2.85rem; // match buttons - normal form controls are fine, just chosen is weird
     box-shadow: none;
-
-    span {
-      line-height: 2; // needs this fix to vertically align the label
-    }
+    background-image: none; // Remove default gradient background image
 
     div {
       width: 30px;
@@ -81,7 +78,7 @@
   }
 
   &.chosen-with-drop .chosen-single {
-    border-color: $input-border-focus;
+    border-color: $input-focus-border-color;
     background-color: $input-bg;
     background-image: none;
 
@@ -114,7 +111,7 @@
 .chosen-container-single .chosen-single div b {
   background-position: right center;
   background: {
-    image: url($svg-select-icon) !important;
+    image: $custom-select-indicator !important;
     repeat: no-repeat;
     position: center !important;
     color: transparent;

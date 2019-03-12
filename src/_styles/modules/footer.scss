@@ -44,22 +44,21 @@
   //   }
   // }
 
-}
-
-.footer-menu__title {
-  margin-bottom: 20px;
-}
-
-.footer-menu__list {
-  @extend .list-unstyled;
-  font-size: $footer-menu-font-size;
-
-  li:not(:last-child) {
-    margin-bottom: 5px;
+  .footer-menu__title {
+    margin-bottom: 20px;
   }
 
-  a {
-    color: $footer-menu-text-color;
+  .footer-menu__list {
+    @extend .list-unstyled;
+    font-size: $footer-menu-font-size;
+
+    li:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    a {
+      color: $footer-menu-text-color;
+    }
   }
 }
 

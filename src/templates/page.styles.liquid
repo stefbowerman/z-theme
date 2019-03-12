@@ -8,12 +8,10 @@
     <div class="row justify-content-center">
       <div class="col-md-10">
 
-        <div class="page-header">
-          <h1 class="page-header__title">Styleguide</h1>
-          <div class="page-header__subtitle">
-            This page is here to show off styles for standard page elements such as typography, form elements, and icons. These are hard coded in an alternate page template file named <code>page.styles.liquid</code>.</p>
-          </div>
-        </div>
+        {% include 'page-header',
+                    ph_title: 'Styleguide',
+                    ph_subtitle: 'This page is here to show off styles for standard page elements such as typography, form elements, and icons. These are hard coded in an alternate page template file named <code>page.styles.liquid</code>.'
+        %}
 
         <h2 class="docs-title">Table of Contents</h2>
         <ul>
@@ -341,7 +339,11 @@
         </div>
 
         <h2 id="docs-content-grid" class="docs-title">Content Grid</h2>
-        <p>This is a more rigid grid for laying out content, typically products and articles.  It uses the same sizing and gutters as the normal grid.  There is one base version with several modifier classes that allow you some level of flexibility.  The default layout is 1 across on mobile devices, and 3-col on screens larger than <code>$screen-md-min</code>.</p>
+        <p>The content grid is an alternative way to layout content similar to the Bootstrap grid but it doesn't rely on rows and columns.  It used the same sizing and gutters to ensure layout consistency, but the usage is slightly different.</p>
+        <p>The content grid relies on a parent <code>.content-grid</code> element with any number of direct child <code>.content-grid__item</code> elements.  The child element sizing is parent on the parent grid element and any modifier classes it may have.  The default grid is responsive and initially displays 1 item per row and expands to show 2, and 3 items per row as the screen crosses the <code>small</code> and <code>large</code> breakpoints respectively.</p>
+        <p>Responsive modifier classes are available to generate 1 -> 6 columns per breakpoint and work similar to Bootstrap responsive utilities.  Any breakpoint class applies to that breakpoint and <em>up</em>.  If you add another class for a larger breakpoint it will override any ones applying at smaller breakpoints.</p>
+
+        <p>Below is an example of the default content grid.</p>
 
         <div class="content-grid show-grid">
           {% for i in (1..6) %}
@@ -351,61 +353,17 @@
           {% endfor %}
         </div>
 
-        <h4 class="docs-subtitle">Alternate Content Grid Layouts</h4>
+        <h4 class="docs-subtitle">Responsive Content Grid Layouts</h4>
         <p>Modifier classes are available to create alternate grid layouts</p>
 
-        <p>Use <code>.content-grid--2-col</code> to create a 2 column grid on screens larger than <code>$screen-md-min</code>.</p>
-        <div class="content-grid content-grid--2-col show-grid">
-          {% for i in (1..4) %}
-            <div class="content-grid__item">
-              <div>Grid item {{ i }}</div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <br /><br />
-
-        <p>Use <code>.content-grid--4-col</code> to create a 4 column grid on screens larger than <code>$screen-md-min</code>.</p>
-        <div class="content-grid content-grid--4-col show-grid">
-          {% for i in (1..8) %}
-            <div class="content-grid__item">
-              <div>Grid item {{ i }}</div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <br /><br />
-
-        <p>Use <code>.content-grid--2-4</code> to create a grid that switches from 2 to 4 columns.</p>
-        <div class="content-grid content-grid--2-4 show-grid">
-          {% for i in (1..8) %}
-            <div class="content-grid__item">
-              <div>Grid item {{ i }}</div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <br /><br />
-
-        <p>Use <code>.content-grid--1-2-4</code> to create a grid that switches from 1 to 2 to 4 columns.</p>
-        <div class="content-grid content-grid--1-2-4 show-grid">
-          {% for i in (1..8) %}
-            <div class="content-grid__item">
-              <div>Grid item {{ i }}</div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <br /><br />
-
-        <p>Use <code>.content-grid--1-2-3</code> to create a grid that switches from 1 to 2 to 3 columns.</p>
-        <div class="content-grid content-grid--1-2-3 show-grid">
+        <p>Use <code>.content-grid--sm-3-col.content-grid--xxl-6-col</code> to create a 3 column grid on screens large than the <code>sm</code> breakpoint and a 6 column grid on screens larger than the <code>xxl</code> breakpoint.</p>
+        <div class="content-grid content-grid--sm-3-col content-grid--xxl-6-col show-grid">
           {% for i in (1..6) %}
             <div class="content-grid__item">
               <div>Grid item {{ i }}</div>
             </div>
           {% endfor %}
-        </div>    
+        </div>
 
         <h4 class="docs-subtitle">Alternate Content Grid Spacing</h4>
         <p>Use the <code>content-grid--flush</code> modifier class to make all grid items flush with each other.</p>
@@ -831,8 +789,8 @@
         <p>Use these elements to create sections of content throughout the body of the page.  While page header should be used once at the top, the content header can be used multiple times.</p>
 
         {% include 'content-header',
-            title: "Content Header Title Goes Here",
-            subtitle: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            ch_title: "Content Header Title Goes Here",
+            ch_subtitle: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         %}
 
         <div class="content-grid content-grid--flush">
@@ -870,7 +828,7 @@
           {% endfor %}
         </div>
         <h4 class="docs-subtitle">Responsive Frames</h4>
-        <p>Responsive frame sizing is available and works similar to Bootstrap responsive utilities, any breakpoint class applies to that breakpoint and <em>up</em>.  If you add another class for a larger breakpoint it will override any ones applying at smaller breakpoints.  Frame sizing being applied to screen sizes smaller than <code>$grid-breakpoints('sm')</code> do not need a responsive class. </p>
+        <p>Responsive frame sizing is available and works similar to Bootstrap responsive utilities, any breakpoint class applies to that breakpoint and <em>up</em>.  If you add another class for a larger breakpoint it will override any ones applying at smaller breakpoints.  Frame sizing being applied to screen sizes smaller than <code>$grid-breakpoints('sm')</code> do not need a responsive class.</p>
         <div class="row">
           <div class="col-md-6">
             <div class="frame frame--16x9 frame--sm-6x4 frame--md-1x1 frame--lg-3x4 frame--xl-4x6 frame--xxl-4x6" style="border: 1px solid #d8d8d8">

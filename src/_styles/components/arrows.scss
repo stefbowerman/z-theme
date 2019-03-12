@@ -3,7 +3,9 @@
 // -----------------------------------------------------------------------------
 
 .arrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   height: $arrow-dimension;
   width: $arrow-dimension;
@@ -13,9 +15,6 @@
   overflow: hidden;
   cursor: pointer;
   vertical-align: top;
-  @include inline-flex;
-  @include align-items(center);
-  @include justify-content(center);
   transition: background-color $transition-duration-fast $transition-timing-function-in-out-ui;
 
   // No focus here because slideshow a11y causes these to keep focus at weird times
@@ -24,19 +23,19 @@
     transition: background-color $transition-duration-fast $transition-timing-function-in-out-ui;
   }
 
-  &.arrow--right {
+  &--right {
     // Default
   }
 
-  &.arrow--left {
+  &--left {
     transform: rotate(180deg);
   }
 
-  &.arrow--up {
+  &--up {
     transform: rotate(-90deg);
   }
 
-  &.arrow--down {
+  &--down {
     transform: rotate(90deg);
   }
 }

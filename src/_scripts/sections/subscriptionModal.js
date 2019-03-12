@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import User from '../core/user';
+import * as User from '../core/user';
 import * as Utils from '../core/utils';
 
 const selectors = {

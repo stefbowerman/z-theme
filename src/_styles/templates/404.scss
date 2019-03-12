@@ -1,11 +1,11 @@
 .four04 {
-  @include display-flex;
-  @include align-items(center);
+  display: flex;
+  align-items: center;
 }
 
 .four04__content-wrapper {
   width: 85%;
-  @include center-block;
+  @extend .mx-auto;
   text-align: center;
 }
 
