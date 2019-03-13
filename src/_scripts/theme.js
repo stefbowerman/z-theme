@@ -40,6 +40,9 @@ import SubscriptionModalSection   from './sections/subscriptionModal';
 import SubscriptionSlideupSection from './sections/subscriptionSlideup';
 import SlideshowSection           from './sections/slideshow';
 import CustomersLoginSection      from './sections/customersLogin';
+import CustomersAccountSection    from './sections/customersAccount';
+import CustomersAddressesSection  from './sections/customersAddresses';
+import CustomersOrderSection      from './sections/customersOrder';
 
 // Models
 import ProductCard from './models/productCard';
@@ -74,6 +77,9 @@ Breakpoints.initialize();
   sectionManager.register('subscription-slideup', SubscriptionSlideupSection);
   sectionManager.register('slideshow', SlideshowSection);
   sectionManager.register('customers-login', CustomersLoginSection);
+  sectionManager.register('customers-account', CustomersAccountSection);
+  sectionManager.register('customers-addresses', CustomersAddressesSection);
+  sectionManager.register('customers-order', CustomersOrderSection);
 
   $('.in-page-link').on('click', (evt) => {
     A11Y.pageLinkFocus($(evt.currentTarget.hash));

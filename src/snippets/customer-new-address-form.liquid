@@ -14,7 +14,6 @@
           id="AddressFirstNameNew"
           class="form-control"
           value="{{ form.first_name }}"
-          placeholder="{{ 'customer.addresses.first_name' | t }}"
           autocapitalize="words">
       </div>                      
     </div>
@@ -28,52 +27,40 @@
           name="address[last_name]"
           id="AddressLastNameNew"
           class="form-control"
-          placeholder="{{ 'customer.addresses.last_name' | t }}"
           value="{{ form.last_name }}"
           autocapitalize="words">
       </div>                      
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="AddressCompanyNew">
-      {{ 'customer.addresses.company' | t }}
-    </label>
+  <div class="row">
+    <div class="col-md-6 col-lg-8">
+      <div class="form-group">
+        <label for="AddressAddress1New">
+          {{ 'customer.addresses.address1' | t }}
+        </label>
 
-    <input type="text"
-      name="address[company]"
-      id="AddressCompanyNew"
-      class="form-control"
-      placeholder="{{ 'customer.addresses.company' | t }}"
-      value="{{ form.company }}"
-      autocapitalize="words">
-  </div>
-
-  <div class="form-group">
-    <label for="AddressAddress1New">
-      {{ 'customer.addresses.address1' | t }}
-    </label>
-
-    <input type="text"
-      name="address[address1]"
-      id="AddressAddress1New"
-      class="form-control"
-      placeholder="{{ 'customer.addresses.address1' | t }}"
-      value="{{ form.address1 }}"
-      autocapitalize="words">
-  </div>
-
-  <div class="form-group">
-    <label for="AddressAddress2New">
-      {{ 'customer.addresses.address2' | t }}
-    </label>
-    <input type="text"
-      name="address[address2]"
-      id="AddressAddress2New"
-      class="form-control"
-      placeholder="{{ 'customer.addresses.address2' | t }}"
-      value="{{ form.address2 }}"
-      autocapitalize="words">
+        <input type="text"
+          name="address[address1]"
+          id="AddressAddress1New"
+          class="form-control"
+          value="{{ form.address1 }}"
+          autocapitalize="words">
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="form-group">
+        <label for="AddressAddress2New">
+          {{ 'customer.addresses.address2' | t }}
+        </label>
+        <input type="text"
+          name="address[address2]"
+          id="AddressAddress2New"
+          class="form-control"
+          value="{{ form.address2 }}"
+          autocapitalize="words">
+      </div>      
+    </div>
   </div>
 
   <div class="form-group">
@@ -84,14 +71,23 @@
       name="address[city]"
       id="AddressCityNew"
       class="form-control"
-      placeholder="{{ 'customer.addresses.city' | t }}"
       value="{{ form.city }}"
       autocapitalize="words">
   </div>
 
   <div class="row">
     <div class="col-md-4">
-
+      <div class="form-group">
+        <label for="AddressProvinceNew">
+          {{ 'customer.addresses.state' | t }}
+        </label>
+        <input type="text"
+          name="address[province]"
+          id="AddressProvinceNew"
+          class="form-control">
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group">
         <label for="AddressCountryNew">
           {{ 'customer.addresses.country' | t }}
@@ -104,24 +100,8 @@
           {{ country_option_tags }}
         </select>
       </div>
-
     </div>
     <div class="col-md-4">
-
-      <div class="form-group">
-        <label for="AddressProvinceNew">
-          {{ 'customer.addresses.state' | t }}
-        </label>
-        <input type="text"
-          name="address[province]"
-          id="AddressProvinceNew"
-          class="form-control"
-          placeholder="{{ 'customer.addresses.state' | t }}">
-      </div>
-
-    </div>
-    <div class="col-md-4">
-
       <div class="form-group">
         <label for="AddressZipNew">
           {{ 'customer.addresses.zip' | t }}
@@ -130,7 +110,6 @@
           name="address[zip]"
           id="AddressZipNew"
           class="form-control"
-          placeholder="{{ 'customer.addresses.zip' | t }}"
           value="{{ form.zip }}"
           autocapitalize="characters">
       </div>
@@ -145,7 +124,6 @@
       name="address[phone]"
       id="AddressPhoneNew"
       class="form-control"
-      placeholder="{{ 'customer.addresses.phone' | t }}"
       value="{{ form.phone }}"
       pattern="[0-9\-]*">
   </div>

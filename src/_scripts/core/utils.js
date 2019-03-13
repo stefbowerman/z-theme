@@ -369,3 +369,30 @@ export function getPropByString(o, s) {
   }
   return o;
 }
+
+/**
+ * Performs a post request by way of a form submit
+ * Pulled from Shopify's shopify_common.js
+ *
+ * @param {String} t - url
+ * @return {Object} e - parameters
+ */
+export function postLink(t, e) {
+  const n = (e = e || {}).method || 'post';
+  const i = e.parameters || {};
+  const o = document.createElement('form');
+
+  /* eslint-disable */
+  for (const r in o.setAttribute('method', n), o.setAttribute('action', t), i) {
+    const l = document.createElement('input');
+    l.setAttribute('type', 'hidden');
+    l.setAttribute('name', r);
+    l.setAttribute('value', i[r]);
+    o.appendChild(l);
+  }
+
+  document.body.appendChild(o);
+  o.submit();
+  document.body.removeChild(o);
+  /* eslint-enable */
+}

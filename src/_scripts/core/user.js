@@ -42,23 +42,6 @@ export function generateCookie(key) {
 }
 
 /**
- * Sets a browser cookie
- *
- * @param {Object} cookie
- * @param {String} cookie.name
- * @param {String} cookie.value
- * @param {Number} cookie.expiration - Time to expire in days, expires after session if left blank
- */
-export function setCookie(cookie) {
-  if (hasCookie(cookie.name) && getCookieValue(cookie.name) !== cookie.value) {
-    removeCookie(cookie.name);
-  }
-
-  const opts = cookie.hasOwnProperty('expiration') ? { expires: cookie.expiration } : {};
-  Cookies.set(cookie.name, cookie.value, opts);
-}
-
-/**
  * Checks for the presence of a browser cookie by name (doesn't check for value equality)
  *
  * @param {String} cookieName
@@ -86,4 +69,21 @@ export function getCookieValue(cookieName) {
  */
 export function removeCookie(cookieName) {
   Cookies.remove(cookieName);
+}
+
+/**
+ * Sets a browser cookie
+ *
+ * @param {Object} cookie
+ * @param {String} cookie.name
+ * @param {String} cookie.value
+ * @param {Number} cookie.expiration - Time to expire in days, expires after session if left blank
+ */
+export function setCookie(cookie) {
+  if (hasCookie(cookie.name) && getCookieValue(cookie.name) !== cookie.value) {
+    removeCookie(cookie.name);
+  }
+
+  const opts = cookie.hasOwnProperty('expiration') ? { expires: cookie.expiration } : {};
+  Cookies.set(cookie.name, cookie.value, opts);
 }
