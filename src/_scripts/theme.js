@@ -44,9 +44,11 @@ import CustomersAccountSection    from './sections/customersAccount';
 import CustomersAddressesSection  from './sections/customersAddresses';
 import CustomersOrderSection      from './sections/customersOrder';
 
+// Managers
+import QuickViewManager from './managers/quickView';
+
 // Models
 import ProductCard from './models/productCard';
-import quickViewManager from './models/quickViewManager';
 
 // Templates
 import './templates/pageStyles';
@@ -142,6 +144,6 @@ Breakpoints.initialize();
   // Quickview stuff
   $body.on('click', '[data-quick-view-trigger]', function(e) {
     e.preventDefault();
-    quickViewManager.onQuickViewTriggerClick($(this));
+    QuickViewManager.onQuickViewTriggerClick($(this));
   });
 })(Modernizr);

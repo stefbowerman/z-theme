@@ -9,7 +9,7 @@ module.exports = {
       dest: '/styles',
       filePattern: ['src/_styles/**/*.scss'],
       files: ['theme.scss'],
-      // files: ['theme.scss', 'checkout.scss'],
+      // files: ['checkout.scss'],
       watchTask: 'styles',
       extensions: ['scss', 'css']
     },

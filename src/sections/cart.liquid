@@ -20,6 +20,22 @@
                 </div>
                 <div class="cart-list__body">
                   {% for item in cart.items %}
+
+                    {% comment %}
+                      - Variant quantity logic may also be contained in templates/cart.json.liquid
+                      - If you make changes here, make sure those changes are reflected there and vice-versa
+                    {% endcomment %}
+                    {% assign variant_quantity_limit = 0 %}
+                    {% if variant.available %}
+                      {% assign variant_quantity_limit = 10 %}
+                      {% if variant.inventory_quantity < variant_quantity_limit and variant.inventory_policy == "deny" %}
+                        {% assign variant_quantity_limit = variant.inventory_quantity %}
+                      {% endif %}
+                      {% if item.quantity >= variant_quantity_limit %}
+                        {% assign variant_quantity_limit = item.quantity %}
+                      {% endif %}
+                    {% endif %}
+
                     <div class="cart-list__row">
                       <div class="cart-list__col-product">
                         <a href="{{ item.url | within: collections.all }}">
@@ -55,10 +71,16 @@
                               {% endfor %}
                             {% endunless %}
 
-                            <li class="d-md-none">{{ item.line_price | money }}</li>
+                            <li class="d-lg-none">{{ item.line_price | money }}</li>
                           </ul>
 
-                          <div class="d-md-none">
+                          <div class="d-lg-none">
+                            <div class="quantity-adjuster" data-quantity-adjuster>
+                              <button class="quantity-adjuster__decrement" data-decrement>-</button>
+                              <input type="number" value="{{ item.quantity }}" min="0" max="{{ variant_quantity_limit }}" data-item-qa-input="updates_{{ item.key }}" />
+                              <button class="quantity-adjuster__increment" data-increment>+</button>
+                            </div>                            
+                            {% comment %}
                             <div style="max-width: 80px;">
                               <select class="cart-list__item-quantity form-control" aria-label="{{ 'cart.general.item_quantity' | t }}" data-item-quantity-select="updates_{{ item.key }}">
                                 {% for i in (0..10) %}
@@ -66,6 +88,7 @@
                                 {% endfor %}
                               </select>
                             </div>
+                            {% endcomment %}
                           </div>
 
                           <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart-list__item-details-remove">
@@ -75,6 +98,12 @@
                       </div>
                       <div class="cart-list__col-quantity">
                         <input type="number" value="{{ item.quantity }}" name="updates[]" id="updates_{{ item.key }}" style="display: none !important" />
+                        <div class="quantity-adjuster" data-quantity-adjuster>
+                          <button class="quantity-adjuster__decrement" data-decrement>-</button>
+                          <input type="number" value="{{ item.quantity }}" min="0" max="{{ variant_quantity_limit }}" data-item-qa-input="updates_{{ item.key }}" />
+                          <button class="quantity-adjuster__increment" data-increment>+</button>
+                        </div>                         
+                        {% comment %}
                         <div style="max-width: 80px; margin: 0 auto">
                           <select class="cart-list__item-quantity form-control" aria-label="{{ 'cart.general.item_quantity' | t }}" data-item-quantity-select="updates_{{ item.key }}">
                             {% for i in (0..10) %}
@@ -82,6 +111,7 @@
                             {% endfor %}
                           </select>
                         </div>
+                        {% endcomment %}
                       </div>
                       <div class="cart-list__col-subtotal">
                         <span class="h5">{{ item.line_price | money }}</span>
@@ -95,7 +125,7 @@
                   {% endfor %}
                 </div>
                 <div class="cart-list__footer">
-                  <div class="cart-list__footer-row cart-list__footer-row--secondary d-none d-md-block">
+                  <div class="cart-list__footer-row cart-list__footer-row--secondary d-none d-lg-block">
                     {{ 'cart.general.shipping_at_checkout' | t }}
                   </div>
                   <div class="cart-list__footer-row cart-list__footer-row--primary">
@@ -107,7 +137,7 @@
                       {% if cart.total_discounts > 0 %}
                         <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
                       {% endif %}
-                      <p class="d-md-none">{{ 'cart.general.shipping_at_checkout' | t }}<br /><br/></p>
+                      <p class="d-lg-none">{{ 'cart.general.shipping_at_checkout' | t }}<br /><br/></p>
                     </div>
                     <div class="cart-list__footer-width-container">
                       <p>

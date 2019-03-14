@@ -11,6 +11,7 @@ body.ajax-cart-open {
   z-index: $zindex-ajax-cart;
   top: 0;
   right: 0;
+  bottom: 0;
   width: 100%;
   max-height: 100%;
   background: $ajax-cart-bg;
@@ -27,20 +28,9 @@ body.ajax-cart-open {
     transition: all $transition-duration-slide $transition-timing-function-slide-in;
   }
 
-  // Ajax cart shield
-  &:before {
-    content: '';
-    @include stretch-within;
-    background: transparentize($ajax-cart-bg, 0.5);
-    opacity: 0;
+  &.is-empty .ajax-cart__footer {
+    display: none;
     pointer-events: none;
-    transition: opacity $transition-duration-base $transition-timing-function-base;
-  }
-
-  &.request-in-progress:before {
-    opacity: 1;
-    pointer-events: auto;
-    cursor: $cursor-disabled;
   }
 
   // Ensure that the cart is full width on screen sizes below this
@@ -49,8 +39,22 @@ body.ajax-cart-open {
   }
 }
 
+// Ensure that the cart takes up the entire screen at all times
+.ajax-cart-container,
+.ajax-cart,
+.ajax-cart-form {
+  height: 100%;
+}
+
 .ajax-cart {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;  
   background: $ajax-cart-bg;
+}
+
+.ajax-cart-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .ajax-cart__header,
@@ -68,7 +72,25 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__body {
+  position: relative;
+  flex: 1;
 
+  // Ajax cart loading shield
+  &:before {
+    content: '';
+    @include stretch-within;
+    z-index: 1;
+    background: transparentize($ajax-cart-bg, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-duration-base $transition-timing-function-base;
+  }
+
+  .ajax-cart-container.lock-ui &:before {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: $cursor-disabled;
+  }    
 }
 
 .ajax-cart__footer {
@@ -80,8 +102,12 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__empty-message {
-  margin: $ajax-cart-padding-vertical*2 0;
-  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $ajax-cart-padding-vertical*2 0;
+  opacity: 0.5;
 }
 
 .ajax-cart__list {
@@ -137,6 +163,12 @@ body.ajax-cart-open {
 
 .ajax-cart__item-remove {
 
+}
+
+.ajax-cart__footer {
+  .additional-checkout-button {
+    width: 100%;
+  }
 }
 
 .ajax-cart__footer-row {

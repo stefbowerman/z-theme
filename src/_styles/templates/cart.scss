@@ -11,7 +11,7 @@ $cart-padding-v: 34px;
   font-family: $headings-font-family;
   font-weight: bold;
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     display: block;
   }
 }
@@ -21,7 +21,7 @@ $cart-padding-v: 34px;
   border-width: 2px 0;
   border-color: $black;
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     border-width: 1px 0;
   }
 }
@@ -32,7 +32,7 @@ $cart-padding-v: 34px;
   &:not(:last-child) {
     border-bottom: 2px solid $black;
 
-    @include media-breakpoint-up('md') {
+    @include media-breakpoint-up('lg') {
       border-bottom-width: 1px;
     }
   }
@@ -48,7 +48,7 @@ $cart-padding-v: 34px;
   }
 
   // Make flush with left and right on larger screens
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     > div:first-child {
       padding-left: 0;
     }
@@ -93,7 +93,7 @@ $cart-padding-v: 34px;
   padding-right: 20px; // Make extra room for the absolutely positioned remove button
 }
 
-@include media-breakpoint-up('md') {
+@include media-breakpoint-up('lg') {
 
   .cart-list__col-product {
     width: 50%;
@@ -130,7 +130,7 @@ $cart-padding-v: 34px;
   width: 100px;
   height: auto;
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     width: 120px;
   }
 }
@@ -138,7 +138,7 @@ $cart-padding-v: 34px;
 .cart-list__item-details {
   margin-left: 100px + $grid-gutter-width;
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     margin-left: 120px + $grid-gutter-width; // gutter between image and item details
   }
 }
@@ -148,7 +148,7 @@ $cart-padding-v: 34px;
   top: $cart-padding-v - 2px;
   right: -4px;
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up('lg') {
     display: none;
   }
 

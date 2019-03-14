@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
-import QuickView from './quickView';
+import QuickView from '../models/quickView';
 import * as Animations from '../core/animations';
 
 const $window = $(window);

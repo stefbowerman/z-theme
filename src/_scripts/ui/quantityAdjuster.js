@@ -51,14 +51,6 @@ export default class QuantityAdjuster {
     this._updateDisabledState();
   }
 
-  _getMin() {
-    return parseInt(this.$input.attr('min')) || 0;
-  }
-
-  _getMax() {
-    return parseInt(this.$input.attr('max')) || 999;
-  }
-
   _addMutationObserver(el) {
     if (!el) return;
 
@@ -89,15 +81,15 @@ export default class QuantityAdjuster {
       return;
     }
 
-    if (val === this._getMax() && val === this._getMin()) {
+    if (val === this.getMax() && val === this.getMin()) {
       this.$increment.prop('disabled', true);
       this.$decrement.prop('disabled', true);
     }
-    else if (val >= this._getMax()) {
+    else if (val >= this.getMax()) {
       this.$increment.prop('disabled', true);
       this.$decrement.prop('disabled', false);
     }
-    else if (val <= this._getMin()) {
+    else if (val <= this.getMin()) {
       this.$increment.prop('disabled', false);
       this.$decrement.prop('disabled', true);
     }
@@ -116,7 +108,7 @@ export default class QuantityAdjuster {
     const newVal = val + amount;
 
     // Don't change if the value is the same or invalid
-    if (newVal === val || newVal > this._getMax() || newVal < this._getMin()) return;
+    if (newVal === val || newVal > this.getMax() || newVal < this.getMin()) return;
 
     this.$input.val(newVal);
     this.$input.trigger('change');
@@ -124,8 +116,8 @@ export default class QuantityAdjuster {
 
   _clampInputVal() {
     const currVal = parseInt(this.$input.val());
-    const max = this._getMax();
-    const min = this._getMin();
+    const max = this.getMax();
+    const min = this.getMin();
 
     if (currVal > max) {
       this.$input.val(max);
@@ -133,6 +125,14 @@ export default class QuantityAdjuster {
     else if (currVal < min) {
       this.$input.val(min);
     }
+  }
+
+  getMin() {
+    return parseInt(this.$input.attr('min')) || 0;
+  }
+
+  getMax() {
+    return parseInt(this.$input.attr('max')) || 999;
   }
 
   onDisabledAttributeChange() {
@@ -175,10 +175,14 @@ export default class QuantityAdjuster {
     return data;
   }
 
-  static refresh() {
-    $(selectors.adjuster).each((i, el) => {
+  static refresh($container) {
+    $(selectors.adjuster, $container).each((i, el) => {
       QuantityAdjuster.ensureQuantityAdjuster(el);
     });
+  }
+
+  static getDataKey() {
+    return dataKey;
   }
 }
 
