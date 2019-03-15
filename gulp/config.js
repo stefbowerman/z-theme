@@ -17,10 +17,10 @@ module.exports = {
       src: '/_scripts',
       dest: '/scripts',
       extensions: ['js'],
-      // bundles: [{
-      //   entries: 'theme.js',
-      //   outputName: 'theme.js'
-      // }]
+      bundles: [{
+        entries: 'theme.js',
+        outputName: 'theme.js'
+      }]
       // bundles: [{
       //   entries: 'theme.js',
       //   outputName: 'theme.js'
@@ -28,16 +28,16 @@ module.exports = {
       //   entries: 'vendor.js',
       //   outputName: 'vendor.js'    
       // }]      
-      bundles: [{
-        entries: 'theme.js',
-        outputName: 'theme.js'
-      }, {
-        entries: 'vendor.js',
-        outputName: 'vendor.js'
-      }, {
-        entries: 'checkout.js',
-        outputName: 'checkout.js'
-      }]
+      // bundles: [{
+      //   entries: 'theme.js',
+      //   outputName: 'theme.js'
+      // }, {
+      //   entries: 'vendor.js',
+      //   outputName: 'vendor.js'
+      // }, {
+      //   entries: 'checkout.js',
+      //   outputName: 'checkout.js'
+      // }]
     },
     eslint: {
       filePattern: ['gulpfile.js/**/*.js', 'src/_scripts/**/*.js'],
