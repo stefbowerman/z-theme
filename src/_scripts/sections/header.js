@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import BaseSection from './base';
-import DropdownManager from '../models/dropdownManager';
+import DropdownManager from '../managers/dropdown';
 
 const $window = $(window);
 const $body   = $(document.body);
@@ -21,13 +21,12 @@ export default class HeaderSection extends BaseSection {
     super(container, 'header');
 
     this.$el = $(selectors.header, this.$container);
-    this.dropdownManager = new DropdownManager();
 
     this.$container.on(this.events.MOUSELEAVE, this.onMouseLeave.bind(this));
 
     // Register each dropdown trigger
     $(selectors.dropdownTrigger, this.$container).each((i, trigger) => {
-      this.dropdownManager.register($(trigger));
+      DropdownManager.register($(trigger));
     });
 
     // We pass in the fixed behavior as a class on the body of the site
@@ -58,11 +57,11 @@ export default class HeaderSection extends BaseSection {
   }
 
   onMouseLeave() {
-    this.dropdownManager.closeAllDropdowns();
+    DropdownManager.closeAllDropdowns();
   }
 
   onBlockSelect(e) {
-    const dropdown = this.dropdownManager.getDropdownByBlockId(e.detail.blockId);
+    const dropdown = DropdownManager.getDropdownByBlockId(e.detail.blockId);
 
     // Bypass dropdown manager since we're inside the theme editor
     if (dropdown) {
@@ -71,7 +70,7 @@ export default class HeaderSection extends BaseSection {
   }
 
   onBlockDeselect(e) {
-    const dropdown = this.dropdownManager.getDropdownByBlockId(e.detail.blockId);
+    const dropdown = DropdownManager.getDropdownByBlockId(e.detail.blockId);
 
     // Bypass dropdown manager since we're inside the theme editor
     if (dropdown) {

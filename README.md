@@ -46,7 +46,6 @@ slate zip # Creates a zip file for manually uploading your theme
 
 ```bash
 npm run start # Installs Slate globally and locally to start working on any project.
-npm run jshint # Runs code linter on JS files
 npm run hooks # Installs a Git Hook that prevents branch changes without stopping the watcher (sets a touch -a to the config.yml to force the watcher stop)
 npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and then starts a watcher
 ```

@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import Dropdown from './dropdown';
+import Dropdown from '../models/dropdown';
 import { find } from '../core/utils';
 
-export default class DropdownManager {
+class DropdownManager {
   constructor() {
     this.closeDropdownTimeout = null;
     this.closeDropdownTimeoutDuration = 80;
@@ -93,3 +93,5 @@ export default class DropdownManager {
     clearTimeout(this.closeDropdownTimeout);
   }
 }
+
+export default new DropdownManager();
