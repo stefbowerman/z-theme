@@ -11,7 +11,7 @@
     <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
     {%- comment %} images, title, price, etc. {% endcomment -%}
-    {% include 'product-detail-form',
+    {% include 'product-detail',
                 product: product,
                 current_variant: current_variant,
                 show_share_buttons: section.settings.show_share_buttons

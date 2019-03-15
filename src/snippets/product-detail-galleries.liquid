@@ -1,6 +1,6 @@
 {%- comment %}
 
-  Product Detail Form Gallery
+  Product Detail Galleries
   ------------------------------------------------------------------------------
 
   - In order to build multiple galleries for every color option, we need to loop through all the colors, then all the available product images to see if we have one or more image for each
@@ -22,7 +22,7 @@
 
   Usage:
 
-  {% include 'product-detail-form-gallery',
+  {% include 'product-detail-galleries',
               product: { product } - required
               current_variant: { current_variant }
   %}  
@@ -72,7 +72,7 @@
 {% endfor %}
 
 
-<div class="product-galleries">
+<div class="product-galleries" data-product-detail-galleries>
 
   {% if variant_gallery_possible %}
 
@@ -98,7 +98,6 @@
                         <a href="{{ image | img_url: photo_zoom_dimension }}" data-product-gallery-slide-link>
                           <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}"e>
                         </a>
-                        <a href="#" class="product-gallery__zoom-trigger zoom-trigger" data-zoom-button></a>
                       </li>
                     {% endunless %}
                   {% endif %}
@@ -139,7 +138,6 @@
                 <a href="{{ image | img_url: photo_zoom_dimension }}" data-product-gallery-slide-link>
                   <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}">
                 </a>
-                <a href="#" class="product-gallery__zoom-trigger zoom-trigger" data-zoom-button></a>
               </li>
             {% endunless %}
           {% endfor %}

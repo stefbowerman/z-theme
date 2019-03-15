@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
 import * as Utils from '../core/utils';
-import ProductDetailForm from '../view/product/productDetailForm';
+import ProductDetail from '../view/product/productDetail';
 
 /**
  * Model - QuickView
@@ -20,7 +20,7 @@ const selectors = {
   quickViewContentsBody: '[data-quick-view-contents-body]',
   quickViewClose: '[data-quick-view-close]',
   productCardContents: '[data-product-card-contents]',
-  productDetailForm: '[data-product-detail-form]'
+  productDetail: '[data-product-detail]'
 };
 
 const classes = {
@@ -35,7 +35,7 @@ export default class QuickView {
    * @param { Object } settings
    * @param { HTMLElement | jQuery } settings.$productCard
    * @param { String } settings.url - URL pointing to the quick view of the product
-   * @param { Function } settings.onProductDetailFormReady - Called after the product form is initialized.  `this` references the QuickView instance
+   * @param { Function } settings.onProductDetailReady - Called after the product form is initialized.  `this` references the QuickView instance
    * @param { Number } settings.transitionDuration - ms
    * @param { String } settings.transitionTimingFunction - string matching a jQuery easing equation.  see core/animations
    */  
@@ -44,14 +44,14 @@ export default class QuickView {
     this.namespace = '.'+this.name;
 
     const defaults = {
-      onProductDetailFormReady: $.noop,
+      onProductDetailReady: $.noop,
       transitionDuration: 800,
       transitionTimingFunction: 'ease-in-out'
     };
 
     this.settings = $.extend({}, defaults, options);
 
-    if (this.settings.$productCard === 'undefined') {
+    if (this.settings.$productCard === undefined) {
       console.warn('['+this.name+'] - $productCard element required to initialize');
       return;
     }
@@ -64,14 +64,14 @@ export default class QuickView {
     // Elements we'll need for everything to work
     this.$productCard           = this.settings.$productCard;
     this.$productCardContents   = this.$productCard.find(selectors.productCardContents);
-    this.$productDetailForm     = null;
+    this.$productDetail         = null;
     this.$quickView             = null;
     this.$quickViewContentsBody = null;
     this.$close                 = null;
 
-    this.stateIsOpen               = false;
-    this.supportsCssTransitions    = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
-    this.productDetailFormInstance = null;
+    this.stateIsOpen            = false;
+    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
+    this.productDetailInstance  = null;
 
     this.events = {
       OPEN:   'open'   + this.namespace,
@@ -97,34 +97,20 @@ export default class QuickView {
   _onAjaxSuccess(ajaxResponse) {
     this.$productCard.append($(ajaxResponse));
 
-    this.$productDetailForm     = this.$productCard.find(selectors.productDetailForm);
+    this.$productDetail         = this.$productCard.find(selectors.productDetail);
     this.$quickView             = this.$productCard.find(selectors.quickView);
     this.$quickViewContentsBody = this.$productCard.find(selectors.quickViewContentsBody);
     this.$close                 = this.$quickView.find(selectors.quickViewClose);
 
-    this.$productDetailForm.on('ready.productDetailForm', this.onProductDetailFormReady.bind(this));
+    this.productDetailInstance = new ProductDetail(this.$productDetail, false);
 
-    const config = {
-      $el: this.$productDetailForm,
-      zoomEnabled: true,
-      enableHistoryState: false
-    };
-
-    this.productDetailFormInstance = new ProductDetailForm(config);
-    this.productDetailFormInstance.initialize();
+    this.settings.onProductDetailReady.call(this);
 
     // Fire off the loaded event once all the images in the quick view are loaded
     imagesLoaded(this.$quickView.get(0), () => {
       const e = $.Event(this.events.LOADED);
       this.$productCard.trigger(e);
     });
-  }
-
-  /**
-   * Called after the product detail form is done initializing
-   */
-  onProductDetailFormReady() {
-    this.settings.onProductDetailFormReady.call(this);
   }
 
   open() {
