@@ -96,9 +96,11 @@
 </style>
 
 <div id="page-hero-{{ ph_id }}" class="page-hero page-hero--content-{{ ph_content_alignment }} page-hero--text-{{ ph_text_alignment }}{% if ph_light_text %} page-hero--light{% endif %}">
-  <div class="page-hero__bg">
-    <div class="page-hero__bg-image"></div>
-  </div>
+  {% if ph_background_image %}
+    <div class="page-hero__bg">
+      <div class="page-hero__bg-image" role="img" aria-label="{{ ph_background_image.alt }}"></div>
+    </div>
+  {% endif %}
   <div class="container">
     <div class="page-hero__content">
       {% if ph_toptitle != blank %}

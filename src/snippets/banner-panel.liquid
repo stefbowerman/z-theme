@@ -143,7 +143,7 @@
 
     {% if bp_background_image or bp_background_image_medium or bp_background_image_small %}
       <div class="banner__bg-container">
-        <div class="banner__bg-image"></div>
+        <div class="banner__bg-image" role="img" aria-label="{{ bp_background_image.alt }}"></div>
       </div>
     {% endif %}
 

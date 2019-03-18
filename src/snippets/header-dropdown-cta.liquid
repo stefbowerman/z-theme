@@ -21,7 +21,10 @@
 {% if cta_image %}
   <div class="header-dropdown__cta">
     {% if has_cta_link %}<a href="{{ cta_link }}">{% endif %}
-      <div class="header-dropdown__cta-image" style="background-image: url({{ cta_image | img_url: '600x' }})"></div>
+      <div class="header-dropdown__cta-image"
+           role="img"
+           aria-label="{{ cta_image.alt }}"
+           style="background-image: url({{ cta_image | img_url: '600x' }})"></div>
       <span>{{ cta_text }}</span>
     {% if has_cta_link %}</a>{% endif %}
   </div>

@@ -84,7 +84,9 @@
     <a href="{{ oc_url }}">
   {% endif %}  
     
-    <div class="overlay-card__bg"></div>
+    {% if oc_background_image %}
+      <div class="overlay-card__bg" role="img" aria-label="{{ oc_background_image.alt }}"></div>
+    {% endif %}
 
     <div class="overlay-card__contents">
 

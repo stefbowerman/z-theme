@@ -76,15 +76,17 @@
         {% if p_frame_ratio != blank %}
           <div class="frame
                       frame--{{ p_frame_ratio_small }}
-                      frame--lg-{{ p_frame_ratio }}">
+                      frame--lg-{{ p_frame_ratio }}"
+               role="img"
+               aria-label="{{ p_image.alt }}">
           </div>
         {% else %}
           {% if p_image != blank %}
             {% if p_image_small != blank %}
-              <img src="{{ p_image       | img_url: '1600x' }}" class="d-none  d-md-block" />
-              <img src="{{ p_image_small | img_url: '900x' }}"  class="d-block d-md-none" />
+              <img src="{{ p_image       | img_url: '1600x' }}" class="d-none  d-md-block" alt="{{ p_image.alt }}" />
+              <img src="{{ p_image_small | img_url: '900x' }}"  class="d-block d-md-none" alt="{{ p_image_small.alt }}" />
             {% else %}
-              <img src="{{ p_image | img_url: '1600x' }}" />
+              <img src="{{ p_image | img_url: '1600x' }}" alt="{{ p_image.alt }}" />
             {% endif %}
           {% endif %}
         {% endif %}

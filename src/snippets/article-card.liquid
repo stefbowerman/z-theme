@@ -45,7 +45,7 @@
   <div class="article-card">
     {% if article.image %}
       <a href="{{ article.url }}">
-        <img src="{{ article | img_url: img_size, crop: 'center' }}" class="article-card__image" />
+        <img src="{{ article | img_url: img_size, crop: 'center' }}" class="article-card__image" alt="{{ article.image.alt }}"/>
       </a>
     {% endif %}
     <div class="article-card__info">

@@ -48,7 +48,7 @@
 
   <div class="container">
     <div style="position: relative;">
-      <img src="{{ section.settings.image | img_url: '1600x' }}" style="width: 100%" />
+      <img src="{{ section.settings.image | img_url: '1600x' }}" style="width: 100%" alt="{{ setion.settings.image.alt }}" />
 
       {% for block in section.blocks %}
         <div id="hotspot-{{ block.id }}" class="hotspot" title="{{ block.settings.title }}">

@@ -55,7 +55,7 @@
                   <div class="account-block" {% unless forloop.first %}style="margin-top: 60px"{% endunless %}>          
                     <div class="row">
                       <div class="col-sm-5">
-                        <img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" />
+                        <img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" alt="{{ line_item.title | escape }}" />
                       </div>
                       <div class="col-sm-7">
                         <div>
@@ -102,7 +102,7 @@
                     {% for line_item in order.line_items %}                  
                       <tr>
                         <td>
-                          <div style="width: 130px; float: left"><img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" /></div>
+                          <div style="width: 130px; float: left"><img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" alt="{{ line_item.title | escape }}" /></div>
                           <div style="padding-left: 160px">
                             <strong>{{ line_item.product.title }}</strong>
                             {% comment %} Only show this line if there is non-default content {% endcomment %}
