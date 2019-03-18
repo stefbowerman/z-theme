@@ -8,6 +8,8 @@ import * as Image from './core/image';
   const $document = $(document);
   const $body = $(document.body);
 
+  const STEP_PAGE_CLASS_REGEX = /(^|\s)step-\S+|page-\S+/g;
+
   const selectors = {
     productThumbnailImage: '.product-thumbnail__image'
   };
@@ -41,6 +43,25 @@ import * as Image from './core/image';
       </div>`;
   }
 
+  /**
+   * Sets the body class based on the current step + page in checkout
+   * Also removes any pre-existing classes in case of a page:check event instead of page reload
+   *
+   */
+  function setBodyClasses() {
+    const S = window.Shopify;
+
+    if (S === undefined || S.Checkout === undefined) {
+      return;
+    }
+
+    $body.removeClass((i, classname) => {
+      return (classname.match(STEP_PAGE_CLASS_REGEX) || []).join(' ');
+    });
+    $body.addClass(`step-${S.Checkout.step.replace('_', '-')}`);
+    $body.addClass(`page-${S.Checkout.page.replace('_', '-')}`);
+  }
+
   $document.on('page:load page:change', () => {
     // Replace sidebar images with bigger versions
     $(selectors.productThumbnailImage).each((i, el) => {
@@ -58,6 +79,7 @@ import * as Image from './core/image';
       }
     });
 
+    setBodyClasses();
     $body.addClass(classes.checkoutReady);
   });
 })(Modernizr);

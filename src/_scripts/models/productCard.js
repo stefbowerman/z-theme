@@ -12,13 +12,13 @@ const classes = {
   altLoaded: 'alt-loaded' // added to the product card once the alt image is loaded to avoid a flash of white while loading
 };
 
-/**
- * Product Card constructor
- *
- * @param {HTMLElement | $} el - The card element
- */
 export default class ProductCard {
-  constructor(el, options) {
+  /**
+   * Product Card constructor
+   *
+   * @param {HTMLElement | $} el - The card element
+   */
+  constructor(el) {
     this.name = 'productCard';
     this.namespace = `.${this.name}`;
 
