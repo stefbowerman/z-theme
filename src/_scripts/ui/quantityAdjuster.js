@@ -159,7 +159,7 @@ export default class QuantityAdjuster {
     this._changeValue(-1);
   }
 
-  static ensureQuantityAdjuster(el) {
+  static ensure(el) {
     let $el =  $(el);
 
     if (!$el.is(selectors.adjuster)) {
@@ -177,7 +177,7 @@ export default class QuantityAdjuster {
 
   static refresh($container) {
     $(selectors.adjuster, $container).each((i, el) => {
-      QuantityAdjuster.ensureQuantityAdjuster(el);
+      QuantityAdjuster.ensure(el);
     });
   }
 

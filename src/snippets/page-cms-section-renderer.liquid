@@ -18,6 +18,7 @@
     - product_grid
     - banner
     - richtext
+    - video
 
 {% endcomment -%}
 
@@ -173,6 +174,20 @@
 
           </div>
 
+        {% elsif block.type == "video" %}
+          <div class="container">
+            <div id="video-player-{{ block.id }}" class="video-player" data-video-player data-video-id="{{ block.settings.video_url.id }}" data-video-type="{{ block.settings.video_url.type }}" data-background="{% if block.settings.background %}true{% else %}false{% endif %}" data-embed-color="{{ block.settings.embed_color | remove: '#' }}">
+              {% if block.settings.cover_image and block.settings.background == false %}
+                <div class="video-player__cover" data-video-player-cover>
+                  <div class="video-player__cover-still" style="background-image: url({{ block.settings.cover_image | img_url: '2000x' }});"></div>
+                  <span class="video-player__cover-play">
+                    {% include 'icon-play' %}
+                  </span>
+                </div>
+              {% endif %}
+              <div class="video-player__embed" data-video-player-embed></div>
+            </div>
+          </div>
         {% endif %}
       </div>
     {% endfor %}

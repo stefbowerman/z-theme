@@ -362,6 +362,43 @@
             "default":   "center"
           }
         ]
+      },
+      {
+        "type": "video",
+        "name": "Video",
+        "settings": [
+          {
+             "id": "video_url",
+             "type": "video_url",
+             "label": "Video URL",
+             "accept": ["vimeo", "youtube"],
+             "info": "Both Vimeo and YouTube videos are supported",
+             "default": "https://vimeo.com/72223143"
+          },
+          {
+            "type": "image_picker",
+            "id": "cover_image",
+            "label": "Cover Image"
+          },
+          {
+            "type": "header",
+            "content": "Vimeo Embed Options",
+            "info": "The options below only apply to Vimeo videos"
+          },
+          {
+            "type": "color",
+            "id": "embed_color",
+            "label": "Embed Color",
+            "default": "#000"
+          },          
+          {
+            "type": "checkbox",
+            "id" : "background",
+            "label": "Background Video",
+            "info": "Enabling this will remove video controls, cover image and autoplay the video.  [See Vimeo Help Page for info](https://help.vimeo.com/hc/en-us/articles/115011183028-Embedding-background-videos)",
+            "default": false
+          }
+        ]
       }
     ]
   }
