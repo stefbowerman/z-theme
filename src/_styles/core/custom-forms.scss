@@ -12,6 +12,10 @@
   display: block;
   min-height: $font-size-base * $line-height-base;
   padding-left: $custom-control-gutter + $custom-control-indicator-size;
+
+  + .custom-control {
+    margin-top: $custom-control-vertical-spacing;
+  }
 }
 
 .custom-control-inline {

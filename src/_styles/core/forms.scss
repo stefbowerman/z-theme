@@ -203,6 +203,10 @@ textarea.form-control {
   position: relative;
   display: block;
   padding-left: $form-check-input-gutter;
+
+  + .form-check {
+    margin-top: $form-check-vertical-spacing;
+  }
 }
 
 .form-check-input {
