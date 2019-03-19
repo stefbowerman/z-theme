@@ -396,3 +396,17 @@ export function postLink(t, e) {
   document.body.removeChild(o);
   /* eslint-enable */
 }
+
+
+/**
+ * Returns a string with all HTML entities decoded
+ * See: https://stackoverflow.com/questions/1147359/how-to-decode-html-entities-using-jquery#answer-1395954
+ *
+ * @param {String} encodedString
+ * @return {String}
+ */
+export function decodeEntities(encodedString) {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = encodedString;
+  return textArea.value;
+}

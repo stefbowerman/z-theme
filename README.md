@@ -54,5 +54,33 @@ npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and the
 
 All styling is done via the scss files located in the `/src/_styles` directory.  There is a gulp task that compiles these and outputs them to the `/src/styles` directory.  Only compiled files should end up in this directory.  The reason for the 2 source directories is that by default, Slate watches for file changes in `/src/styles` and runs it's own task.  We get around this by creating a new underscore-prefixed directory where we can apply our own watcher.  Navigate to `/gulp/tasks/styles.js` if you need to make adjustments to the task.
 
-#### Notes
-- Turning off "prefer-destructing" because I have no idea how it works.
+### Javascript Development
+
+Similarly, all javascript source files are container in `/src/_scripts`.  Only compiled files should end up in `/src/scripts`.
+
+## Theme Features
+
+Use this area of the readme to document anything specific related to the theme's interaction with products, collection, blogs, settings, etc.
+
+### Product
+
+##### Metafields
+| Namespace | Key | Description |
+|---|---|---|
+| `namespace_here` | `key_here` | Description of what should go in this metafield and how it is used. |
+
+##### Tags
+
+| Value | Effect |
+|---|---|
+| Tag Name | Description of tag and how it is used |
+
+### CMS Pages
+
+The following pages utilize the CMS page schema and renderer.  Any time changes are made to the schema, make sure to update the schemas on all of the following sections to ensure the full suite of modules is always available.
+
+- `page-cms.liquid`
+
+### Checkout Additional Scripts
+
+Since additional checkout scripts are saved in a textarea inside the checkout admin settings, they do not have versioning and are liable to be modified or removed at any time.  As a precaution, try to store the most up to date version of these scripts inside the snippet `_checkout-additional-scripts.liquid`.  This file doesn't get included on the site anywhere but is the only way to maintain this content in version control.
