@@ -6,7 +6,7 @@ module.exports = {
     styles: {
       // Relative to root.src
       src: '/_styles',
-      dest: '/styles',
+      dest: '/assets',
       filePattern: ['src/_styles/**/*.scss'],
       files: ['theme.scss'],
       // files: ['checkout.scss'],
@@ -15,7 +15,7 @@ module.exports = {
     },
     scripts: {
       src: '/_scripts',
-      dest: '/scripts',
+      dest: '/assets',
       extensions: ['js'],
       bundles: [{
         entries: 'theme.js',
@@ -37,6 +37,9 @@ module.exports = {
       // }, {
       //   entries: 'checkout.js',
       //   outputName: 'checkout.js'
+      // }, {
+      //   entries: 'giftcard.js',
+      //   outputName: 'giftcard.js'
       // }]
     },
     eslint: {

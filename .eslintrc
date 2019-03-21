@@ -18,7 +18,8 @@
   },
   "globals": {
     "Modernizr": "readonly",
-    "theme": "readonly"
+    "theme": "readonly",
+    "QRCode": "readonly"
   },
   "rules": {
     "comma-dangle": "off",

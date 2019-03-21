@@ -50,13 +50,9 @@ npm run hooks # Installs a Git Hook that prevents branch changes without stoppin
 npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and then starts a watcher
 ```
 
-### SCSS Development
+### _ Prefixed Directories
 
-All styling is done via the scss files located in the `/src/_styles` directory.  There is a gulp task that compiles these and outputs them to the `/src/styles` directory.  Only compiled files should end up in this directory.  The reason for the 2 source directories is that by default, Slate watches for file changes in `/src/styles` and runs it's own task.  We get around this by creating a new underscore-prefixed directory where we can apply our own watcher.  Navigate to `/gulp/tasks/styles.js` if you need to make adjustments to the task.
-
-### Javascript Development
-
-Similarly, all javascript source files are container in `/src/_scripts`.  Only compiled files should end up in `/src/scripts`.
+This project uses Slate behind the scenes to handle file changes and uploads.  It comes with a watcher that watches over files inside of two specific source directories titles `styles` and `scripts`.  This watcher runs a task every time files are changed that re-compiles any top-level files and moves them into the `dist` directory for uploading.  This works well except for the fact that it compiles and uploads _all_ of those top level files each time anything changes.  For example, because we have 4 JS files, this means we have to wait for 4 files to upload everytime we make a change to one.  To get around this, we put our styles and scripts in directories with _underscore prefixes_ and hook them up to our own gulp watch task that compiles and outputs them directly to the `src/assets` directory (which uploads single files on change).
 
 ## Theme Features
 
