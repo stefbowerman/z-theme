@@ -2,8 +2,47 @@
 // Slideshow Module
 // -------------------------
 
+// Base styling for all swiper instances
+.swiper-container {
+
+}
+
+.swiper-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &--left {
+    left: $grid-gutter-width/2;
+  }
+  &--right {
+    right: $grid-gutter-width/2;
+  }    
+}
+
+.swiper-pagination-bullet {
+  height: $slideshow-dot-size;
+  width: $slideshow-dot-size;  
+  background-color: $slideshow-dot-color;
+  transition: background-color $transition-duration-base $transition-timing-function-out;
+
+  &:hover,
+  &:focus,
+  &.swiper-pagination-bullet-active {
+    transition: background-color $transition-duration-base $transition-timing-function-in;  
+    background-color: $slideshow-dot-active-color;
+  }
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 $slideshow-dot-size/2;
+}
+
+
 // Slideshow Slide styling
 .slideshow {
+
 }
 
 .slideshow-slide {
@@ -27,74 +66,9 @@
 }
 
 .slideshow-slide__title {
-  @include media-breakpoint-down('lg') {
-    font-size: $h4-font-size;
-  }
+
 }
 
 .slideshow-slide__subtitle {
 
-}
-
-// Slick specific styling - we don't use one of their default themes
-
-.slick-slider {
-  .slick-arrow {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-
-    &--prev {
-      left: $grid-gutter-width/2;
-    }
-    &--next {
-      right: $grid-gutter-width/2;
-    }
-  }
-
-  &.has-equal-height-slides {
-    .slick-track {
-      display: flex;
-    }
-
-    &.slick-initialized .slick-slide {
-      display: flex;
-      flex-direction: column;
-      height: auto;
-    }
-  }
-}
-
-.slick-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @include list-unstyled;
-  height: 3*$slideshow-dot-size;
-  margin-top: -3*$slideshow-dot-size;
-  margin-bottom: 0;
-
-  li {
-    position: relative;
-    height: $slideshow-dot-size;
-    width: $slideshow-dot-size;
-    margin: 0 $slideshow-dot-size/2;
-    border-radius: 50%;
-    background-color: $slideshow-dot-color;
-    cursor: pointer;
-    vertical-align: middle;
-    transition: background-color $transition-duration-base $transition-timing-function-out;
-
-    &:hover,
-    &:focus,
-    &.slick-active {
-      background-color: $slideshow-dot-active-color;
-      transition: background-color $transition-duration-base $transition-timing-function-in;
-    }
-
-    button {
-      display: none !important;
-    }
-  }
 }

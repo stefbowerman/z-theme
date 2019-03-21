@@ -3,7 +3,6 @@ const browserify = require('browserify');
 const buffer = require('vinyl-buffer');
 const babelify = require('babelify');
 const gulp = require('gulp');
-const es2015ie = require('babel-preset-es2015-ie');
 const mergeStream = require('merge-stream');
 const path = require('path');
 const size = require('gulp-size');
@@ -25,7 +24,7 @@ const browserifyThis = (bundleConfig) => {
   Object.assign(bundleConfig, watchify.args, { debug: false, entries: paths.src });
 
   let b = browserify(bundleConfig)
-    .transform(babelify, {presets: [es2015ie], extensions: ['.js', '.ts']});
+    .transform(babelify, { presets: ["@babel/preset-env"] });
 
   b.transform(uglifyify);
 

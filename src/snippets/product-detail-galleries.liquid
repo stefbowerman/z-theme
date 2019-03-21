@@ -4,21 +4,21 @@
   ------------------------------------------------------------------------------
 
   - In order to build multiple galleries for every color option, we need to loop through all the colors, then all the available product images to see if we have one or more image for each
-  - This snippet only to be used on the product template!
+  - This snippet only to be used inside the product-detail snippet
   - It's too bad that we have to duplicate the gallery code twice in the same file but liquid kind of sucks so this is the best we can do
-  - Normal and Variant Galleries share the same code structure
+  - Normal and variant galleries share the same code structure
     .product-galleries
       .product-gallery
-        .product-gallery__slideshow-wrapper
-          ul.product-gallery__slideshow <- Needs an id in order for the asNavFor to work
-            li.product-gallery__slideshow-slide
-              a
+        .product-gallery__slideshow.swiper-container
+          .swiper-wrapper
+            .swiper-slide
+              a <- Needed for zoom to work
                 img
-        .product-gallery__thumbnails-wrapper
-          ul.product-gallery__thumbnails <- Needs an id in order for the asNavFor to work
-            li.product-gallery__thumbnails-slide
-              img
-  - The only difference between the two is that .product-gallery elements gets a `data-variant-gallery` attribute matching the color value associated with it
+        .product-gallery__thumbnails
+          .product-gallery__thumbnails-slide
+            img
+
+  - The only difference between the two is that .product-gallery elements gets a `data-option-value` attribute matching the color value associated with it
 
   Usage:
 
@@ -26,12 +26,6 @@
               product: { product } - required
               current_variant: { current_variant }
   %}  
-
-  Requires:
-  - product.liquid
-  - product-detail.scss
-  - product.js
-  - slate/slideshow.js
 
 {% endcomment -%}
 
@@ -84,40 +78,42 @@
           {% assign color_downcase = color | downcase %}
           {% assign color_index = forloop.index %}
 
-          <div class="product-gallery{% if option.selected_value != color %} hide{% endif %}" data-product-gallery data-variant-gallery="{{ color }}">
-            <div class="product-gallery__slideshow-wrapper">
-              <ul id="slideshow-{{ product.id }}-{{ forloop.index }}" class="product-gallery__slideshow" data-product-gallery-slideshow>
+          <div class="product-gallery{% if option.selected_value != color %} hide{% endif %}" data-product-gallery data-option-value="{{ color }}">
+            <div id="slideshow-{{ product.id }}-{{ forloop.index }}" class="product-gallery__slideshow swiper-container" data-product-gallery-slideshow>
+              <div class="swiper-wrapper">
                 {% for image in product.images %}
                   {% assign image_alt_downcase = image.alt | downcase %}
                   {% if image_alt_downcase contains color_downcase %}
-                    {% comment %} if alt doesn't contain the swatch identifier {% endcomment %}
                     {% unless image_alt_downcase contains alt_swatch_identifier %}
-                      <li class="product-gallery__slideshow-slide"
-                          data-image="{{ image.id }}"
-                          {% if image.id == current_variant.featured_image.id %} data-initial-slide{% endif %}>
-                        <a href="{{ image | img_url: photo_zoom_dimension }}" data-product-gallery-slide-link>
-                          <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}"e>
+                      <div class="swiper-slide" data-image="{{ image.id }}" {% if image.id == current_variant.featured_image.id %} data-initial-slide{% endif %}>
+                        <a href="{{ image | img_url: photo_zoom_dimension }}">
+                          <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}">
                         </a>
-                      </li>
+                      </div>
                     {% endunless %}
                   {% endif %}
                 {% endfor %}
-              </ul>
+              </div>
+              <span class="swiper-arrow swiper-arrow--left">
+                <span class="arrow arrow--left"><span class="arrow__icon"></span></span>
+              </span>
+              <span class="swiper-arrow swiper-arrow--right">
+                <span class="arrow arrow--right"><span class="arrow__icon"></span></span>
+              </span>
+              <div class="swiper-pagination"></div>
             </div>
-            <div class="product-gallery__thumbnails-wrapper">
-              <ul id="slideshow-thumbs-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumbnails" data-product-gallery-thumbnails>
-                {% for image in product.images %}
-                  {% assign image_alt_downcase = image.alt | downcase %}
-                  {% if image_alt_downcase contains color_downcase %}
-                    {% unless image_alt_downcase contains alt_swatch_identifier %}
-                      <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
-                        <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
-                      </li>
-                    {% endunless %}
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </div>            
+            <div id="slideshow-thumbs-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumbnails" data-product-gallery-thumbnails>
+              {% for image in product.images %}
+                {% assign image_alt_downcase = image.alt | downcase %}
+                {% if image_alt_downcase contains color_downcase %}
+                  {% unless image_alt_downcase contains alt_swatch_identifier %}
+                    <div class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
+                      <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
+                    </div>
+                  {% endunless %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         {% endfor %}
       {% endif %}
@@ -127,34 +123,37 @@
 
     {% comment %} Make one gallery for all the images {% endcomment %}
     <div class="product-gallery" data-product-gallery>
-      <div class="product-gallery__slideshow-wrapper">
-        <ul id="slideshow-{{ product.id }}" class="product-gallery__slideshow" data-product-gallery-slideshow>
+      <div id="slideshow-{{ product.id }}" class="product-gallery__slideshow swiper-container" data-product-gallery-slideshow>
+        <div class="swiper-wrapper">
           {% for image in product.images %}
             {% assign image_alt_downcase = image.alt | downcase %}
             {% unless image_alt_downcase contains alt_swatch_identifier %}
-              <li class="product-gallery__slideshow-slide"
-                  data-image="{{ image.id }}"
-                  {% if image.id == current_variant.featured_image.id %} data-initial-slide{% endif %}>
-                <a href="{{ image | img_url: photo_zoom_dimension }}" data-product-gallery-slide-link>
-                  <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}">
+              <div class="swiper-slide" data-image="{{ image.id }}" {% if image.id == current_variant.featured_image.id %} data-initial-slide{% endif %}>
+                <a href="{{ image | img_url: photo_zoom_dimension }}">
+                  <img src="{{ image | img_url: photo_main_dimension }}" alt="{{ image.alt | escape }}" class="img-fluid">
                 </a>
-              </li>
+              </div>
             {% endunless %}
           {% endfor %}
-        </ul>
+        </div>
+        <span class="swiper-arrow swiper-arrow--left">
+          <span class="arrow arrow--left"><span class="arrow__icon"></span></span>
+        </span>
+        <span class="swiper-arrow swiper-arrow--right">
+          <span class="arrow arrow--right"><span class="arrow__icon"></span></span>
+        </span>
+        <div class="swiper-pagination"></div>
       </div>
-      <div class="product-gallery__thumbnails-wrapper">
-        <ul id="slideshow-thumbs-{{ product.id }}" class="product-gallery__thumbnails list-unstyled" data-product-gallery-thumbnails>
-          {% for image in product.images %}
-            {% assign image_alt_downcase = image.alt | downcase %}
-            {% unless image_alt_downcase contains alt_swatch_identifier %}
-              <li class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
-                <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}">
-              </li>
-            {% endunless %}
-          {% endfor %}
-        </ul>
-      </div>      
+      <div id="slideshow-thumbs-{{ product.id }}" class="product-gallery__thumbnails" data-product-gallery-thumbnails>
+        {% for image in product.images %}
+          {% assign image_alt_downcase = image.alt | downcase %}
+          {% unless image_alt_downcase contains alt_swatch_identifier %}
+            <div class="product-gallery__thumbnails-slide" data-product-gallery-thumbnails-slide>
+              <img src="{{ image.src | img_url: photo_thumb_dimension }}" alt="{{ image.alt | escape }}" class="img-fluid">
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
     </div>
   {% endif %}
 

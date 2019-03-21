@@ -44,8 +44,8 @@
 {% comment %} Only output the slide html if there is an image to use {% endcomment %}
 {% if background_image != blank or background_image_small != blank %}
 
-  {% comment %} Can't use IDs here because slick clones slides and doesn't carry over the IDs {% endcomment %}
-  <div class="slideshow-slide-{{ id }} slideshow-slide" data-slideshow-slide {{ attributes }}>
+  {% comment %} Can't use IDs here because the slideshow clones slides and doesn't carry over the IDs {% endcomment %}
+  <div class="slideshow-slide-{{ id }} slideshow-slide swiper-slide" data-slideshow-slide {{ attributes }}>
     <style type="text/css">
       .slideshow-slide-{{ id }} .slideshow-slide__image {
         background-position: center {{ background_image_vertical_alignment }};
@@ -96,9 +96,8 @@
 
         <div class="slideshow-slide__image 
                     frame 
-                    frame--{{ background_image_aspect_ratio }}
-                    frame--sm-{{ background_image_small_aspect_ratio }}
-                    frame--xs-{{ background_image_small_aspect_ratio }}">
+                    frame--{{ background_image_small_aspect_ratio }}
+                    frame--md-{{ background_image_aspect_ratio }}">
         </div>
 
         {% if background_image == blank and background_image_small == blank %}

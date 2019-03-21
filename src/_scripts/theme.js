@@ -3,7 +3,6 @@ import $ from 'jquery';
 import 'jquery-zoom';
 import 'chosen-js';
 import 'jquery-unveil';
-import 'slick-carousel';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';

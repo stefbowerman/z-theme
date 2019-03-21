@@ -1,9 +1,9 @@
 import $ from 'jquery';
+import Swiper from 'swiper';
 
 const selectors = {
   productGallery: '[data-product-gallery]',
   productGallerySlideshow: '[data-product-gallery-slideshow]',
-  productGallerySlideLink: '[data-product-gallery-slide-link]',
   productGalleryThumbnails: '[data-product-gallery-thumbnails]',
   productGalleryThumbnailsSlide: '[data-product-gallery-thumbnails-slide]',
   initialSlide: '[data-initial-slide]'
@@ -15,9 +15,92 @@ const classes = {
   zoomedIn: 'is-zoomed'
 };
 
+class ProductDetailGallery {
+  /**
+   * Product Detail Gallery Constructor
+   * Handles the interaction between a single gallery and set of thumbnails
+   * See: snippets/product-detail-galleries.liquid
+   *
+   * @param {HTMLElement | jQuery} el - gallery element containing elements matching the slideshow and thumbnails selectors
+   */  
+  constructor(el) {
+    this.$el = $(el);
+    this.$slideshow  = this.$el.find(selectors.productGallerySlideshow);
+    this.$thumbnails = this.$el.find(selectors.productGalleryThumbnails);
+    this.optionValue = this.$el.data('option-value');
+
+    // Look for element with the initialSlide selector.
+    const initialSlide = this.$slideshow.find(selectors.initialSlide).length ? this.$slideshow.find(selectors.initialSlide).index() : 0;
+
+    this.swiper = new Swiper(this.$slideshow.get(0), {
+      init: false,
+      loop: true,
+      initialSlide: initialSlide,
+      speed: 500,
+      navigation: {
+        nextEl: this.$slideshow.find('.arrow--right').get(0),
+        prevEl: this.$slideshow.find('.arrow--left').get(0)
+      },
+      pagination: {
+        el: this.$slideshow.find('.swiper-pagination'),
+        type: 'bullets',
+        clickable: true
+      },
+      on: {
+        init: this.onSlideShowInit.bind(this),
+        slideChangeTransitionEnd: this.onSlideChangeTransitionEnd.bind(this)
+      }
+    });
+
+    this.swiper.init();
+
+    this.$thumbnails.on('click', selectors.productGalleryThumbnailsSlide, (e) => {
+      this.swiper.slideToLoop($(e.currentTarget).index());
+    });
+  }
+
+  initHoverZoom($zoomTarget) {
+    this.destroyHoverZoom($zoomTarget);
+
+    $zoomTarget.zoom({
+      url: $zoomTarget.find('a').attr('href'),
+      on: 'click',
+      touch: false,
+      escToClose: true,
+      magnify: 1.2,
+      duration: 300,
+      callback: () => {
+        $zoomTarget.addClass(classes.zoomReady);
+      },
+      onZoomIn: () => {
+        $zoomTarget.addClass(classes.zoomedIn);
+      },
+      onZoomOut: () => {
+        $zoomTarget.removeClass(classes.zoomedIn);
+      }
+    });
+  }
+
+  destroyHoverZoom($zoomTarget) {
+    $zoomTarget.trigger('zoom.destroy');
+  }
+
+  onSlideShowInit() {
+    const sw = this.swiper;
+    this.initHoverZoom($(sw.slides[sw.activeIndex]));
+  }
+
+  onSlideChangeTransitionEnd() {
+    const sw = this.swiper;
+    this.destroyHoverZoom($(sw.slides[sw.previousIndex]));
+    this.initHoverZoom($(sw.slides[sw.activeIndex]));
+  }
+}
+
 export default class ProductDetailGalleries {
   /**
    * ProductDetailGalleries constructor
+   * Initializes all galleries and updates visibility on variant change
    *
    * @param {Object} config   
    * @param {jQuery} config.$container - Main element, see snippets/product-detail-galleries.liquid
@@ -41,117 +124,13 @@ export default class ProductDetailGalleries {
     }
 
     this.$container = this.settings.$container; // Scoping element for all DOM lookups
-    this.$galleries = $(selectors.productGallery, this.$container);
+    this.$galleries = $(selectors.productGallery, this.$container); // Galleries contain a slideshow + thumbnails
 
-    // Lifecycle methods for handling slideshow changes + hoverzoom initialization
-    function initHoverZoom($zoomTarget) {
-      const opts = {
-        url: $zoomTarget.find(selectors.productGallerySlideLink).attr('href'),
-        on: 'click',
-        touch: false,
-        escToClose: true,
-        magnify: 1.2,
-        duration: 300,
-        callback: () => {
-          $zoomTarget.addClass(classes.zoomReady);
-        },
-        onZoomIn: () => {
-          $zoomTarget.addClass(classes.zoomedIn);
-        },
-        onZoomOut: () => {
-          $zoomTarget.removeClass(classes.zoomedIn);
-        }
-      };
-
-      $zoomTarget.zoom(opts);
-    }
-
-    function destroyHoverZoom($zoomTarget) {
-      $zoomTarget.trigger('zoom.destroy');
-    }
-
-    function onSlideshowSlickBeforeChange(e, slick) {
-      const $zoomTarget = $(slick.$slides[slick.currentSlide]);
-      destroyHoverZoom($zoomTarget);
-    }
-
-    function onSlideshowSlickAfterChange(e, slick) {
-      const $zoomTarget = $(slick.$slides[slick.currentSlide]);
-      initHoverZoom($zoomTarget);
-    }
-
-    function onSlideshowSlickInit(e, slick) {
-      const $zoomTarget = $(slick.$slides[slick.currentSlide]);
-      initHoverZoom($zoomTarget);
-    }
-
-    this.$galleries.each(function() {
-      const $gallery    = $(this);
-      const $slideshow  = $gallery.find(selectors.productGallerySlideshow);
-      const $thumbnails = $gallery.find(selectors.productGalleryThumbnails);
-
-      // Look for element with the initialSlide selector.
-      const initialSlide = $gallery.find(selectors.initialSlide).length ? $gallery.find(selectors.initialSlide).index() : 0;
-
-      let thumbnailsSlidesToShow;
-      const thumbnailsSlidesCount = $thumbnails.children().length;
-
-      // Slick has trouble when slideToShow === slideCount
-      if (thumbnailsSlidesCount < 4) {
-        thumbnailsSlidesToShow = Math.max(thumbnailsSlidesCount - 1, 1);
-      }
-      else {
-        thumbnailsSlidesToShow = thumbnailsSlidesCount === 4 ? 3 : 4;
-      }
-
-      $slideshow.on({
-        init: onSlideshowSlickInit,
-        beforeChange: onSlideshowSlickBeforeChange,
-        afterChange: onSlideshowSlickAfterChange
-      });
-
-      const slideshowOpts = {
-        speed: 600,
-        dots: false,
-        swipe: Modernizr.touchevents,
-        arrows: !Modernizr.touchevents,
-        prevArrow: '<div class="slick-arrow slick-arrow--prev"><span class="arrow arrow--left"><span class="arrow__icon"></span></span></div>',
-        nextArrow: '<div class="slick-arrow slick-arrow--next"><span class="arrow arrow--right"><span class="arrow__icon"></span></span></div>',
-        initialSlide: initialSlide,
-        accessibility: false,
-        draggable: true
-      };
-
-      // You can only add this option *if* the thumbnails exist, slick has no graceful fallback
-      if ($thumbnails.length) {
-        slideshowOpts.asNavFor = `#${$thumbnails.attr('id')}`;
-      }
-
-      $slideshow.slick(slideshowOpts);
-
-      if ($thumbnails.length) {
-        $thumbnails.on('click', selectors.productGalleryThumbnailsSlide, function() {
-          $slideshow.slick('slickGoTo', $(this).data('slick-index'));
-        });
-
-        $thumbnails.slick({
-          speed: 600,
-          slidesToShow: thumbnailsSlidesToShow,
-          slidestoScroll: 1,
-          arrows: false,
-          asNavFor: `#${$slideshow.attr('id')}`,
-          initialSlide: initialSlide,
-          accessibility: false,
-          draggable: false
-        });
-      }
-    });
+    this.galleries = this.$galleries.toArray().map(el => new ProductDetailGallery(el));
   }
 
-  getVariantGalleryForOption(option) {
-    return this.$galleries.filter(function() {
-      return $(this).data('variant-gallery') === option;
-    });
+  getProductDetailGalleryForVariantOptionValue(optionValue) {
+    return this.galleries.filter(gallery => gallery.optionValue === optionValue)[0];
   }
 
   /**
@@ -161,37 +140,32 @@ export default class ProductDetailGalleries {
    * @param {Object} variant - Shopify variant object
    */
   updateForVariant(variant) {
-    if (variant) {
-      if (this.$galleries.length > 1) {
-        for (let i = 3; i >= 1; i--) {
-          const $variantGallery = this.getVariantGalleryForOption(variant['option' + i]);
+    if (!variant) return;
 
-          if ($variantGallery.length && $variantGallery.hasClass(classes.hide)) {
-            this.$galleries.addClass(classes.hide);
-            $variantGallery.removeClass(classes.hide);
+    if (this.galleries.length > 1) {
+      for (let i = 3; i >= 1; i--) {
+        const gallery = this.getProductDetailGalleryForVariantOptionValue(variant['option' + i]);
 
-            // Slick needs to make a lot of measurements in order to work, calling `refresh` forces this to happen
-            $variantGallery.find(selectors.productGallerySlideshow).slick('refresh');
-            $variantGallery.find(selectors.productGalleryThumbnails).slick('refresh');
-          }
-        }
-      }
-      else {
-        // this.$galleries is just a single gallery
-        // Slide to featured image for selected variant but only if we're not already on it.
-        // Have to check this way because slick clones slides so even if we're currently on it -
-        // there can be a cloned slide that also has the correct data-image attribute
-        if (variant.featured_image && this.$galleries.find('.slick-current').data('image') !== variant.featured_image.id) { // eslint-disable-line
-          const $imageSlide = this.$galleries.find(`[data-image="${variant.featured_image.id}"]`).first();
+        if (gallery && gallery.$el.hasClass(classes.hide)) {
+          this.$galleries.addClass(classes.hide);
+          gallery.$el.removeClass(classes.hide);
 
-          if ($imageSlide.length) {
-            this.$galleries.find(selectors.productGallerySlideshow).slick('slickGoTo', $imageSlide.data('slick-index'));
-          }
+          // Now that we show a different gallery, make sure it's all ready to go
+          gallery.swiper.update();
+          gallery.onSlideShowInit();
         }
       }
     }
     else {
-      // No variant - Don't do anything?
+      // this.$galleries is just a single gallery
+      // Slide to featured image for selected variant but only if we're not already on it.
+      if (variant.featured_image && this.$galleries.find('.swiper-slide-active').data('image') !== variant.featured_image.id) { // eslint-disable-line
+        const $imageSlide = this.$galleries.find(`[data-image="${variant.featured_image.id}"]`).first();
+
+        if ($imageSlide.length) {
+          this.galleries[0].swiper.slideToLoop($imageSlide.data('swiper-slide-index'));
+        }
+      }
     }
   }
 }

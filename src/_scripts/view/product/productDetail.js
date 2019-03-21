@@ -13,6 +13,7 @@ export default class ProductDetail {
    *
    *
    * @param {jQuery | HTMLElement} el - Main element, see snippets/product-detail.liquid
+   * @param {Boolean} enableHistoryState - enables URL history updates on variant change.  See productDetailForm.js
    */
   constructor(el, enableHistoryState = true) {
     this.settings = {};
