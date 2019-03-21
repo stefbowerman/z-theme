@@ -36,20 +36,17 @@ class AJAXFormManager {
 
       CartAPI.addItemFromForm($(e.target))
         .then((data) => {
-          // Reset button state
-          $submitButton.prop('disabled', false);
-          $submitButtonText.html(theme.strings.addToCart);
-
           const event = $.Event(this.events.ADD_SUCCESS, { cart: data });
           $window.trigger(event);
         })
         .fail((data) => {
+          const event = $.Event(this.events.ADD_FAIL, { data });
+          $window.trigger(event);
+        })
+        .always(() => {
           // Reset button state
           $submitButton.prop('disabled', false);
           $submitButtonText.html(theme.strings.addToCart);
-
-          const event = $.Event(this.events.ADD_FAIL, { data });
-          $window.trigger(event);
         });
     });
   }
