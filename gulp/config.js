@@ -6,16 +6,17 @@ module.exports = {
     styles: {
       // Relative to root.src
       src: '/_styles',
-      dest: '/assets',
+      dest: '../dist/assets',
       filePattern: ['src/_styles/**/*.scss'],
       files: ['theme.scss'],
       // files: ['checkout.scss'],
+      // files: ['theme.scss', 'checkout.scss'],
       watchTask: 'styles',
       extensions: ['scss', 'css']
     },
     scripts: {
       src: '/_scripts',
-      dest: '/assets',
+      dest: '../dist/assets',
       extensions: ['js'],
       bundles: [{
         entries: 'theme.js',

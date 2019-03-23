@@ -3,13 +3,6 @@ dist/
 upload/
 config.yml
 
-# Compiled JS + SCSS files
-src/assets/checkout.js
-src/assets/giftcard.js
-src/assets/theme.css
-src/assets/theme.js
-src/assets/vendor.js
-
 # Logs
 logs
 *.log

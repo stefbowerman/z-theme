@@ -23,11 +23,6 @@ const browserifyThis = (bundleConfig) => {
   // config our bundle setup.
   Object.assign(bundleConfig, watchify.args, { debug: false, entries: paths.src });
 
-  let b = browserify(bundleConfig)
-    .transform(babelify, { presets: ["@babel/preset-env"] });
-
-  b.transform(uglifyify);
-
   const bundle = () => {
     bundleLogger.start(paths.src);
 
@@ -37,13 +32,25 @@ const browserifyThis = (bundleConfig) => {
       })
       .pipe(source(bundleConfig.outputName))
       .pipe(buffer()) // optional, remove if no need to buffer file contents
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest(paths.dest))
       .pipe(size({showFiles: true, title: 'JS: size of'}))
       .on('finish', function() {
         bundleLogger.end(paths.src);
       });
   };
+
+  let b = browserify(bundleConfig);
+
+  b.transform(babelify, {
+      presets: ["@babel/preset-env"],
+      ignore: [
+        "./node_modules/",
+        "../../node_modules/"
+      ]
+    });
+
+  // b.transform(uglifyify);
 
   b = watchify(b);
 
