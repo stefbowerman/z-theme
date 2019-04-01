@@ -24,7 +24,7 @@
         <div class="account-content{% if sidebar_html != blank %} account-content--has-sidebar{% endif %}">
 
           {% comment %} Account Stuff {% endcomment %}
-          <div class="hide" data-account-section="account">
+          <div data-account-section="account">
 
             <h3>{{ 'customer.account.details' | t }}</h1>
 
@@ -107,76 +107,6 @@
               </div>
             </div>
 
-          </div>        
-
-          {% comment %} Order History Stuff {% endcomment %}
-          <div class="hide" data-account-section="order-history">
-            <h3>{{ 'customer.account.order_history' | t }}</h1>
-            {% if customer.orders.size == 0 %}
-              <div class="account-block">
-                <div class="account-block__content">{{ 'customer.orders.none' | t }}</div>
-              </div>
-            {% else %}
-              <div class="d-block d-lg-none">
-                {% for order in customer.orders %}
-                  <div style="max-width: 450px; {% unless forloop.last %}margin-bottom: 50px;{% endunless %}">
-                    <table class="table table-borderless table-sm">
-                      <tr>
-                        <th>{{ 'customer.orders.shipped_to' | t }}</th>
-                        <td>{{ order.customer.name }}</td>
-                      </tr>
-                      <tr>
-                        <th>{{ 'customer.orders.date' | t }}</th>
-                        <td>{{ order.created_at | time_tag: format: 'month_day_year_short' }}</td>
-                      </tr>
-                      <tr>
-                        <th>{{ 'customer.orders.order_number' | t }}</th>
-                        <td>{{ order.order_number }}</td>
-                      </tr>
-                      <tr>
-                        <th>{{ 'customer.orders.payment' | t }}</th>
-                        <td>{{ order.financial_status_label }}</td>
-                      </tr>
-                      <tr>
-                        <th>{{ 'customer.orders.fulfillment' | t }}</th>
-                        <td>{{ order.fulfillment_status_label }}</td>
-                      </tr>
-                      <tr>
-                        <th>{{ 'customer.orders.amount' | t }}</th>
-                        <td>{{ order.total_price | money }}</td>
-                      </tr>
-                    </table>
-                    <a href="{{ order.customer_url }}" class="btn btn-secondary">{{ 'customer.orders.order_details' | t }}</a>
-                  </div>
-                {% endfor %}
-              </div>
-              <div class="d-none d-lg-block">
-                <table class="table table-borderless">
-                  <thead>
-                    <tr>
-                      <th>{{ 'customer.orders.shipped_to' | t }}</th>
-                      <th>{{ 'customer.orders.date' | t }}</th>
-                      <th>{{ 'customer.orders.order_number' | t }}</th>
-                      <th>{{ 'customer.orders.payment' | t }}</th>
-                      <th>{{ 'customer.orders.fulfillment' | t }}</th>
-                      <th>{{ 'customer.orders.amount' | t }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for order in customer.orders %}
-                      <tr>
-                        <td>{{ order.customer.name }}</td>
-                        <td>{{ order.created_at | time_tag: format: 'month_day_year_short' }}</td>
-                        <td><a href="{{ order.customer_url }}">{{ order.order_number }}</a></td>
-                        <td><a href="{{ order.order_status_url }}">{{ order.financial_status_label }}</a></td>
-                        <td><a href="{{ order.order_status_url }}">{{ order.fulfillment_status_label }}</a></td>
-                        <td>{{ order.total_price | money }}</td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            {% endif %}
           </div>
 
         </div>
