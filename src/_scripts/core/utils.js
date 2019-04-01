@@ -193,7 +193,7 @@ export function getUrlWithRemovedQueryStringParameter(parameterKeyToRemove, _uri
  * @return {bool}
  */
 export function isThemeEditor() {
-  return window.location.href.match(/myshopify.com/) !== null && window.location.href.match(/theme_id/) !== null;
+  return window.Shopify && window.Shopify.designMode;
 }
 
 /**
@@ -274,6 +274,7 @@ export function userAgentBodyClass() {
 
 /**
  * Generates a 32 bit integer from a string
+ * Useful for hashing content into a some-what unique identifier to use for cookies.
  * Reference - https://stackoverflow.com/a/7616484
  *
  * @param {string}

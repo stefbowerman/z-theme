@@ -14,7 +14,7 @@ import $ from 'jquery';
  * eg for In-page links, after scroll, focus shifts to content area so that
  * next `tab` is where user expects if focusing a link, just $link.focus();
  *
- * @param {JQuery} $element - The element to be acted upon
+ * @param {jQuery} $element - The element to be acted upon
  */
 export function pageLinkFocus($element) {
   const focusClass = 'js-focus-hidden';

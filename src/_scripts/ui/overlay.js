@@ -28,7 +28,7 @@ export default class Overlay {
     this.$el = $(el);
     this.stateIsOpen            = false;
     this.transitionEndEvent     = Utils.whichTransitionEnd();
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
+    this.supportsCssTransitions = !!Modernizr.csstransitions;
 
     if (this.$el === undefined || !this.$el.hasClass(classes.overlay)) {
       console.warn(`[${this.name}] - Element with class ${classes.overlay} required to initialize.`);

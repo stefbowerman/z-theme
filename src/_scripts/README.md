@@ -1,33 +1,40 @@
 # JavaScript
 
-All javascript builds on the pre-existing javascript structure provided to us by Slate.  This structure allows us to easily add functionality in an organized way that focuses on re-usability of modules and share-ability of utilities.
+Our javascript architecture takes inspiration from Slate, but refactored and modernized to better fit our workflow.  This allows us to easily add functionality in an organized way that focuses on re-usability of modules and share-ability of utilities.
 
 - [Structure](#structure)
-- [JavaScript Conventions](#javascript-conventions)
 - [Adding JavaScript](#adding-javascript)
+- [JavaScript Conventions](#javascript-conventions)
 - [Adding A Section](#adding-a-section)
 - [Removing A Section](#removing-a-section)
 - [Adding Vendor Libraries](#adding-vendor-libraries)
 
 ## Structure
 
-The site javascript is built off of the main `theme.js` file which relies on two global objects - `window.slate` and `window.theme`.  Slate code is imported first followed by theme code which consumes it.  All files should attach plain objects, constructors or instances (whichever makes the most sense) to the appropriate global object.  All initialization should be done inside `theme.js` or handled through the `slate.section` instance (see [Adding A Section](#adding-a-section)).
+The main entry point for all scripts on the site is `_scripts/theme.js`.  This file imports all global dependencies, registers all sections and kicks off any code that needs to run across across the entire site.  Only add code to this file if it is _absolutely necessary_, see the section below for information on how to classify the any javascript you need to add.
 
-#### `window.slate`
+##### Additional script files
 
-This global object contains helper methods and module code that is independent of any section or page.  Files that attach things to this object should be placed only in the `slate` directory.  By attaching to `slate` as opposed to `theme`, the idea is that these scripts could be used independently on other projects and are not tied into any theme specific files or code structure.
+By default, the gulp development task _only_ watches this theme.js file as this is the main file.  There are additional script files in the project that serve specific purposes.  Edit the `gulp/config.js` to enable these file for watching / compilation during development if needed.  In general, it is best to only watch one file at a time, otherwise the Slate watcher deploy takes long as it has to upload additional files with each save.
 
-#### `window.theme`
+- `checkout.js` - This script is included in `layout/checkout.liquid` and contains code specific to the checkout pages.
+- `vendor.js` - This script includes any libraries that need to be loaded _before_ the opening body tag.  They are pulled in via a regular script tag (non defer) so try to keep this as light weight as possible.  Currently, only Modernizr is included as it needs to apply feature-support classes to the document before rendering the page.  If your script doesn't have a reason to be in here, it probably doesn't need to be.
+- `giftcard.js` - Runs on the `layout/giftcard.liquid`.  Not used on any other template / layout.
 
-This global object contains code specific to pages, templates, and sections of the theme.  Files that attach to this object should be placed in either the `sections` or `templates` directory.
+## Adding JavaScript
 
-#### `theme.js`
+When adding javascript to the theme, you need to determine the purpose of the script and how it will be used, this will determine where it should live.  Here is a brief explanation of the script subdirectories.
 
-The main file that imports all the theme javascript dependencies, wires theme up and initializes them.
+- __Core__ - Core functionality that is used across all pages on the site.  Typically these files contain helper functions, API shortcuts and commons variables.
+- __Lib__ - Any useful functionality that serves a specific purpose but is not related to core site feature set.
+- __Managers__ - Singletons that manage multiple instances of functionality.  They can be imported and used in any file.
+- __Models__ - Classes that don't fall into any other subdirectory
+- __Sections__ - Scripts that map to files in `src/sections`
+- __Templates__ - If you need to run javascript on a specific template.  Better to use sections if possible.
+- __UI__ - Modules that exist on multiple pages and represent a unit of UI (i.e. dropdown, popup, etc..).
+- __View__ - Functionality specific to an area of the site (isn't shared across different pages).
 
-#### Official Docs
-
-Now that you understand the javascript architecture, please take a minute to look through the official [Slate JavaScript documentation](https://shopify.github.io/slate/js-examples/) to get an idea of the functionality that they provide and how to make use of it.  Pay close attention to the part on [section events](https://shopify.github.io/slate/js-examples/#section-events) as that is the most important (and potentially confusing) feature of Slate.
+__Note:__ If writing something global that is independent of a module, then write it inside of `theme.js`.  Examples of this could be scrolling effects, analytics, user cookies, etc..
 
 ##### Note On Section Events
 
@@ -38,64 +45,56 @@ Section events aren't covered very clearly in the official documentation.  If yo
 
 To make sure your theme sections don't break when the user is customizing the theme, the editor fires events that your code can respond to. The events listed in the Shopify docs are the raw events as fired by the theme editor.
 
-The __Section__ object that Slate provides acts as an abstraction layer to make it easier to interact with these events.  It takes care of attaching event listeners and calling the appropriate handlers.  As long as you follow the javascript pattern that Slate has created for sections (see [Adding A Section](#adding-a-section)), all you need to do is attach specially named methods to the constructor's prototype and the __Section__ object will handle the rest.  The full list of named methods that you can use are listed at the bottom of the [Slate JavaScript documentation](https://shopify.github.io/slate/js-examples/) and duplicated below.
+The __SectionManager__ class provides acts as an abstraction layer to make it easier to interact with these events.  It takes care of attaching event listeners and calling the appropriate handlers.  As long as you follow the javascript pattern for sections (see [Adding A Section](#adding-a-section)), all you need to do is attach specifically named methods to the class and the __SectionManager__ object will handle the rest.  The full list of named methods that you can use are listed at the bottom of the [Slate JavaScript documentation](https://shopify.github.io/slate/js-examples/) and duplicated below.
 
 | Methods      | Description |
 | :-------------- | :-------------- |
 | `onUnload()`        | A section has been deleted or is being re-rendered. |
 | `onSelect()`        | User has selected the section in the editor's sidebar. |
-| `onDeselect()`          | User has deselected the section in the editor's sidebar. |
-| `onReorder()`          | User has changed the section's order in the editor's sidebar. |
-| `onBlockSelect()`        | User has selected the block in the editor's sidebar. |
-| `onBlockDeselect()`        | User has deselected the block in the editor's sidebar. |
+| `onDeselect()`      | User has deselected the section in the editor's sidebar. |
+| `onReorder()`       | User has changed the section's order in the editor's sidebar. |
+| `onBlockSelect()`   | User has selected the block in the editor's sidebar. |
+| `onBlockDeselect()` | User has deselected the block in the editor's sidebar. |
 
 
 ## JavaScript Conventions  
 
 When adding javascript code to the theme, please keep the following code conventions in mind.
 
-- All code should be camelcased except constructors which should be Pascal cased.
+- All code should be camelcased except class definitions which should be Pascal cased.
 
   ```javascript
-  // Pascal cased constructor
-  var MyConstructorFunction = function() {}
+  // Pascal cased class definition
+  class MyClass {
+
+  }
 
   // Camel case everywhere else
-  var myNewInstance = new MyConstructorFunction();
+  const myClassInstance = new MyClass();
   ```
 
-- Utilities use plain objects
-- Declare your dependencies via injection by passing them into the function scope.
-
-  ```javascript
-  theme.module = (function(dependency) {
-
-    // Module code here
-
-  })(dependency);
-  ```
+- Utilities use named exports.
 - Selectors use `data-*` attributes and should be defined outside any constructors.
 - Document your code as neccessary, this includes following [JSDocs](http://usejsdoc.org/) guidelines to define function signatures if they accept arguments, return values, or both.
 - Prefix any private methods with an underscore.
-- Revealing module pattern is OK.
-- For consistency, when querying the DOM with a scoping element, pass it to the $ constructor as the second argument.
+- For consistency, when querying the DOM with a scoping element, pass it to the $ constructor as the second argument.  This makes it easier to read what is being selected.
 
   ```javascript
   // Do this
-  var $el = $(selector, $parentScope);
+  const $el = $(selector, $parentScope);
 
   // Not this
-  var $el = $parentScope.find(selector);
+  const $el = $parentScope.find(selector);
   ```
 
-## Adding JavasScript
+##### Code Linting
+Additionally, this project comes with ESlint installed to lint files for common errors and code style.  All settings are contained within the `.eslintrc` file at the project root.  The linter settings extend from the airbnb preset as that has become a javascript standard.  All rule settings specified in this file either turn off or lower the warning level for rules contained in this preset.
 
-When adding javascript to the theme, you need to determine the purpose of the script and how it will be used, this will determine where it should live.
+If you are running the watcher during development, the gulp linting task should run every time you save a file.  If you aren't, you can always run it independently with
 
-- If building a module that may exist on multiple pages (i.e. dropdown, popup, etc), you should build it entirely contained in it's own file to be consumed by the appropriate larger file (`theme.js` or a section).
-- If writing something specific to a page or template, follow the pattern of files inside `scripts/templates`.
-- If writing something specific to a section, add it to the appropriate file in `scripts/sections` or create a new one, following the guidelines in the section below.
-- If writing something global that is independent of a module, then write it inside of `theme.js`.  Examples of this could be scrolling effects, analytics, user cookies, etc..
+```shell
+>> gulp eslint
+```
 
 ## Adding A Section
 
@@ -128,31 +127,29 @@ When adding section javascript, take extra care to make sure that it is fully co
 A simple example would look like:
 
 ```javascript
-// scripts/sections/aboutUs.js
+// _scripts/sections/aboutUs.js
 
-// Pascal Case the name of your section constructor and attach it to the global `theme` variable.
-theme.AboutUs = (function() {
+import $ from 'jquery';
+import BaseSection from './base';
 
-  // Place all selectors at the top of this file
-  // These should almost always be data-attributes (to keep css classes strictly presentational) that describe the elements they select
-  var selectors = {
-    aboutButton: '[data-about-button]',
-    listItem: '[data-list-item]'
-  };
+// Place all selectors at the top of this file
+// These should almost always be data-attributes (to keep css classes strictly presentational) that describe the elements they select
+const selectors = {
+  aboutButton: '[data-about-button]',
+  listItem: '[data-list-item]'
+};
 
-  // Place all css classes at the top of this file that get used in functions down below.
-  // These are typically used to represent the different element states
-  var classes = {
-    isActive: 'is-active'
-  };
+// Place all css classes at the top of this file that get used in functions down below.
+// These are typically used to represent the different element states
+const classes = {
+  isActive: 'is-active'
+};
 
-  // Constructor Function - This should also be Pascal Cased.
+// Make sure the class is the default export
+export default class AboutUsSection extends BaseSection {
   // @param {HTMLElement} container - Wrapper element from the section liquid file, it scopes all other DOM elements.
-  function AboutUs(container) {
-    this.$container = $(container);
-
-    this.name = 'aboutUs'; // namespaces should be camelCased.
-    this.namespace = '.'+this.name; // namespaces are useful if you need to fire events that are section specific
+  constructor(container) {
+    super(container, 'aboutUs'); // Call the parent constructor first to set base instance variables, namespaces should be camelCased.
 
     // For any DOM elements that can be cached (don't change over the life of the page or there's a small number of them)
     // set them as instance variables
@@ -162,82 +159,62 @@ theme.AboutUs = (function() {
     // Cached elements get bound directly
     // Non-cached elements get bound using delegated handlers - see below for usage
     this.$aboutButton.on('click', this.onAboutButtonClick.bind(this));
-    this.$container.on('click', selectors.listItem, this.onListItemClick.bind(this));
+    this.$container.on('click', selectors.listItem, this.onListItemClick.bind(this));    
   }
 
-  // Add prototype methods
-  AboutUs.prototype = $.extend({}, AboutUs.prototype, {
+  _privateFunction() {
+    //
+  }
 
-    _privateFunction: function() {
-      //
-    },
+  onAboutButtonClick(e) {
+    e.preventDefault();
+    // 
+  }
 
-    onAboutButtonClick: function(e) {
-      e.preventDefault();
-      // 
-    },
+  onListItemClick(e) {
+    var $listItem = $(e.currentTarget);
 
-    onListItemClick: function(e) {
-      var $listItem = $(e.currentTarget);
+    // Use the clicked on $listItem here
+  }   
 
-      // Use the clicked on $listItem here
-    },    
-
-    // Any methods that apply *only* to the theme editor should go at the bottom of the file
-    onSelect: function() {
-      //
-    }
-
-  });
-
-  return AboutUs; // return the constructor
-})();
+  // Any methods that apply *only* to the theme editor should go at the bottom of the file (see _scripts/sections/sectionManager.js)
+  onSelect() {
+    //
+  }  
+}
 ```
 
 ##### Theme Script
 
 ```javascript
-// scripts/theme.js
+// _scripts/theme.js
 
-// Add the require directive under the heading for sections
+// Import the section along with all the other section imports
 
-/*================ Sections ================*/
-// =require sections/aboutUs.js
+// Sections
+import AboutUsSection from './sections/aboutUs';
 
 
 // Register your section after all the other calls to sections.register
-
-sections.register('about-us', theme.AboutUs);
+sections.register('about-us', AboutUsSection);
 ```
 
 ## Removing A Section
 
-If you remove a section from your theme, be sure to remove the file and all the javascript associated with it.  Continuing with our **About Us** page example:
+If you remove a section from your theme, be sure to remove the file and all the javascript associated with it.  Continuing with our **About Us** example:
 
 - Remove `sections/about-us.liquid`
-- Remove `scripts/sections/aboutUs.js`
+- Remove `_scripts/sections/aboutUs.js`
 - Remove the related lines in `theme.js`
 
-  ```javascript
-  // Remove this line
-  // =require sections/aboutUs.js
+```javascript
+// Remove this line
+import AboutUsSection from './sections/aboutUs';
 
-  // And this one
-  sections.register('about-us-section', theme.AboutUs);
-  ```
+// And this one
+sections.register('about-us', AboutUsSection);
+```
 
 ## Adding Vendor Libraries
 
-All javascript dependencies should be included in one of two vendor files.  While both files are included in the head of the site, `vendor.js` is included with a `defer` attribute whereas `vendor-head.js` is included without one.  If your dependency is required in the body of the page or *must* be loaded before parsing of the body tag begins then include it in `vendor-head.js`, otherwise include it in `vendor.js`.
-
-By default, Slate provides you with a way to add vendor scripts to your project by adding them to the vendor directory and then importing them in the appropriate vendor file.  Since this project already uses node for task running, we can use NPM to manage vendor dependencies and import them from the `node_modules` directory.  To do this, install your dependency, and then reference the javascript file like so.
-
-```javascript
-// scripts/vendor.js
-
-// Dependency from the vendor directory
-// =require /vendor/dependency.js
-
-// Node Module dependency
-// =require /../../node_modules/dependency/dependency.js
-``` 
+All vendor libraries should be installed through NPM when possible and directly imported into whatever script file requires them.  For jQuery plugins, include them at the top of `_scripts/theme.js` below the initial jQuery import, this will attach them to the global instance of jQuery that is specified through the browserify shim (see package.json).  If you need to include a library that isn't CommonJS compatible, add it to the `browserify-shim` property of `package.json`, this will tell Browserify how to resolve it when importing it.  See the [browserify-shim README.md](https://www.npmjs.com/package/browserify-shim) for full details.

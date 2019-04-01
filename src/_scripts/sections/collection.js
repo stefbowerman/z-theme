@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import CollectionFilters from '../view/collection/filters';
-import CollectionSort from '../view/collection/sort';
+import CollectionFilters from '../view/collection/collectionFilters';
+import CollectionSort from '../view/collection/collectionSort';
 
 const selectors = {
   collectionJson: '[data-collection-json]'

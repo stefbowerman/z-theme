@@ -26,7 +26,7 @@ export default class Slideup {
     this.$el = $(el);
     this.stateIsOpen            = false;
     this.transitionEndEvent     = Utils.whichTransitionEnd();
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
+    this.supportsCssTransitions = !!Modernizr.csstransitions;
 
     if (this.$el === undefined || !this.$el.hasClass(classes.slideup)) {
       console.warn(`[${this.name}] - Element with class ${classes.slideup} required to initialize.`);

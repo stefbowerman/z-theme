@@ -45,7 +45,7 @@ export function generateCookie(key) {
  * Checks for the presence of a browser cookie by name (doesn't check for value equality)
  *
  * @param {String} cookieName
- * @return {Boolean}
+ * @return {boolean}
  */
 export function hasCookie(cookieName) {
   return typeof Cookies.get(cookieName) !== 'undefined';
@@ -65,7 +65,6 @@ export function getCookieValue(cookieName) {
  * Removes a cookie by name
  *
  * @param {String} cookieName
- * @return {Self}
  */
 export function removeCookie(cookieName) {
   Cookies.remove(cookieName);

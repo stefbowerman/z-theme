@@ -49,7 +49,7 @@ export default class SubscriptionSlideupSection extends BaseSection {
     this.slideup = new Slideup(this.$el);
     
     // Hook up the form to an ESP here
-    // this.ajaxKlaviyoForm = new slate....
+    // this.ajaxKlaviyoForm = new AJAXKlaviyoForm...
 
     /**
      * These are the cookies that we'll use to keep track of how much the user has seen / interacted with the slideup

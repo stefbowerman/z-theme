@@ -50,7 +50,7 @@ import CustomersOrderSection      from './sections/customersOrder';
 import QuickViewManager from './managers/quickView';
 
 // Models
-import ProductCard from './models/productCard';
+import ProductCard from './view/product/productCard';
 
 // Templates
 import './templates/pageStyles';

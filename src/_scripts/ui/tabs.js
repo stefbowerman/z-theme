@@ -40,7 +40,7 @@ export default class Tabs {
  
     this.animationDuration      = 300; // For emulating transitions where transitionevents aren't supports
     this.transitionEndEvent     = Utils.whichTransitionEnd();
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
+    this.supportsCssTransitions = !!Modernizr.csstransitions;
     this.isAnimating            = false;
 
     if (!$el.length || !$el.is(selectors.tabsContainer)) {

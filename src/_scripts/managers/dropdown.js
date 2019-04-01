@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Dropdown from '../models/dropdown';
+import Dropdown from '../ui/dropdown';
 import { find } from '../core/utils';
 
 class DropdownManager {

@@ -1,19 +1,7 @@
 import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
-import * as Utils from '../core/utils';
-import ProductDetail from '../view/product/productDetail';
-
-/**
- * Model - QuickView
- * -----------------------------------------------------------------------------
- * QuickViews are versions of the product detail form that we pull down via AJAX and append to a product card.
- *
- * Requires:
- *  - jQuery
- *  - Modernizr (for Modernizr.csstransitions)
- *
- * @namespace models.quickView
- */
+import * as Utils from '../../core/utils';
+import ProductDetail from './productDetail';
 
 const selectors = {
   quickView: '[data-quick-view]',
@@ -28,6 +16,15 @@ const classes = {
   productCardHasOpenQuickView: 'has-open-quick-view'
 };
 
+/**
+ * QuickView
+ * -------------------------------------------------------------------------------
+ * QuickView is a version of the product detail form
+ * that we pull down via AJAX and append to a product card.
+ *
+ * @namespace quickView
+ */
+
 export default class QuickView {
   /**
    * QuickView constructor
@@ -41,7 +38,7 @@ export default class QuickView {
    */  
   constructor(options) {
     this.name = 'quickView';
-    this.namespace = '.'+this.name;
+    this.namespace = `.${this.name}`;
 
     const defaults = {
       onProductDetailReady: $.noop,
@@ -70,7 +67,7 @@ export default class QuickView {
     this.$close                 = null;
 
     this.stateIsOpen            = false;
-    this.supportsCssTransitions = Modernizr.hasOwnProperty('csstransitions') && Modernizr.csstransitions;
+    this.supportsCssTransitions = !!Modernizr.csstransitions;
     this.productDetailInstance  = null;
 
     this.events = {
