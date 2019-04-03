@@ -5,11 +5,9 @@ const sass = require('gulp-sass');
 const size = require('gulp-size');
 const postcss = require('gulp-postcss');
 const debug = require('gulp-debug');
-const insert = require('gulp-insert');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const mergeStream = require('merge-stream');
-const styleWarning = require('../lib/stylesWarning');
 const colors = require('ansi-colors');
 const log = require('fancy-log');
 
@@ -41,7 +39,6 @@ const stylePipeline = (src) => {
       this.emit('end');
     })
     .pipe(postcss(postcssPlugins))
-    .pipe(insert.prepend(styleWarning()))
     .pipe(gulp.dest(paths.dest))
     .pipe(debug())
     .pipe(size({showFiles: true, title: 'CSS: size of'}));
