@@ -25,6 +25,7 @@
           <li><a href="#docs-slideup-alert">Slideup Alert</a></li>
           <li><a href="#docs-collapse">Collapse</a></li>
           <li><a href="#docs-quantity-adjuster">Quantity Adjuster</a></li>
+          <li><a href="#docs-newsletter-form">Newsletter Form</a></li>
         </ul>
 
         <h3 class="docs-title">Note About Liquid Snippets</h3>
@@ -993,6 +994,49 @@ The color is "{{ color }}"
           <a href="#" class="btn btn-secondary" data-qa-set-max="2">Set max to 2</a>
           <a href="#" class="btn btn-secondary" data-qa-set-max="10">Set Max to 10</a>
           <a href="#" class="btn btn-secondary" data-qa-toggle-enabled>Toggle Enabled</a>
+        </div>
+
+        <h3 id="docs-newsletter-form" class="docs-title">Newsletter Form</h3>
+        <p>The newsletter form is a UI component for displaying a form input with associated messaging for different subscription states.  The contents element wraps the form inputs as well as the form message.  Different message strings are stored as data attributes and inserted into the dom as necessary.  It requires a specific markup structure with the following data attributes.</p>
+
+        <div class="docs-well">
+<pre style="margin: 0;">
+- form
+  - .newsletter-form-contents[data-form-contents]
+    - .newsletter-form-inputs
+    - .newsletter-form-message[data-form-message][data-message-success][data-message-fail]
+</pre>
+        </div>        
+
+        <p>Use the buttons below to toggle various states of the form.</p>
+
+        <div class="docs-well docs-well--accent">
+          <form id="newsletter-form">
+            <div class="newsletter-form-contents" data-form-contents>
+              <div class="newsletter-form-inputs">
+                <div class="form-group">
+                  <div class="minimal-input-box">
+                    <input type="email" class="minimal-input-box__input" placeholder="Enter your text here" required="required"/>
+                    <button type="submit" class="minimal-input-box__submit">
+                      {% include 'icon-arrow-right' %}
+                      <span class="icon-fallback-text">Submit</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="newsletter-form-message"
+                 data-form-message
+                 data-message-success="Success Message!"
+                 data-message-already-subscribed="Already subscribed message"
+                 data-message-fail="Failure message :("></div>
+            </div>
+            <br />
+            <br />
+
+            <a href="#" class="btn btn-secondary" data-newsletter-trigger-success>Trigger Success</a>
+            <a href="#" class="btn btn-secondary" data-newsletter-trigger-subscribed>Trigger Already Subscribed</a>
+            <a href="#" class="btn btn-secondary" data-newsletter-trigger-fail>Trigger Failure</a>
+          </form>
         </div>
 
       </div>

@@ -2,6 +2,7 @@ import $ from 'jquery';
 import BaseTemplate from './base';
 import SlideupAlert from '../ui/slideupAlert';
 import Tabs from '../ui/tabs';
+import NewsletterForm from '../ui/newsletterForm';
 
 const $body = $(document.body);
   
@@ -10,7 +11,11 @@ const selectors = {
   tabContainer: '[data-tab-container]',
   qaSetMax: '[data-qa-set-max]',
   qaToggleEnabled: '[data-qa-toggle-enabled]',
-  qa: '[data-quantity-adjuster]'
+  qa: '[data-quantity-adjuster]',
+  newsletterForm: '#newsletter-form',
+  newsletterTriggerSuccess: '[data-newsletter-trigger-success]',
+  newsletterTriggerSubscribed: '[data-newsletter-trigger-subscribed]',
+  newsletterTriggerFail: '[data-newsletter-trigger-fail]'
 };
 
 class PageComponentsTemplate extends BaseTemplate {
@@ -40,6 +45,15 @@ class PageComponentsTemplate extends BaseTemplate {
       const $qaInput = $(selectors.qa).find('input[type="number"]');
       $qaInput.attr('disabled', !$qaInput.is(':disabled'));
     });
+
+    // Newsletter Form
+    this.newsletterForm = new NewsletterForm($(selectors.newsletterForm), { setCookies: false });
+
+    /* eslint-disable */
+    $(selectors.newsletterTriggerSuccess).on('click', () => { this.newsletterForm.onSubscribeSuccess({ data: { is_subscribed: false }}); })
+    $(selectors.newsletterTriggerSubscribed).on('click', () => { this.newsletterForm.onSubscribeSuccess({ data: { is_subscribed: true }}); })
+    $(selectors.newsletterTriggerFail).on('click', () => { this.newsletterForm.onSubscribeFail(); })
+    /* eslint-enable */
 
     $body.on('click', 'a[href="#"]', () => false);
   }

@@ -8,12 +8,12 @@ const cookies = {
     name: 'site_visit',
     value: true
   },
-  subscriptionSlideupSeen: {
-    name: 'subscriptionSlideup_seen',
+  newsletterSlideupSeen: {
+    name: 'newsletterSlideup_seen',
     value: true
   },
-  subscriptionModalSeen: {
-    name: 'subscriptionModal_seen',
+  newsletterModalSeen: {
+    name: 'newsletterModal_seen',
     value: true
   },
   emailCollected: {

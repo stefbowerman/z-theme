@@ -3,30 +3,26 @@ import BaseSection from './base';
 import * as User from '../core/user';
 import * as Utils from '../core/utils';
 import Slideup from '../ui/slideup';
+import NewsletterForm from '../ui/newsletterForm';
 
 const selectors = {
-  slideup: '[data-subscription-slideup]',
-  formContent: '[data-subscription-slideup-form-content]',
-  formMessage: '[data-subscription-slideup-form-message]'
-};
-
-const classes = {
-  showMessage: 'show-message'
+  slideup: '[data-newsletter-slideup]',
+  newsletterForm: '[data-newsletter-form]'
 };
 
 /**
- * Subscription Slideup Section Script
+ * Newsletter Slideup Section Script
  * ------------------------------------------------------------------------------
  *
  * Details are dependent on:
  *  - Mailing list provider (See settings_schema.json)
  *  - 3rd party ajax / validation scripts
  *
- * @namespace - subscriptionSlideup
+ * @namespace - newsletterSlideup
  */
-export default class SubscriptionSlideupSection extends BaseSection {
+export default class NewsletterSlideupSection extends BaseSection {
   constructor(container) {
-    super(container, 'subscriptionSlideup');
+    super(container, 'newsletterSlideup');
 
     this.settings = {
       enabled: this.$container.data('enabled'),
@@ -43,10 +39,9 @@ export default class SubscriptionSlideupSection extends BaseSection {
 
     // DOM elements we'll need
     this.$el          = $(selectors.slideup, this.$container);
-    this.$formContent = $(selectors.formContent, this.$container);
-    this.$formMessage = $(selectors.formMessage, this.$container);
 
-    this.slideup = new Slideup(this.$el);
+    this.slideup        = new Slideup(this.$el);
+    this.newsletterForm = new NewsletterForm($(selectors.newsletterForm, this.$container));
     
     // Hook up the form to an ESP here
     // this.ajaxKlaviyoForm = new AJAXKlaviyoForm...
@@ -56,12 +51,9 @@ export default class SubscriptionSlideupSection extends BaseSection {
      */
     this.cookies = {};
 
-    this.cookies.seen = User.generateCookie('subscriptionSlideupSeen');
+    this.cookies.seen = User.generateCookie('newsletterSlideupSeen');
     this.cookies.seen.value = Utils.hashFromString(this.$el.text()).toString(); // Set the cookie value based on the content
     this.cookies.seen.expiration = this.settings.seenExpiration;
-
-    this.cookies.emailCollected = User.generateCookie('emailCollected');
-    this.cookies.emailCollected.expiration = this.settings.seenExpiration;
 
     /**
      * Attach event handlers
@@ -79,32 +71,6 @@ export default class SubscriptionSlideupSection extends BaseSection {
     }
   }
 
-  /**
-   * Resets everything to it's initial state.  Only call when slideup isn't visible.
-   */
-  reset() {
-    this.$formContent.find('input[type="email"]').val('');
-    this.$formMessage.html('');
-    this.$formContent.removeClass(classes.showMessage);
-  }
-
-  onSubscribeSuccess() {
-    this.$formMessage.html(this.$formMessage.data('message-success'));
-    this.$formContent.addClass(classes.showMessage);
-    
-    if (!Utils.isThemeEditor()) {
-      User.setCookie(this.cookies.emailCollected);
-    }
-  }
-
-  onSubmitFail() {
-    this.$formMessage.html(this.$formMessage.data('message-fail'));
-    this.$formContent.addClass(classes.showMessage);
-    setTimeout(() => {
-      this.$formContent.removeClass(classes.showMessage);
-    }, 5000);
-  }
-
   shouldShow() {
     // Checks should be done in this order!
 
@@ -112,7 +78,7 @@ export default class SubscriptionSlideupSection extends BaseSection {
       return false;
     }
 
-    if (User.hasCookie(this.cookies.emailCollected.name)) {
+    if (this.newsletterForm.emailCollected()) {
       return false;
     }
 
@@ -130,7 +96,7 @@ export default class SubscriptionSlideupSection extends BaseSection {
   }
 
   onHidden() {
-    this.reset();
+    this.newsletterForm.reset();
   }
 
   /**

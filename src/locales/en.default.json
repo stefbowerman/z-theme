@@ -41,6 +41,12 @@
         "share_on_email": "Share via Email"
       }
     },
+    "newsletter": {
+      "subscribe_placeholder": "Your email",
+      "already_subscribed": "You're already subscribed!",
+      "subscribe_success": "Thank you for subscribing!",
+      "subscribe_fail": "Please check your email and try again."
+    },
     "search": {
       "no_results_html": "Nothing was found for '{{ terms }}'",
       "results_for_html": "Search results for '{{ terms }}'",
