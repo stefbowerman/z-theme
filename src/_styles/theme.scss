@@ -103,6 +103,10 @@
 @import 'templates/challenge.scss';
 @import 'templates/password.scss';
 
-/* stylelint-disable-next-line selector-max-id */
-#preview-bar-iframe,
-.shopify-preview-bar { display: none; }
+.development-mode {
+  /* stylelint-disable-next-line selector-max-id */
+  #preview-bar-iframe,
+  .shopify-preview-bar {
+    display: none;
+  }
+}

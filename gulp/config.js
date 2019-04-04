@@ -38,9 +38,6 @@ module.exports = {
       // }, {
       //   entries: 'checkout.js',
       //   outputName: 'checkout.js'
-      // }, {
-      //   entries: 'giftcard.js',
-      //   outputName: 'giftcard.js'
       // }]
     },
     eslint: {

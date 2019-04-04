@@ -153,4 +153,9 @@ Breakpoints.initialize();
     e.preventDefault();
     QuickViewManager.onQuickViewTriggerClick($(this));
   });
+
+  // Add "development mode" class for CSS hook
+  if (window.location.hostname === 'localhost') {
+    $body.addClass('development-mode');
+  }
 })(Modernizr);
