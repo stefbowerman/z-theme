@@ -22,6 +22,10 @@ export default class ProductCard {
     this.name = 'productCard';
     this.namespace = `.${this.name}`;
 
+    this.events = {
+      MOUSEENTER: `mouseenter${this.namespace}`
+    };
+
     this.$el = $(el);
 
     if (this.$el === undefined || !this.$el.is(selectors.el)) {
@@ -41,7 +45,7 @@ export default class ProductCard {
     });
 
     if (this.$altLazyImg.length) {
-      this.$el.one('mouseenter', this.onMouseenter.bind(this));
+      this.$el.one(this.events.MOUSEENTER, this.onMouseenter.bind(this));
     }
   }
 
@@ -57,6 +61,6 @@ export default class ProductCard {
   }
 
   destroy() {
-    this.$el.off('mouseenter', this.onMouseenter);
+    this.$el.off(this.events.MOUSEENTER);
   }
 }

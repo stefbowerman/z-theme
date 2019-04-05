@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
-import { defaultTo } from './utils';
 
 /**
  * Breakpoint Helper Functions / constants
@@ -46,16 +45,16 @@ export function getBreakpointMinWidth(key) {
  * Gets the key for one of the breakpoint widths, whichever is closest but smaller to the passed in width
  * So if we pass in a width between 'sm' and 'md', this will return 'sm'
  *
- * @param {int} w - width
+ * @param {int} w - width to search for
  * @return {undefined|string} foundKey
  */
 export function getBreakpointMinWidthKeyForWidth(w) {
-  w = defaultTo(w, $window.width());
+  const width = w || $window.width();
   
   let foundKey;
 
   $.each(breakpointMinWidths, (k, bpMinWidth) => {
-    if (w >= bpMinWidth) {
+    if (width >= bpMinWidth) {
       foundKey = k;
     }
   });

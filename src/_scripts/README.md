@@ -19,7 +19,6 @@ By default, the gulp development task _only_ watches this theme.js file as this 
 
 - `checkout.js` - This script is included in `layout/checkout.liquid` and contains code specific to the checkout pages.
 - `vendor.js` - This script includes any libraries that need to be loaded _before_ the opening body tag.  They are pulled in via a regular script tag (non defer) so try to keep this as light weight as possible.  Currently, only Modernizr is included as it needs to apply feature-support classes to the document before rendering the page.  If your script doesn't have a reason to be in here, it probably doesn't need to be.
-- `giftcard.js` - Runs on the `layout/giftcard.liquid`.  Not used on any other template / layout.
 
 ## Adding JavaScript
 
