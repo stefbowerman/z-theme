@@ -13,6 +13,10 @@ const watchify = require('watchify');
 const bundleLogger = require('../lib/bundleLogger');
 const colors = require('ansi-colors');
 const log = require('fancy-log');
+const argv = require('yargs').argv;
+const gulpif = require('gulp-if');
+
+const productionMode = (argv.e === 'production');
 
 const browserifyThis = (bundleConfig) => {
   const paths = {
@@ -32,7 +36,7 @@ const browserifyThis = (bundleConfig) => {
       })
       .pipe(source(bundleConfig.outputName))
       .pipe(buffer()) // optional, remove if no need to buffer file contents
-      // .pipe(uglify())
+      .pipe(gulpif(productionMode, uglify()))
       .pipe(gulp.dest(paths.dest))
       .pipe(size({showFiles: true, title: 'JS: size of'}))
       .on('finish', function() {
@@ -50,13 +54,18 @@ const browserifyThis = (bundleConfig) => {
       ]
     });
 
-  // b.transform(uglifyify);
+  if (productionMode) {
+    b.transform(uglifyify);
+  }
 
   b = watchify(b);
 
   // Rebundle on update
   b.on('update', bundle);
-  bundleLogger.watch(paths.src);
+
+  if (argv.watch && !productionMode) {
+    bundleLogger.watch(paths.src);
+  }
 
   return bundle();
 };

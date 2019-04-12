@@ -36,6 +36,7 @@ slate -h # Help
 npm run start # Installs Slate globally and locally to start working on any project.
 npm run hooks # Installs a Git Hook that prevents branch changes without stopping the watcher (sets a touch -a to the config.yml to force the watcher stop)
 npm run start-dev # Runs the `gulp start` task which runs all gulp tasks and then starts a watcher
+npm run build # Runs the `gulp build` task which compiles scss and javascript in production mode (minification enabled)
 ```
 
 ### Gulp Tasks
