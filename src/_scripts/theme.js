@@ -57,8 +57,6 @@ import ProductCard from './view/product/productCard';
 import './templates/pageStyles';
 import './templates/pageComponents';
 
-import * as Currency from './core/currency';
-
 // Do this ASAP
 Animations.initialize();
 Breakpoints.initialize();
