@@ -26,6 +26,7 @@
           <li><a href="#docs-collapse">Collapse</a></li>
           <li><a href="#docs-quantity-adjuster">Quantity Adjuster</a></li>
           <li><a href="#docs-newsletter-form">Newsletter Form</a></li>
+          <li><a href="#docs-video-player">Video Player</a></li>
         </ul>
 
         <h3 class="docs-title">Note About Liquid Snippets</h3>
@@ -1038,6 +1039,32 @@ The color is "{{ color }}"
             <a href="#" class="btn btn-secondary" data-newsletter-trigger-fail>Trigger Failure</a>
           </form>
         </div>
+
+        <h3 id="docs-video-player" class="docs-title">Video Player</h3>
+        <p>The video player component supports both YouTube and Vimeo videos.  All settings are passed as data attributes.  The component consists of a specific markup structure which loads an iframe from the required video provider when initialized.</p>
+
+        <h4 class="docs-subtitle">YouTube Example</h4>
+        <div class="docs-well">
+          <div id="video-player-ScMzIvxBSi4" class="video-player" data-video-player data-video-id="ScMzIvxBSi4" data-video-type="youtube">
+            <div class="video-player__cover" data-video-player-cover>
+              <div class="video-player__cover-still" style="background-image: url({{ 'test-video-bg.png' | asset_url }});"></div>
+              <span class="video-player__cover-play">{% include 'icon-play' %}</span>
+            </div>
+            <div class="video-player__embed" data-video-player-embed></div>
+          </div>
+        </div>
+
+        <h4 class="docs-subtitle">Vimeo Example</h4>
+        <p>This example uses the <strong>background</strong> setting that Vimeo offers.  This setting removes all controls and branding on the player, as well as autoplaying and looping the video.  This setting can be toggled via the <code>data-background</code> attribute on the <code>.video-player</code> element.</p>
+        <div class="docs-well">
+          <div id="video-player-72223143" class="video-player" data-video-player data-video-id="72223143" data-video-type="vimeo" data-background="true">
+            <div class="video-player__cover" data-video-player-cover>
+              <div class="video-player__cover-still" style="background-image: url({{ 'test-video-bg.png' | asset_url }});"></div>
+              <span class="video-player__cover-play">{% include 'icon-play' %}</span>
+            </div>
+            <div class="video-player__embed" data-video-player-embed></div>
+          </div>
+        </div>        
 
       </div>
     </div>

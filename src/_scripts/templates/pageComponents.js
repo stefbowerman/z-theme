@@ -3,6 +3,7 @@ import BaseTemplate from './base';
 import SlideupAlert from '../ui/slideupAlert';
 import Tabs from '../ui/tabs';
 import NewsletterForm from '../ui/newsletterForm';
+import VideoPlayer from '../ui/videoPlayer';
 
 const $body = $(document.body);
   
@@ -54,6 +55,8 @@ class PageComponentsTemplate extends BaseTemplate {
     $(selectors.newsletterTriggerSubscribed).on('click', () => { this.newsletterForm.onSubscribeSuccess({ data: { is_subscribed: true }}); })
     $(selectors.newsletterTriggerFail).on('click', () => { this.newsletterForm.onSubscribeFail(); })
     /* eslint-enable */
+
+    VideoPlayer.refresh();
 
     $body.on('click', 'a[href="#"]', () => false);
   }
