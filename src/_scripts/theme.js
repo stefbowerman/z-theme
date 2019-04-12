@@ -59,8 +59,6 @@ import './templates/pageComponents';
 
 import * as Currency from './core/currency';
 
-window.C = Currency;
-
 // Do this ASAP
 Animations.initialize();
 Breakpoints.initialize();
