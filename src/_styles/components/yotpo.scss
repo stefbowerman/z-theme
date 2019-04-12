@@ -126,7 +126,7 @@ $yotpo-icon-thumbs-down: false !default;
       &,
       &:hover,
       &:focus {
-        color: $gray-800 !important;
+        color: $gray-darker !important;
       }
     }
 
@@ -138,7 +138,7 @@ $yotpo-icon-thumbs-down: false !default;
 
   // Re-usable bordered box with padding+ margins
   .yotpo-regular-box {
-    border-top-color: $gray-800;
+    border-top-color: $gray-darker;
     margin-left: 0;
     margin-right: 0;
     padding: 45px 0;
@@ -162,7 +162,7 @@ $yotpo-icon-thumbs-down: false !default;
 
     &.yotpo-icon-btn {
       padding: 0;
-      border: 1px solid $gray-500;
+      border: 1px solid $gray;
       border-width: 0 0 1px;
       background: transparent;
     }
@@ -295,11 +295,11 @@ $yotpo-icon-thumbs-down: false !default;
   //     @media (max-width: 541px) {
   //       background-color: $color-white !important;
   //       letter-spacing: $letter-spacing-base !important;
-  //       color: $color-dark-grey !important;
+  //       color: $color-dark-gray !important;
   //       text-transform: none !important;
   //       border-color: $color-white !important;
 
-  //       .yotpo-icon { color: $color-dark-grey !important; }
+  //       .yotpo-icon { color: $color-dark-gray !important; }
   //     }
   //   }
   // }
@@ -346,7 +346,7 @@ $yotpo-icon-thumbs-down: false !default;
 
       .yotpo-review-date {
         font-size: $font-size-sm !important;
-        color: $gray-500 !important;
+        color: $gray !important;
         font-weight: $font-weight-base;
         margin-top: 5px;
         margin-left: 10px;
@@ -364,7 +364,7 @@ $yotpo-icon-thumbs-down: false !default;
         float: none;
 
         .y-label {
-          color: $gray-500 !important;
+          color: $gray !important;
           font-size: $font-size-sm !important;
           font-weight: $font-weight-bold;
 
@@ -434,7 +434,7 @@ $yotpo-icon-thumbs-down: false !default;
   .yotpo-tool-tip-question,
   .yotpo-tool-tip-answer {
 
-    border-color: $gray-500 !important;
+    border-color: $gray !important;
     max-width: 340px !important;
 
     // Match .content-review

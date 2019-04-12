@@ -58,7 +58,7 @@ class PageComponentsTemplate extends BaseTemplate {
 
     VideoPlayer.refresh();
 
-    $body.on('click', 'a[href="#"]', () => false);
+    $(document).on('click', 'a[href="#"]', (e) => e.preventDefault());
   }
 }
 

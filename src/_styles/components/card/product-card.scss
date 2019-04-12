@@ -76,9 +76,9 @@
 .product-card__info-price {
   font-size: $product-card-price-size;
 
-  // Grey out crossed out price
+  // Gray out crossed out price
   s {
-    color: $gray-500;
+    color: $gray;
   }
 }
 

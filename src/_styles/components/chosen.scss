@@ -33,12 +33,12 @@
 
       &.result-selected {
         color: $input-color;
-        background-color: $gray-300;
+        background-color: $gray-light;
       }
 
       &.highlighted {
         color: $input-color;
-        background-color: $gray-200;
+        background-color: $gray-lighter;
         background-image: none;
       }
     }

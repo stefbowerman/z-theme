@@ -47,6 +47,8 @@ The following bootstrap components have been omitted from this project either be
 The following changes have been made to the core bootstrap files.  The majority of them are additions as opposed to removals or modifications in order to keep the core functionality consistent with the bootstrap documentation.
 
 - Add type mixins - typography variables have been broken down to each type style (h1, h2, ..p1, p2, ...)
+- Remove `$gray` color map and all associated functions.
+- Add gray scale colors to the map `$colors` map
 - Helper classes file - `core/helpers.scss`
 - Add `visually-hidden` and `visually-shown` mixins to `mixins/_visibility.scss`
 - Add `core/layout.scss`

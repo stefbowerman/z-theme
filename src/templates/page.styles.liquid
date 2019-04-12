@@ -59,16 +59,20 @@
 
         <h2 id="docs-colors" class="docs-title">Colors</h2>
 
-        {% assign grey_scale_colors = '' %}
-        {% assign grey_scale_colors = grey_scale_colors | append: 'black:Black:#000:$black' | append: '|' %}
-        {% assign grey_scale_colors = grey_scale_colors | append: 'gray-dark:Gray Dark:#343a40:$gray-dark' | append: '|' %}
-        {% assign grey_scale_colors = grey_scale_colors | append: 'gray:Gray:#adb5bd:$gray' | append: '|' %}
-        {% assign grey_scale_colors = grey_scale_colors | append: 'white:White:#fff:$color-white' | append: '|' %}
-        {% assign grey_scale_colors = grey_scale_colors | split: '|' %}
+        {% assign gray_scale_colors = '' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'black:Black:#000:$black' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray-darkest:Gray Darkest:#212529:$gray-darkest' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray-darker:Gray Darker:#494949:$gray-darker' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray-dark:Gray Dark:#666:$gray-dark' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray:Gray:#ccc:$gray' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray-light:Gray Light:#e9ecef:$gray-light' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'gray-lighter:Gray Lighter:#f8f9fa:$gray-lighter' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | append: 'white:White:#fff:$color-white' | append: '|' %}
+        {% assign gray_scale_colors = gray_scale_colors | split: '|' %}
 
-        <h4 class="docs-subtitle">Greyscale</h4>
+        <h4 class="docs-subtitle">Grayscale</h4>
         <div>
-          {% for color in grey_scale_colors %}
+          {% for color in gray_scale_colors %}
             {% assign parts = color | split: ':' %}
             <div class="styleguide-color">
               <div class="styleguide-color__swatch styleguide-color__swatch--{{ parts[0] }}"></div>
@@ -136,10 +140,12 @@
           <li class="font-weight-bold">.font-weight-bold</li>
           <li class="letter-spacing-base">.letter-spacing-base</li>
           <li class="text-black">.text-black</li>
-          {% for i in (1..9) %}
-            {% assign val = i | times: 100 %}
-            <li class="text-gray-{{ val }}">.text-gray-{{ val }}</li>
-          {% endfor %}
+          <li class="text-gray-darkest">.text-gray-darkest</li>
+          <li class="text-gray-darker">.text-gray-darker</li>
+          <li class="text-gray-dark">.text-gray-dark</li>
+          <li class="text-gray">.text-gray</li>
+          <li class="text-gray-light">.text-gray-light</li>
+          <li class="text-gray-lighter">.text-gray-lighter</li>
           <li class="text-white">.text-white</li>
           <li class="text-muted">.text-muted</li>
           <li class="text-black-50">.text-black-50</li>
@@ -150,26 +156,24 @@
           <li class="text-info">.text-info</li>
           <li class="text-warning">.text-warning</li>
           <li class="text-danger">.text-danger</li>
-          <li class="text-light">.text-light</li>
-          <li class="text-dark">.text-dark</li>
         </ul>
 
         <h4 class="docs-subtitle">Background Color Utilities</h4>
         <ul class="docs-text-list">
           <li class="bg-black text-white">.bg-black</li>
+          <li class="bg-gray-darkest text-white">.bg-gray-darkest</li>
+          <li class="bg-gray-darker text-white">.bg-gray-darker</li>
+          <li class="bg-gray-dark">.bg-gray-dark</li>
+          <li class="bg-gray">.bg-gray</li>
+          <li class="bg-gray-light">.bg-gray-light</li>
+          <li class="bg-gray-lighter">.bg-gray-lighter</li>
           <li class="bg-white">.bg-white</li>
-          {% for i in (1..9) %}
-            {% assign val = i | times: 100 %}
-            <li class="bg-gray-{{ val }} {% if i > 6 %}text-white{% endif %}">.bg-gray-{{ val }}</li>
-          {% endfor %}          
           <li class="bg-primary">.bg-primary</li>
           <li class="bg-secondary">.bg-secondary</li>
           <li class="bg-success">.bg-success</li>
           <li class="bg-info">.bg-info</li>
           <li class="bg-warning">.bg-warning</li>
           <li class="bg-danger">.bg-danger</li>
-          <li class="bg-light">.bg-light</li>
-          <li class="bg-dark text-white">.bg-dark</li>
         </ul>
 
         <h4 class="docs-subtitle">Blockquotes</h4>
