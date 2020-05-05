@@ -12,7 +12,6 @@
   Renders section content.  This snippet should be used as the single point of entry for rendering CMS section content - see sections/page-cms.liquid
 
   Renders blocks of the following types:
-    - spacer
     - promo
     - article_grid
     - product_grid
@@ -40,11 +39,7 @@
 
     {% for block in section.blocks %}  
       <div class="cms-page-block" {{ block.shopify_attributes }}>
-        {% if block.type == "spacer" %}
-        
-          {% include 'spacer', id: block.id, height_name: block.settings.height_name %}
-
-        {% elsif block.type == "promo" %}
+        {% if block.type == "promo" %}
         
           <div class="container">
             {% include 'promo',
