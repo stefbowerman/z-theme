@@ -44,9 +44,6 @@ import CustomersAccountOrdersSection from './sections/customersAccountOrders';
 import CustomersAddressesSection     from './sections/customersAddresses';
 import CustomersOrderSection         from './sections/customersOrder';
 
-// Models
-import ProductCard from './view/product/productCard';
-
 // Templates
 import './templates/pageStyles';
 import './templates/pageComponents';
@@ -134,11 +131,6 @@ Breakpoints.initialize();
     $(this).parents('.expandable-list').addClass(isOpenClass);
   });
   // END - Global handler for collapse plugin to add state class for open expandable lists
-
-  // Init any Product Cards on the page
-  $('[data-product-card]').each((i, el) => {
-    new ProductCard(el);
-  });
 
   // Add "development mode" class for CSS hook
   if (window.location.hostname === 'localhost') {

@@ -1,9 +1,11 @@
 import $ from 'jquery';
 import BaseSection from './base';
 import CollectionSort from '../view/collection/collectionSort';
+import ProductCard from '../view/product/productCard';
 
 const selectors = {
-  collectionJson: '[data-collection-json]'
+  collectionJson: '[data-collection-json]',
+  productCard: '[data-product-card]'
 };
 
 export default class CollectionSection extends BaseSection {
@@ -19,5 +21,11 @@ export default class CollectionSection extends BaseSection {
     this.collectionData = JSON.parse($(selectors.collectionJson, this.$container).html());
 
     this.sort = new CollectionSort(container, this.collectionData);
+
+    this.productCards = $.map($(selectors.productCard, this.$container), el => new ProductCard(el));
+  }
+
+  onUnload() {
+    this.productCards.forEach(card => card.destroy());
   }
 }

@@ -20,12 +20,12 @@ class AJAXFormManager {
       ADD_FAIL: `addFail${this.namespace}`
     };
 
-    this.requestInProgress = false;
+    let requestInProgress = false;
 
     $body.on('submit', selectors.addForm, (e) => {
       e.preventDefault();
 
-      if (this.requestInProgress) return;
+      if (requestInProgress) return;
 
       const $submitButton = $(e.target).find(selectors.addToCart);
       const $submitButtonText = $submitButton.find(selectors.addToCartText);
@@ -33,6 +33,8 @@ class AJAXFormManager {
       // Update the submit button text and disable the button so the user knows the form is being submitted
       $submitButton.prop('disabled', true);
       $submitButtonText.html(getPropByString(window, 'theme.strings.adding') || 'Adding');
+
+      requestInProgress = true;
 
       CartAPI.addItemFromForm($(e.target))
         .then((data) => {
@@ -47,6 +49,8 @@ class AJAXFormManager {
           // Reset button state
           $submitButton.prop('disabled', false);
           $submitButtonText.html(theme.strings.addToCart);
+
+          requestInProgress = false;
         });
     });
   }
