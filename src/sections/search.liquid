@@ -33,7 +33,7 @@
             {% for item in search.results %}
               <div class="content-grid__item">
                 {% if item.object_type == 'product' %}
-                  {% include 'product-card', product: item, quick_view: true %}
+                  {% include 'product-card', product: item %}
                 {% elsif item.object_type == 'article' %}
                   {% include 'article-card', article: item %}  
                 {% else %}

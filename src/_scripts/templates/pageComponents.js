@@ -4,8 +4,6 @@ import SlideupAlert from '../ui/slideupAlert';
 import Tabs from '../ui/tabs';
 import NewsletterForm from '../ui/newsletterForm';
 import VideoPlayer from '../ui/videoPlayer';
-
-const $body = $(document.body);
   
 const selectors = {
   slideupAlertForm: '[data-slideup-alert-form]',
@@ -58,7 +56,7 @@ class PageComponentsTemplate extends BaseTemplate {
 
     VideoPlayer.refresh();
 
-    $(document).on('click', 'a[href="#"]', (e) => e.preventDefault());
+    $(document).on('click', 'a[href="#"]', e => e.preventDefault());
   }
 }
 

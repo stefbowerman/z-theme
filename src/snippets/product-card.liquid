@@ -7,7 +7,6 @@
 
   {% include 'product-card',
               product: { product } - required
-              quick_view: { boolean } - optional, defaults to false
               lazy_load: { boolean } - optional, defaults to false,
               show_swatches: { boolean } - optional, defaults to true
               show_reviews: { boolean } - optional, defaults to false
@@ -16,10 +15,6 @@
 {% endcomment -%}
 
 {% comment %} Defaults {% endcomment %}
-{% if quick_view == blank %}
-  {% assign quick_view = false %}
-{% endif %}
-
 {% if lazy_load == blank %}
   {% assign lazy_load = false %}
 {% endif %}
@@ -76,11 +71,6 @@
               {% endif %}
             {% endif %}
           </a>
-          {% if quick_view %}
-            <div class="product-card__qv-trigger-wrap">
-              <a href="{{ product_url }}?view=quick-view" class="btn btn-primary" data-quick-view-trigger>Quick View</a>
-            </div>
-          {% endif %}
         </div>
       {% endif %}
 
@@ -151,9 +141,5 @@
 
       </div>
     </div>
-
-    {% comment %} Quick view gets appended to here {% endcomment %}
-
   </div>
-
 {% endif %}

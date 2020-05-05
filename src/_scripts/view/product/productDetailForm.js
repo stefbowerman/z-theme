@@ -15,8 +15,7 @@ const selectors = {
   singleOptionSelector: '[data-single-option-selector]',
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
-  quantitySelect: '[data-product-quantity-select]',
-  fullDetailsLink: '[data-full-details-link]'
+  quantitySelect: '[data-product-quantity-select]'
 };
 
 const classes = {
@@ -60,7 +59,6 @@ export default class ProductDetailForm {
     /* temporarily disable to allow long lines for element descriptions */
     this.$container              = this.settings.$container; // Scoping element for all DOM lookups
     this.$quantitySelect         = $(selectors.quantitySelect, this.$container); // Quantity dropdown
-    this.$fullDetailsLink        = $(selectors.fullDetailsLink, this.$container); // Inside quickview, link that points back to the full product
     this.$addToCartBtn           = $(selectors.addToCart, this.$container);
     this.$addToCartBtnText       = $(selectors.addToCartText, this.$container); // Text inside the add to cart button
     this.$priceWrapper           = $(selectors.priceWrapper, this.$container); // Contains all price elements
@@ -182,20 +180,6 @@ export default class ProductDetailForm {
         $variantOptionValueUI.addClass(classes.variantOptionValueActive);
         $variantOptionValueUI.siblings().removeClass(classes.variantOptionValueActive);
       }
-    }
-  }
-
-  /**
-   * Used on quick view, updates the "view full details" link to point to the currently selected variant
-   *
-   * @param {Object} variant - Shopify variant object
-   */
-  updateFullDetailsLink(variant) {
-    let updatedUrl;
-
-    if (variant && this.$fullDetailsLink.length) {
-      updatedUrl = Utils.getUrlWithUpdatedQueryStringParameter('variant', variant.id, this.$fullDetailsLink.attr('href'));
-      this.$fullDetailsLink.attr('href', updatedUrl);
     }
   }
 

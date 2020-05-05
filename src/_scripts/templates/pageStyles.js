@@ -18,7 +18,7 @@ class PageStylesTemplate extends BaseTemplate {
       $(this).addClass('is-active');
     });
 
-    $(document).on('click', 'a[href="#"]', (e) => e.preventDefault());
+    $(document).on('click', 'a[href="#"]', e => e.preventDefault());
   }
 }
 

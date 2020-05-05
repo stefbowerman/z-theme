@@ -46,9 +46,6 @@ import CustomersAccountOrdersSection from './sections/customersAccountOrders';
 import CustomersAddressesSection     from './sections/customersAddresses';
 import CustomersOrderSection         from './sections/customersOrder';
 
-// Managers
-import QuickViewManager from './managers/quickView';
-
 // Models
 import ProductCard from './view/product/productCard';
 
@@ -144,12 +141,6 @@ Breakpoints.initialize();
   // Init any Product Cards on the page
   $('[data-product-card]').each((i, el) => {
     new ProductCard(el);
-  });
-
-  // Quickview stuff
-  $body.on('click', '[data-quick-view-trigger]', function(e) {
-    e.preventDefault();
-    QuickViewManager.onQuickViewTriggerClick($(this));
   });
 
   // Add "development mode" class for CSS hook

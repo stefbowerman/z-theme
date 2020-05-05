@@ -12,10 +12,6 @@
 
 {% endcomment -%}
 
-{% if template.name == 'product' and template.suffix == 'quick-view' %}
-  {% assign is_quick_view = true %}
-{% endif %}
-
 {% if current_variant == blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
 {% endif %}
@@ -144,11 +140,6 @@
   <div class="rte">
     {{ product.description }}
   </div>
-
-  {% if is_quick_view %}
-    {% comment %} This link will get updated on variant change.  See productDetailForm.js {% endcomment %}
-    <a href="{{ current_variant.url }}" data-full-details-link>View Full Details</a>
-  {% endif %}
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>
