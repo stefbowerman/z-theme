@@ -17,7 +17,17 @@
   {% endif %}
 
   {% capture seo_title %}
-    {{ page_title }}
+    {% if template.name == "search" %}
+      Search
+      {% if search.performed %}
+        - "{{ search.terms | escape }}"
+      {% endif %}
+    {% elsif template.name == "cart" %}
+      Cart
+    {% else %}
+      {{ page_title }}
+    {% endif %}
+
     {% if current_tags %}
       {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
     {% endif %}
@@ -50,12 +60,6 @@
       },
       moneyFormat: {{ shop.money_format | json }}
     };
-
-  {% if settings.yotpo_client_id != blank %}
-    window.yotpoConfig = {
-      appKey: '{{ settings.yotpo_client_id }}'
-    };
-  {% endif %}
   </script>
 
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}"></script><!--<![endif]-->
@@ -77,15 +81,11 @@
 
 <body id="{{ page_title | handle }}" class="{{ body_class | strip | strip_newlines }}">
 
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
-  
-  {% comment %} If you don't need swatch functionality, remove this section along with the associated JS {% endcomment %}
-  {% section 'swatches' %} 
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>  
   {% section 'pencil-banner' %}
   {% section 'mobile-menu' %}
 
   <div class="layout-wrapper">
-
     {% comment %} Select the appropriate 'header-*' section for the theme you are building and remove the files for the others {% endcomment %}
     {% section 'header-logo-center' %}
     {% comment %}{% section 'header-logo-left' %} {% endcomment %}
@@ -97,7 +97,6 @@
     </main>
 
     {% section 'footer' %}
-
   </div>
 
   {% comment %} Select the appropriate 'newsletter-*' section for the theme you are building and remove the associated files for the other {% endcomment %}
@@ -109,8 +108,6 @@
   {% endunless %}
 
   {% include 'slideup-template' %}
-  {% include 'search-overlay' %}
   {% include 'third-party-scripts-foot' %}
-
 </body>
 </html>

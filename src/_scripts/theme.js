@@ -38,7 +38,6 @@ import InstagramFeedSection          from './sections/instagramFeed';
 import NewsletterModalSection        from './sections/newsletterModal';
 import NewsletterSlideupSection      from './sections/newsletterSlideup';
 import SlideshowSection              from './sections/slideshow';
-import SwatchesSection               from './sections/swatches';
 import VideoSection                  from './sections/video';
 import CMSPageSection                from './sections/cmsPage';
 import CustomersLoginSection         from './sections/customersLogin';
@@ -81,7 +80,6 @@ Breakpoints.initialize();
   sectionManager.register('newsletter-modal', NewsletterModalSection);
   sectionManager.register('newsletter-slideup', NewsletterSlideupSection);
   sectionManager.register('slideshow', SlideshowSection);
-  sectionManager.register('swatches', SwatchesSection);
   sectionManager.register('video', VideoSection);
   sectionManager.register('cms-page', CMSPageSection);
   sectionManager.register('customers-login', CustomersLoginSection);
@@ -158,4 +156,6 @@ Breakpoints.initialize();
   if (window.location.hostname === 'localhost') {
     $body.addClass('development-mode');
   }
+
+  Utils.credits();
 })(Modernizr);

@@ -18,6 +18,7 @@ Z-Theme is a boilerplate Shopify theme built on top of [Slate](https://shopify.g
   - **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes).
   - **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
 - Follow Z-Theme [dev prep guide](https://github.com/zehnergroup/z-theme/wiki/Dev-Prep-Guide)
+- You'll need to use node v9.9.0 to run the slate commands
 
 ### [Slate Commands](https://shopify.github.io/slate/commands/)
 

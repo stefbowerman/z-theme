@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Z-Theme",
-    "theme_version": "0.1.0",
-    "theme_author": "Zehner Group",
-    "theme_documentation_url": "https://github.com/zehnergroup/z-theme/wiki",
-    "theme_support_url": "https://github.com/zehnergroup/z-theme"
+    "theme_version": "1.0.0",
+    "theme_author": "Stefan Bowerman",
+    "theme_documentation_url": "https://github.com/stefbowerman/z-theme/wiki",
+    "theme_support_url": "https://github.com/stefbowerman/z-theme"
   },
   {
     "name": "Social media",
@@ -119,21 +119,6 @@
         "id": "sharing_image_3",
         "label": "Image #3"
       }
-    ]
-  },
-  {
-    "name": "Yotpo",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Credentials"
-      },
-      {
-        "type": "text",
-        "id": "yotpo_client_id",
-        "label": "App Key",
-        "info": "See: https://support.yotpo.com/en/article/finding-your-app-key-and-your-secret-key"
-      }    
     ]
   },
   {
