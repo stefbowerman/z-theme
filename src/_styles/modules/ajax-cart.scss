@@ -123,11 +123,6 @@ body.ajax-cart-open {
   &:last-child {
     margin-bottom: 0;
   }
-
-  &.is-being-removed {
-    opacity: 0;
-    transition: opacity $transition-duration-base $transition-timing-function-in;
-  }
 }
 
 .ajax-cart__item-image {

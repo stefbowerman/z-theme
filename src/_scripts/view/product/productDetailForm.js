@@ -92,7 +92,6 @@ export default class ProductDetailForm {
     this.updateAddToCartState(variant);
     this.updateQuantitySelect(variant);
     this.updateVariantOptionValues(variant);
-    this.updateFullDetailsLink(variant);
 
     this.$singleOptionSelectors.trigger('chosen:updated');
 

@@ -76,7 +76,7 @@ export default class AJAXCart {
     this.qaInteractionTimeout = null;
     this.qaInteractionDelay   = 350; // Delay before triggering the quantityadjuster change event (allows user to increment / decrement quickly)
     this.transitionEndEvent   = Utils.whichTransitionEnd();
-
+    this.rendered             = false; // Keep track of whether or not the cart has rendered yet, don't open if it hasn't been
 
     if (!this.$bodyTemplate.length || !this.$footerTopTemplate.length) {
       console.warn(`[${this.name}] - Handlebars template required to initialize`);
@@ -91,7 +91,6 @@ export default class AJAXCart {
       this.$el.find('.additional-checkout-button').parent('.ajax-cart__footer-row').remove();
     }
 
-    // Add event handlers here
     $body.on(this.events.CLICK, selectors.trigger, this.onTriggerClick.bind(this));
     $body.on(this.events.CLICK, selectors.close, this.onCloseClick.bind(this));
     $body.on(this.events.CLICK, selectors.itemRemove, this.onItemRemoveClick.bind(this));
@@ -162,15 +161,28 @@ export default class AJAXCart {
    * Builds the HTML for the ajax cart and inserts it into the container element
    *
    * @param {object} cart - JSON representation of the cart.  See https://help.shopify.com/themes/development/getting-started/using-ajax-api#get-cart
+   * @param {string} slot - specific slot to re-render, otherwise the entire cart will be re-rendered
    * @return this
    */
-  render(cart) {
+  render(cart, slot) {
     const templateData = $.extend(this.templateData, cart);
 
     $window.trigger($.Event(this.events.DESTROY));
-    this.$acBody.empty().append(this.bodyTemplate(templateData));
-    this.$acFooterTop.empty().append(this.footerTopTemplate(templateData));
+
+    if (slot === 'body') {
+      this.$acBody.empty().append(this.bodyTemplate(templateData));
+    }
+    else if (slot === 'footer') {
+      this.$acFooterTop.empty().append(this.footerTopTemplate(templateData));
+    }
+    else {
+      this.$acBody.empty().append(this.bodyTemplate(templateData));
+      this.$acFooterTop.empty().append(this.footerTopTemplate(templateData));
+    }
+
     $window.trigger($.Event(this.events.RENDER, { cart }));
+
+    this.rendered = true;
 
     return this;
   }
@@ -310,7 +322,16 @@ export default class AJAXCart {
     this.lockUI();
 
     CartAPI.changeLineItemQuantityByKey(attrs.key, 0).then((cart) => {
-      this.render(cart);
+      // this.render(cart);
+      if (cart.item_count > 0) {
+        // We only need to re-render the footer
+        attrs.$row.slideUp(250, () => {
+          this.render(cart, 'footer');
+        });
+      }
+      else {
+        this.render(cart);
+      }
     })
       .fail(() => {
         console.warn('something went wrong...');
@@ -396,7 +417,7 @@ export default class AJAXCart {
    *
    */
   open() {
-    if (this.stateIsOpen) return;
+    if (this.stateIsOpen || !this.rendered) return;
 
     this.stateIsOpen = true;
 
