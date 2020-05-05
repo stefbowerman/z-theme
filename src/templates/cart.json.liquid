@@ -39,6 +39,7 @@
         "title": {{ item.title | json }},
         "price": {{ item.price }},
         "line_price": {{ item.line_price }},
+        "final_line_price": {{ item.final_line_price }},
         "original_line_price": {{ item.original_line_price }},
         "original_price": {{ item.original_price }},
         "discounted_price": {{ item.original_price | minus: item.total_discount }},        
