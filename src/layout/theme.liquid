@@ -38,6 +38,7 @@
       &ndash; {{ shop.name }}
     {% endunless %}
   {% endcapture %}
+  
   <title>{{ seo_title }}</title>
 
   {% if page_description %}
@@ -75,13 +76,20 @@
 
 {% capture body_class %}
   template-{{ template.name | handle }}
-  {% if template.suffix != blank %} template-{{ template.name | append: '-' | append: template.suffix | handle }} {% endif %}
-  {% if FIXED_HEADER == true %} site-fixed-header {% endif %}
+  {% if template.suffix != blank %}
+    template-{{ template.name | append: '-' | append: template.suffix | handle }}
+  {% endif %}
+  {% if FIXED_HEADER == true %}
+    site-fixed-header
+  {% endif %}
 {% endcapture %}
 
 <body id="{{ page_title | handle }}" class="{{ body_class | strip | strip_newlines }}">
 
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>  
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">
+    {{ 'general.accessibility.skip_to_content' | t }}
+  </a>  
+
   {% section 'pencil-banner' %}
   {% section 'mobile-menu' %}
 
@@ -101,13 +109,11 @@
 
   {% comment %} Select the appropriate 'newsletter-*' section for the theme you are building and remove the associated files for the other {% endcomment %}
   {% section 'newsletter-modal' %}
-  {% comment %}{% section 'newsletter-slideup' %}{% endcomment %}
 
   {% unless template == 'cart' %}
     {% section 'ajax-cart' %}
   {% endunless %}
 
-  {% include 'slideup-template' %}
   {% include 'third-party-scripts-foot' %}
 </body>
 </html>

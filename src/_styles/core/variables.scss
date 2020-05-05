@@ -723,7 +723,6 @@ $form-validation-states: map-merge(
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
-$zindex-slideup:                    990 !default;
 $zindex-dropdown:                   1000 !default;
 $zindex-sticky:                     1500 !default;
 $zindex-fixed:                      2000 !default;
@@ -780,7 +779,7 @@ $transition-duration-dropdown:            $transition-duration-base !default;
 $transition-timing-function-dropdown-in:  $transition-timing-function-in !default;
 $transition-timing-function-dropdown-out: $transition-timing-function-out !default;
 
-// slide - (ajaxcart / mobile menu / slideup)
+// slide - (ajaxcart / mobile menu)
 $transition-duration-slide:               $transition-duration-medium !default;
 $transition-timing-function-slide-in:     cubic-bezier(0.34, 0.75, 0.6, 1) !default;
 $transition-timing-function-slide-out:    cubic-bezier(0.4, 0.5, 0.5, 1) !default;
@@ -1037,13 +1036,6 @@ $spacer-height-medium:                  $spacer * 4;
 $spacer-height-large:                   $spacer * 8;
 $spacer-height-xlarge:                  $spacer * 12;
 $spacer-height-huge:                    $spacer * 16;
-
-
-// Slideup
-
-$slideup-bg:                            #ededed;
-$slideup-content-max-width:             500px;
-$slideup-padding-vertical:              $grid-gutter-width;
 
 
 // Arrows

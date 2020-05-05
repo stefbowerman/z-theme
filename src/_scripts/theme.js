@@ -18,7 +18,6 @@ import * as Breakpoints from './core/breakpoints';
 // UI - Import all to enable data API
 import './ui/drawer';
 import './ui/overlay';
-import './ui/slideup';
 import './ui/tabs';
 import './ui/quantityAdjuster';
 
@@ -36,7 +35,6 @@ import BlogSection                   from './sections/blog';
 import ArticleSection                from './sections/article';
 import InstagramFeedSection          from './sections/instagramFeed';
 import NewsletterModalSection        from './sections/newsletterModal';
-import NewsletterSlideupSection      from './sections/newsletterSlideup';
 import SlideshowSection              from './sections/slideshow';
 import VideoSection                  from './sections/video';
 import CMSPageSection                from './sections/cmsPage';
@@ -75,7 +73,6 @@ Breakpoints.initialize();
   sectionManager.register('article', ArticleSection);
   sectionManager.register('instagram-feed', InstagramFeedSection);
   sectionManager.register('newsletter-modal', NewsletterModalSection);
-  sectionManager.register('newsletter-slideup', NewsletterSlideupSection);
   sectionManager.register('slideshow', SlideshowSection);
   sectionManager.register('video', VideoSection);
   sectionManager.register('cms-page', CMSPageSection);

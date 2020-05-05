@@ -1,12 +1,10 @@
 import $ from 'jquery';
 import BaseTemplate from './base';
-import SlideupAlert from '../ui/slideupAlert';
 import Tabs from '../ui/tabs';
 import NewsletterForm from '../ui/newsletterForm';
 import VideoPlayer from '../ui/videoPlayer';
   
 const selectors = {
-  slideupAlertForm: '[data-slideup-alert-form]',
   tabContainer: '[data-tab-container]',
   qaSetMax: '[data-qa-set-max]',
   qaToggleEnabled: '[data-qa-toggle-enabled]',
@@ -23,15 +21,6 @@ class PageComponentsTemplate extends BaseTemplate {
   }
 
   addEventHandlers() {
-    $(selectors.slideupAlertForm).on('submit', function(e) {
-      e.preventDefault();
-
-      new SlideupAlert({
-        title: $(this).find('input[name="title"]').val(),
-        text: $(this).find('input[name="text"]').val()
-      });
-    });
-
     // Tabs
     new Tabs($(selectors.tabContainer));
 

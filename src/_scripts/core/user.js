@@ -8,10 +8,6 @@ const cookies = {
     name: 'site_visit',
     value: true
   },
-  newsletterSlideupSeen: {
-    name: 'newsletterSlideup_seen',
-    value: true
-  },
   newsletterModalSeen: {
     name: 'newsletterModal_seen',
     value: true
