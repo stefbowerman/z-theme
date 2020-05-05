@@ -47,8 +47,6 @@
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 
   {{ content_for_header }}
-
-  {% include 'third-party-scripts-head' %}
 </head>
 
 {% capture body_class %}
@@ -75,7 +73,7 @@
     {% section 'header-logo-center' %}
     {% comment %}{% section 'header-logo-left' %} {% endcomment %}
 
-    <main role="main" id="MainContent">
+    <main role="main" id="MainContent" role="main">
       <div class="layout-main-content">
         {{ content_for_layout }}
       </div>
@@ -90,7 +88,5 @@
   {% unless template == 'cart' %}
     {% section 'ajax-cart' %}
   {% endunless %}
-
-  {% include 'third-party-scripts-foot' %}
 </body>
 </html>

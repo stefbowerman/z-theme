@@ -61,25 +61,6 @@
   {% endif %}
 {% endfor %}
 
-{% comment %} SOCIAL Capture {% endcomment %}
-{% capture social_list_items %}
-  {%- assign social_accounts = 'Facebook, Instagram, Twitter, Pinterest, Snapchat' | split: ', ' -%}
-  {% for social in social_accounts %}
-    {% assign social_handle = social | handleize %}
-    {% capture social_enabled_handle %}social_{{ social_handle }}_enabled{% endcapture %}
-    {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-    {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-    {% if settings[social_link] != blank and section.settings[social_enabled_handle] %}
-        <li>
-          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" target="_blank">
-            {% include social_icon %}
-            <span class="icon-fallback-text">{{ social }}</span>
-          </a>
-        </li>
-    {% endif %}
-  {% endfor %}
-{% endcapture %}
-
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
   <div class="container">
     <div class="row">
@@ -138,12 +119,6 @@
                  data-message-fail="{{ message_fail | strip | escape }}"></div>
             </div>
           </form>
-
-          {% if social_list_items %}
-            <ul class="footer-social-list">
-              {{ social_list_items }}
-            </ul>
-          {% endif %}
         </div>
       </div>
     </div>
@@ -162,35 +137,6 @@
   {
     "name": "Footer",
     "settings": [
-      {
-        "type": "header",
-        "content": "Social"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_facebook_enabled",
-        "label": "Facebook"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_instagram_enabled",
-        "label": "Instagram"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_twitter_enabled",
-        "label": "Twitter"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_pinterest_enabled",
-        "label": "Pinterest"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_snapchat_enabled",
-        "label": "Snapchat"
-      },
       {
         "type": "header",
         "content": "Menus"
@@ -224,11 +170,7 @@
         "type": "link_list",
         "id": "footer_linklist_3",
         "label": "Third Menu"
-      },
-      {
-        "type": "header",
-        "content": "Copyright"
-      },      
+      },     
       {
         "type": "header",
         "content": "Mailing List"
