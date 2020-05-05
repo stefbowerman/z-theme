@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+const noop = () => {}
+
 /**
  * AJAX Klaviyo Library
  * -----------------------------------------------------------------------------
@@ -50,11 +52,11 @@ export default class AJAXKlaviyoForm {
 
     const defaults = {
       source: 'Shopify Form',
-      onInit: $.noop,
-      onBeforeSend: $.noop,
-      onSubmitFail: $.noop,
-      onSubscribeSuccess: $.noop,
-      onSubscribeFail: $.noop
+      onInit: noop,
+      onBeforeSend: noop,
+      onSubmitFail: noop,
+      onSubscribeSuccess: noop,
+      onSubscribeFail: noop
     };
 
     if (form.length === 0) {

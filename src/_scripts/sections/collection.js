@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import CollectionFilters from '../view/collection/collectionFilters';
 import CollectionSort from '../view/collection/collectionSort';
 
 const selectors = {
@@ -19,7 +18,6 @@ export default class CollectionSection extends BaseSection {
 
     this.collectionData = JSON.parse($(selectors.collectionJson, this.$container).html());
 
-    this.filters = new CollectionFilters(container, this.collectionData);
     this.sort = new CollectionSort(container, this.collectionData);
   }
 }

@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+const noop = () => {}
+
 /**
  * AJAX MailChimp Library
  * -----------------------------------------------------------------------------
@@ -69,12 +71,12 @@ export default class AJAXMailChimpForm {
     };
 
     const defaults = {
-      onInit: $.noop,
-      onDestroy: $.noop,
-      onBeforeSend: $.noop,
-      onSubmitFail: $.noop,
-      onSubscribeSuccess: $.noop,
-      onSubscribeFail: $.noop
+      onInit: noop,
+      onDestroy: noop,
+      onBeforeSend: noop,
+      onSubmitFail: noop,
+      onSubscribeSuccess: noop,
+      onSubscribeFail: noop
     };
 
     if (form.length === 0) {
