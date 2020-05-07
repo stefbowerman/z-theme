@@ -1,6 +1,9 @@
 import $ from 'jquery';
-import * as Currency from './currency';
-import * as Image from './image';
+import {
+  formatMoney,
+  stripZeroCents
+} from './currency';
+import { getSizedImageUrl } from './image';
 
 class CartAPI {
   constructor() {
@@ -22,13 +25,13 @@ class CartAPI {
     }
 
     // Make adjustments to the cart object contents before we pass it off to the handlebars template
-    cart.total_price = Currency.formatMoney(cart.total_price, theme.moneyFormat);
-    cart.total_price = Currency.stripZeroCents(cart.total_price);
+    cart.total_price = formatMoney(cart.total_price, theme.moneyFormat);
+    cart.total_price = stripZeroCents(cart.total_price);
 
     cart.items.map((item) => {
-      item.image = Image.getSizedImageUrl(item.image, '200x');
-      item.price = Currency.formatMoney(item.price, theme.moneyFormat);
-      item.price = Currency.stripZeroCents(item.price);
+      item.image = getSizedImageUrl(item.image, '200x');
+      item.price = formatMoney(item.price, theme.moneyFormat);
+      item.price = stripZeroCents(item.price);
 
       // Adjust the item's variant options to add "name" and "value" properties
       if (item.hasOwnProperty('product')) {

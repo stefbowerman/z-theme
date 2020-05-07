@@ -9,9 +9,17 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/modal';
 
 // Core
-import * as Utils       from './core/utils';
-import * as RTE         from './core/rte';
-import * as A11Y        from './core/a11y';
+import {
+  userAgentBodyClass,
+  cookiesEnabled,
+  chosenSelects,
+  credits
+} from './core/utils';
+import {
+  wrapTables,
+  wrapIframe
+} from './core/rte';
+import { pageLinkFocus } from './core/a11y';
 import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
 
@@ -77,15 +85,13 @@ Breakpoints.initialize();
   sectionManager.register('customers-addresses', CustomersAddressesSection);
   sectionManager.register('customers-order', CustomersOrderSection);
 
-  $('.in-page-link').on('click', (evt) => {
-    A11Y.pageLinkFocus($(evt.currentTarget.hash));
-  });
+  $('.in-page-link').on('click', evt => pageLinkFocus($(evt.currentTarget.hash)));
 
   // Common a11y fixes
-  A11Y.pageLinkFocus($(window.location.hash));
+  pageLinkFocus($(window.location.hash));
 
   // Target tables to make them scrollable
-  RTE.wrapTables({
+  wrapTables({
     $tables: $('.rte table'),
     tableWrapperClass: 'table-responsive'
   });
@@ -93,21 +99,21 @@ Breakpoints.initialize();
   // Target iframes to make them responsive
   const iframeSelectors = '.rte iframe[src*="youtube.com/embed"], .rte iframe[src*="player.vimeo"]';
 
-  RTE.wrapIframe({
+  wrapIframe({
     $iframes: $(iframeSelectors),
     iframeWrapperClass: 'rte__video-wrapper'
   });
 
   // Apply UA classes to the document
-  Utils.userAgentBodyClass();
+  userAgentBodyClass();
 
   // Apply a specific class to the html element for browser support of cookies.
-  if (Utils.cookiesEnabled()) {
+  if (cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
 
   // Chosen JS plugin for select boxes
-  Utils.chosenSelects();
+  chosenSelects();
 
   // Form event handling / validation
   $body.on('change keydown', '.form-control', (e) => {
@@ -135,5 +141,5 @@ Breakpoints.initialize();
     $body.addClass('development-mode');
   }
 
-  Utils.credits();
+  credits();
 })(Modernizr);

@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import * as Utils from '../../core/utils';
-import * as Currency from '../../core/currency';
+import { chosenSelects } from '../../core/utils';
+import { formatMoney } from '../../core/currency';
 import Variants from './variants';
 
 const selectors = {
@@ -82,7 +82,7 @@ export default class ProductDetailForm {
     this.$container.on('variantChange', this.onVariantChange.bind(this));
     this.$container.on(this.events.CLICK, selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
 
-    Utils.chosenSelects(this.$container);
+    chosenSelects(this.$container);
   }
 
   onVariantChange(evt) {
@@ -145,10 +145,10 @@ export default class ProductDetailForm {
    */
   updateProductPrices(variant) {
     if (variant) {
-      this.$productPrice.html(Currency.formatMoney(variant.price, window.theme.moneyFormat));
+      this.$productPrice.html(formatMoney(variant.price, window.theme.moneyFormat));
 
       if (variant.compare_at_price > variant.price) {
-        this.$comparePrice.html(Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
+        this.$comparePrice.html(formatMoney(variant.compare_at_price, theme.moneyFormat));
         this.$compareEls.removeClass(classes.hide);
       }
       else {

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import * as Utils from '../../core/utils';
+import { getQueryParams } from '../../core/utils';
 
 const selectors = {
   sortSelect: '[data-sort-select]'
@@ -24,7 +24,7 @@ export default class CollectionSort {
 
   applySort() {
     const sortBy = $(selectors.sortSelect, this.container).find('option:selected').val();
-    const queryParams = Utils.getQueryParams();
+    const queryParams = getQueryParams();
 
     if (sortBy !== this.collectionData.sortDefault) {
       queryParams.sort_by = sortBy;

@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import Handlebars from 'handlebars';
-import * as Utils from '../core/utils';
+import {
+  whichTransitionEnd,
+  isThemeEditor
+} from '../core/utils';
 import CartAPI from '../core/cartAPI';
 import QuantityAdjuster from './quantityAdjuster';
 
@@ -75,7 +78,7 @@ export default class AJAXCart {
     this.hasBeenRendered      = false; // Lock to prevent displaying the cart before anything has been rendered
     this.qaInteractionTimeout = null;
     this.qaInteractionDelay   = 350; // Delay before triggering the quantityadjuster change event (allows user to increment / decrement quickly)
-    this.transitionEndEvent   = Utils.whichTransitionEnd();
+    this.transitionEndEvent   = whichTransitionEnd();
     this.rendered             = false; // Keep track of whether or not the cart has rendered yet, don't open if it hasn't been
 
     if (!this.$bodyTemplate.length || !this.$footerTopTemplate.length) {
@@ -87,7 +90,7 @@ export default class AJAXCart {
     this.bodyTemplate      = Handlebars.compile(this.$bodyTemplate.html());
     this.footerTopTemplate = Handlebars.compile(this.$footerTopTemplate.html());
 
-    if (Utils.isThemeEditor()) {
+    if (isThemeEditor()) {
       this.$el.find('.additional-checkout-button').parent('.ajax-cart__footer-row').remove();
     }
 

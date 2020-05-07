@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import * as Utils from '../core/utils';
+import { whichTransitionEnd } from '../core/utils';
 
 const $document = $(document);
 const $body = $(document.body);
@@ -29,7 +29,7 @@ export default class Drawer {
 
     this.$el = $(el);
     this.stateIsOpen            = false;
-    this.transitionEndEvent     = Utils.whichTransitionEnd();
+    this.transitionEndEvent     = whichTransitionEnd();
     this.supportsCssTransitions = !!Modernizr.csstransitions;
 
     if (this.$el === undefined || !this.$el.hasClass(classes.drawer)) {

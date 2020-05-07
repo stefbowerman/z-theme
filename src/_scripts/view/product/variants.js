@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import * as Utils from '../../core/utils';
+import { compact } from '../../core/utils';
 
 /**
  * Variant Selection scripts
@@ -62,7 +62,7 @@ export default class Variants {
     });
 
     // remove any unchecked input values if using radio buttons or checkboxes
-    currentOptions = Utils.compact(currentOptions);
+    currentOptions = compact(currentOptions);
 
     return currentOptions;
   }

@@ -1,7 +1,12 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import * as User from '../core/user';
-import * as Utils from '../core/utils';
+import {
+  generateCookie,
+  setCookie,
+  hasCookie,
+  getCookieValue
+} from '../core/user';
+import { hashFromString, isThemeEditor } from '../core/utils';
 import NewsletterForm from '../ui/newsletterForm';
 
 const selectors = {
@@ -46,8 +51,8 @@ export default class NewsletterModalSection extends BaseSection {
      */
     this.cookies = {};
 
-    this.cookies.seen = User.generateCookie('newsletterModalSeen');
-    this.cookies.seen.value = Utils.hashFromString(this.$modal.text()).toString(); // Set the cookie value based on the content
+    this.cookies.seen = generateCookie('newsletterModalSeen');
+    this.cookies.seen.value = hashFromString(this.$modal.text()).toString(); // Set the cookie value based on the content
     this.cookies.seen.expiration = this.settings.seenExpiration;
 
     /**
@@ -66,8 +71,8 @@ export default class NewsletterModalSection extends BaseSection {
 
   hide() {
     this.$modal.modal('hide');
-    if (!Utils.isThemeEditor()) {
-      User.setCookie(this.cookies.seen);
+    if (!isThemeEditor()) {
+      setCookie(this.cookies.seen);
     }
   }
 
@@ -78,7 +83,7 @@ export default class NewsletterModalSection extends BaseSection {
   shouldShow() {
     // Checks should be done in this order!
 
-    if (Utils.isThemeEditor() || !this.settings.enabled) {
+    if (isThemeEditor() || !this.settings.enabled) {
       return false;
     }
 
@@ -86,7 +91,7 @@ export default class NewsletterModalSection extends BaseSection {
       return false;
     }
 
-    if (User.hasCookie(this.cookies.seen.name) && User.getCookieValue(this.cookies.seen.name) === this.cookies.seen.value) {
+    if (hasCookie(this.cookies.seen.name) && getCookieValue(this.cookies.seen.name) === this.cookies.seen.value) {
       return false;
     }
 
@@ -98,8 +103,8 @@ export default class NewsletterModalSection extends BaseSection {
   }
 
   onHidden() {
-    if (!Utils.isThemeEditor()) {
-      User.setCookie(this.cookies.seen);
+    if (!isThemeEditor()) {
+      setCookie(this.cookies.seen);
     }
   }
 

@@ -1,6 +1,13 @@
 import $ from 'jquery';
-import * as Utils from '../core/utils';
-import * as User from '../core/user';
+import {
+  whichTransitionEnd,
+  isThemeEditor
+} from '../core/utils';
+import {
+  generateCookie,
+  hasCookie,
+  setCookie
+} from '../core/user';
 import { getTransitionTimingDuration } from '../core/animations';
 
 const selectors = {
@@ -28,7 +35,7 @@ export default class NewsletterForm {
     };
 
     this.settings = $.extend({}, defaults, options);
-    this.transitionEndEvent     = Utils.whichTransitionEnd();
+    this.transitionEndEvent     = whichTransitionEnd();
     this.supportsCssTransitions = !!Modernizr.csstransitions;
 
     this.$el = $(el);
@@ -48,11 +55,11 @@ export default class NewsletterForm {
      */
     this.cookies = {};
 
-    this.cookies.emailCollected = User.generateCookie('emailCollected');
+    this.cookies.emailCollected = generateCookie('emailCollected');
   }
 
   emailCollected() {
-    return User.hasCookie(this.cookies.emailCollected.name);
+    return hasCookie(this.cookies.emailCollected.name);
   }
 
   /**
@@ -97,8 +104,8 @@ export default class NewsletterForm {
     const isSubscribed = response && response.data && response.data.is_subscribed;
     const successMsg = this.$formMessage.data(isSubscribed ? 'message-already-subscribed' : 'message-success');
 
-    if (!Utils.isThemeEditor() && this.settings.setCookies) {
-      User.setCookie(this.cookies.emailCollected);
+    if (!isThemeEditor() && this.settings.setCookies) {
+      setCookie(this.cookies.emailCollected);
     }
 
     this.$formMessage.html(successMsg);

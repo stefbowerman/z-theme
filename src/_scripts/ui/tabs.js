@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
-import * as Utils from '../core/utils';
+import { whichTransitionEnd } from '../core/utils';
 
 const $document = $(document);
 
@@ -39,7 +39,7 @@ export default class Tabs {
     };
  
     this.animationDuration      = 300; // For emulating transitions where transitionevents aren't supports
-    this.transitionEndEvent     = Utils.whichTransitionEnd();
+    this.transitionEndEvent     = whichTransitionEnd();
     this.supportsCssTransitions = !!Modernizr.csstransitions;
     this.isAnimating            = false;
 
