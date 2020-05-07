@@ -1,5 +1,3 @@
-{% assign MAX_FOOTER_MENUS = 3 %}
-
 {% assign footer_menu_html_desktop = '' %}
 {% assign footer_menu_html_mobile  = '' %}
 
@@ -17,75 +15,57 @@
 {% assign message_fail = 'general.newsletter.subscribe_fail' | t %}  
 
 {% comment %} MENU Capture {% endcomment %}
-{% for i in (1..MAX_FOOTER_MENUS) %}
-  {% assign menu_setting_handle = 'footer_linklist_' | append: i %}
-  {% assign menu_title_setting_handle = 'footer_linklist_title_' | append: i %}
-  {% assign linklist_handle = section.settings[menu_setting_handle] %}
-  {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
+{% for block in section.blocks %}
+  {% if block.type == 'menu' %}
+    {% if block.settings.title != blank or block.settings.link_list != blank %}
+      {%- capture desktop_html -%}
+        <div class="footer-menu">
+          <h6 class="footer-menu__title">
+            {{ block.settings.title }}
+          </h6>
 
-    {% capture desktop_html %}
-      <div class="footer-menu">
-        <h6 class="footer-menu__title">{{ section.settings[menu_title_setting_handle] }}</h6>
-        {% if linklist_handle and linklists[linklist_handle].links.size > 0 %}
-          <ul class="footer-menu__list">
-            {% for link in linklists[linklist_handle].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div>
-    {% endcapture %}
-
-    {% capture mobile_html %}
-      <div class="expandable-list">
-        <div class="expandable-list__header">
-          <a href="#{{ linklist_handle }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ linklist_handle }}">
-            {{ section.settings[menu_title_setting_handle] }} 
-            {% include 'icon-caret-down' %}
-          </a>
+          {% if block.settings.link_list and linklists[block.settings.link_list].links.size > 0 %}
+            <ul class="footer-menu__list">
+              {% for link in linklists[block.settings.link_list].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
-        <div id="{{ linklist_handle }}" class="collapse">
-          <div class="expandable-list__body">
-            {% for link in linklists[linklist_handle].links %}
-              <div class="expandable-list__item">
-                <a href="{{ link.url }}" class="expandable-list__item-title">{{ link.title }}</a>
-              </div>
-            {% endfor %}
+      {%- endcapture -%}
+
+      {%- capture mobile_html -%}
+        {% assign id = block.id | append: '-mobile' %}
+        <div class="expandable-list">
+          <div class="expandable-list__header">
+            <a href="#{{ id }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ id }}">
+              {{ block.settings.title }}
+              {% include 'icon-caret-down' %}
+            </a>
+          </div>
+          <div id="{{ id }}" class="collapse">
+            <div class="expandable-list__body">
+              {% for link in linklists[block.settings.link_list].links %}
+                <div class="expandable-list__item">
+                  <a href="{{ link.url }}" class="expandable-list__item-title">{{ link.title }}</a>
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
-      </div>
-    {% endcapture %}
+      {%- endcapture -%}
 
-    {% assign footer_menu_html_desktop = footer_menu_html_desktop | append: desktop_html %}
-    {% assign footer_menu_html_mobile  = footer_menu_html_mobile  | append: mobile_html %}
+      {% assign footer_menu_html_desktop = footer_menu_html_desktop | append: desktop_html %}
+      {% assign footer_menu_html_mobile  = footer_menu_html_mobile | append: mobile_html %}
+    {% endif %}
   {% endif %}
 {% endfor %}
 
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
   <div class="container">
     <div class="row">
-
-      {% comment %} Footer Block - Info {% endcomment %}
-      <div class="col-lg-2">
-        <div class="footer-block">
-          Footer Info Block
-        </div>
-      </div>
-
-      {% comment %} Footer Block - Menus {% endcomment %}
-      <div class="col-lg-6">
-        <div class="footer-block">
-          <div class="d-none d-lg-block">
-            {{ footer_menu_html_desktop }}
-          </div>
-          <div class="d-block d-lg-none">
-            {{ footer_menu_html_mobile }}
-          </div>
-        </div>
-      </div>
-
       {% comment %} Footer Block - Contact {% endcomment %}
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="footer-block">
           
           {% if settings.newsletter_form_action == blank %}
@@ -121,6 +101,18 @@
           </form>
         </div>
       </div>
+
+      {% comment %} Footer Block - Menus {% endcomment %}
+      <div class="col-lg-6">
+        <div class="footer-block">
+          <div class="d-none d-lg-block">
+            {{ footer_menu_html_desktop }}
+          </div>
+          <div class="d-block d-lg-none">
+            {{ footer_menu_html_mobile }}
+          </div>
+        </div>
+      </div>      
     </div>
 
     {% assign year = 'now' | date: "%Y" %}
@@ -136,41 +128,8 @@
 {% schema %}
   {
     "name": "Footer",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Menus"
-      },
-      {
-        "type": "text",
-        "id": "footer_linklist_title_1",
-        "label": "First Menu Title"
-      },
-      {
-        "type": "link_list",
-        "id": "footer_linklist_1",
-        "label": "First Menu"
-      },
-      {
-        "type": "text",
-        "id": "footer_linklist_title_2",
-        "label": "Second Menu Title"
-      },
-      {
-        "type": "link_list",
-        "id": "footer_linklist_2",
-        "label": "Second Menu"
-      },
-      {
-        "type": "text",
-        "id": "footer_linklist_title_3",
-        "label": "Third Menu Title"
-      },
-      {
-        "type": "link_list",
-        "id": "footer_linklist_3",
-        "label": "Third Menu"
-      },     
+    "max_blocks": 3,
+    "settings": [   
       {
         "type": "header",
         "content": "Mailing List"
@@ -212,6 +171,24 @@
         "id": "copyright_text",
         "label": "Text",
         "info": "Use '$year$' to include the current year.  Use $shop$ to include the name of your shop."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list",
+            "label": "Menu"
+          }
+        ]
       }
     ]
   }
