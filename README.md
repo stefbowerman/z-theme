@@ -1,14 +1,10 @@
-![ZG](https://i.imgur.com/KBnzMey.png)
-
 # Z-Theme
 
 Z-Theme is a boilerplate Shopify theme built on top of [Slate](https://shopify.github.io/slate/).
 
 ## Getting Started
 
-- After creating your new repo, clone [Z-Theme](https://github.com/zehnergroup/z-theme/wiki/Cloning-Z-Theme)
 - In `package.json` rename `Z-Theme` to appropriate name
-- Setup the `.editorconfig` [plug-in](https://editorconfig.org/#download) for your editor/IDE
 - Install Slate: `npm install -g @shopify/slate`
 - In the project directory, install dependences with `npm install`
 - Setup your shopify dev store
@@ -17,10 +13,10 @@ Z-Theme is a boilerplate Shopify theme built on top of [Slate](https://shopify.g
   - **store:** the Shopify-specific URL for this store/environment (ie. my-store.myshopify.com)
   - **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes).
   - **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
-- Follow Z-Theme [dev prep guide](https://github.com/zehnergroup/z-theme/wiki/Dev-Prep-Guide)
-- You'll need to use node v9.9.0 to run the slate commands
 
 ### [Slate Commands](https://shopify.github.io/slate/commands/)
+
+*Note:* You'll need to use node v9.9.0 to run the following commands
 
 ```bash
 slate start [-e][-m] # Runs build, deploy, then watcher
@@ -51,7 +47,6 @@ This project uses Slate behind the scenes to handle file changes and uploads.  I
 ### Additional documentation
 
 - For script documentation, please see the README file inside `src/_scripts`
-- See the [wiki](https://github.com/zehnergroup/z-theme/wiki) for more general information related to the project, as well as any gotchas or engineering recipes.
 
 ## Theme Features
 

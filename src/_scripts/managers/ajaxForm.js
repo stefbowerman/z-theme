@@ -42,7 +42,7 @@ class AJAXFormManager {
           $window.trigger(event);
         })
         .fail((data) => {
-          const event = $.Event(this.events.ADD_FAIL, { data });
+          const event = $.Event(this.events.ADD_FAIL, { message: data.message });
           $window.trigger(event);
         })
         .always(() => {

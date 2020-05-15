@@ -34,7 +34,7 @@ export default class AJAXCartSection extends BaseSection {
         this.ajaxCartUI.onChangeSuccess(e.cart);
       },
       changeFail: (e) => {
-        this.ajaxCartUI.onChangeFail(e.data);
+        this.ajaxCartUI.onChangeFail(e.message);
       }
     };
 

@@ -16,8 +16,10 @@
   {% if current_page != 1 %}
     &ndash; {{ 'general.meta.page' | t: page: current_page }}
   {% endif %}
-  {% unless page_title contains shop.name %}
-    &ndash; {{ shop.name }}
+  {% unless template.name == "index" %}
+    {% unless page_title contains shop.name %}
+      &ndash; {{ shop.name }}
+    {% endunless %}
   {% endunless %}
 {%- endcapture -%}
   
